@@ -4,15 +4,22 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <TextView
-        android:layout_width="match_parent"
+    <ScrollView
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="HomeFragment"
-        android:textColor="@color/black" />
+        android:scrollbars="vertical" >
 
-    <ListView 
-        android:id="@+id/lv_city"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"></ListView>
-    
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="HomeFragment"
+            android:textColor="@color/black" />
+
+        <ListView
+            android:id="@+id/lv_city"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+        </ListView>
+    </ScrollView>
+
 </LinearLayout>
