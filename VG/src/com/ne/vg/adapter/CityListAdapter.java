@@ -16,6 +16,14 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+/**
+ * 首页的city列表适配器 
+ * 有2种布局显示
+ * @ClassName: CityListAdapter 
+ * @author 贺智超
+ * @Description: TODO 
+ * @date 2014-8-11 下午3:53:34
+ */
 public class CityListAdapter extends BaseAdapter{
 	
 	private static final int TYPE_HEAD = 0,TYPE_DATA = 1;  

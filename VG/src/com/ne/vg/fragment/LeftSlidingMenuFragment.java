@@ -4,7 +4,6 @@ import com.ne.vg.MainActivity;
 import com.ne.vg.R;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,8 +18,7 @@ public class LeftSlidingMenuFragment extends Fragment implements View.OnClickLis
 	private Button btn_home,btn_mine;
 	private MainActivity mainActivity;
 	@Override
-	public View onCreateView(LayoutInflater inflater,
-			@Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+	public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		Toast.makeText(getActivity(), TAG+ " onCreateView", Toast.LENGTH_SHORT).show();
 		View view  = inflater.inflate(R.layout.fragment_leftslidingmenu, container,false);

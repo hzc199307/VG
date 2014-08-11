@@ -1,0 +1,239 @@
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+		<script type="text/javascript"
+		src="http://ditu.google.cn/maps/api/js?sensor=true"></script>
+		<script type="text/javascript">
+			//地图
+			var map;
+
+			var flag;
+
+			//中心
+			var myLatlngCen;
+
+			//latlng = [new google.maps.LatLng(23.14274, 113.269904), new google.maps.LatLng(23.144268, 113.272078), new google.maps.LatLng(23.144194, 113.269392), new google.maps.LatLng(23.142175, 113.270739), new google.maps.LatLng(23.143637, 113.274189), new google.maps.LatLng(23.145415, 113.270425), new google.maps.LatLng(23.142025, 113.271925)];
+			/**
+			 * 地图初始化函数
+			 */
+			var initialize = function() {
+				flag = true;
+
+				myLatlngCen = new google.maps.LatLng(23.144268, 113.272078);
+				//地圖中心點
+				var myOptions = {
+					zoom : 16,
+					center : myLatlngCen,
+					mapTypeId : google.maps.MapTypeId.ROADMAP               //道路地圖
+				};
+				map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+
+				//setCenter(23.0, 113.0);
+				//hehe();
+				//addMarker(23.0, 113.0, 'marker1.png', 'A');
+				//addMarker(23.5, 113.5, 'marker1.png', 'B');
+				//showSpan();
+				//display(latLngBounds.getCenter());
+
+				// if(numOfMarker > 0) {
+				// //window.demo.testMap();
+				// for(var i = 0; i < numOfMarker; i++) {
+				// markers[numOfMarker].setMap(map);
+				// }
+				// }
+				//
+				//
+			}
+			// var marker;
+			// function hehe() {
+			//
+			// marker = new google.maps.Marker({
+			// position : myLatlngCen,
+			// map : map,
+			// title : 'Hello World!'
+			// });
+			// marker.setVisible(true);
+			// }
+
+			/**
+			 *设置地图中心  传入的是double坐标
+			 */
+			function setCenter(lat, lng) {
+				myLatlngCen = new google.maps.LatLng(lat, lng);
+				map.setCenter(myLatlngCen);
+			}
+
+			////////////////////////////////MarkerUtil
+
+			//标记
+			var markers = new Array();
+			//坐标
+			var latlngs = new Array();
+			//弹窗   ---我只需要一个弹窗
+			var infoWindow;
+			//Marker个数
+			var numOfMarker = 0;
+
+			function addMarker(lat, lng, iconUrl, title) {
+				latlngs[numOfMarker] = new google.maps.LatLng(lat, lng);
+				markers[numOfMarker] = new google.maps.Marker({
+					position : latlngs[numOfMarker],
+					map : map,
+					icon : 'marker1.png', //icon : iconUrl,
+					title : title,
+					//visible : true  //要执行showAll函数才显示
+				});
+				//if(iconUrl != null)
+				//	markers[numOfMarker].setIcon(iconUrl);
+				if(numOfMarker == 0)
+					infoWindow = new google.maps.InfoWindow({
+						content : "infoWindow",
+					});
+
+				var nowIndex = numOfMarker;
+
+				//marker 点击的监听函数
+				google.maps.event.addListener(markers[nowIndex], 'click', function() {
+
+					window.demo.onMarkerClick(nowIndex);
+					//设置弹窗的内容    以嵌套html的形式添加点击事件
+					if(infoWindowStatus == true) {
+
+						//可被点击的 infoWindow内容
+						infoWindow.setContent('<span class="vright" onclick="onClickedInfoWindow(' + nowIndex + ')">' + markers[nowIndex].getTitle() + "..." + ' </span>');
+						//infoWindow.setContent('<input id="Button1" type="button" value="test" onclick="display()" /> ' + '<input id="Text1" type="text" />');
+						//infoWindow.setContent(markers[nowIndex].getTitle());
+						//打开弹窗 并且第二个参数里面附带一个位置
+
+						infoWindow.open(map, markers[nowIndex]);
+					}
+
+				});
+				numOfMarker = numOfMarker + 1;
+				//addPoint(lat,lng);
+			}
+
+			var infoWindowStatus = false;
+			function setInfoWindowStatus(status) {
+				infoWindowStatus = status;
+			}
+
+			/**
+			 * 是否展示所有marker
+			 * @param isShow  bool类型 表示是否展示
+			 */
+			function showAllMarker(isShow) {
+				for(var i = 0; i < numOfMarker; i++)
+					markers[i].setVisible(isShow);
+			}
+
+			/**
+			 * 刚好显示所有的 标记
+			 */
+			function showSpan() {
+				getLatLngBounds(latlngs);
+				map.fitBounds(latLngBounds);
+				map.setCenter(latLngBounds.getCenter());
+			}
+
+			/**
+			 * 刚好显示所有的 标记   （动画)
+			 */
+			function showSpanWithAnimation() {
+				getLatLngBounds(latlngs);
+				map.fitBounds(latLngBounds);
+				//map.setCenter(latLngBounds.getCenter());
+				map.panTo(latLngBounds.getCenter());
+			}
+
+			var latLngBounds;
+			/**
+			 *获取 众多点 的坐标范围和地图中心点
+			 * @param latlngs 坐标点数组
+			 */
+			function getLatLngBounds(latlngs) {
+				latLngBounds = new google.maps.LatLngBounds(latlngs[0], latlngs[1]);
+				for(var i = 2; i < numOfMarker; i++)
+					latLngBounds.extend(latlngs[i]);
+				return latLngBounds;
+			}
+
+			/**
+			 * 调用android的onClickedInfoWindow函数处理
+			 * @param index 被点击的是第index个marker的infoWindow
+			 */
+			function onClickedInfoWindow(index) {
+				window.demo.onClickedInfoWindow(index);
+			}
+
+			////////////////PolylineUtil
+
+			var
+			polyline;
+
+			var latlngsOfRoute = new Array();
+
+			var polylineSize = 0;
+
+			var lineSymbol = {
+				path : google.maps.SymbolPath.FORWARD_CLOSED_ARROW
+			};
+
+			/**
+			 * 加点
+			 */
+			function addPoint(lat, lng) {
+				latlngsOfRoute[polylineSize] = new google.maps.LatLng(lat, lng);
+				if(polyline == null) {
+					polyline = new google.maps.Polyline({
+						icons : [{
+							icon : lineSymbol,
+							offset : '100%'
+						}],
+						strokeColor : "#ff0000",
+						strokeOpacity : 0.6,
+						strokeWeight : 5,
+						map : map
+					});
+				}
+				polylineSize = polylineSize + 1;
+			}
+
+			/**
+			 * 显示或者隐藏路线
+			 */
+			function showRoute(status) {
+				if(polyline != null) {
+					polyline.setPath(latlngsOfRoute);
+					polyline.setVisible(status);
+				}
+			}
+
+			/**
+			 * 弹窗显示 坐标
+			 */
+			function display(latlng) {
+				var name = prompt("请输入您的名字", latlng.toString());
+				if(name != null && name != "") {
+					document.write("你好！" + name + " 今天过得怎么样？");
+				}
+			}
+
+			function display() {
+				var name = prompt("请输入您的名字", myLatlngCen.toString());
+				if(name != null && name != "") {
+					document.write("你好！" + name + " 今天过得怎么样？");
+				}
+			}
+
+		</script>
+	</head>
+	<body style="margin:0px; padding:0px;" onload="initialize()">
+		<form style="position:absolute;top:0px;left:0px;z-index:10;" action="">
+			<p>
+				<input type="button" id="btn_pmt" onclick="showRoute(false)" value="定位"/>
+			</p>
+		</form>
+		<div id="map_canvas" style="width:100%; height:100%"></div>
+	</body>
+</html>

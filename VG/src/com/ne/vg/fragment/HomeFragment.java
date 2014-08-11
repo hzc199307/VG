@@ -4,12 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.ne.vg.R;
+import com.ne.vg.activity.BigSceneDetailActivity;
 import com.ne.vg.adapter.CityListAdapter;
 import com.ne.vg.bean.City;
 import com.slidingmenu.lib.app.SlidingFragmentActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,11 +27,10 @@ public class HomeFragment extends Fragment implements OnClickListener{
 	private ListView lv_city;
 	private CityListAdapter cityListAdapter ;
 	private List<City> listCities;
-	private ImageButton home_title_left_btn;
-	
+	private ImageButton home_title_left_btn,home_title_right_btn;
+
 	@Override
-	public View onCreateView(LayoutInflater inflater,
-			@Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+	public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		Toast.makeText(getActivity(), TAG+ " onCreateView", Toast.LENGTH_SHORT).show();
 
@@ -42,6 +42,8 @@ public class HomeFragment extends Fragment implements OnClickListener{
 		lv_city.setAdapter(cityListAdapter);
 		home_title_left_btn = (ImageButton)view.findViewById(R.id.home_title_left_btn);
 		home_title_left_btn.setOnClickListener(this);
+		home_title_right_btn = (ImageButton)view.findViewById(R.id.home_title_right_btn);
+		home_title_right_btn.setOnClickListener(this);
 		return view;
 	}
 
@@ -71,6 +73,10 @@ public class HomeFragment extends Fragment implements OnClickListener{
 		case R.id.home_title_left_btn:
 			//点击标题左边按钮弹出左侧菜单
 			((SlidingFragmentActivity)getActivity()).getSlidingMenu().showMenu(true);
+			break;
+		case R.id.home_title_right_btn:
+			//点击标题左边按钮弹出左侧菜单
+			startActivity(new Intent(getActivity(),BigSceneDetailActivity.class));
 			break;
 		default:
 			break;
