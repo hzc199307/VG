@@ -16,7 +16,7 @@ public class MineFragment extends Fragment implements View.OnClickListener{
 
 	private final static String TAG = "MineFragment";
 	
-	private Button btn_panshan;
+	private Button btn_panshan,btn_zhichao;
 	@Override
 	public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -24,6 +24,8 @@ public class MineFragment extends Fragment implements View.OnClickListener{
 		View view  = inflater.inflate(R.layout.fragment_mine, container,false);
 		btn_panshan = (Button)view.findViewById(R.id.btn_panshan);
 		btn_panshan.setOnClickListener(this);
+		btn_zhichao = (Button)view.findViewById(R.id.btn_zhichao);
+		btn_zhichao.setOnClickListener(this); 
 		return view;
 	}
 	@Override
@@ -33,6 +35,11 @@ public class MineFragment extends Fragment implements View.OnClickListener{
 		case R.id.btn_panshan:
 			//TODO 潘杉 你要执行的跳转
 			startActivity(new Intent(getActivity(),RecommendActivity.class));
+			break;
+		case R.id.btn_zhichao:
+			//TODO 
+			getFragmentManager().beginTransaction().hide(this).add(R.id.content_frame, new RouteFragment()).addToBackStack(null).commit();
+			//startActivity(new Intent(getActivity(),RecommendActivity.class));
 			break;
 		default:
 			break;

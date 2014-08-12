@@ -16,5 +16,12 @@
         android:layout_height="wrap_content"
         android:text="潘森跳大"
         android:textColor="@color/black" />
+    
+    <Button
+        android:id="@+id/btn_zhichao"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="智超跳大"
+        android:textColor="@color/black" />
 
 </LinearLayout>

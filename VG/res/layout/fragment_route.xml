@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <include
+        layout="@layout/title_route"
+        android:focusable="true" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/route_viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center" >
+
+            <android.support.v4.view.PagerTabStrip
+                android:id="@+id/route_pagertab"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/route_tab_height"
+                android:layout_gravity="top" />
+        </android.support.v4.view.ViewPager>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/route_tab_height"
+                android:text="" />
+
+            <FrameLayout
+                android:id="@+id/route_frame_map"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/route_map_height" >
+            </FrameLayout>
+        </LinearLayout>
+    </FrameLayout>
+
+</LinearLayout><!--
+    注意事项:   
+    1.这里ViewPager和 PagerTabStrip都要把包名写全了，不然会ClassNotFount  
+    2.API中说：在布局xml把PagerTabStrip当做ViewPager的一个子标签来用，不能拿出来，不然还是会报错  
+    3.在PagerTabStrip标签中可以用属性android:layout_gravity=TOP|BOTTOM来指定title的位置  
+    4.如果要显示出PagerTabStrip某一页的title,需要在ViewPager的adapter中实现getPageTitle(int)
+-->
