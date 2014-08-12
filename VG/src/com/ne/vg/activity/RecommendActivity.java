@@ -1,5 +1,10 @@
-package com.ne.vg;
+package com.ne.vg.activity;
 
+import com.ne.vg.R;
+import com.ne.vg.R.drawable;
+import com.ne.vg.R.id;
+import com.ne.vg.R.layout;
+import com.ne.vg.R.menu;
 import com.ne.vg.adapter.RecommendAdapter;
 
 import android.support.v4.app.FragmentActivity;

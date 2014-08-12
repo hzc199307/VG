@@ -24,7 +24,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".RecommendActivity"
+            android:name="com.ne.vg.activity.RecommendActivity"
             android:label="@string/title_activity_recommend" >
         </activity>
         <activity

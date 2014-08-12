@@ -1,7 +1,7 @@
 package com.ne.vg.fragment;
 
 import com.ne.vg.R;
-import com.ne.vg.RecommendActivity;
+import com.ne.vg.activity.RecommendActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
