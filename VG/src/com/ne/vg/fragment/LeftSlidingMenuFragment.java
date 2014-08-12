@@ -11,6 +11,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
+/**
+ * Ö÷³ÌÐò²à±ßÀ¸
+ * @ClassName: LeftSlidingMenuFragment 
+ * @author ºØÖÇ³¬
+ * @Description: TODO 
+ * @date 2014-8-12 ÏÂÎç3:20:39
+ */
 public class LeftSlidingMenuFragment extends Fragment implements View.OnClickListener{
 
 	private final static String TAG = "LeftSlidingMenuFragment";

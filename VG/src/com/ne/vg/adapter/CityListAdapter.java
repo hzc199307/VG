@@ -45,6 +45,11 @@ public class CityListAdapter extends BaseAdapter{
 		setListData(list);
 		inflater = LayoutInflater.from(context);
 	}
+	
+	public void destroy() {
+		listData.clear();
+		listData=null;
+	}
 
 	public void setListData(List<City> list){
 		if (list != null) {

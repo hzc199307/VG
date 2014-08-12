@@ -12,6 +12,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
+/**
+ * “我的”详情页（暂时用来测试用）
+ * @ClassName: MineFragment 
+ * @author 贺智超
+ * @Description: TODO 
+ * @date 2014-8-12 下午3:21:19
+ */
 public class MineFragment extends Fragment implements View.OnClickListener{
 
 	private final static String TAG = "MineFragment";

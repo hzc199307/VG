@@ -7,6 +7,7 @@ import com.ne.vg.R;
 import com.ne.vg.activity.BigSceneDetailActivity;
 import com.ne.vg.adapter.CityListAdapter;
 import com.ne.vg.bean.City;
+import com.ne.vg.bean.CreateData;
 import com.slidingmenu.lib.app.SlidingFragmentActivity;
 
 import android.content.Intent;
@@ -20,13 +21,19 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
 
+/**
+ * 主页详情页
+ * @ClassName: HomeFragment 
+ * @author 贺智超
+ * @Description: TODO 
+ * @date 2014-8-12 下午3:21:59
+ */
 public class HomeFragment extends Fragment implements OnClickListener{
 
 	private final static String TAG = "HomeFragment";
 
 	private ListView lv_city;
 	private CityListAdapter cityListAdapter ;
-	private List<City> listCities;
 	private ImageButton home_title_left_btn,home_title_right_btn;
 
 	@Override
@@ -34,35 +41,15 @@ public class HomeFragment extends Fragment implements OnClickListener{
 		// TODO Auto-generated method stub
 		Toast.makeText(getActivity(), TAG+ " onCreateView", Toast.LENGTH_SHORT).show();
 
-		createListCities();
-
 		View view  = inflater.inflate(R.layout.fragment_home, container,false);
 		lv_city = (ListView)view.findViewById(R.id.lv_city);
-		cityListAdapter = new CityListAdapter(getActivity(), listCities);
+		cityListAdapter = new CityListAdapter(getActivity(), CreateData.getCityList());
 		lv_city.setAdapter(cityListAdapter);
 		home_title_left_btn = (ImageButton)view.findViewById(R.id.home_title_left_btn);
 		home_title_left_btn.setOnClickListener(this);
 		home_title_right_btn = (ImageButton)view.findViewById(R.id.home_title_right_btn);
 		home_title_right_btn.setOnClickListener(this);
 		return view;
-	}
-
-	public void createListCities()
-	{
-		listCities = new ArrayList<City>();
-		City city1,city2,city;
-		city1 = new City();
-		city1.setCityName("罗马");
-		listCities.add(city1);
-		city2 = new City();
-		city2.setCityName("威尼斯");
-		listCities.add(city2);
-		for(int i=0;i<10;i++)
-		{
-			city = new City();
-			city.setCityName("意大利城市");
-			listCities.add(city);
-		}
 	}
 
 	@Override
@@ -81,5 +68,11 @@ public class HomeFragment extends Fragment implements OnClickListener{
 		default:
 			break;
 		}
+	}
+	
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		cityListAdapter.destroy();
 	}
 }

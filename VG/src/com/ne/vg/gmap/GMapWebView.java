@@ -25,6 +25,13 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+/**
+ * googleµØÍ¼ WebView 
+ * @ClassName: GMapWebView 
+ * @author ºØÖÇ³¬
+ * @Description: TODO 
+ * @date 2014-8-12 ÏÂÎç3:23:12
+ */
 public class GMapWebView extends WebView {
 
 	private static final String TAG = "GMapWebView"; 

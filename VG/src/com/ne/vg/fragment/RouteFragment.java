@@ -69,6 +69,7 @@ public class RouteFragment extends Fragment{
 	/**
 	 * 此适配器会保存所有的Fragment对象     而FragmentStatePagerAdapter只会保存3个(左+自己+右)
 	 * 此适应于fragment少的情况
+	 * 不在(左+自己+右)位置的时候 执行了onDestroyView，重新出现的时候 执行了onCreateView
 	 * @ClassName: MyFragmentPagerAdapter 
 	 */
 	public class MyFragmentPagerAdapter extends FragmentPagerAdapter{

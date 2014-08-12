@@ -9,6 +9,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+/**
+ * googleµØÍ¼
+ * @ClassName: GMapFragment 
+ * @author ºØÖÇ³¬
+ * @Description: TODO 
+ * @date 2014-8-12 ÏÂÎç3:22:44
+ */
 public class GMapFragment extends Fragment{
 
 	//private WebView webviewGMap;
