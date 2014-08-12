@@ -19,8 +19,15 @@ import android.widget.AdapterView.OnItemClickListener;
 
 import com.ne.vg.R;
 import com.ne.vg.adapter.RecommendRouteAdapter;
-
+/**
+ * 
+ * @ClassName: RecommendRouteFragment 
+ * @author 潘杉
+ * @Description: 推荐路线的页面以listview来显示，在推荐activity中
+ * @date 2014-8-12 下午3:44:46
+ */
 public class RecommendRouteFragment extends Fragment{
+	private static final String TAG = "RecommendRouteFragment";
 	//ListView控件
 	private ListView listview;
 	//自定义的适配器
@@ -37,6 +44,7 @@ public class RecommendRouteFragment extends Fragment{
 	public View onCreateView(LayoutInflater inflater,
 			ViewGroup container, Bundle savedInstanceState)
 	{
+		Toast.makeText(getActivity(), TAG + " onCreateView", Toast.LENGTH_SHORT).show();
 		View rootView = inflater.inflate(R.layout.fragment_recommendroute,
 				container, false);
 		//Init view
@@ -65,7 +73,7 @@ public class RecommendRouteFragment extends Fragment{
 			public void onItemClick(AdapterView<?> arg0, View arg1, int position,
 					long arg3) {
 				Log.e("panshan"," " + position);
-				// TODO Auto-generated method stub
+				// TODO 这里是写跳转函数，跳转到其他页面。
 				Toast.makeText(getActivity().getApplicationContext(), "pic" + (position+1), Toast.LENGTH_SHORT).show(); 
 			}
 

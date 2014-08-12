@@ -16,6 +16,13 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+/**
+ * 
+ * @ClassName: BigSceneListAdapter 
+ * @author 潘杉
+ * @Description: 大景点列表（推荐activity）中所用到的自定义适配器，用来传输数据
+ * @date 2014-8-12 下午3:20:00
+ */
 public class BigSceneListAdapter extends BaseAdapter{
 
 	//LayoutInflater作用是将layout的xml布局文件实例化为View类对象。

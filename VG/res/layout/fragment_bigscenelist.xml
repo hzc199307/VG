@@ -3,16 +3,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
+
     <!-- 倒数第二个属性为缩放与列宽大小同步 -->
+
     <GridView
         android:id="@+id/bigscene_gridview1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:numColumns="2"
-        android:verticalSpacing="10dp"
+        android:gravity="center"
         android:horizontalSpacing="10dp"
-        android:gravity="center"   
-        />
-    
+        android:numColumns="2"
+        android:verticalSpacing="10dp" />
 
 </LinearLayout>

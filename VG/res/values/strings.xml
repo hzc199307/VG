@@ -8,4 +8,6 @@
     <string name="title_activity_big_scene_detail">BigSceneDetailActivity</string>
     <string name="title_fragment_route">RouteFragment</string>
     <string name="title_fragment_recommend">RecommendFragment</string>
+    <string name="title_fragment_recommendroute">推荐路线</string>
+    <string name="title_fragment_scenelist">景点列表</string>
 </resources>

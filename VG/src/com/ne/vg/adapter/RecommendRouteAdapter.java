@@ -14,6 +14,13 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+/**
+ * 
+ * @ClassName: RecommendRouteAdapter 
+ * @author 潘杉
+ * @Description: 推荐路线（推荐activity）中所用到的自定义适配器，用来传输数据
+ * @date 2014-8-12 下午3:21:05
+ */
 public class RecommendRouteAdapter extends BaseAdapter{
 
 	//LayoutInflater作用是将layout的xml布局文件实例化为View类对象。
@@ -30,19 +37,16 @@ public class RecommendRouteAdapter extends BaseAdapter{
 
 	@Override
 	public int getCount() {
-		// TODO Auto-generated method stub
 		return mData.size();
 	}
 
 	@Override
 	public Object getItem(int position) {
-		// TODO Auto-generated method stub
 		return mData.get(position);
 	}
 
 	@Override
 	public long getItemId(int arg0) {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
