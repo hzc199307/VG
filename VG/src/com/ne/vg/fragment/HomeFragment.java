@@ -43,7 +43,8 @@ public class HomeFragment extends Fragment implements OnClickListener{
 
 		View view  = inflater.inflate(R.layout.fragment_home, container,false);
 		lv_city = (ListView)view.findViewById(R.id.lv_city);
-		cityListAdapter = new CityListAdapter(getActivity(), CreateData.getCityList());
+		if(cityListAdapter==null)
+			cityListAdapter = new CityListAdapter(getActivity(), CreateData.getCityList());
 		lv_city.setAdapter(cityListAdapter);
 		home_title_left_btn = (ImageButton)view.findViewById(R.id.home_title_left_btn);
 		home_title_left_btn.setOnClickListener(this);
@@ -69,10 +70,11 @@ public class HomeFragment extends Fragment implements OnClickListener{
 			break;
 		}
 	}
-	
+
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
 		cityListAdapter.destroy();
+		cityListAdapter = null;
 	}
 }

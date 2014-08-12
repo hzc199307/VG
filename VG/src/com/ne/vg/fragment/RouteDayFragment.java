@@ -48,7 +48,7 @@ public class RouteDayFragment extends Fragment {
 	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		bigSceneListAdapter = new RouteDay_BigSceneListAdapter(getActivity());
+		
 	}
 
 	@Override
@@ -56,6 +56,8 @@ public class RouteDayFragment extends Fragment {
 		// TODO Auto-generated method stub  关于视图的都放在这里弄
 		Toast.makeText(getActivity(), TAG+ " "+i+" onCreateView", Toast.LENGTH_SHORT).show();
 
+		if(bigSceneListAdapter == null)
+			bigSceneListAdapter = new RouteDay_BigSceneListAdapter(getActivity());
 		rootView = inflater.inflate(R.layout.fragment_route_day, container,false);
 		tv= (TextView)rootView.findViewById(R.id.tv);
 		tv.setText(""+i);
@@ -77,5 +79,6 @@ public class RouteDayFragment extends Fragment {
 		// TODO Auto-generated method stub
 		super.onDestroy();
 		bigSceneListAdapter.destroy();
+		bigSceneListAdapter = null;
 	}
 }
