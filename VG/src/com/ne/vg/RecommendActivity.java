@@ -1,6 +1,6 @@
 package com.ne.vg;
 
-import com.ne.vg.adapter.RecommendRouteAdapter;
+import com.ne.vg.adapter.RecommendAdapter;
 
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
@@ -23,7 +23,7 @@ public class RecommendActivity extends FragmentActivity {
 	
 	private String TAG = "RecommendActivity";
 	private ViewPager viewPager;//Ò³¿¨ÄÚÈÝ
-	private RecommendRouteAdapter recommendRouteAdapter;
+	private RecommendAdapter recommendAdapter;
 	private ImageView imageView;// ¶¯»­Í¼Æ¬
 	private TextView textView1,textView2;
 	private int offset = 0;// ¶¯»­Í¼Æ¬Æ«ÒÆÁ¿
@@ -50,8 +50,8 @@ public class RecommendActivity extends FragmentActivity {
 	 */
 	private void InitViewPager() {
 		viewPager=(ViewPager) findViewById(R.id.recommend_viewPager); 
-		recommendRouteAdapter = new RecommendRouteAdapter(getSupportFragmentManager() );
-		viewPager.setAdapter(recommendRouteAdapter);  
+		recommendAdapter = new RecommendAdapter(getSupportFragmentManager() );
+		viewPager.setAdapter(recommendAdapter);  
 	    viewPager.setCurrentItem(0);  
 	    viewPager.setOnPageChangeListener(new MyOnPageChangeListener());  
 	}

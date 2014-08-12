@@ -9,10 +9,10 @@ import android.support.v4.view.PagerAdapter;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class RecommendRouteAdapter extends FragmentPagerAdapter{
+public class RecommendAdapter extends FragmentPagerAdapter{
 
 	int NUM_ITEM = 2;
-	public RecommendRouteAdapter(FragmentManager fm) {
+	public RecommendAdapter(FragmentManager fm) {
 		super(fm);
 	}
 

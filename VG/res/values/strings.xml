@@ -7,6 +7,5 @@
     <string name="title_activity_recommend">RecommendActivity</string>
     <string name="title_activity_big_scene_detail">BigSceneDetailActivity</string>
     <string name="title_fragment_route">RouteFragment</string>
-    
-
+    <string name="title_fragment_recommend">RecommendFragment</string>
 </resources>
