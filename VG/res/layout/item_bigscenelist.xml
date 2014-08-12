@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id = "@+id/frame1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin">
+    <FrameLayout
+        
+    android:layout_width="match_parent"
+    android:layout_height="180dp">
+    <ImageView 
+        
+        android:id="@+id/bigscenelist_view01"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:scaleType="center"
+        android:src="@drawable/haimian"
+        />
+    <RelativeLayout 
+        android:id = "@+id/bigscenelist_relative"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        >
+        <Button 
+            android:id="@+id/bigscenelist_bu1"
+          	android:background="#add8e6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            />
+        <!-- 显示景点名称 -->
+        <TextView 
+            android:id="@+id/bigscenelist_tv1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            />
+        <!-- 显示爱心跟音频那两个图标的部分（即底端背景图） -->
+        <TextView
+            android:background="#d2b48c"
+           	android:layout_width="fill_parent"
+        	android:layout_height="15dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            
+            />
+        <TextView 
+            android:id="@+id/bigscenelist_tv2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="15dp"
+            />
+        <TextView 
+            android:id="@+id/bigscenelist_tv3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="15dp"
+            />
+        
+        
+        
+    </RelativeLayout>
+</FrameLayout>
+</FrameLayout>
