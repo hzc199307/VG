@@ -20,8 +20,15 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
-
+/**
+ * 
+ * @ClassName: BigSceneListFragment 
+ * @author 潘杉
+ * @Description: 大景点列表的页面以gridview来显示，在推荐activity中
+ * @date 2014-8-12 下午3:19:24
+ */
 public class BigSceneListFragment extends Fragment{
+	private final static String TAG="BigSceneListFragment";
 	
 	private GridView gridview;
 	//自定义的适配器
@@ -44,6 +51,7 @@ public class BigSceneListFragment extends Fragment{
 			ViewGroup container, Bundle savedInstanceState)
 	{
 		//TODO
+		Toast.makeText(getActivity(), TAG + " onCreateView", Toast.LENGTH_SHORT).show();
 		View rootView = inflater.inflate(R.layout.fragment_bigscenelist,
 				container, false);
 		//Init view
@@ -71,7 +79,6 @@ public class BigSceneListFragment extends Fragment{
 				// TODO Auto-generated method stub
 				Toast.makeText(getActivity().getApplicationContext(), "pic" + (position+1), Toast.LENGTH_SHORT).show(); 
 			}
-
 		});
 	}
 	

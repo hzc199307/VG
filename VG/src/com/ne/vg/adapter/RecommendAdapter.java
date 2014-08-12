@@ -11,6 +11,13 @@ import android.support.v4.view.PagerAdapter;
 import android.view.View;
 import android.view.ViewGroup;
 
+/**
+ * 
+ * @ClassName: RecommendAdapter 
+ * @author 潘杉
+ * @Description: 推荐activity中所用到的自定义适配器，用来传输数据选择使用哪个fragment
+ * @date 2014-8-12 下午3:21:37
+ */
 public class RecommendAdapter extends FragmentPagerAdapter{
 
 	int NUM_ITEM = 2;
@@ -20,7 +27,6 @@ public class RecommendAdapter extends FragmentPagerAdapter{
 
 	@Override
 	public Fragment getItem(int position) {
-		// TODO 这里两个fragment需要被修改
 		switch(position){
 		//初始化fragment
 		case 0:return new RecommendRouteFragment();
@@ -33,7 +39,7 @@ public class RecommendAdapter extends FragmentPagerAdapter{
 	public int getCount() {
 		return NUM_ITEM;
 	}
-	
+
 	@Override  
 	public void destroyItem(ViewGroup container, int position, Object object) {  
 		super.destroyItem(container, position, object);  
