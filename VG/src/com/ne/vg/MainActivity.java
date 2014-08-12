@@ -3,6 +3,7 @@ package com.ne.vg;
 import com.ne.vg.fragment.HomeFragment;
 import com.ne.vg.fragment.LeftSlidingMenuFragment;
 import com.ne.vg.fragment.MineFragment;
+import com.ne.vg.fragment.RouteFragment;
 import com.slidingmenu.lib.SlidingMenu;
 import com.slidingmenu.lib.app.SlidingFragmentActivity;
 
@@ -11,6 +12,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
@@ -84,7 +86,7 @@ public class MainActivity extends SlidingFragmentActivity {
 		mSlidingMenu = getSlidingMenu();
 		mSlidingMenu.setMode(SlidingMenu.LEFT);// 设置是左滑还是右滑，还是左右都可以滑，我这里只做了左滑
 	    
-		mSlidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);//设置手势模式
+		mSlidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_MARGIN);//设置手势模式
 		//mSlidingMenu.setShadowDrawable(R.drawable.shadow);// 设置左菜单阴影图片
 		mSlidingMenu.setFadeEnabled(true);// 设置滑动时菜单的是否淡入淡出
 		mSlidingMenu.setFadeDegree(0.5f);// 设置淡入淡出的比例
@@ -130,6 +132,7 @@ public class MainActivity extends SlidingFragmentActivity {
             nowFragment = toFragment;
         }
 		mSlidingMenu.showContent();
+		
 	}
 	
 	/**
@@ -146,6 +149,15 @@ public class MainActivity extends SlidingFragmentActivity {
 	public void switchContentToMine()
 	{
 		switchContent(mineFragment);
+	}
+	
+	/**
+	 * 设置侧边栏是否有用
+	 * @param enabled
+	 */
+	public void setSlidingEnabled(boolean enabled)
+	{
+		mSlidingMenu.setSlidingEnabled(enabled);
 	}
 
 }
