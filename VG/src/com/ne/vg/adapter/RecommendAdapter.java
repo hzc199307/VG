@@ -1,6 +1,8 @@
 package com.ne.vg.adapter;
 
+import com.ne.vg.fragment.BigSceneListFragment;
 import com.ne.vg.fragment.HomeFragment;
+import com.ne.vg.fragment.RecommendRouteFragment;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -20,8 +22,9 @@ public class RecommendAdapter extends FragmentPagerAdapter{
 	public Fragment getItem(int position) {
 		// TODO 这里两个fragment需要被修改
 		switch(position){
-		case 0:return new HomeFragment();
-		case 1:return new HomeFragment();
+		//初始化fragment
+		case 0:return new RecommendRouteFragment();
+		case 1:return new BigSceneListFragment();
 		default:return null;
 		}
 	}

@@ -81,7 +81,7 @@ public class RecommendActivity extends FragmentActivity {
 	 * @throws
 	 */
 	private void InitImageView() {
-		 imageView= (ImageView) findViewById(R.id.home_title_iv);  
+		 imageView= (ImageView) findViewById(R.id.recommend_cursor);  
 	     bmpW = BitmapFactory.decodeResource(getResources(), R.drawable.main_cursor).getWidth();// 获取图片宽度  
 	     DisplayMetrics dm = new DisplayMetrics();  
 	     getWindowManager().getDefaultDisplay().getMetrics(dm);  
@@ -117,7 +117,6 @@ public class RecommendActivity extends FragmentActivity {
 		 	
 		 //TODO
 	    	int one = offset * 2 + bmpW;// 页卡1 -> 页卡2 偏移量
-			int two = one * 2;// 页卡1 -> 页卡3 偏移量
 			public void onPageScrollStateChanged(int arg0) {
 					
 			}
@@ -127,8 +126,8 @@ public class RecommendActivity extends FragmentActivity {
 			}
 
 			public void onPageSelected(int arg0) {
-				
-				
+				//TODO 主要是imageview的位置问题
+				//arg1是动画开始的点离当前View X坐标上的差值，arg2是动画结束的点离当前View X坐标上的差值 
 				Animation animation = new TranslateAnimation(one*currIndex, one*arg0, 0, 0);
 				currIndex = arg0;
 				animation.setFillAfter(true);// True:图片停在动画结束位置
