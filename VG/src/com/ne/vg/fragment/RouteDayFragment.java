@@ -6,6 +6,7 @@ import com.ne.vg.adapter.RouteDay_BigSceneListAdapter;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,7 +38,8 @@ public class RouteDayFragment extends Fragment {
 	public void onAttach(Activity activity) {
 		// TODO Auto-generated method stub
 		super.onAttach(activity);
-		Toast.makeText(getActivity(), TAG+ " "+i+" onAttach", Toast.LENGTH_SHORT).show();
+		Log.v(TAG, "onAttach");
+		//Toast.makeText(getActivity(), TAG+ " "+i+" onAttach", Toast.LENGTH_SHORT).show();
 		
 	}
 	
@@ -54,7 +56,8 @@ public class RouteDayFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState) {
 		// TODO Auto-generated method stub  关于视图的都放在这里弄
-		Toast.makeText(getActivity(), TAG+ " "+i+" onCreateView", Toast.LENGTH_SHORT).show();
+		Log.v(TAG, "onCreateView");
+		//Toast.makeText(getActivity(), TAG+ " "+i+" onCreateView", Toast.LENGTH_SHORT).show();
 
 		if(bigSceneListAdapter == null)
 			bigSceneListAdapter = new RouteDay_BigSceneListAdapter(getActivity());
@@ -70,14 +73,17 @@ public class RouteDayFragment extends Fragment {
 	@Override
 	public void onDestroyView() {
 		// TODO Auto-generated method stub
+		Log.v(TAG, "onDestroyView");
 		super.onDestroyView();
-		Toast.makeText(getActivity(), TAG+ " "+i+" onDestroyView", Toast.LENGTH_SHORT).show();
+		//Toast.makeText(getActivity(), TAG+ " "+i+" onDestroyView", Toast.LENGTH_SHORT).show();
 	}
 	
 	@Override
 	public void onDestroy() {
 		// TODO Auto-generated method stub
 		super.onDestroy();
+		Log.v(TAG, "onDestroy");
+		//Toast.makeText(getActivity(), TAG+ " "+i+" onDestroy", Toast.LENGTH_SHORT).show();
 		bigSceneListAdapter.destroy();
 		bigSceneListAdapter = null;
 	}

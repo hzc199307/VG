@@ -2,27 +2,15 @@ package com.ne.vg.gmap;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.zip.Inflater;
-
-
-
-
 
 import android.content.Context;
-import android.graphics.Canvas;
 import android.os.Handler;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 /**
@@ -34,9 +22,9 @@ import android.widget.Toast;
  */
 public class GMapWebView extends WebView {
 
-	private static final String TAG = "GMapWebView"; 
-	private static final String CHINA_URL = "file:///android_asset/map.html";
-	private static final String FOREIGN_URL = "";
+	private final String TAG = "GMapWebView"; 
+	private final String CHINA_URL = "file:///android_asset/map.html";
+	private final String FOREIGN_URL = "";
 
 	public GMapWebView(Context context, AttributeSet attrs)
 	{
@@ -102,6 +90,8 @@ public class GMapWebView extends WebView {
 		 * 如果webView被销毁了，那么我们再次调用webSetting中的方法时，会抛出异常。
 		 */
 		WebSettings webSettings = this.getSettings();
+		//缓存+网络
+		webSettings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
 		//允许在webview中执行JavaScript代码
 		webSettings.setJavaScriptEnabled(true);
 		//设置webview是否支持缩放
@@ -117,6 +107,7 @@ public class GMapWebView extends WebView {
 		 * interfaceName则是访问我们在obj中声明的方法时候所用到的js对象，调用方法为window.interfaceName.方法名()
 		 */
 		this.addJavascriptInterface(new JsInterfaceObject(),"demo");
+
 
 		//		btn.setOnClickListener(new View.OnClickListener() {
 		//			@Override
@@ -278,7 +269,7 @@ public class GMapWebView extends WebView {
 					showRoute();
 					showSpan();
 					loadUrl("javascript:setInfoWindowStatus("+infoWindowStatus+")");
-					
+
 				}
 			});
 		}
@@ -310,8 +301,8 @@ public class GMapWebView extends WebView {
 	{
 		this.loadUrl("javascript:showSpanWithAnimation()");
 	}
-	
-	
+
+
 	/**
 	 * 维度 经度 坐标类
 	 * @ClassName: Latlng 
@@ -321,7 +312,7 @@ public class GMapWebView extends WebView {
 		public double getLat();
 		public double getLng();
 	}
-	
+
 	private List<Latlng> listLatlngs;
 	/**
 	 * 设置路线数据
@@ -379,7 +370,7 @@ public class GMapWebView extends WebView {
 			});
 
 		}
-		
+
 		/**
 		 * 移除路线
 		 */
@@ -388,8 +379,8 @@ public class GMapWebView extends WebView {
 		{
 			loadUrl("javascript:showRoute(false)");
 		}
-		
-		
+
+
 
 		/**
 		 * marker被点击事件
@@ -408,7 +399,7 @@ public class GMapWebView extends WebView {
 			});
 
 		}
-		
+
 		/**
 		 * infoWindow被点击事件
 		 */
@@ -428,4 +419,14 @@ public class GMapWebView extends WebView {
 		}
 
 	}
+
+	@Override
+	protected void onDetachedFromWindow() {
+		// TODO Auto-generated method stub
+		Log.v(TAG, "onDetachedFromWindow");
+		super.onDetachedFromWindow();
+		
+	}
+
+
 }

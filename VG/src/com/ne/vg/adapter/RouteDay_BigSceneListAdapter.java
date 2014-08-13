@@ -68,7 +68,7 @@ public class RouteDay_BigSceneListAdapter extends BaseAdapter{
 		ViewHolder viewHolder = null;
 
 		if (convertView == null) {// 这样做可以使view循环利用，而不会有多少个item就产生多少个view
-			Log.v(TAG, "convertView 是空的");
+			//Log.v(TAG, "convertView 是空的");
 			viewHolder = new ViewHolder();
 			convertView = inflater.inflate(R.layout.item_bigsene_routeday, null);// 引用布局文件
 			viewHolder.bigSceneName = (TextView)convertView.findViewById(R.id.bigSceneName);	

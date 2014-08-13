@@ -2,10 +2,12 @@ package com.ne.vg.fragment;
 
 import com.ne.vg.R;
 import com.ne.vg.activity.RecommendActivity;
+import com.ne.vg.activity.RouteActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,10 +26,11 @@ public class MineFragment extends Fragment implements View.OnClickListener{
 	private final static String TAG = "MineFragment";
 	
 	private Button btn_panshan,btn_zhichao;
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
-		Toast.makeText(getActivity(), TAG+ " onCreateView", Toast.LENGTH_SHORT).show();
+		//Toast.makeText(getActivity(), TAG+ " onCreateView", Toast.LENGTH_SHORT).show();
 		View view  = inflater.inflate(R.layout.fragment_mine, container,false);
 		btn_panshan = (Button)view.findViewById(R.id.btn_panshan);
 		btn_panshan.setOnClickListener(this);
@@ -45,11 +48,18 @@ public class MineFragment extends Fragment implements View.OnClickListener{
 			break;
 		case R.id.btn_zhichao:
 			//TODO 
-			getFragmentManager().beginTransaction().hide(this).add(R.id.content_frame, new RouteFragment()).addToBackStack(null).commit();
-			//startActivity(new Intent(getActivity(),RecommendActivity.class));
+			//getFragmentManager().beginTransaction().hide(this).add(R.id.content_frame, new RouteFragment()).addToBackStack(null).commit();
+			startActivity(new Intent(getActivity(),RouteActivity.class));
 			break;
 		default:
 			break;
 		}
+	}
+	
+	@Override
+	public void onDestroyView() {
+		// TODO Auto-generated method stub
+		super.onDestroyView();
+		Log.v(TAG, "onDestroy");
 	}
 }

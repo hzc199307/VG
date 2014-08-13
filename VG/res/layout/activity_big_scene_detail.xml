@@ -22,7 +22,7 @@
             android:orientation="vertical" >
 
             <FrameLayout
-                android:id="@+id/content_frame"
+                android:id="@+id/big_scene_detail_frame_map"
                 android:layout_width="match_parent"
                 android:layout_height="200dp" >
             </FrameLayout>
