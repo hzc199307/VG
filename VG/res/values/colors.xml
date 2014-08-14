@@ -5,6 +5,13 @@
     <color name="white">#ffffffff</color>
     <color name="black">#ff000000</color>
     <color name="tools_box_bg">#ff333332</color>
-    <color name="devide_line">#CBCED2</color>
+    
+    <!-- activity big_scene_detail -->
+    <color name="big_scene_detail_devide_line">#CBCED2</color>
+    
+    <!-- HomeFragment 相关 -->
+    <color name="home_item_city_head_bg">#323232</color>
+    <color name="home_item_city_head_tv_normal">#969696</color>
+    <color name="home_item_city_head_tv_pressed">#686868</color>
 
 </resources>

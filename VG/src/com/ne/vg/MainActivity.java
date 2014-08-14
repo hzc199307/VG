@@ -41,7 +41,7 @@ public class MainActivity extends SlidingFragmentActivity {
 		
 		leftSlidingMenuFragment = new LeftSlidingMenuFragment();
 		homeFragment = new HomeFragment();
-		mineFragment = new MineFragment();
+		
 		
 		if (savedInstanceState == null) {
 			fragmentManager.beginTransaction()
@@ -140,6 +140,7 @@ public class MainActivity extends SlidingFragmentActivity {
 	 */
 	public void switchContentToHome()
 	{
+		
 		switchContent(homeFragment);
 	}
 	
@@ -148,6 +149,8 @@ public class MainActivity extends SlidingFragmentActivity {
 	 */
 	public void switchContentToMine()
 	{
+		if(mineFragment == null)
+			mineFragment = new MineFragment();
 		switchContent(mineFragment);
 	}
 	

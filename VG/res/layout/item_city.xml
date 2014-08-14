@@ -1,13 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="60dp"
-    android:background="#ffffff" >
 
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+
+    <!-- android:adjustViewBounds="true" 保持高宽比例 -->
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scaleType="centerCrop"
+        android:adjustViewBounds="true"
+        android:src="@drawable/city_flls" />
+    
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/item_city_shadow" />
+    
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/home_item_city_divider_height"
+        android:background="@drawable/item_city_divider"
+        android:layout_gravity="bottom|fill_horizontal" />
+    
     <RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_height="60dp"
-        android:background="#ffffff" >
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#00000000" >
 
         <TextView
             android:id="@+id/cityName"
@@ -19,5 +38,5 @@
             android:text="cityname"
             android:textColor="#ff000000" />
     </RelativeLayout>
-
-</RelativeLayout>
+    
+</FrameLayout>

@@ -40,7 +40,7 @@ public class HomeFragment extends Fragment implements OnClickListener{
 	public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		Toast.makeText(getActivity(), TAG+ " onCreateView", Toast.LENGTH_SHORT).show();
-
+		
 		View view  = inflater.inflate(R.layout.fragment_home, container,false);
 		lv_city = (ListView)view.findViewById(R.id.lv_city);
 		if(cityListAdapter==null)
@@ -50,6 +50,7 @@ public class HomeFragment extends Fragment implements OnClickListener{
 		home_title_left_btn.setOnClickListener(this);
 		home_title_right_btn = (ImageButton)view.findViewById(R.id.home_title_right_btn);
 		home_title_right_btn.setOnClickListener(this);
+		
 		return view;
 	}
 

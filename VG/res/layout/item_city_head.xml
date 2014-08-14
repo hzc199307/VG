@@ -1,29 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="60dp"
+    android:layout_height="@dimen/home_item_city_head_height"
+    android:background="@color/home_item_city_head_bg"
     android:orientation="horizontal" >
+
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="match_parent"
         android:layout_weight="1"
-        android:background="#ffffff" >
+        android:clickable="true" >
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="@dimen/home_item_city_head_icon_marginleft"
             android:orientation="horizontal" >
 
             <ImageView
                 android:id="@+id/iv_locationEnter"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="@dimen/home_item_city_head_icon_width"
+                android:layout_height="@dimen/home_item_city_head_icon_height"
                 android:scaleType="centerInside"
-                android:src="@drawable/ic_launcher" />
+                android:src="@drawable/icon_location_enter"
+                 />
 
             <TextView
                 android:id="@+id/tv_locationEnter"
@@ -31,31 +34,31 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:text="进入语音导游"
-                android:textColor="#ff000000" />
+                android:textColor="@color/home_item_city_head_tv_selector" />
         </LinearLayout>
         
     </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="match_parent"
         android:layout_weight="1"
-        android:background="#ffffff" >
+        android:clickable="true" >
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="@dimen/home_item_city_head_icon_marginleft"
             android:orientation="horizontal" >
 
             <ImageView
                 android:id="@+id/iv_randomEnter"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="@dimen/home_item_city_head_icon_width"
+                android:layout_height="@dimen/home_item_city_head_icon_height"
                 android:scaleType="centerInside"
-                android:src="@drawable/ic_launcher" />
+                android:src="@drawable/icon_random_enter" />
 
             <TextView
                 android:id="@+id/tv_randomEnter"
@@ -63,9 +66,10 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:text="景点随机穿越"
-                android:textColor="#ff000000" />
+                android:textColor="@color/home_item_city_head_tv_selector" />
         </LinearLayout>
         
     </RelativeLayout>
+
 
 </LinearLayout>

@@ -8,16 +8,24 @@
         layout="@layout/home_title"
         android:focusable="true" />
     
-    <TextView
+    <include
+        layout="@layout/item_city_head"
+        android:focusable="true" />
+    
+    <!-- <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="HomeFragment"
-        android:textColor="@color/black" />
+        android:textColor="@color/black" /> -->
 
+<!-- listview 弃用android:divider="@drawable/home_lv_divider"
+        android:dividerHeight="3px"  改在每个item_city下面-->
     <ListView
         android:id="@+id/lv_city"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent"
+        android:divider="#00000000"
+         >
     </ListView>
 
 </LinearLayout>

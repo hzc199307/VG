@@ -18,14 +18,14 @@ import android.widget.TextView;
 
 /**
  * 首页的city列表适配器 
- * 有2种布局显示
+ * 有1种布局显示
  * @ClassName: CityListAdapter 
  * @author 贺智超
  * @Description: TODO 
  * @date 2014-8-11 下午3:53:34
  */
 public class CityListAdapter extends BaseAdapter{
-	
+
 	private static final int TYPE_HEAD = 0,TYPE_DATA = 1;  
 	private final String TAG = "CityListAdapter";
 	private List<City> listData = null;
@@ -45,7 +45,7 @@ public class CityListAdapter extends BaseAdapter{
 		setListData(list);
 		inflater = LayoutInflater.from(context);
 	}
-	
+
 	public void destroy() {
 		listData.clear();
 		listData=null;
@@ -61,104 +61,47 @@ public class CityListAdapter extends BaseAdapter{
 	}
 	@Override
 	public int getCount() {
-		return listData.size()+1;
+		return listData.size();
 	}
 
 	@Override
 	public City getItem(int position) {
 		if(listData == null) return null;
-		return listData.get(position-1);
+		return listData.get(position);
 	}
 
 	@Override
 	public long getItemId(int position) {
 		return position;
 	}
-	
-	/**
-	 * 根据数据源的position返回需要显示的的layout的type
-	 * 
-	 * type的值必须从0开始
-	 * 
-	 * */
-	@Override
-	public int getItemViewType(int position) {
-
-		if(position ==0)
-			return TYPE_HEAD;
-		else
-			return TYPE_DATA;
-	}
-
-	/**
-	 * 返回所有的layout的数量
-	 * 
-	 * */
-	@Override
-	public int getViewTypeCount() {
-		return 2;
-	}
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 
-		int type = getItemViewType(position);
 		//TODO
 		ViewHolderData viewHolderData = null;
-		ViewHolderHead viewHolderHead = null;
 
 		if (convertView == null) {// 这样做可以使view循环利用，而不会有多少个item就产生多少个view
-			Log.v(TAG, "convertView 是空的 ，type = "+type);
-			switch(type)
-			{
-			case TYPE_DATA:
-				viewHolderData = new ViewHolderData();
-				convertView = inflater.inflate(R.layout.item_city, null);// 引用布局文件
-				viewHolderData.cityName = (TextView)convertView.findViewById(R.id.cityName);	
-				convertView.setTag(viewHolderData);// 如果是新产生的view，则设置tag
-				break;
-			case TYPE_HEAD:
-				viewHolderHead = new ViewHolderHead();
-				convertView = inflater.inflate(R.layout.item_city_head, null);// 引用布局文件
-				viewHolderHead.tv_locationEnter = (TextView)convertView.findViewById(R.id.tv_locationEnter);	
-				viewHolderHead.tv_randomEnter = (TextView)convertView.findViewById(R.id.tv_randomEnter);
-				convertView.setTag(viewHolderHead);// 如果是新产生的view，则设置tag
-				break;
-			}
+			Log.v(TAG, "convertView 是空的 ");
+			viewHolderData = new ViewHolderData();
+			convertView = inflater.inflate(R.layout.item_city, null);// 引用布局文件
+			//viewHolderData.cityName = (TextView)convertView.findViewById(R.id.cityName);	
+			convertView.setTag(viewHolderData);// 如果是新产生的view，则设置tag
 		} 
 		else
 		{
-			switch(type)
-			{
-			case TYPE_DATA:
-				viewHolderData = (ViewHolderData) convertView.getTag();// 如果是使用已经存在的view，则从tag中获取就可以了
-				break;
-			case TYPE_HEAD:
-				viewHolderHead = (ViewHolderHead) convertView.getTag();// 如果是使用已经存在的view，则从tag中获取就可以了
-				break;
-			}
-			
+			viewHolderData = (ViewHolderData) convertView.getTag();// 如果是使用已经存在的view，则从tag中获取就可以了
 		}
-		
-		switch(type)
-		{
-		case TYPE_DATA:
-			City myCity = listData.get(position-1);
-			viewHolderData.cityName.setText(myCity.getCityName());
-			//int id = mContext.getResources().getIdentifier("city_"+myCity.getCityPinyin() ,"drawable","com.ne.voiceguider");
-			break;
-		case TYPE_HEAD:
-			viewHolderHead = (ViewHolderHead) convertView.getTag();// 如果是使用已经存在的view，则从tag中获取就可以了
-			break;
-		}
+
+		City myCity = listData.get(position);
+		//viewHolderData.cityName.setText(myCity.getCityName());
+		//int id = mContext.getResources().getIdentifier("city_"+myCity.getCityPinyin() ,"drawable","com.ne.voiceguider");
+
 		return convertView;
 	}
 
 	class ViewHolderData {
 		public TextView cityName;
-	}
-	class ViewHolderHead {
-		public TextView tv_locationEnter,tv_randomEnter;
 	}
 
 	/**
