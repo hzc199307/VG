@@ -4,6 +4,7 @@
     <color name="text_white_shadow_color">#ff5a9487</color>
     <color name="white">#ffffffff</color>
     <color name="black">#ff000000</color>
+    <color name="none">#00000000</color>
     <color name="tools_box_bg">#ff333332</color>
     
     <!-- activity big_scene_detail -->
@@ -13,5 +14,6 @@
     <color name="home_item_city_head_bg">#323232</color>
     <color name="home_item_city_head_tv_normal">#969696</color>
     <color name="home_item_city_head_tv_pressed">#686868</color>
+    <color name="home_item_city_head_devide_line">#484848</color>
 
 </resources>

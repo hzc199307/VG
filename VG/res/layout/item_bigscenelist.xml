@@ -19,7 +19,7 @@
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:scaleType="center"
-            android:src="@drawable/haimian" />
+            android:src="@drawable/test_haimian" />
 
         <RelativeLayout
             android:id="@+id/bigscenelist_relative"

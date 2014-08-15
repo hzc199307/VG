@@ -12,6 +12,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Toast;
@@ -35,6 +36,8 @@ public class MainActivity extends SlidingFragmentActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
+		Log.v(TAG, "onCreate");
 		setContentView(R.layout.activity_main);
 
 		fragmentManager = getSupportFragmentManager();
@@ -71,6 +74,13 @@ public class MainActivity extends SlidingFragmentActivity {
 //		});
 		
 		
+	}
+	
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		Log.v(TAG, "onResume");
 	}
 
 	/**
@@ -161,6 +171,11 @@ public class MainActivity extends SlidingFragmentActivity {
 	public void setSlidingEnabled(boolean enabled)
 	{
 		mSlidingMenu.setSlidingEnabled(enabled);
+	}
+	
+	public void showMenu(View view)
+	{
+		mSlidingMenu.showMenu();
 	}
 
 }

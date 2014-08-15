@@ -22,7 +22,7 @@ import android.widget.Toast;
 public class GMapFragment extends Fragment{
 
 	private final String TAG = "GMapFragment";
-	private WebView webviewGMap;
+	private GMapWebView webviewGMap;
 
 	private final String MAP_URL="file:///android_asset/map.html"; 
 
@@ -34,7 +34,7 @@ public class GMapFragment extends Fragment{
 		//Toast.makeText(getActivity(), TAG+ " onCreateView", Toast.LENGTH_SHORT).show();
 
 		View view  = inflater.inflate(R.layout.fragment_gmap, container,false);
-		webviewGMap = (WebView)view.findViewById(R.id.gmap_webview);
+		webviewGMap = (GMapWebView)view.findViewById(R.id.gmap_webview);
 		//		WebSettings webSettings = webviewGMap.getSettings();
 		//        //允许在webview中执行JavaScript代码
 		//        webSettings.setJavaScriptEnabled(true);
@@ -68,8 +68,19 @@ public class GMapFragment extends Fragment{
 	public void onDestroyView() {
 		// TODO Auto-generated method stub
 		super.onDestroyView();
+		webviewGMap.destroyDrawingCache();
+		webviewGMap.clearAnimation();
+		webviewGMap.clearCache(false);
+		webviewGMap.clearDisappearingChildren();
+		webviewGMap.clearFocus();
+		webviewGMap.clearFormData();
+		webviewGMap.clearHistory();
+		webviewGMap.clearMatches();
+		webviewGMap.clearSslPreferences();
+		webviewGMap.clearView();
 		webviewGMap.removeAllViews();
 		webviewGMap.destroy();
+		webviewGMap = null;
 
 		Log.v(TAG, "onDestroyView");
 	}

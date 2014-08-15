@@ -105,7 +105,7 @@ public class BigSceneListFragment extends Fragment{
 		Map<String, Object> map;
 		for(int i=0;i<10;i++){
 			map = new HashMap<String, Object>();
-			map.put("img",R.drawable.haimian);
+			map.put("img",R.drawable.test_haimian);
 			map.put("download", "ÏÂÔØ");
 			map.put("sceneName","¾°¸£¹¬");
 			map.put("loveNum","12035");

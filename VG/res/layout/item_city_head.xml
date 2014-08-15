@@ -5,19 +5,17 @@
     android:background="@color/home_item_city_head_bg"
     android:orientation="horizontal" >
 
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:clickable="true" >
+        android:clickable="true"
+        android:gravity="center" >
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="@dimen/home_item_city_head_icon_marginleft"
+            android:gravity="center"
             android:orientation="horizontal" >
 
             <ImageView
@@ -25,32 +23,35 @@
                 android:layout_width="@dimen/home_item_city_head_icon_width"
                 android:layout_height="@dimen/home_item_city_head_icon_height"
                 android:scaleType="centerInside"
-                android:src="@drawable/icon_location_enter"
-                 />
+                android:src="@drawable/home_location_enter_icon" />
 
             <TextView
                 android:id="@+id/tv_locationEnter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:text="进入语音导游"
+                android:layout_marginLeft="@dimen/home_item_city_head_icon_text_space"
+                android:text="@string/home_item_city_head_locationEnter"
                 android:textColor="@color/home_item_city_head_tv_selector" />
         </LinearLayout>
-        
     </RelativeLayout>
+
+    <View
+        android:layout_width="@dimen/home_item_city_head_devide_line_width"
+        android:layout_height="@dimen/home_item_city_head_devide_line_height"
+        android:layout_gravity="center"
+        android:background="@color/home_item_city_head_devide_line" />
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:clickable="true" >
+        android:clickable="true"
+        android:gravity="center" >
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="@dimen/home_item_city_head_icon_marginleft"
+            android:gravity="center"
             android:orientation="horizontal" >
 
             <ImageView
@@ -58,18 +59,16 @@
                 android:layout_width="@dimen/home_item_city_head_icon_width"
                 android:layout_height="@dimen/home_item_city_head_icon_height"
                 android:scaleType="centerInside"
-                android:src="@drawable/icon_random_enter" />
+                android:src="@drawable/home_random_enter_icon" />
 
             <TextView
                 android:id="@+id/tv_randomEnter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/home_item_city_head_icon_text_space"
                 android:text="景点随机穿越"
                 android:textColor="@color/home_item_city_head_tv_selector" />
         </LinearLayout>
-        
     </RelativeLayout>
-
 
 </LinearLayout>

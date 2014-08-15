@@ -10,13 +10,20 @@
     
     <!-- HomeFragment 相关 -->
     <dimen name="home_title_height">50dp</dimen>
-    <dimen name="home_item_city_head_height">37.3dp</dimen>
+    <dimen name="home_title_menu_icon_marginleft">10dp</dimen>
+    <dimen name="home_title_search_icon_paddingright">10dp</dimen>
     
-    <dimen name="home_item_city_head_icon_marginleft">25.3dp</dimen>
+    <dimen name="home_item_city_head_height">37.3dp</dimen>
+    <dimen name="home_item_city_head_icon_text_space">8dp</dimen>
     <dimen name="home_item_city_head_icon_height">22dp</dimen>
     <dimen name="home_item_city_head_icon_width">22dp</dimen>
+    <dimen name="home_item_city_head_devide_line_height">14dp</dimen>
+    <dimen name="home_item_city_head_devide_line_width">1dp</dimen>
+    
     
     <dimen name="home_item_city_divider_height">2dp</dimen>
+    <dimen name="home_item_city_left_marginBottom">8dp</dimen>
+    <dimen name="home_item_city_left_marginLeft">4dp</dimen>
     
 
 </resources>

@@ -7,9 +7,14 @@
     <string name="title_activity_recommend">RecommendActivity</string>
     <string name="title_activity_big_scene_detail">BigSceneDetailActivity</string>
     <string name="title_fragment_route">RouteFragment</string>
+    
     <string name="title_fragment_recommend">RecommendFragment</string>
     <string name="title_fragment_recommendroute">推荐路线</string>
     <string name="title_fragment_scenelist">景点列表</string>
     <string name="title_activity_route">RouteActivity</string>
 
+    <!-- HomeFragment 相关 -->
+    <string name="title_fragment_home">热门城市</string>
+    <string name="home_item_city_head_locationEnter">进入语音导游</string>
+    <string name="home_item_city_head_randomEnter">景点随机穿越</string>
 </resources>

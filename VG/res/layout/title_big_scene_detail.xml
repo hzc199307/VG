@@ -30,7 +30,7 @@
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="5dip"
         android:layout_centerVertical="true"
-        android:background="@drawable/home_title_left_btn_selector"
+        android:background="@drawable/test_title_left_btn_selector"
         android:gravity="center"
         android:includeFontPadding="false" />
 
@@ -40,7 +40,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:background="@drawable/home_title_left_btn_selector"
+        android:background="@drawable/test_title_left_btn_selector"
         android:gravity="center"
         android:layout_marginRight="5dip"
         android:includeFontPadding="false" />

@@ -95,7 +95,7 @@ public class RecommendRouteFragment extends Fragment{
 		Map<String, Object> map;
 		for(int i=0;i<10;i++){
 			map = new HashMap<String, Object>();
-			map.put("img",com.ne.vg.R.drawable.haimian);
+			map.put("img",com.ne.vg.R.drawable.test_haimian);
 			map.put("sceneNum", "9景点");
 			map.put("routeName","首尔必游之地 3天");
 			map.put("collectNum","34562收藏");

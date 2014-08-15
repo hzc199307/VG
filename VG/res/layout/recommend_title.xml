@@ -49,7 +49,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:scaleType="matrix"
-            android:src="@drawable/main_cursor" />
+            android:src="@drawable/test_main_cursor" />
     </LinearLayout>
 
     <ImageButton
@@ -59,7 +59,7 @@
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
         android:layout_marginLeft="5dip"
-        android:background="@drawable/home_title_left_btn_selector"
+        android:background="@drawable/test_title_left_btn_selector"
         android:gravity="center"
         android:includeFontPadding="false" />
 
@@ -70,7 +70,7 @@
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:layout_marginRight="5dip"
-        android:background="@drawable/home_title_right_btn_selector"
+        android:background="@drawable/test_title_right_btn_selector"
         android:gravity="center"
         android:includeFontPadding="false" />
 

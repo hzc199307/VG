@@ -13,6 +13,7 @@ import com.slidingmenu.lib.app.SlidingFragmentActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -34,22 +35,20 @@ public class HomeFragment extends Fragment implements OnClickListener{
 
 	private ListView lv_city;
 	private CityListAdapter cityListAdapter ;
-	private ImageButton home_title_left_btn,home_title_right_btn;
+	private View home_title_search_btn;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		Toast.makeText(getActivity(), TAG+ " onCreateView", Toast.LENGTH_SHORT).show();
-		
+		Log.v(TAG, "onCreateView");
 		View view  = inflater.inflate(R.layout.fragment_home, container,false);
 		lv_city = (ListView)view.findViewById(R.id.lv_city);
 		if(cityListAdapter==null)
 			cityListAdapter = new CityListAdapter(getActivity(), CreateData.getCityList());
 		lv_city.setAdapter(cityListAdapter);
-		home_title_left_btn = (ImageButton)view.findViewById(R.id.home_title_left_btn);
-		home_title_left_btn.setOnClickListener(this);
-		home_title_right_btn = (ImageButton)view.findViewById(R.id.home_title_right_btn);
-		home_title_right_btn.setOnClickListener(this);
+		home_title_search_btn = (ImageButton)view.findViewById(R.id.home_title_search_btn);
+		home_title_search_btn.setOnClickListener(this);
 		
 		return view;
 	}
@@ -59,11 +58,7 @@ public class HomeFragment extends Fragment implements OnClickListener{
 		int id = view.getId();
 		switch(id)
 		{
-		case R.id.home_title_left_btn:
-			//点击标题左边按钮弹出左侧菜单
-			((SlidingFragmentActivity)getActivity()).getSlidingMenu().showMenu(true);
-			break;
-		case R.id.home_title_right_btn:
+		case R.id.home_title_search_btn:
 			//点击标题左边按钮弹出左侧菜单
 			startActivity(new Intent(getActivity(),BigSceneDetailActivity.class));
 			break;
@@ -75,6 +70,7 @@ public class HomeFragment extends Fragment implements OnClickListener{
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
+		Log.v(TAG, "onDestroy");
 		cityListAdapter.destroy();
 		cityListAdapter = null;
 	}

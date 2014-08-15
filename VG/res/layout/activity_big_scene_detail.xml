@@ -24,7 +24,7 @@
             <FrameLayout
                 android:id="@+id/big_scene_detail_frame_map"
                 android:layout_width="match_parent"
-                android:layout_height="200dp" >
+                android:layout_height="1000dp" >
             </FrameLayout>
 
             <TextView

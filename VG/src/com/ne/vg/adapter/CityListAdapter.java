@@ -78,6 +78,7 @@ public class CityListAdapter extends BaseAdapter{
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 
+		Log.v(TAG, "getView");
 		//TODO
 		ViewHolderData viewHolderData = null;
 

@@ -87,7 +87,7 @@ public class RecommendActivity extends FragmentActivity {
 	 */
 	private void InitImageView() {
 		 imageView= (ImageView) findViewById(R.id.recommend_cursor);  
-	     bmpW = BitmapFactory.decodeResource(getResources(), R.drawable.main_cursor).getWidth();// 获取图片宽度  
+	     bmpW = BitmapFactory.decodeResource(getResources(), R.drawable.test_main_cursor).getWidth();// 获取图片宽度  
 	     DisplayMetrics dm = new DisplayMetrics();  
 	     getWindowManager().getDefaultDisplay().getMetrics(dm);  
 	     int screenW = dm.widthPixels;// 获取分辨率宽度  

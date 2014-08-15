@@ -1,6 +1,7 @@
 package com.ne.vg.fragment;
 
 import com.ne.vg.R;
+import com.ne.vg.activity.BigSceneDetailActivity;
 import com.ne.vg.activity.RecommendActivity;
 import com.ne.vg.activity.RouteActivity;
 
@@ -50,6 +51,7 @@ public class MineFragment extends Fragment implements View.OnClickListener{
 			//TODO 
 			//getFragmentManager().beginTransaction().hide(this).add(R.id.content_frame, new RouteFragment()).addToBackStack(null).commit();
 			startActivity(new Intent(getActivity(),RouteActivity.class));
+			//startActivity(new Intent(getActivity(),BigSceneDetailActivity.class));
 			break;
 		default:
 			break;
