@@ -31,7 +31,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/home_item_city_head_icon_text_space"
                 android:text="@string/home_item_city_head_locationEnter"
-                android:textColor="@color/home_item_city_head_tv_selector" />
+                android:textColor="@color/home_item_city_head_tv_selector"
+                android:textSize="13sp" />
         </LinearLayout>
     </RelativeLayout>
 
@@ -67,7 +68,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/home_item_city_head_icon_text_space"
                 android:text="景点随机穿越"
-                android:textColor="@color/home_item_city_head_tv_selector" />
+                android:textColor="@color/home_item_city_head_tv_selector"
+                android:textSize="13sp" />
         </LinearLayout>
     </RelativeLayout>
 

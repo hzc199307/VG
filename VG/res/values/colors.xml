@@ -15,5 +15,11 @@
     <color name="home_item_city_head_tv_normal">#969696</color>
     <color name="home_item_city_head_tv_pressed">#686868</color>
     <color name="home_item_city_head_devide_line">#484848</color>
+    
+    <!-- LeftSlidingMenuFragment 相关 -->
+    <color name="left_tv_selected">#fc6662</color>
+    <color name="left_tv_normal">#ffffff</color>
+    <color name="left_bg">#323232</color>
+    <color name="left_divider_bg">#494949</color>
 
 </resources>

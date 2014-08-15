@@ -32,7 +32,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingBottom="4dp"
+            android:paddingBottom="2dp"
             android:src="@drawable/item_city_left_icon" />
 
         <LinearLayout
@@ -48,14 +48,15 @@
                 android:layout_height="wrap_content"
                 android:text="佛罗伦萨"
                 android:textColor="@color/white"
-                android:textSize="21sp" />
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/cityEnglishName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Florence"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:textSize="9sp" />
         </LinearLayout>
     </LinearLayout>
 
@@ -108,13 +109,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="8"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/white"
+                    android:textSize="10sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="线路"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/white"
+                    android:textSize="10sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -129,13 +132,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="32"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/white"
+                    android:textSize="10sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="景点"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/white"
+                    android:textSize="10sp" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

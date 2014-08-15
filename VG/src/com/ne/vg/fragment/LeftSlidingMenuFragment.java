@@ -22,7 +22,9 @@ public class LeftSlidingMenuFragment extends Fragment implements View.OnClickLis
 
 	private final static String TAG = "LeftSlidingMenuFragment";
 	
-	private Button btn_home,btn_mine;
+	
+	private View home_layout,mine_layout,search_layout,setting_layout;
+
 	private MainActivity mainActivity;
 	@Override
 	public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState) {
@@ -30,15 +32,22 @@ public class LeftSlidingMenuFragment extends Fragment implements View.OnClickLis
 		Toast.makeText(getActivity(), TAG+ " onCreateView", Toast.LENGTH_SHORT).show();
 		View view  = inflater.inflate(R.layout.fragment_leftslidingmenu, container,false);
 		
-		btn_home = (Button)view.findViewById(R.id.btn_home);
-		btn_mine = (Button)view.findViewById(R.id.btn_mine);
-		btn_home.setOnClickListener(this);
-		btn_mine.setOnClickListener(this);
+		home_layout = (View)view.findViewById(R.id.home_layout);
+		home_layout.setOnClickListener(this);
+		mine_layout = (View)view.findViewById(R.id.mine_layout);
+		mine_layout.setOnClickListener(this);
+		search_layout = (View)view.findViewById(R.id.search_layout);
+		search_layout.setOnClickListener(this);
+		setting_layout = (View)view.findViewById(R.id.setting_layout);	
+		setting_layout.setOnClickListener(this);
 		
 		mainActivity = (MainActivity) getActivity();
 		
-		
-		
+		home_layout.setSelected(true);
+		mine_layout.setSelected(false);
+		search_layout.setSelected(false);
+		setting_layout.setSelected(false);
+	
 		return view;
 	}
 	
@@ -46,11 +55,33 @@ public class LeftSlidingMenuFragment extends Fragment implements View.OnClickLis
 	public void onClick(View view) {
 		// TODO Auto-generated method stub
 		switch (view.getId()) {
-		case R.id.btn_home:
+		case R.id.home_layout:
 			mainActivity.switchContentToHome();
+			home_layout.setSelected(true);
+			mine_layout.setSelected(false);
+			search_layout.setSelected(false);
+			setting_layout.setSelected(false);
 			break;
-		case R.id.btn_mine:
+		case R.id.mine_layout:
 			mainActivity.switchContentToMine();
+			home_layout.setSelected(false);
+			mine_layout.setSelected(true);
+			search_layout.setSelected(false);
+			setting_layout.setSelected(false);
+			break;
+		case R.id.search_layout:
+			mainActivity.switchContentToSearch();
+			home_layout.setSelected(false);
+			mine_layout.setSelected(false);
+			search_layout.setSelected(true);
+			setting_layout.setSelected(false);
+			break;
+		case R.id.setting_layout:
+			mainActivity.switchContentToSetting();
+			home_layout.setSelected(false);
+			mine_layout.setSelected(false);
+			search_layout.setSelected(false);
+			setting_layout.setSelected(true);
 			break;
 		default:
 			break;
