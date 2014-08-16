@@ -2,6 +2,9 @@ package com.ne.vg.service;
 
 import java.io.IOException;
 
+import com.ne.vg.R;
+
+
 import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -35,7 +38,11 @@ public class MusicService extends Service{
 		Log.d(TAG, "onCreate");
 		Toast.makeText(getApplicationContext(), "show media player", Toast.LENGTH_SHORT).show();
 		
-		
+		if(mediaPlayer == null){
+			//TODO 这里需要加入音频文件的id
+			mediaPlayer = MediaPlayer.create(this, R.raw.fengwei);
+			mediaPlayer.setLooping(false);
+	}
 		//意图过滤器   
         IntentFilter filter = new IntentFilter();  
           
@@ -45,10 +52,10 @@ public class MusicService extends Service{
   
         //创建一个电话服务   
         TelephonyManager manager = (TelephonyManager) getSystemService(TELEPHONY_SERVICE);  
-          
+        Log.d(TAG, "listen occurs problems!");
         //监听电话状态，接电话时停止播放 
         /**
-         * 这里出现了bug，若监听则第一次点击play按钮无法播放。
+         * 这里出现了bug，若监听则第一次点击play按钮无法播放,已解决。
          */
         manager.listen(new MyPhoneStateListener(), PhoneStateListener.LISTEN_CALL_STATE);  
 		
@@ -77,7 +84,6 @@ public class MusicService extends Service{
         	}
         }  
     }  
-	
     /* 
      * 收到广播时暂停 
      */  

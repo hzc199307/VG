@@ -5,7 +5,7 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="8"
+        android:minSdkVersion="9"
         android:targetSdkVersion="21" />
 
     <application
@@ -38,6 +38,13 @@
             android:name="com.ne.vg.activity.PlayMusicActivity"
             android:label="@string/title_activity_play_music" >
         </activity>
+        <service
+            android:name="com.ne.vg.service.MusicService"
+            android:enabled="true" >
+            <intent-filter>
+                <action android:name="com.ne.vg.service.MusicService" />
+            </intent-filter>
+        </service>
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />

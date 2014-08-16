@@ -102,7 +102,7 @@ public class PlayMusicFragment extends Fragment{
 					long arg3) {
 				// TODO 这里是写跳转函数，跳转到其他页面
 				// 参数是service在注册文件中 的 intent-filter的action name
-				intent = new Intent("com.exmple.playmusic1.MusicService");
+				intent = new Intent("com.ne.vg.service.MusicService");
 				Log.v(TAG, "item is clicked!");
 				Toast.makeText(getActivity().getApplicationContext(), "music" + (position+1), Toast.LENGTH_SHORT).show(); 
 				if(isPlaying == false){
