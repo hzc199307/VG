@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal" 
+    android:descendantFocusability="blocksDescendants">
+    
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:background="#BBBBBB"
+        android:layout_height="80dip"
+        android:layout_weight="1" >
+    <ImageView
+        android:id="@+id/playmusic_pic"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:scaleType="center"
+        android:src="@drawable/test_btn_play"/>
+    
+    <TextView
+        android:id="@+id/playmusic_name"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/playmusic_pic"
+        android:gravity="center" />
+        
+       
+    
+
+</RelativeLayout>
+</LinearLayout>

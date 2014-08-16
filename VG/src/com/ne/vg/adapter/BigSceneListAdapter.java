@@ -8,6 +8,7 @@ import com.ne.vg.R;
 
 import android.content.Context;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * 
@@ -29,6 +31,8 @@ public class BigSceneListAdapter extends BaseAdapter{
 	private LayoutInflater mInflater;
 	//存储数据
 	List<Map<String, Object>> mData;
+	
+	private Context context;
 
 	/**
 	 * 
@@ -39,6 +43,7 @@ public class BigSceneListAdapter extends BaseAdapter{
 	{
 		mInflater = LayoutInflater.from(context);
 		this.mData = mData;
+		this.context = context;
 	}
 	
 	@Override
@@ -85,14 +90,15 @@ public class BigSceneListAdapter extends BaseAdapter{
 		holder.loveNum.setText((String)mData.get(position).get("loveNum"));
 		holder.recordNum.setText((String)mData.get(position).get("recordNum"));
 		
-//		holder.viewButton.setOnClickListener(new View.OnClickListener() {
-//			
-//			@Override
-//			public void onClick(View v) {
-//				//TODO
-//				//mContext.showInfo();					
-//			}
-//		});
+		holder.viewButton.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				//TODO	点击下载之后的时间响应		
+				Log.v("ppp", "download is clicked");
+				//Toast.makeText(context.getApplicationContext(), "xiazai is clicked", Toast.LENGTH_SHORT).show();
+			}
+		});
 		return convertView;
 	}
 	final class Holder

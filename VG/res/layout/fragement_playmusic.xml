@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    <ListView
+        android:id= "@+id/playmusic_lvSongs"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="8"
+        android:cacheColorHint="#00000000"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:background="#BBBBBB"
+        android:layout_height="0dp"
+        android:layout_weight="1" >
+
+        <Button
+            android:id="@+id/playmusic_btnDetail"
+            android:layout_width="48dip"
+            android:layout_height="48dip"
+            android:layout_margin="0dip"
+            android:background="@drawable/music_app"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentTop="true"/>
+
+        <SeekBar
+            android:id="@+id/playmusic_pbDuration"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="3dip"
+            android:layout_height="10dip"
+            android:layout_marginBottom="3dip"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/playmusic_btnDetail"                       
+            android:maxHeight="1dip"
+            android:minHeight="1dip"
+            android:progressDrawable="@drawable/test_progress_style"
+            android:thumbOffset="0dip"            
+            android:thumb="@drawable/test_seekbar_thumb"/>
+
+        <TextView
+            android:id="@+id/playmusic_tvCurrentMusic"
+            android:layout_width="190dp"
+            android:layout_height="32dip"
+            android:layout_alignBaseline="@+id/playmusic_btnStartStop"
+            android:layout_toRightOf="@+id/playmusic_btnDetail"
+            
+            android:layout_marginLeft="15dip"
+            android:gravity="left|center_vertical"
+            android:paddingLeft="5dip"
+            android:paddingRight="5dip" />
+
+        <Button
+            android:id="@+id/playmusic_btnStartStop"
+            android:layout_width="32dip"
+            android:layout_height="32dip"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/playmusic_pbDuration"
+            android:layout_marginRight="30dip"
+            android:background="@drawable/test_play"
+          />
+
+       
+
+    </RelativeLayout>
+    
+
+</LinearLayout>

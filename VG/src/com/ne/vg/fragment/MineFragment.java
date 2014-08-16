@@ -2,6 +2,7 @@ package com.ne.vg.fragment;
 
 import com.ne.vg.R;
 import com.ne.vg.activity.BigSceneDetailActivity;
+import com.ne.vg.activity.PlayMusicActivity;
 import com.ne.vg.activity.RecommendActivity;
 import com.ne.vg.activity.RouteActivity;
 
@@ -26,7 +27,7 @@ public class MineFragment extends Fragment implements View.OnClickListener{
 
 	private final static String TAG = "MineFragment";
 	
-	private Button btn_panshan,btn_zhichao;
+	private Button btn_panshan,btn_zhichao,btn_bofang;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState) {
@@ -37,6 +38,8 @@ public class MineFragment extends Fragment implements View.OnClickListener{
 		btn_panshan.setOnClickListener(this);
 		btn_zhichao = (Button)view.findViewById(R.id.btn_zhichao);
 		btn_zhichao.setOnClickListener(this); 
+		btn_bofang = (Button)view.findViewById(R.id.btn_bofangyieyue);
+		btn_bofang.setOnClickListener(this);
 		return view;
 	}
 	@Override
@@ -53,6 +56,9 @@ public class MineFragment extends Fragment implements View.OnClickListener{
 			startActivity(new Intent(getActivity(),RouteActivity.class));
 			//startActivity(new Intent(getActivity(),BigSceneDetailActivity.class));
 			break;
+		case R.id.btn_bofangyieyue:
+			//TODO 播放音乐跳转的地方
+			startActivity(new Intent(getActivity(),PlayMusicActivity.class));
 		default:
 			break;
 		}
