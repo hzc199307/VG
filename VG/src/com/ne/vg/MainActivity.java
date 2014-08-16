@@ -102,7 +102,8 @@ public class MainActivity extends SlidingFragmentActivity {
 		mSlidingMenu.setMode(SlidingMenu.LEFT);// 设置是左滑还是右滑，还是左右都可以滑，我这里只做了左滑
 	    
 		mSlidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_MARGIN);//设置手势模式
-		//mSlidingMenu.setShadowDrawable(R.drawable.shadow);// 设置左菜单阴影图片
+		mSlidingMenu.setShadowDrawable(R.drawable.left_shadow);// 设置左菜单阴影图片
+		mSlidingMenu.setShadowWidthRes(R.dimen.left_shadow_width);
 		mSlidingMenu.setFadeEnabled(true);// 设置滑动时菜单的是否淡入淡出
 		mSlidingMenu.setFadeDegree(0.5f);// 设置淡入淡出的比例
 		mSlidingMenu.setBehindScrollScale(0.0f);// 设置滑动时拖拽效果

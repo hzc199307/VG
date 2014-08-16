@@ -14,14 +14,14 @@
         android:id="@+id/btn_panshan"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="潘森跳大"
+        android:text="panshan"
         android:textColor="@color/black" />
     
     <Button
         android:id="@+id/btn_zhichao"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="智超跳大"
+        android:text="zhichao"
         android:textColor="@color/black" />
 
 </LinearLayout>

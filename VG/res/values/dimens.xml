@@ -21,6 +21,7 @@
     <dimen name="home_item_city_divider_height">1dp</dimen>
     <dimen name="home_item_city_left_marginBottom">8dp</dimen>
     <dimen name="home_item_city_left_marginLeft">4dp</dimen>
+    <dimen name="home_item_city_right_paddingLeft">6dp</dimen>
 
     <!-- LeftSlidingMenuFragment 相关 -->
     <dimen name="left_all_paddingTop">50dp</dimen>
@@ -31,5 +32,8 @@
     <dimen name="left_tvs_top_textsize">13sp</dimen>
     <dimen name="left_tvs_bottom_textsize">9sp</dimen>
     <dimen name="left_divider_height">1dp</dimen>
+    
+    <dimen name="left_shadow_width">3dp</dimen>
+    
 
 </resources>

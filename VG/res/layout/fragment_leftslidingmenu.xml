@@ -64,14 +64,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/left_home_tv_top"
-                        android:textColor="@color/left_tv_selector"
+                        android:textColor="@color/left_tv_cn_selector"
                         android:textSize="@dimen/left_tvs_top_textsize" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/left_home_tv_bottom"
-                        android:textColor="@color/left_tv_selector"
+                        android:textColor="@color/left_tv_en_selector"
                         android:textSize="@dimen/left_tvs_bottom_textsize" />
                 </LinearLayout>
             </LinearLayout>
@@ -143,14 +143,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/left_mine_tv_top"
-                        android:textColor="@color/left_tv_selector"
+                        android:textColor="@color/left_tv_cn_selector"
                         android:textSize="@dimen/left_tvs_top_textsize" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/left_mine_tv_bottom"
-                        android:textColor="@color/left_tv_selector"
+                        android:textColor="@color/left_tv_en_selector"
                         android:textSize="@dimen/left_tvs_bottom_textsize" />
                 </LinearLayout>
             </LinearLayout>
@@ -222,14 +222,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/left_search_tv_top"
-                        android:textColor="@color/left_tv_selector"
+                        android:textColor="@color/left_tv_cn_selector"
                         android:textSize="@dimen/left_tvs_top_textsize" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/left_search_tv_bottom"
-                        android:textColor="@color/left_tv_selector"
+                        android:textColor="@color/left_tv_en_selector"
                         android:textSize="@dimen/left_tvs_bottom_textsize" />
                 </LinearLayout>
             </LinearLayout>
@@ -301,14 +301,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/left_setting_tv_top"
-                        android:textColor="@color/left_tv_selector"
+                        android:textColor="@color/left_tv_cn_selector"
                         android:textSize="@dimen/left_tvs_top_textsize" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/left_setting_tv_bottom"
-                        android:textColor="@color/left_tv_selector"
+                        android:textColor="@color/left_tv_en_selector"
                         android:textSize="@dimen/left_tvs_bottom_textsize" />
                 </LinearLayout>
             </LinearLayout>

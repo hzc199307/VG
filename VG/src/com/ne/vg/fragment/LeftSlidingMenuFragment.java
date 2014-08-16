@@ -38,7 +38,7 @@ public class LeftSlidingMenuFragment extends Fragment implements View.OnClickLis
 		mine_layout.setOnClickListener(this);
 		search_layout = (View)view.findViewById(R.id.search_layout);
 		search_layout.setOnClickListener(this);
-		setting_layout = (View)view.findViewById(R.id.setting_layout);	
+		setting_layout = (View)view.findViewById(R.id.setting_layout);
 		setting_layout.setOnClickListener(this);
 		
 		mainActivity = (MainActivity) getActivity();
