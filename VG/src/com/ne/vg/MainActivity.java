@@ -4,6 +4,8 @@ import com.ne.vg.fragment.HomeFragment;
 import com.ne.vg.fragment.LeftSlidingMenuFragment;
 import com.ne.vg.fragment.MineFragment;
 import com.ne.vg.fragment.RouteFragment;
+import com.ne.vg.fragment.SearchFragment;
+import com.ne.vg.fragment.SettingFragment;
 import com.slidingmenu.lib.SlidingMenu;
 import com.slidingmenu.lib.app.SlidingFragmentActivity;
 
@@ -20,6 +22,7 @@ import android.widget.Toast;
 
 public class MainActivity extends SlidingFragmentActivity {
 
+	private final static double behindWidth = 0.75;
 	private final static String TAG = "MainActivity";
 	
 	protected SlidingMenu mSlidingMenu;
@@ -30,6 +33,8 @@ public class MainActivity extends SlidingFragmentActivity {
 	private LeftSlidingMenuFragment leftSlidingMenuFragment;//侧边Fragment
 	private HomeFragment homeFragment;//主Fragment
 	private MineFragment mineFragment;
+	private SearchFragment searchFragment;
+	private SettingFragment settingFragment;
 	
 	DisplayMetrics dm;
 	
@@ -97,11 +102,12 @@ public class MainActivity extends SlidingFragmentActivity {
 		mSlidingMenu.setMode(SlidingMenu.LEFT);// 设置是左滑还是右滑，还是左右都可以滑，我这里只做了左滑
 	    
 		mSlidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_MARGIN);//设置手势模式
-		//mSlidingMenu.setShadowDrawable(R.drawable.shadow);// 设置左菜单阴影图片
+		mSlidingMenu.setShadowDrawable(R.drawable.left_shadow);// 设置左菜单阴影图片
+		mSlidingMenu.setShadowWidthRes(R.dimen.left_shadow_width);
 		mSlidingMenu.setFadeEnabled(true);// 设置滑动时菜单的是否淡入淡出
 		mSlidingMenu.setFadeDegree(0.5f);// 设置淡入淡出的比例
 		mSlidingMenu.setBehindScrollScale(0.0f);// 设置滑动时拖拽效果
-		mSlidingMenu.setBehindWidth((int)(dm.widthPixels*0.618));//侧边栏的宽度 按照黄金比例
+		mSlidingMenu.setBehindWidth((int)(dm.widthPixels*behindWidth));//侧边栏的宽度 按照黄金比例
 		//mSlidingMenu.setBehindOffsetRes(R.dimen.slidingmenu_offset);// 设置剩余宽度
 	}
 	
@@ -162,6 +168,24 @@ public class MainActivity extends SlidingFragmentActivity {
 		if(mineFragment == null)
 			mineFragment = new MineFragment();
 		switchContent(mineFragment);
+	}
+	/**
+	 * 跳转到SearchFragment
+	 */
+	public void switchContentToSearch()
+	{
+		if(searchFragment == null)
+			searchFragment = new SearchFragment();
+		switchContent(searchFragment);
+	}
+	/**
+	 * 跳转到SettingFragment
+	 */
+	public void switchContentToSetting()
+	{
+		if(settingFragment == null)
+			settingFragment = new SettingFragment();
+		switchContent(settingFragment);
 	}
 	
 	/**

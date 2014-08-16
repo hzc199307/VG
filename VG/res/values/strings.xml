@@ -18,7 +18,6 @@
     <string name="home_item_city_head_locationEnter">进入语音导游</string>
     <string name="home_item_city_head_randomEnter">景点随机穿越</string>
     <string name="title_activity_play_music">PlayMusicActivity</string>
-
     
     <!-- LeftSlidingMenuFragment 相关 -->
     <string name="left_home_tv_top">首页</string>

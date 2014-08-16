@@ -32,7 +32,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingBottom="4dp"
+            android:paddingBottom="2dp"
             android:src="@drawable/item_city_left_icon" />
 
         <LinearLayout
@@ -48,14 +48,15 @@
                 android:layout_height="wrap_content"
                 android:text="佛罗伦萨"
                 android:textColor="@color/white"
-                android:textSize="21sp" />
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/cityEnglishName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Florence"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:textSize="9sp" />
         </LinearLayout>
     </LinearLayout>
 
@@ -66,18 +67,21 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|right"
         android:background="@drawable/item_city_right_bottom_bg"
-        android:gravity="center"
-        android:orientation="horizontal" >
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/home_item_city_right_paddingLeft" >
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_gravity="center"
+            android:layout_weight="0"
+            android:gravity="right"
             android:orientation="vertical" >
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
                 android:layout_weight="1"
                 android:scaleType="centerInside"
                 android:src="@drawable/item_city_route_icon" />
@@ -85,19 +89,20 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
                 android:layout_weight="1"
                 android:scaleType="centerInside"
                 android:src="@drawable/item_city_scene_icon" />
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_gravity="center"
+            android:layout_weight="1"
             android:orientation="vertical" >
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
@@ -108,17 +113,19 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="8"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/white"
+                    android:textSize="10sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="线路"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/white"
+                    android:textSize="10sp" />
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
@@ -129,13 +136,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="32"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/white"
+                    android:textSize="10sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="景点"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/white"
+                    android:textSize="10sp" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

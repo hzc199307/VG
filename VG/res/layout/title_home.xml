@@ -34,7 +34,7 @@
             android:singleLine="true"
             android:layout_marginLeft="@dimen/home_title_menu_icon_marginleft"
             android:text="@string/title_fragment_home" 
-            android:textSize="20sp"
+            android:textSize="17sp"
             android:textColor="@color/white"/>
     </LinearLayout>
 
