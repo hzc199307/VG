@@ -58,9 +58,11 @@ public class RecommendRouteAdapter extends BaseAdapter{
 			convertView = mInflater.inflate(R.layout.item_recommendroute, null);
 			holder = new Holder();
 			holder.img = (ImageView)convertView.findViewById(R.id.recommendroute_view01);
-			holder.sceneNum = (TextView)convertView.findViewById(R.id.recommendroute_tv1);
-			holder.routeName = (TextView)convertView.findViewById(R.id.recommendroute_tv2);
-			holder.collectNum = (TextView)convertView.findViewById(R.id.recommendroute_tv3);
+			//TODO 这里注释的地方需要取消
+			/** */
+//			holder.sceneNum = (TextView)convertView.findViewById(R.id.recommendroute_tv1);
+//			holder.routeName = (TextView)convertView.findViewById(R.id.recommendroute_tv2);
+//			holder.collectNum = (TextView)convertView.findViewById(R.id.recommendroute_tv3);
 			convertView.setTag(holder);
 		}
 		else {

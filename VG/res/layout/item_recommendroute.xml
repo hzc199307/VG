@@ -3,56 +3,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/container"
     android:layout_width="match_parent"
-    android:layout_height="180dp"
-    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:layout_height="wrap_content"
+    android:paddingBottom="0dp"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingTop="@dimen/reommend_item_vertical_margin"
     tools:context="com.example.recommended_route.MainActivity"
     tools:ignore="MergeRootFrame" >
-
-    <FrameLayout
+    <LinearLayout 
         android:layout_width="match_parent"
-        android:layout_height="180dp" >
-
+        android:layout_height="match_parent"
+        android:orientation="vertical">
         <ImageView
             android:id="@+id/recommendroute_view01"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:layout_gravity="center"
-            android:scaleType="matrix" />
+            android:scaleType="matrix"
+            android:src="@drawable/recommend_item_iv1"  />
+    </LinearLayout>
 
-        <RelativeLayout
-            android:id="@+id/recommendroute_relative"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_gravity="center" >
-
-            <TextView
-                android:id="@+id/recommendroute_tv1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginLeft="10dp"
-                android:background="#add8e6" />
-
-            <TextView
-                android:id="@+id/recommendroute_tv2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentLeft="true"
-                android:layout_marginLeft="10dp" />
-
-            <TextView
-                android:id="@+id/recommendroute_tv3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="10dp" />
-        </RelativeLayout>
-    </FrameLayout>
+    
 
 </FrameLayout>

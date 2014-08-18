@@ -5,7 +5,7 @@
     android:orientation="vertical" >
 
     <include
-        layout="@layout/recommend_title"
+        layout="@layout/title_recommend"
         android:focusable="true" />
 
     <!-- viewpager的属性有可能需要修改 -->

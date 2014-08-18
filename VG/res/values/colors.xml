@@ -6,16 +6,18 @@
     <color name="black">#ff000000</color>
     <color name="none">#00000000</color>
     <color name="tools_box_bg">#ff333332</color>
-    
+
+    <color name="main_iv_cover">#4d323232</color>
     <!-- activity big_scene_detail -->
     <color name="big_scene_detail_devide_line">#CBCED2</color>
-    
+
     <!-- HomeFragment 相关 -->
     <color name="home_item_city_head_bg">#323232</color>
     <color name="home_item_city_head_tv_normal">#969696</color>
     <color name="home_item_city_head_tv_pressed">#686868</color>
     <color name="home_item_city_head_devide_line">#484848</color>
     
+
     <!-- LeftSlidingMenuFragment 相关 -->
     <color name="left_tv_cn_selected">#b3fc6662</color>
     <color name="left_tv_en_selected">#66fc6662</color>

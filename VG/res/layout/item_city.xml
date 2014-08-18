@@ -17,6 +17,7 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_gravity="bottom"
         android:background="@drawable/item_city_shadow" />
 
     <!-- 左下角 -->
@@ -75,13 +76,12 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="0"
-            android:gravity="right"
+            android:gravity="center"
             android:orientation="vertical" >
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_gravity="center_vertical"
                 android:layout_weight="1"
                 android:scaleType="centerInside"
                 android:src="@drawable/item_city_route_icon" />
@@ -89,7 +89,6 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_gravity="center_vertical"
                 android:layout_weight="1"
                 android:scaleType="centerInside"
                 android:src="@drawable/item_city_scene_icon" />

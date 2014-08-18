@@ -10,6 +10,7 @@ import com.ne.vg.bean.City;
 import com.ne.vg.bean.CreateData;
 import com.slidingmenu.lib.app.SlidingFragmentActivity;
 
+import android.R.layout;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -18,7 +19,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
+import android.view.animation.TranslateAnimation;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -35,7 +39,8 @@ public class HomeFragment extends Fragment implements OnClickListener{
 
 	private ListView lv_city;
 	private CityListAdapter cityListAdapter ;
-	private View home_title_search_btn;
+	private View home_title_search_btn,home_title_left;
+
 
 	@Override
 	public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState) {
@@ -49,7 +54,9 @@ public class HomeFragment extends Fragment implements OnClickListener{
 		lv_city.setAdapter(cityListAdapter);
 		home_title_search_btn = (ImageButton)view.findViewById(R.id.home_title_search_btn);
 		home_title_search_btn.setOnClickListener(this);
-		
+
+		home_title_left = (View)view.findViewById(R.id.home_title_left);
+
 		return view;
 	}
 
@@ -74,4 +81,21 @@ public class HomeFragment extends Fragment implements OnClickListener{
 		cityListAdapter.destroy();
 		cityListAdapter = null;
 	}
+	
+	/**
+	 * 开始标题栏动画
+	 */
+	public void startAnimation(TranslateAnimation animation) {
+		animation.setDuration(400);
+		animation.setFillAfter(true);
+		home_title_left.startAnimation(animation);
+	}
+	
+	/**
+	 * 关闭标题栏动画
+	 */
+	public void clearAnimation() {
+		home_title_left.clearAnimation();
+	}
+
 }
