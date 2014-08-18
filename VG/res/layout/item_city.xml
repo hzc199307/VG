@@ -6,11 +6,12 @@
     <!-- 背景图 android:adjustViewBounds="true" 保持高宽比例 -->
 
     <ImageView
+        android:id="@+id/item_city_bg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:adjustViewBounds="true"
         android:scaleType="centerCrop"
-        android:src="@drawable/city_flls" />
+        android:src="@drawable/city_florence" />
 
     <!-- 阴影 -->
 
@@ -52,7 +53,7 @@
                 android:textSize="20sp" />
 
             <TextView
-                android:id="@+id/cityEnglishName"
+                android:id="@+id/cityPinyin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Florence"

@@ -43,6 +43,7 @@ public class CityListAdapter extends BaseAdapter{
 
 	public CityListAdapter(Context context,List<City> list) {
 		setListData(list);
+		mContext = context;
 		inflater = LayoutInflater.from(context);
 	}
 
@@ -86,7 +87,9 @@ public class CityListAdapter extends BaseAdapter{
 			Log.v(TAG, "convertView 是空的 ");
 			viewHolderData = new ViewHolderData();
 			convertView = inflater.inflate(R.layout.item_city, null);// 引用布局文件
-			//viewHolderData.cityName = (TextView)convertView.findViewById(R.id.cityName);	
+			viewHolderData.cityName = (TextView)convertView.findViewById(R.id.cityName);
+			viewHolderData.cityPinyin = (TextView)convertView.findViewById(R.id.cityPinyin);
+			viewHolderData.item_city_bg = (ImageView)convertView.findViewById(R.id.item_city_bg);
 			convertView.setTag(viewHolderData);// 如果是新产生的view，则设置tag
 		} 
 		else
@@ -95,14 +98,18 @@ public class CityListAdapter extends BaseAdapter{
 		}
 
 		City myCity = listData.get(position);
-		//viewHolderData.cityName.setText(myCity.getCityName());
-		//int id = mContext.getResources().getIdentifier("city_"+myCity.getCityPinyin() ,"drawable","com.ne.voiceguider");
+		viewHolderData.cityName.setText(myCity.getCityName());
+		viewHolderData.cityPinyin.setText(myCity.getCityPinyin());
+		int resId = mContext.getResources().getIdentifier(myCity.getResource() ,"drawable","com.ne.vg");
+		if(resId>0)
+			viewHolderData.item_city_bg.setImageResource(resId);
 
 		return convertView;
 	}
 
 	class ViewHolderData {
-		public TextView cityName;
+		public TextView cityName,cityPinyin;
+		public ImageView item_city_bg;
 	}
 
 	/**

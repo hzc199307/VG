@@ -29,15 +29,22 @@ public class CreateData {
 		List<City> listCities = new ArrayList<City>();
 		City city1,city2,city;
 		city1 = new City();
-		city1.setCityName("罗马");
+		city1.setCityName("佛罗伦萨");
+		city1.setCityPinyin("Florence");
+		city1.setResource("city_florence");
+		
 		listCities.add(city1);
 		city2 = new City();
-		city2.setCityName("威尼斯");
+		city2.setCityName("罗马");
+		city2.setCityPinyin("Roman");
+		city2.setResource("city_roman");
 		listCities.add(city2);
 		for(int i=0;i<10;i++)
 		{
 			city = new City();
-			city.setCityName("意大利城市");
+			city.setCityName("五渔村");
+			city.setCityPinyin("Cinque Terre");
+			city.setResource("city_cinqueterre");
 			listCities.add(city);
 		}
 		return listCities;

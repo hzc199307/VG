@@ -1,3 +1,4 @@
+package com.ne.vg.adapter;
 //package com.ne.vg.adapter;
 //
 //import java.util.ArrayList;
