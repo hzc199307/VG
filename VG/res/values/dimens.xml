@@ -33,7 +33,8 @@
     <dimen name="left_tvs_bottom_textsize">9sp</dimen>
     <dimen name="left_divider_height">1dp</dimen>
     
-    <dimen name="left_shadow_width">3dp</dimen>
+    <dimen name="left_shadow_right_width">3dp</dimen>
+    <dimen name="left_shadow_top_height">4dp</dimen>
     
 
 </resources>
