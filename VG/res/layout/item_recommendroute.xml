@@ -4,24 +4,128 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingBottom="0dp"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/reommend_item_vertical_margin"
-    tools:context="com.example.recommended_route.MainActivity"
-    tools:ignore="MergeRootFrame" >
-    <LinearLayout 
+    android:layout_marginLeft="@dimen/recommend_item_horizontal_margin"
+    android:layout_marginRight="@dimen/recommend_item_horizontal_margin"
+    android:layout_marginTop="@dimen/recommend_item_vertical_margin"
+    tools:context="com.example.recommended_route.MainActivity" >
+
+    <ImageView
+        android:id="@+id/recommendroute_view01"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-        <ImageView
-            android:id="@+id/recommendroute_view01"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:scaleType="matrix"
-            android:src="@drawable/recommend_item_iv1"  />
+        android:layout_height="wrap_content"
+        android:scaleType="centerCrop"
+        android:src="@drawable/recommend_item_iv1" />
+
+    <!-- 底下白色的那一栏 -->
+
+    <FrameLayout
+        android:id="@+id/recommendroute_view02"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:adjustViewBounds="true"
+        android:background="@drawable/recommend_item_iv2"
+        android:orientation="horizontal" >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:layout_gravity="center_vertical|left"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/recommendroute_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/recommend_item_name_left"
+                android:text="五渔村必游之地"
+                android:textSize="@dimen/recommend_item_text_size1" />
+
+            <TextView
+                android:id="@+id/recommendroute_scenenum"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/recommend_item_scene_left"
+                android:text="3天"
+                android:textSize="@dimen/recommend_item_text_size1" />
+            
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:layout_gravity="center_vertical|right"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:id="@+id/iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/recommend_item_iv_right"
+                android:src="@drawable/recommend_item_love_icon" />
+
+            <TextView
+                android:id="@+id/recommendroute_lovenum"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/recommend_item_lovenum_right"
+                android:singleLine="true"
+                android:text="3245"
+                android:textSize="@dimen/recommend_item_text_size2" />
+        </LinearLayout>
+    </FrameLayout>
+
+    <LinearLayout>
+        
     </LinearLayout>
 
-    
+    <!-- 左下角的红色圆 -->
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="54dp" >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/reconmmend_route_rectangle" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="13dp"
+            android:layout_marginTop="6dp"
+            android:src="@drawable/recommend__item_icon" />
+
+        <!-- 不知道为什么LinearLayout用fillparent就不行 -->
+
+        <LinearLayout
+            android:layout_width="46dp"
+            android:layout_height="16dp"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/recommendroute_sceneNum"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="9"
+                android:textColor="@color/white"
+                android:textSize="10sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="景点"
+                android:textColor="@color/white"
+                android:textSize="10sp" />
+        </LinearLayout>
+    </FrameLayout>
 
 </FrameLayout>

@@ -43,6 +43,12 @@
     
     <!-- RecommendRouteFragment 相关 -->
     <dimen name="recommend_item_height">136dp</dimen>
-    <dimen name="reommend_item_horizontal_margin">5dp</dimen>
-	<dimen name="reommend_item_vertical_margin">5dp</dimen>
+    <dimen name="recommend_item_horizontal_margin">4dp</dimen>
+	<dimen name="recommend_item_vertical_margin">5dp</dimen>
+	<dimen name="recommend_item_text_size1">15sp</dimen>
+	<dimen name="recommend_item_name_left">14dp</dimen>
+	<dimen name="recommend_item_scene_left">8dp</dimen>
+	<dimen name="recommend_item_iv_right">6dp</dimen>
+	<dimen name="recommend_item_lovenum_right">14dp</dimen>
+	<dimen name="recommend_item_text_size2">12sp</dimen>
 </resources>
