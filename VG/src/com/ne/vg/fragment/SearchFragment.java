@@ -22,4 +22,11 @@ public class SearchFragment extends Fragment {
 		View view  = inflater.inflate(R.layout.fragment_search, container,false);
 		return view;
 	}
+	
+	@Override
+	public void onDestroyView() {
+		// TODO Auto-generated method stub
+		super.onDestroyView();
+		Log.v(TAG, "onDestroyView");
+	}
 }

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- 景点等级、介绍 -->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="left"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="推荐级别："
+            android:textColor="#fc6662"
+            android:textSize="14sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="必去景点"
+            android:textColor="#fc6662"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="5dp" >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="1dp"
+            android:paddingRight="2dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/bsi_star_icon" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="1dp"
+            android:paddingRight="2dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/bsi_star_icon" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="1dp"
+            android:paddingRight="2dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/bsi_star_icon" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="1dp"
+            android:paddingRight="2dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/bsi_star_icon" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="1dp"
+            android:paddingRight="2dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/bsi_star_icon" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="11dp"
+        android:text="建于1394年，有600多年历史的景福宫是李朝（公元1392～1910年）时期首尔的五大宫之一，是李氏王朝的正宫，也是韩国封建社会后期的政治中心。
+景福宫拥有庄严华丽的大门、雕梁画栋的内宫、琳琅满目的陈设。此宫共有四门，南门叫光化门，韩国动乱时期曾遭破坏。重修后的光化门门匾，据称是韩国唯一用韩文写成的古宫门匾，而且是韩国前总统的手笔。"
+        android:textColor="#e8e8e8"
+        android:textSize="12sp" />
+
+</LinearLayout>

@@ -22,4 +22,10 @@ public class SettingFragment extends Fragment {
 		return view;
 	}
 	
+	@Override
+	public void onDestroyView() {
+		// TODO Auto-generated method stub
+		super.onDestroyView();
+		Log.v(TAG, "onDestroyView");
+	}
 }

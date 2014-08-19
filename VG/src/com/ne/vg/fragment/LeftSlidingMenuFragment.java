@@ -5,9 +5,11 @@ import com.ne.vg.R;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -86,5 +88,37 @@ public class LeftSlidingMenuFragment extends Fragment implements View.OnClickLis
 		default:
 			break;
 		}
+	}
+	
+//	/**
+//	 * 开始标题栏动画
+//	 */
+//	public void startAnimation(TranslateAnimation animation) {
+//		animation.setDuration(400);
+//		animation.setFillAfter(true);
+//		home_layout.startAnimation(animation);
+//		animation.setDuration(animation.getDuration()+500);
+//		mine_layout.startAnimation(animation);
+//		animation.setDuration(animation.getDuration()+500);
+//		search_layout.startAnimation(animation);
+//		animation.setDuration(animation.getDuration()+500);
+//		setting_layout.startAnimation(animation);
+//	}
+//	
+//	/**
+//	 * 关闭标题栏动画
+//	 */
+//	public void clearAnimation() {
+//		home_layout.clearAnimation();
+//		mine_layout.clearAnimation();
+//		search_layout.clearAnimation();
+//		setting_layout.clearAnimation();
+//	}
+	
+	@Override
+	public void onDestroyView() {
+		// TODO Auto-generated method stub
+		super.onDestroyView();
+		Log.v(TAG, "onDestroy");
 	}
 }

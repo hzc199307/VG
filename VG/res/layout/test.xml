@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="2dp"
+    android:background="#303030" >
+
+    <!-- 背景图 android:adjustViewBounds="true" 保持高宽比例 -->
+
+    <ImageView
+        android:id="@+id/item_city_bg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/city_cinqueterre"
+        android:paddingTop="1.333dp"
+        android:paddingBottom="2.666dp"
+        android:paddingLeft="2dp"
+        android:background="@drawable/item_route_bg"
+         />
+    <ImageView
+        android:id="@+id/item_city_bg1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/test_city_0"
+        android:paddingTop="1.333dp"
+        android:paddingBottom="2.666dp"
+        android:paddingLeft="2dp"
+        android:background="@drawable/item_route_bg"
+         />
+
+   
+
+</FrameLayout>

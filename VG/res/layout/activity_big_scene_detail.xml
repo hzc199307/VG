@@ -12,35 +12,86 @@
     <ScrollView
         android:layout_width="fill_parent"
         android:layout_height="match_parent"
+        android:background="#323232"
         android:scrollbars="vertical" >
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
             android:orientation="vertical" >
+
+            <!-- 地图 -->
 
             <FrameLayout
                 android:id="@+id/big_scene_detail_frame_map"
                 android:layout_width="match_parent"
-                android:layout_height="1000dp" >
+                android:layout_height="170dp" >
             </FrameLayout>
 
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="500dp"
-                android:text="123" />
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp" >
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:background="@color/big_scene_detail_devide_line" />
+                <!-- 进入语音导游的button -->
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="500dp"
-                android:text="123" />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="43dp"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="14dp"
+                    android:layout_marginTop="14dp"
+                    android:background="@drawable/bsd_btn_bg"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="进入语音导游"
+                        android:textColor="#ffffff"
+                        android:textSize="14sp" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="7dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/bsd_btn_download_icon" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.667dp"
+                    android:background="@color/big_scene_detail_devide_line" />
+
+                <!-- 景点等级、介绍  BigSceneIntroFragment -->
+
+                <FrameLayout
+                    android:id="@+id/frame_big_scene_intro"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="14dp"
+                    android:paddingTop="13dp" >
+                </FrameLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.667dp"
+                    android:background="@color/big_scene_detail_devide_line" />
+
+                <!-- 景点介绍详情 -->
+
+                <FrameLayout
+                    android:id="@+id/frame_big_scene_intro_detail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="14dp"
+                    android:paddingTop="13dp" >
+                </FrameLayout>
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 

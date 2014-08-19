@@ -2,6 +2,8 @@ package com.ne.vg.activity;
 
 import com.ne.vg.R;
 import com.ne.vg.TestFragment;
+import com.ne.vg.fragment.BigSceneIntroDetailFragment;
+import com.ne.vg.fragment.BigSceneIntroFragment;
 import com.ne.vg.fragment.HomeFragment;
 import com.ne.vg.fragment.MineFragment;
 import com.ne.vg.gmap.GMapFragment;
@@ -11,6 +13,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.View;
 
 /**
  * 大景点详情内容页
@@ -22,7 +25,9 @@ import android.view.KeyEvent;
 public class BigSceneDetailActivity extends FragmentActivity {
 
 	private final String TAG= "BigSceneDetailActivity";
-	GMapFragment gMapFragment;
+	private GMapFragment gMapFragment;
+	private BigSceneIntroFragment bigSceneIntroFragment;
+	private BigSceneIntroDetailFragment bigSceneIntroDetailFragment;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +41,14 @@ public class BigSceneDetailActivity extends FragmentActivity {
 			gMapFragment = new GMapFragment();
 			getSupportFragmentManager().beginTransaction()
 			.replace(R.id.big_scene_detail_frame_map, gMapFragment)
+			.commit();
+			bigSceneIntroFragment = new BigSceneIntroFragment();
+			getSupportFragmentManager().beginTransaction()
+			.replace(R.id.frame_big_scene_intro, bigSceneIntroFragment)
+			.commit();
+			bigSceneIntroDetailFragment = new BigSceneIntroDetailFragment();
+			getSupportFragmentManager().beginTransaction()
+			.replace(R.id.frame_big_scene_intro_detail, bigSceneIntroDetailFragment)
 			.commit();
 		}
 		
@@ -57,6 +70,17 @@ public class BigSceneDetailActivity extends FragmentActivity {
 		this.finish();
 		return super.onKeyDown(keyCode, event);
 		
+	}
+	
+	public void onClick(View view) {
+		switch (view.getId()) {
+		case R.id.big_scene_detail_title_left:
+			this.finish();
+			break;
+
+		default:
+			break;
+		}
 	}
 
 }

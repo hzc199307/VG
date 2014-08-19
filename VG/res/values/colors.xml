@@ -9,7 +9,7 @@
 
     <color name="main_iv_cover">#4d323232</color>
     <!-- activity big_scene_detail -->
-    <color name="big_scene_detail_devide_line">#CBCED2</color>
+    <color name="big_scene_detail_devide_line">#494949</color>
 
     <!-- HomeFragment 相关 -->
     <color name="home_item_city_head_bg">#323232</color>

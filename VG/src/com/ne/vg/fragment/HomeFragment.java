@@ -3,6 +3,7 @@ package com.ne.vg.fragment;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.ne.vg.MainActivity;
 import com.ne.vg.R;
 import com.ne.vg.activity.BigSceneDetailActivity;
 import com.ne.vg.adapter.CityListAdapter;
@@ -68,6 +69,7 @@ public class HomeFragment extends Fragment implements OnClickListener{
 		case R.id.home_title_search_btn:
 			//点击标题左边按钮弹出左侧菜单
 			startActivity(new Intent(getActivity(),BigSceneDetailActivity.class));
+			((MainActivity)getActivity()).destroyAllFragmentWithoutNow();
 			break;
 		default:
 			break;

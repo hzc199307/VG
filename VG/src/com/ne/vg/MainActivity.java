@@ -43,7 +43,7 @@ public class MainActivity extends SlidingFragmentActivity {
 
 	private ImageView home_iv_cover;
 
-	private TranslateAnimation animation;
+	private TranslateAnimation animation1,animation2;
 
 	DisplayMetrics dm;
 
@@ -76,7 +76,8 @@ public class MainActivity extends SlidingFragmentActivity {
 		Toast.makeText(getApplicationContext(), strPM, Toast.LENGTH_SHORT).show();
 		Toast.makeText(getApplicationContext(), getResources().getDisplayMetrics().densityDpi+"", Toast.LENGTH_SHORT).show(); 
 
-		animation = new TranslateAnimation(0, (int)(dm.widthPixels*(1-behindWidth-0.05)), 0, 0);
+		animation1 = new TranslateAnimation(0, (int)(dm.widthPixels*(1-behindWidth-0.05)), 0, 0);
+		animation2 = new TranslateAnimation(-(int)(dm.widthPixels*behindWidth), 0, 0, 0);
 
 		initSlidingMenu();
 
@@ -87,6 +88,17 @@ public class MainActivity extends SlidingFragmentActivity {
 		// TODO Auto-generated method stub
 		super.onResume();
 		Log.v(TAG, "onResume");
+
+	}
+
+	@Override
+	protected void onResumeFragments() {
+		Log.v(TAG, "onResumeFragments");
+		super.onResumeFragments();
+		// TODO 当nowFragment没有内容 或者被隐藏 跳往主界面
+		if(nowFragment == null||nowFragment.isHidden())
+			switchContentToHome();
+
 	}
 
 	/**
@@ -119,7 +131,8 @@ public class MainActivity extends SlidingFragmentActivity {
 			public void onOpen() {
 				setCoverIvVisibility(View.VISIBLE);
 				if(nowFragment == homeFragment)
-					homeFragment.startAnimation(animation);
+					homeFragment.startAnimation(animation1);
+				//				leftSlidingMenuFragment.startAnimation(animation2);
 			}
 		});
 		mSlidingMenu.setOnCloseListener(new OnCloseListener() {
@@ -129,11 +142,12 @@ public class MainActivity extends SlidingFragmentActivity {
 				setCoverIvVisibility(View.GONE);
 				if(nowFragment == homeFragment)
 					homeFragment.clearAnimation();
+				//				leftSlidingMenuFragment.clearAnimation();
 			}
 		});
 	}
 
-	Fragment nowFragment;
+	private Fragment nowFragment;//目前的fragment
 
 	/**
 	 * 从一个Fragment跳转到另外一个Fragment
@@ -158,19 +172,21 @@ public class MainActivity extends SlidingFragmentActivity {
 	 * @param toFragment
 	 */
 	private void switchContent(Fragment toFragment) {
+		if(toFragment==null)//为空不跳转
+			return;
+		FragmentTransaction transaction = fragmentManager.beginTransaction();
 		if (nowFragment != toFragment) {
-			FragmentTransaction transaction = fragmentManager.beginTransaction();
 			//.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out);
-			transaction.hide(nowFragment);// 隐藏当前的fragment
-			if (!toFragment.isAdded()) {    // 先判断是否被add过
-				transaction.add(R.id.main_content_frame, toFragment).commit(); // add下一个到Activity中
-			} else {
-				transaction.show(toFragment).commit(); // 显示下一个
-			}
+			if(nowFragment!=null)transaction.hide(nowFragment);// 隐藏当前的fragment
 			nowFragment = toFragment;
 		}
+		if (!toFragment.isAdded()) { //判断是否被add过
+			transaction.add(R.id.main_content_frame, toFragment).commit(); // add下一个到Activity中
+		} 
+		if(toFragment.isHidden()){   //判断是否被隐藏过
+			transaction.show(toFragment).commit(); // 显示下一个
+		}
 		mSlidingMenu.showContent();
-
 	}
 
 	/**
@@ -178,7 +194,8 @@ public class MainActivity extends SlidingFragmentActivity {
 	 */
 	public void switchContentToHome()
 	{
-
+		if(homeFragment == null)
+			homeFragment = new HomeFragment();
 		switchContent(homeFragment);
 	}
 
@@ -235,4 +252,82 @@ public class MainActivity extends SlidingFragmentActivity {
 
 
 
+	@Override
+	protected void onRestoreInstanceState(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		Log.v(TAG, "onRestoreInstanceState");
+		super.onRestoreInstanceState(savedInstanceState);
+	}
+
+	@Override
+	protected void onSaveInstanceState(Bundle outState) {
+		// TODO Auto-generated method stub
+		Log.v(TAG, "onSaveInstanceState");
+		//super.onSaveInstanceState(outState);
+
+	}
+
+	@Override
+	protected void onStop() {
+		// TODO 在Activity处于后台的时候 关掉那些不用的Fragment
+		destroyAllFragmentWithoutNow();
+		super.onStop();
+		Log.v(TAG, "onStop");
+
+	}
+
+	@Override
+	protected void onDestroy() {
+		// TODO Auto-generated method stub
+
+		Log.v(TAG, "onDestroy");
+		//		destroyFragment(leftSlidingMenuFragment);
+		//		destroyFragment(homeFragment);
+		//		destroyFragment(mineFragment);
+		//		destroyFragment(searchFragment);
+		//		destroyFragment(settingFragment);
+		nowFragment = null;
+		super.onDestroy();
+	}
+
+	/**
+	 * remove某一个fragment
+	 * @param fragment
+	 */
+	public void destroyFragment(Fragment fragment)
+	{
+		if(fragmentManager==null)
+			fragmentManager = getSupportFragmentManager();
+		if(fragment!=null)
+		{
+			if(nowFragment==fragment)//如果remove的是现在显示的fragment
+				nowFragment = null;
+			fragmentManager.beginTransaction()
+			.remove(fragment).commit();
+			fragment = null;
+		}
+	}
+
+	/**
+	 * remove某一个非nowragment的fragment 
+	 * @param fragment
+	 */
+	public void destroyFragmentNotNow(Fragment fragment)
+	{
+		if(nowFragment==fragment)
+			return;
+		destroyFragment(fragment);
+	}
+
+	/**
+	 * remove所有fragment （除了leftSlidingMenuFragment）
+	 * @param fragment
+	 */
+	public void destroyAllFragmentWithoutNow()
+	{
+		destroyFragmentNotNow(homeFragment);
+		destroyFragmentNotNow(mineFragment);
+		destroyFragmentNotNow(searchFragment);
+		destroyFragmentNotNow(settingFragment);
+	}
 }
