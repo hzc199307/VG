@@ -60,9 +60,11 @@ public class RecommendRouteAdapter extends BaseAdapter{
 			holder.img = (ImageView)convertView.findViewById(R.id.recommendroute_view01);
 			//TODO 这里注释的地方需要取消
 			/** */
-//			holder.sceneNum = (TextView)convertView.findViewById(R.id.recommendroute_tv1);
-//			holder.routeName = (TextView)convertView.findViewById(R.id.recommendroute_tv2);
-//			holder.collectNum = (TextView)convertView.findViewById(R.id.recommendroute_tv3);
+			holder.sceneNum = (TextView)convertView.findViewById(R.id.recommendroute_sceneNum);
+			holder.routeName = (TextView)convertView.findViewById(R.id.recommendroute_name);
+			holder.routeDay = (TextView)convertView.findViewById(R.id.recommendroute_scenenum);
+			
+			holder.collectNum = (TextView)convertView.findViewById(R.id.recommendroute_lovenum);
 			convertView.setTag(holder);
 		}
 		else {
@@ -72,6 +74,9 @@ public class RecommendRouteAdapter extends BaseAdapter{
 		holder.sceneNum.setText((String)mData.get(position).get("sceneNum"));
 		holder.routeName.setText((String)mData.get(position).get("routeName"));
 		holder.collectNum.setText((String)mData.get(position).get("collectNum"));
+		//routeDay还需要加入天这个字
+		holder.routeDay.setText((String)mData.get(position).get("routeDay")+ "天");
+		//TODO click的响应目前先不写
 		holder.collectNum.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
@@ -87,10 +92,11 @@ public class RecommendRouteAdapter extends BaseAdapter{
 	//用来存储对应数据类型，对照着XML文件
 	final class Holder
 	{
-		public ImageView img;
-		public TextView sceneNum;
-		public TextView routeName;
-		public TextView collectNum;
+		private ImageView img;
+		private TextView sceneNum;
+		private TextView routeName;
+		private TextView routeDay;
+		private TextView collectNum;
 	}
 
 

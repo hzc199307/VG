@@ -3,6 +3,9 @@ package com.ne.vg.bean;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.ne.vg.R;
+
+
 public class CreateData {
 
 	public static List<BigScene> getBigSceneList()
@@ -48,5 +51,79 @@ public class CreateData {
 			listCities.add(city);
 		}
 		return listCities;
+	}
+	
+	/**
+	 * 
+	 * @Title: getRecommendRoute 
+	 * @Description: 获取推荐路线
+	 * @param @return
+	 * @return List<RecommendRoute> 
+	 * @throws
+	 */
+	public static List<RecommendRoute> getRecommendRoute()
+	{
+		List<RecommendRoute> listRoutes = new ArrayList<RecommendRoute>();
+		RecommendRoute route1,route2,route3;
+		
+		route1 = new RecommendRoute();
+		route1.setRouteName("五渔村必游之地");
+		route1.setRouteDay(3);
+		route1.setSceneNum(9);
+		route1.setLoveNum(2325);
+		route1.setResource(R.drawable.recommend_item_iv1);
+		
+		route2 = new RecommendRoute();
+		route2.setRouteName("五渔村必游之地");
+		route2.setRouteDay(3);
+		route2.setSceneNum(9);
+		route2.setLoveNum(2325);
+		route2.setResource(R.drawable.recommend_item_iv1);
+		
+		route3 = new RecommendRoute();
+		route3.setRouteName("五渔村必游之地");
+		route3.setRouteDay(3);
+		route3.setSceneNum(9);
+		route3.setLoveNum(2325);
+		route3.setResource(R.drawable.recommend_item_iv1);
+		
+		return listRoutes;
+	}
+
+	public static List<BigScene> getBigScenePs(){
+		List<BigScene> scenelist = new ArrayList<BigScene>();
+		BigScene sc,sc1,sc2,sc3;
+		
+		for(int i = 0;i<10;i++){
+			sc = new BigScene();
+			
+			sc.setBigSceneName("景福宫景福宫");
+			sc.setDowned(false);
+			sc.setRecordNum(18);
+			sc.setLoveNum(3252);
+			sc.setSrc(R.drawable.recommend_item_iv1);
+		}
+		sc1 = new BigScene();
+		sc1.setBigSceneName("景福宫景福宫");
+		sc1.setDowned(true);
+		sc1.setRecordNum(18);
+		sc1.setLoveNum(3252);
+		sc1.setSrc(R.drawable.recommend_item_iv1);
+
+		sc2 = new BigScene();
+		sc2.setBigSceneName("景福宫景福宫");
+		sc2.setDowned(true);
+		sc2.setRecordNum(18);
+		sc2.setLoveNum(3252);
+		sc2.setSrc(R.drawable.recommend_item_iv1);
+
+		sc3 = new BigScene();
+		sc3.setBigSceneName("景福宫景福宫");
+		sc3.setDowned(false);
+		sc3.setRecordNum(18);
+		sc3.setLoveNum(3252);
+		sc3.setSrc(R.drawable.recommend_item_iv1);
+		
+		return scenelist;
 	}
 }

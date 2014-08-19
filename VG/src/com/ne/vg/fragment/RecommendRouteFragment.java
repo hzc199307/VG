@@ -95,10 +95,12 @@ public class RecommendRouteFragment extends Fragment{
 		Map<String, Object> map;
 		for(int i=0;i<10;i++){
 			map = new HashMap<String, Object>();
-			map.put("img",com.ne.vg.R.drawable.test_haimian);
-			map.put("sceneNum", "9景点");
-			map.put("routeName","首尔必游之地 3天");
-			map.put("collectNum","34562收藏");
+			//TODO 先用自己的数据，之后再换成zhichao的
+			map.put("img",com.ne.vg.R.drawable.recommend_item_iv1);
+			map.put("sceneNum", "9");
+			map.put("routeName","首尔必游之地");
+			map.put("routeDay", "3");
+			map.put("collectNum","3456");
 			list.add(map);
 		}
 

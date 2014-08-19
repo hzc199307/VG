@@ -6,7 +6,13 @@ package com.ne.vg.bean;
 public class BigScene {
 
 	private String bigSceneName,resource;
-	private int cityID,bigSceneID,contentID,level;
+	private int cityID,bigSceneID,contentID,level,loveNum,recordNum,src;
+	public int getRecordNum() {
+		return recordNum;
+	}
+	public void setRecordNum(int recordNum) {
+		this.recordNum = recordNum;
+	}
 	private double latitude,longtitude;
 	private boolean isDowned;
 	
@@ -63,6 +69,18 @@ public class BigScene {
 	}
 	public void setDowned(boolean isDowned) {
 		this.isDowned = isDowned;
+	}
+	public int getLoveNum() {
+		return loveNum;
+	}
+	public void setLoveNum(int loveNum) {
+		this.loveNum = loveNum;
+	}
+	public int getSrc() {
+		return src;
+	}
+	public void setSrc(int src) {
+		this.src = src;
 	}
 	
 	

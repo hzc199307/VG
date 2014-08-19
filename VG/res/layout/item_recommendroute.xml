@@ -1,13 +1,11 @@
 <?xml version ="1.0" encoding = "UTF-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginLeft="@dimen/recommend_item_horizontal_margin"
     android:layout_marginRight="@dimen/recommend_item_horizontal_margin"
-    android:layout_marginTop="@dimen/recommend_item_vertical_margin"
-    tools:context="com.example.recommended_route.MainActivity" >
+    android:layout_marginTop="@dimen/recommend_item_vertical_margin" >
 
     <ImageView
         android:id="@+id/recommendroute_view01"
@@ -30,8 +28,8 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:gravity="center_vertical"
             android:layout_gravity="center_vertical|left"
+            android:gravity="center_vertical"
             android:orientation="horizontal" >
 
             <TextView
@@ -49,14 +47,13 @@
                 android:layout_marginLeft="@dimen/recommend_item_scene_left"
                 android:text="3天"
                 android:textSize="@dimen/recommend_item_text_size1" />
-            
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:gravity="center_vertical"
             android:layout_gravity="center_vertical|right"
+            android:gravity="center_vertical"
             android:orientation="horizontal" >
 
             <ImageView
@@ -77,54 +74,62 @@
         </LinearLayout>
     </FrameLayout>
 
-    <LinearLayout>
-        
-    </LinearLayout>
-
     <!-- 左下角的红色圆 -->
 
     <FrameLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="46dp"
+        android:layout_height="46dp"
+        android:layout_gravity="left|top"
         android:layout_marginLeft="12dp"
-        android:layout_marginTop="54dp" >
+        android:layout_marginTop="54dp" 
+        >
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="46dp"
+            android:layout_height="46dp"
             android:layout_gravity="center"
+            android:scaleType="centerInside"
             android:src="@drawable/reconmmend_route_rectangle" />
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="13dp"
-            android:layout_marginTop="6dp"
-            android:src="@drawable/recommend__item_icon" />
-
-        <!-- 不知道为什么LinearLayout用fillparent就不行 -->
-
         <LinearLayout
-            android:layout_width="46dp"
-            android:layout_height="16dp"
-            android:layout_marginTop="20dp"
-            android:gravity="center"
-            android:orientation="horizontal" >
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:orientation="vertical" >
 
-            <TextView
-                android:id="@+id/recommendroute_sceneNum"
+            <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="9"
-                android:textColor="@color/white"
-                android:textSize="10sp" />
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="6dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/recommend__item_icon" />
 
-            <TextView
+            <!-- 不知道为什么LinearLayout用fillparent就不行 -->
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="景点"
-                android:textColor="@color/white"
-                android:textSize="10sp" />
+                android:layout_marginTop="2dp"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/recommendroute_sceneNum"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="9"
+                    android:textColor="@color/white"
+                    android:textSize="10sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="景点"
+                    android:textColor="@color/white"
+                    android:textSize="10sp" />
+            </LinearLayout>
         </LinearLayout>
     </FrameLayout>
 

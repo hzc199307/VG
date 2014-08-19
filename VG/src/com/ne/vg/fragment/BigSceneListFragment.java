@@ -7,6 +7,7 @@ import java.util.Map;
 
 import com.ne.vg.R;
 import com.ne.vg.adapter.BigSceneListAdapter;
+import com.ne.vg.bean.CreateData;
 
 
 
@@ -85,7 +86,7 @@ public class BigSceneListFragment extends Fragment{
 	@Override
 	public void onStart(){
 		mData = getData();
-		gridAdapter = new BigSceneListAdapter(getActivity(), mData);
+		gridAdapter = new BigSceneListAdapter(getActivity(), CreateData.getBigScenePs());
 		gridview.setAdapter(gridAdapter);
 		super.onStart();
 	}
@@ -105,10 +106,10 @@ public class BigSceneListFragment extends Fragment{
 		Map<String, Object> map;
 		for(int i=0;i<10;i++){
 			map = new HashMap<String, Object>();
-			map.put("img",R.drawable.test_haimian);
-			map.put("download", "œ¬‘ÿ");
-			map.put("sceneName","æ∞∏£π¨");
-			map.put("loveNum","12035");
+			map.put("img",R.drawable.recommend_item_iv1);
+			map.put("isdowned", 0);
+			map.put("sceneName","æ∞∏£π¨æ∞∏£π¨");
+			map.put("loveNum","3225");
 			map.put("recordNum","18");
 			list.add(map);
 		}

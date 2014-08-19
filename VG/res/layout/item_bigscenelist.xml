@@ -2,73 +2,118 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/frame1"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:descendantFocusability="blocksDescendants"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin" >
+    android:layout_height="wrap_content"
+    android:descendantFocusability="blocksDescendants">
+
     <!-- descendantFocusability属性是避免button屏蔽整个item的响应 -->
 
-    <FrameLayout
+
+    <!-- 整个图片背景 -->
+
+    <ImageView
+        android:id="@+id/bigscenelist_view01"
         android:layout_width="match_parent"
-        android:layout_height="180dp" >
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:scaleType="centerCrop"
+        android:src="@drawable/recommend_item_iv1" />
+
+    <!-- 加入的阴影 -->
+	<!-- 需要说明的是，下载之前height为match_parent,下载之后为39dp -->
+    <ImageView
+        android:id="@+id/bigscenelist_item_shadow"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="top"
+        android:background="@drawable/bigscenenlist_item_shadow2" />
+    <!-- 左上方的字体，由于只有一个textview所以没有用linearlayout封装一层 -->
+
+    <TextView
+        android:id="@+id/bigscenelist_item_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="13dp"
+        android:layout_marginTop="14dp"
+        android:text="景福宫景福宫"
+        android:textColor="@color/white"
+        android:textSize="20sp" />
+    <!-- 底下白色的那一栏 -->
+
+    <FrameLayout
+        android:id="@+id/bigscenelist_fl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="@drawable/recommend_item_iv2" >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical|left"
+            android:clickable="true"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="14dp"
+                android:src="@drawable/bigscenelist_item_loveicon" />
+
+            <TextView
+                android:id="@+id/bigscenelist_loveNum"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="6dp"
+                android:text="3252"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical|right"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="8dp"
+                android:src="@drawable/bigscenelist_item_musicicon" />
+
+            <TextView
+                android:id="@+id/bigscenelist_musicNum"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="16dp"
+                android:text="18"
+                android:textSize="12sp" />
+        </LinearLayout>
+    </FrameLayout>
+
+    <!-- 右下角的红色下载按钮 -->
+
+    <FrameLayout
+        android:id="@+id/bigscenelist_download"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:layout_marginBottom="26dp"
+        android:layout_marginRight="8dp" 
+        android:clickable="true">
 
         <ImageView
-            android:id="@+id/bigscenelist_view01"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:scaleType="center"
-            android:src="@drawable/test_haimian" />
+            android:src="@drawable/bigscenelist_item_rectangle" />
 
-        <RelativeLayout
-            android:id="@+id/bigscenelist_relative"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center" >
-
-            <Button
-                android:id="@+id/bigscenelist_bu1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentTop="true"
-                android:background="#add8e6" />
-            <!-- 显示景点名称 -->
-
-            <TextView
-                android:id="@+id/bigscenelist_tv1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true" />
-            <!-- 显示爱心跟音频那两个图标的部分（即底端背景图） -->
-
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="15dp"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentRight="true"
-                android:background="#d2b48c" />
-
-            <TextView
-                android:id="@+id/bigscenelist_tv2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentLeft="true"
-                android:layout_marginLeft="15dp" />
-
-            <TextView
-                android:id="@+id/bigscenelist_tv3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="15dp" />
-        </RelativeLayout>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/bigscenelist_item_download" />
     </FrameLayout>
 
 </FrameLayout>
