@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:scaleType="centerCrop"
+        android:scaleType="center"
         android:src="@drawable/recommend_item_iv1" />
 
     <!-- 加入的阴影 -->
@@ -23,7 +23,7 @@
     <ImageView
         android:id="@+id/bigscenelist_item_shadow"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="39dp"
         android:layout_gravity="top"
         android:background="@drawable/bigscenenlist_item_shadow2" />
     <!-- 左上方的字体，由于只有一个textview所以没有用linearlayout封装一层 -->
@@ -99,7 +99,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|right"
-        android:layout_marginBottom="26dp"
+        android:layout_marginBottom="30dp"
         android:layout_marginRight="8dp" 
         android:clickable="true">
 

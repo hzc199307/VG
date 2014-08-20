@@ -72,6 +72,7 @@ public class CreateData {
 		route1.setSceneNum(9);
 		route1.setLoveNum(2325);
 		route1.setResource(R.drawable.recommend_item_iv1);
+		listRoutes.add(route1);
 		
 		route2 = new RecommendRoute();
 		route2.setRouteName("ŒÂ”Ê¥Â±ÿ”Œ÷Æµÿ");
@@ -79,6 +80,7 @@ public class CreateData {
 		route2.setSceneNum(9);
 		route2.setLoveNum(2325);
 		route2.setResource(R.drawable.recommend_item_iv1);
+		listRoutes.add(route2);
 		
 		route3 = new RecommendRoute();
 		route3.setRouteName("ŒÂ”Ê¥Â±ÿ”Œ÷Æµÿ");
@@ -86,6 +88,7 @@ public class CreateData {
 		route3.setSceneNum(9);
 		route3.setLoveNum(2325);
 		route3.setResource(R.drawable.recommend_item_iv1);
+		listRoutes.add(route3);
 		
 		return listRoutes;
 	}
@@ -102,6 +105,7 @@ public class CreateData {
 			sc.setRecordNum(18);
 			sc.setLoveNum(3252);
 			sc.setSrc(R.drawable.recommend_item_iv1);
+			scenelist.add(sc);
 		}
 		sc1 = new BigScene();
 		sc1.setBigSceneName("æ∞∏£π¨æ∞∏£π¨");
@@ -109,6 +113,7 @@ public class CreateData {
 		sc1.setRecordNum(18);
 		sc1.setLoveNum(3252);
 		sc1.setSrc(R.drawable.recommend_item_iv1);
+		scenelist.add(sc1);
 
 		sc2 = new BigScene();
 		sc2.setBigSceneName("æ∞∏£π¨æ∞∏£π¨");
@@ -116,6 +121,7 @@ public class CreateData {
 		sc2.setRecordNum(18);
 		sc2.setLoveNum(3252);
 		sc2.setSrc(R.drawable.recommend_item_iv1);
+		scenelist.add(sc2);
 
 		sc3 = new BigScene();
 		sc3.setBigSceneName("æ∞∏£π¨æ∞∏£π¨");
@@ -123,6 +129,7 @@ public class CreateData {
 		sc3.setRecordNum(18);
 		sc3.setLoveNum(3252);
 		sc3.setSrc(R.drawable.recommend_item_iv1);
+		scenelist.add(sc3);
 		
 		return scenelist;
 	}

@@ -7,6 +7,9 @@
     <include
         layout="@layout/title_recommend"
         android:focusable="true" />
+    <include
+        layout="@layout/title_select_recommend"
+        android:focusable="true" />
 
     <!-- viewpager的属性有可能需要修改 -->
 

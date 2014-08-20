@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.ne.vg.R;
+import com.ne.vg.bean.RecommendRoute;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -26,9 +27,9 @@ public class RecommendRouteAdapter extends BaseAdapter{
 	//LayoutInflater作用是将layout的xml布局文件实例化为View类对象。
 	private LayoutInflater mInflater;
 	//存储数据
-	List<Map<String, Object>> mData;
+	List<RecommendRoute> mData;
 	
-	public RecommendRouteAdapter(Context context, List<Map<String, Object>> mData)
+	public RecommendRouteAdapter(Context context, List<RecommendRoute> mData)
 	{
 		mInflater = LayoutInflater.from(context);
 		this.mData = mData;
@@ -70,12 +71,13 @@ public class RecommendRouteAdapter extends BaseAdapter{
 		else {
 			holder = (Holder)convertView.getTag();
 		}
-		holder.img.setBackgroundResource((Integer)mData.get(position).get("img"));
-		holder.sceneNum.setText((String)mData.get(position).get("sceneNum"));
-		holder.routeName.setText((String)mData.get(position).get("routeName"));
-		holder.collectNum.setText((String)mData.get(position).get("collectNum"));
+		RecommendRoute mRecommendRoute = mData.get(position);
+		holder.img.setBackgroundResource(mRecommendRoute.getResource());
+		holder.sceneNum.setText(Integer.toString(mRecommendRoute.getSceneNum()));
+		holder.routeName.setText(mRecommendRoute.getRouteName());
+		holder.collectNum.setText(Integer.toString(mRecommendRoute.getLoveNum()));
 		//routeDay还需要加入天这个字
-		holder.routeDay.setText((String)mData.get(position).get("routeDay")+ "天");
+		holder.routeDay.setText(mRecommendRoute.getRouteDay()+ "天");
 		//TODO click的响应目前先不写
 		holder.collectNum.setOnClickListener(new View.OnClickListener() {
 			

@@ -25,5 +25,8 @@
     <color name="left_tv_en_normal">#66ffffff</color>
     <color name="left_bg">#323232</color>
     <color name="left_divider_bg">#494949</color>
+    
+    <!-- recommendActivity相关 -->
+    <color name="special_red">#F26866</color>
 
 </resources>

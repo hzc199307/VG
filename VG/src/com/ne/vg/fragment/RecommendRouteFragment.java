@@ -19,6 +19,7 @@ import android.widget.AdapterView.OnItemClickListener;
 
 import com.ne.vg.R;
 import com.ne.vg.adapter.RecommendRouteAdapter;
+import com.ne.vg.bean.CreateData;
 /**
  * 
  * @ClassName: RecommendRouteFragment 
@@ -32,8 +33,6 @@ public class RecommendRouteFragment extends Fragment{
 	private ListView listview;
 	//自定义的适配器
 	private RecommendRouteAdapter gridAdapter;
-	//保存数据的链表
-	private List<Map<String, Object>> mData;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState){
@@ -50,8 +49,7 @@ public class RecommendRouteFragment extends Fragment{
 		//Init view
 		listview = (ListView) rootView.findViewById(R.id.recommendroute_listview);
 		InitListener();
-		mData = getData();
-		gridAdapter = new RecommendRouteAdapter(getActivity(), mData);
+		gridAdapter = new RecommendRouteAdapter(getActivity(), CreateData.getRecommendRoute());
 		listview.setAdapter(gridAdapter);
 		super.onStart();
 		return rootView;
@@ -79,31 +77,5 @@ public class RecommendRouteFragment extends Fragment{
 
 		});
 	}
-	/**
-	 * 
-	 * @Title: getData 
-	 * @Description: 获取数据到List中
-	 * @param @return
-	 * @return List<Map<String,Object>> 
-	 * @throws
-	 */
-	public List<Map<String, Object>> getData() {
-		// TODO Auto-generated method stub
-
-		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
-
-		Map<String, Object> map;
-		for(int i=0;i<10;i++){
-			map = new HashMap<String, Object>();
-			//TODO 先用自己的数据，之后再换成zhichao的
-			map.put("img",com.ne.vg.R.drawable.recommend_item_iv1);
-			map.put("sceneNum", "9");
-			map.put("routeName","首尔必游之地");
-			map.put("routeDay", "3");
-			map.put("collectNum","3456");
-			list.add(map);
-		}
-
-		return list;
-	}
+	
 }
