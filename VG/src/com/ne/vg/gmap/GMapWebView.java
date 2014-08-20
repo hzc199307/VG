@@ -7,6 +7,7 @@ import android.content.Context;
 import android.os.Handler;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.View;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -417,7 +418,31 @@ public class GMapWebView extends WebView {
 			});
 
 		}
+		
+		/**
+		 * 地图被点击事件
+		 */
+		@JavascriptInterface 
+		public void onClickedMap()
+		{
+			handler.post(new Runnable() {
+				@Override
+				public void run() {
+					Toast.makeText(getContext(), "js调用了Android方法onClickedMap ", Toast.LENGTH_SHORT).show();
+					Log.v(TAG, "js调用了Android方法onClickedMap ");
+					if(onMapClickListener!=null)
+						onMapClickListener.onClick(getRootView());
+				}
+			});
 
+		}
+
+	}
+	
+	private View.OnClickListener onMapClickListener;
+	@Override
+	public void setOnClickListener(OnClickListener onClickListener) {
+		this.onMapClickListener = onClickListener;
 	}
 
 	@Override

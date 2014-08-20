@@ -61,6 +61,8 @@ public class GMapFragment extends Fragment{
 		//		});
 		// 添加一个对象, 让JS可以访问该对象的方法, 该对象中可以调用JS中的方法  
 		//        webviewGMap.addJavascriptInterface(new Contact(), "contact");  
+		
+		if(onClickListener!=null)webviewGMap.setOnClickListener(onClickListener);
 		return view;
 	}
 
@@ -91,5 +93,11 @@ public class GMapFragment extends Fragment{
 		super.onDestroy();
 		Log.v(TAG, "onDestroy");
 		//Toast.makeText(getActivity(), TAG+ " onDestroy", Toast.LENGTH_SHORT).show();
+	}
+	
+	private View.OnClickListener onClickListener;
+	public void setOnClickListener(View.OnClickListener onClickListener)
+	{
+		this.onClickListener = onClickListener;
 	}
 }

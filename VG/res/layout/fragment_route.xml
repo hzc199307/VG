@@ -22,7 +22,8 @@
                 android:id="@+id/route_pagertab"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/route_tab_height"
-                android:layout_gravity="top" />
+                android:layout_gravity="top"
+                android:background="#550000" />
         </android.support.v4.view.ViewPager>
 
         <LinearLayout
