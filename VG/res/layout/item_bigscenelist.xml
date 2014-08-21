@@ -32,11 +32,11 @@
         android:id="@+id/bigscenelist_item_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="13dp"
-        android:layout_marginTop="14dp"
+        android:layout_marginLeft="@dimen/bigscenel_item_name_marginLeft"
+        android:layout_marginTop="@dimen/bigscenel_item_name_marginTop"
         android:text="景福宫景福宫"
         android:textColor="@color/white"
-        android:textSize="20sp" />
+        android:textSize="@dimen/bigscenel_item_name_textsize" />
     <!-- 底下白色的那一栏 -->
 
     <FrameLayout
@@ -57,16 +57,16 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="14dp"
+                android:layout_marginLeft="@dimen/bigscenel_item_loveicon_marginLeft"
                 android:src="@drawable/bigscenelist_item_loveicon" />
 
             <TextView
                 android:id="@+id/bigscenelist_loveNum"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="6dp"
+                android:layout_marginLeft="@dimen/bigscenel_item_lovenum_marginLeft"
                 android:text="3252"
-                android:textSize="12sp" />
+                android:textSize="@dimen/bigscenel_item_lovenum_textsize" />
         </LinearLayout>
 
         <LinearLayout
@@ -79,16 +79,16 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="8dp"
+                android:layout_marginRight="@dimen/bigscenel_item_musicicon_marginRight"
                 android:src="@drawable/bigscenelist_item_musicicon" />
 
             <TextView
                 android:id="@+id/bigscenelist_musicNum"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="16dp"
+                android:layout_marginRight="@dimen/bigscenel_item_musicnum_marginRight"
                 android:text="18"
-                android:textSize="12sp" />
+                android:textSize="@dimen/bigscenel_item_lovenum_textsize" />
         </LinearLayout>
     </FrameLayout>
 
@@ -99,8 +99,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|right"
-        android:layout_marginBottom="30dp"
-        android:layout_marginRight="8dp" 
+        android:layout_marginBottom="@dimen/bigscenel_item_download_marginBottom"
+        android:layout_marginRight="@dimen/bigscenel_item_download_marginRight" 
         android:clickable="true">
 
         <ImageView

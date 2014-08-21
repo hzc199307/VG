@@ -1,5 +1,6 @@
 package com.ne.vg.fragment;
 
+import com.ne.vg.MyLoveActivity;
 import com.ne.vg.R;
 import com.ne.vg.activity.BigSceneDetailActivity;
 import com.ne.vg.activity.PlayMusicActivity;
@@ -27,7 +28,7 @@ public class MineFragment extends Fragment implements View.OnClickListener{
 
 	private final static String TAG = "MineFragment";
 	
-	private Button btn_panshan,btn_zhichao,btn_bofang;
+	private Button btn_panshan,btn_zhichao,btn_bofang,btn_mylove;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState) {
@@ -40,6 +41,8 @@ public class MineFragment extends Fragment implements View.OnClickListener{
 		btn_zhichao.setOnClickListener(this); 
 		btn_bofang = (Button)view.findViewById(R.id.btn_bofangyieyue);
 		btn_bofang.setOnClickListener(this);
+		btn_mylove = (Button)view.findViewById(R.id.btn_mylove);
+		btn_mylove.setOnClickListener(this);
 		return view;
 	}
 	@Override
@@ -59,6 +62,12 @@ public class MineFragment extends Fragment implements View.OnClickListener{
 		case R.id.btn_bofangyieyue:
 			//TODO 播放音乐跳转的地方
 			startActivity(new Intent(getActivity(),PlayMusicActivity.class));
+			break;
+		case R.id.btn_mylove:
+			//TODO 跳转到我喜爱的页面
+			startActivity(new Intent(getActivity(),MyLoveActivity.class));
+			break;
+			
 		default:
 			break;
 		}

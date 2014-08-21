@@ -15,7 +15,7 @@
     <!-- 左边的返回按钮 -->
 
     <LinearLayout
-        android:id="@+id/recommend_title_name"
+        android:id="@+id/mylove_back"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_alignParentLeft="true"
@@ -27,7 +27,6 @@
         android:singleLine="true" >
 
         <ImageView
-            android:id="@+id/recommend_title_menu_iv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/recommend_title_back_icon_marginleft"
@@ -35,17 +34,16 @@
             android:src="@drawable/recommend_title_back_icon" />
 
         <TextView
-            android:id="@+id/recommend_cityname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/recommend_title_cityname_marginleft"
-            android:text="湖北孝感" />
+            android:text="我喜欢的" />
     </LinearLayout>
 
     <!-- 右侧的查询按钮 -->
 
     <LinearLayout
-        android:id="@+id/recommend_search"
+        android:id="@+id/mylove_search"
         android:layout_width="@dimen/recommend_title_search_width"
         android:layout_height="match_parent"
         android:layout_alignParentRight="true"
@@ -56,7 +54,6 @@
         android:singleLine="true" >
 
         <ImageButton
-            android:id="@+id/home_title_left_right"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"

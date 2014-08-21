@@ -77,16 +77,16 @@
     <!-- 左下角的红色圆 -->
 
     <FrameLayout
-        android:layout_width="46dp"
-        android:layout_height="46dp"
+        android:layout_width="@dimen/recommend_item_rec_width"
+        android:layout_height="@dimen/recommend_item_rec_height"
         android:layout_gravity="left|top"
-        android:layout_marginLeft="12dp"
-        android:layout_marginTop="54dp" 
+        android:layout_marginLeft="@dimen/recommend_item_rec_marginleft"
+        android:layout_marginTop="@dimen/recommend_item_rec_marginTop" 
         >
 
         <ImageView
-            android:layout_width="46dp"
-            android:layout_height="46dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_gravity="center"
             android:scaleType="centerInside"
             android:src="@drawable/reconmmend_route_rectangle" />
@@ -101,7 +101,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="6dp"
+                android:layout_marginTop="@dimen/recommend_item_recicon_marginTop"
                 android:scaleType="centerCrop"
                 android:src="@drawable/recommend__item_icon" />
 
@@ -110,7 +110,7 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
+                android:layout_marginTop="@dimen/recommend_item_reclinear_marginTop"
                 android:layout_gravity="center_horizontal"
                 android:gravity="center_horizontal"
                 android:orientation="horizontal" >
@@ -121,14 +121,14 @@
                     android:layout_height="wrap_content"
                     android:text="9"
                     android:textColor="@color/white"
-                    android:textSize="10sp" />
+                    android:textSize="@dimen/recommend_item_rec_textsize" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="景点"
                     android:textColor="@color/white"
-                    android:textSize="10sp" />
+                    android:textSize="@dimen/recommend_item_rec_textsize" />
             </LinearLayout>
         </LinearLayout>
     </FrameLayout>

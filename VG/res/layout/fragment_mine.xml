@@ -29,5 +29,11 @@
         android:layout_height="wrap_content"
         android:text="播放音乐"
         android:textColor="@color/black" />
+    <Button
+        android:id="@+id/btn_mylove"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="我喜欢的"
+        android:textColor="@color/black" />
 
 </LinearLayout>
