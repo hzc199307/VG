@@ -6,6 +6,7 @@ import java.util.List;
 import com.ne.vg.MainActivity;
 import com.ne.vg.R;
 import com.ne.vg.activity.BigSceneDetailActivity;
+import com.ne.vg.activity.RecommendActivity;
 import com.ne.vg.adapter.CityListAdapter;
 import com.ne.vg.bean.City;
 import com.ne.vg.bean.CreateData;
@@ -22,6 +23,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.view.animation.TranslateAnimation;
+import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -53,6 +55,16 @@ public class HomeFragment extends Fragment implements OnClickListener{
 		if(cityListAdapter==null)
 			cityListAdapter = new CityListAdapter(getActivity(), CreateData.getCityList());
 		lv_city.setAdapter(cityListAdapter);
+		
+		lv_city.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position,long id) {
+				// TODO Auto-generated method stub
+				startActivity(new Intent(getActivity(),RecommendActivity.class));
+				((MainActivity)getActivity()).destroyAllFragmentWithoutNow();
+			}
+		});
 		home_title_search_btn = (ImageButton)view.findViewById(R.id.home_title_search_btn);
 		home_title_search_btn.setOnClickListener(this);
 
@@ -68,8 +80,7 @@ public class HomeFragment extends Fragment implements OnClickListener{
 		{
 		case R.id.home_title_search_btn:
 			//点击标题左边按钮弹出左侧菜单
-			startActivity(new Intent(getActivity(),BigSceneDetailActivity.class));
-			((MainActivity)getActivity()).destroyAllFragmentWithoutNow();
+			
 			break;
 		default:
 			break;

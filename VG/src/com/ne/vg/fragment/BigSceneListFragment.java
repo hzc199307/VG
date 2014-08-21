@@ -6,11 +6,14 @@ import java.util.List;
 import java.util.Map;
 
 import com.ne.vg.R;
+import com.ne.vg.activity.BigSceneDetailActivity;
+import com.ne.vg.activity.RouteActivity;
 import com.ne.vg.adapter.BigSceneListAdapter;
 import com.ne.vg.bean.CreateData;
 
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -75,7 +78,8 @@ public class BigSceneListFragment extends Fragment{
 					long arg3) {
 				Log.e("panshan"," " + position);
 				// TODO Auto-generated method stub
-				Toast.makeText(getActivity().getApplicationContext(), "pic" + (position+1), Toast.LENGTH_SHORT).show(); 
+				Toast.makeText(getActivity().getApplicationContext(), "pic" + (position+1), Toast.LENGTH_SHORT).show();
+				startActivity(new Intent(getActivity(),BigSceneDetailActivity.class));
 			}
 		});
 	}

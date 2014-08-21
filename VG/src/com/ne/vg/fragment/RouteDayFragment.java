@@ -1,15 +1,21 @@
 package com.ne.vg.fragment;
 
+import com.ne.vg.MainActivity;
 import com.ne.vg.R;
+import com.ne.vg.activity.BigSceneDetailActivity;
+import com.ne.vg.activity.RecommendActivity;
+import com.ne.vg.activity.RouteActivity;
 import com.ne.vg.adapter.RouteDay_BigSceneListAdapter;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -67,6 +73,15 @@ public class RouteDayFragment extends Fragment {
 
 		listView_route_day_bigscenes = (ListView)rootView.findViewById(R.id.listView_route_day_bigscenes);
 		listView_route_day_bigscenes.setAdapter(bigSceneListAdapter);
+		listView_route_day_bigscenes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position,long id) {
+				// TODO Auto-generated method stub
+				startActivity(new Intent(getActivity(),BigSceneDetailActivity.class));
+				((RouteActivity)getActivity()).destroyGMapFragment();
+			}
+		});
 		return rootView;
 	}
 

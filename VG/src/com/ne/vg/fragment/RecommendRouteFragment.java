@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -17,7 +18,10 @@ import android.widget.ListView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
+import com.ne.vg.MainActivity;
 import com.ne.vg.R;
+import com.ne.vg.activity.RecommendActivity;
+import com.ne.vg.activity.RouteActivity;
 import com.ne.vg.adapter.RecommendRouteAdapter;
 import com.ne.vg.bean.CreateData;
 /**
@@ -51,6 +55,14 @@ public class RecommendRouteFragment extends Fragment{
 		InitListener();
 		gridAdapter = new RecommendRouteAdapter(getActivity(), CreateData.getRecommendRoute());
 		listview.setAdapter(gridAdapter);
+		listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position,long id) {
+				// TODO Auto-generated method stub
+				startActivity(new Intent(getActivity(),RouteActivity.class));
+			}
+		});
 		super.onStart();
 		return rootView;
 		

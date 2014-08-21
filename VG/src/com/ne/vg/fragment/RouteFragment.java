@@ -34,8 +34,8 @@ import android.widget.Toast;
 public class RouteFragment extends Fragment{
 
 	private static final String TAG = "RouteFragment";
-    private static final boolean DEBUG = true;
-    
+	private static final boolean DEBUG = true;
+
 	private View rootView;
 	private ViewPager route_viewpager;
 	private PagerTabStrip route_pagertab;
@@ -52,17 +52,26 @@ public class RouteFragment extends Fragment{
 		return rootView;
 	}
 
+	@Override
+	public void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		initMap();
+	}
+
 	/**
 	 * 初始化Map
 	 */
 	private void initMap() {
 		// TODO Auto-generated method stub
-		gMapFragment = new GMapFragment();
-		getFragmentManager().beginTransaction()
-		.add(R.id.route_frame_map, gMapFragment)
-		.commit();
+		if(gMapFragment==null)
+			gMapFragment = new GMapFragment();
+		if(!gMapFragment.isAdded())
+			getFragmentManager().beginTransaction()
+			.add(R.id.route_frame_map, gMapFragment)
+			.commit();
 	}
-	
+
 	/**
 	 * 初始化ViewPager
 	 */
@@ -71,7 +80,7 @@ public class RouteFragment extends Fragment{
 		// TODO Auto-generated method stub
 		route_viewpager = (ViewPager)rootView.findViewById(R.id.route_viewpager);
 		route_pagertab = (PagerTabStrip)rootView.findViewById(R.id.route_pagertab);
-		
+
 		route_pagertab.setTextColor(getResources().getColor(R.color.route_pagertab_text));
 		//设置字体大小好像不太对route_pagertab.setTextSize(TypedValue.COMPLEX_UNIT_SP, getResources().getDimension(R.dimen.route_pagertab_textsize));
 		route_pagertab.setTabIndicatorColor(getResources().getColor(R.color.none)); 
@@ -169,5 +178,14 @@ public class RouteFragment extends Fragment{
 		if(DEBUG)Log.v(TAG, "onDestroy");
 		//Toast.makeText(getActivity(), TAG+ " onDestroy", Toast.LENGTH_SHORT).show();
 
+	}
+
+	/**
+	 * 必须手动移除GMapFragment
+	 */
+	public void destroyGMapFragment() {
+		// 此处必须移除 gMapFragment  因为里面有webview的缘故 否则内存泄露
+		getFragmentManager().beginTransaction().remove(gMapFragment).commit();
+		gMapFragment = null;
 	}
 }
