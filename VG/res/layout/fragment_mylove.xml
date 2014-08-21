@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/bigscenel_linearlayout_padding"
+    android:paddingRight="@dimen/bigscenel_linearlayout_padding"
+    android:paddingTop="6dp"
+    android:paddingBottom="6dp"
+    android:orientation="vertical" 
+    android:background="@color/black" >
+    
+    
+    <!-- 倒数第二个属性为缩放与列宽大小同步 -->
+
+    <GridView
+        android:id="@+id/mylove_gridview1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:horizontalSpacing="@dimen/bigscenel_gridview_spacing"
+        android:numColumns="2"
+        android:verticalSpacing="@dimen/bigscenel_gridview_spacing" />
+    
+
+</LinearLayout>

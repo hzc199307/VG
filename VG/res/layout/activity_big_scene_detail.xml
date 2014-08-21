@@ -76,6 +76,7 @@
                 <!-- 进入语音导游的button -->
 
                 <LinearLayout
+                    android:id="@+id/bsd_enter_scene_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="43dp"
                     android:layout_gravity="center"
@@ -83,7 +84,8 @@
                     android:layout_marginTop="14dp"
                     android:background="@drawable/bsd_btn_bg"
                     android:gravity="center_vertical"
-                    android:orientation="horizontal" >
+                    android:orientation="horizontal"
+                    android:onClick="onClick" >
 
                     <TextView
                         android:layout_width="match_parent"

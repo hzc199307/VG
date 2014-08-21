@@ -8,9 +8,10 @@
         layout="@layout/title_route"
         android:focusable="true" />
 
-    <FrameLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent"
+        android:background="@color/route_bg" >
 
         <android.support.v4.view.ViewPager
             android:id="@+id/route_viewpager"
@@ -22,27 +23,25 @@
                 android:id="@+id/route_pagertab"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/route_tab_height"
-                android:layout_gravity="top"
-                android:background="#550000" />
+                android:layout_gravity="top" />
         </android.support.v4.view.ViewPager>
-
+        
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:orientation="vertical" >
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/route_tab_height"
-                android:text="" />
-
+            <TextView 
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/route_tab_height"/>
             <FrameLayout
                 android:id="@+id/route_frame_map"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/route_map_height" >
             </FrameLayout>
         </LinearLayout>
-    </FrameLayout>
+
+    </RelativeLayout>
 
 </LinearLayout><!--
     注意事项:   

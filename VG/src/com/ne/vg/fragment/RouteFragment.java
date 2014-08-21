@@ -6,6 +6,7 @@ import com.ne.vg.R;
 import com.ne.vg.adapter.MyFragmentStatePagerAdapter2;
 import com.ne.vg.gmap.GMapFragment;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -17,6 +18,7 @@ import android.support.v4.view.PagerTabStrip;
 import android.support.v4.view.PagerTitleStrip;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -64,14 +66,17 @@ public class RouteFragment extends Fragment{
 	/**
 	 * 初始化ViewPager
 	 */
+	@SuppressLint("ResourceAsColor") 
 	private void initViewPager() {
 		// TODO Auto-generated method stub
 		route_viewpager = (ViewPager)rootView.findViewById(R.id.route_viewpager);
 		route_pagertab = (PagerTabStrip)rootView.findViewById(R.id.route_pagertab);
-
-		route_pagertab.setTabIndicatorColor(getResources().getColor(R.color.black)); 
+		
+		route_pagertab.setTextColor(getResources().getColor(R.color.route_pagertab_text));
+		//设置字体大小好像不太对route_pagertab.setTextSize(TypedValue.COMPLEX_UNIT_SP, getResources().getDimension(R.dimen.route_pagertab_textsize));
+		route_pagertab.setTabIndicatorColor(getResources().getColor(R.color.none)); 
 		route_pagertab.setDrawFullUnderline(false);
-		route_pagertab.setBackgroundColor(getResources().getColor(R.color.white));
+		route_pagertab.setBackgroundColor(getResources().getColor(R.color.route_pagertab_bg));
 		route_pagertab.setTextSpacing(50);
 		myPagerAdapter = new MyFragmentStatePagerAdapter(getFragmentManager(),3);
 		route_viewpager.setAdapter(myPagerAdapter);
@@ -133,6 +138,7 @@ public class RouteFragment extends Fragment{
 		@Override
 		public CharSequence getPageTitle(int position) {
 			// TODO Auto-generated method stub
+			if(DEBUG)Log.v(TAG, "getPageTitle"+ position);
 			return "Day "+position;
 		}
 

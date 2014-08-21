@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="38dp"
+    android:layout_height="@dimen/tab_height"
     android:gravity="center_vertical" >
 
     <LinearLayout
@@ -11,51 +11,55 @@
         android:orientation="horizontal" >
 
         <LinearLayout
+            android:id="@+id/scene_map_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1.0"
             android:gravity="center"
-            android:orientation="horizontal" >
+            android:orientation="horizontal"
+            android:clickable="true" >
 
             <ImageView
-                android:id="@+id/recommend_routelist_icon"
+                android:id="@+id/scene_map_iv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/recommend_routelist_icon_se" />
+                android:src="@drawable/scene_map_icon_selector" />
 
             <TextView
-                android:id="@+id/recommend_top_text1"
+                android:id="@+id/scene_map_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:paddingLeft="5dp"
-                android:text="@string/title_fragment_recommendroute"
-                android:textColor="#F26866"
-                android:textSize="15sp" />
+                android:paddingLeft="@dimen/tab_tv_iv"
+                android:text="@string/scene_tab_map"
+                android:textColor="@color/tab_tv_selector"
+                android:textSize="@dimen/tab_textsize" />
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/scene_list_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1.0"
             android:gravity="center"
-            android:orientation="horizontal" >
+            android:orientation="horizontal"
+            android:clickable="true" >
 
             <ImageView
-                android:id="@+id/recommend_scenelist_icon"
+                android:id="@+id/scene_list_iv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/recommend_scenelist_icon" />
+                android:src="@drawable/scene_list_icon_selector" />
 
             <TextView
-                android:id="@+id/recommend_top_text2"
+                android:id="@+id/scene_list_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:paddingLeft="5dp"
-                android:text="@string/title_fragment_scenelist"
-                android:textColor="#000000"
-                android:textSize="15sp" />
+                android:paddingLeft="@dimen/tab_tv_iv"
+                android:text="@string/scene_tab_list"
+                android:textColor="@color/tab_tv_selector"
+                android:textSize="@dimen/tab_textsize" />
         </LinearLayout>
     </LinearLayout>
 
@@ -66,11 +70,11 @@
         android:weightSum="2" >
 
         <View
-            android:id="@+id/recommend_cursor"
+            android:id="@+id/scene_cursor"
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="@dimen/tab_cursor_height"
             android:layout_weight="1"
-            android:background="#F26866" />
+            android:background="@color/tab_cursor" />
 
         <View
             android:layout_width="match_parent"

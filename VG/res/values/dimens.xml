@@ -5,8 +5,9 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
 
     <!-- RouteFragment 相关 -->
-    <dimen name="route_map_height">100dp</dimen>
+    <dimen name="route_map_height">170dp</dimen>
     <dimen name="route_tab_height">30dp</dimen>
+    <dimen name="route_pagertab_textsize">16sp</dimen>
 
     <!-- HomeFragment 相关 -->
     <dimen name="home_title_height">50dp</dimen>
@@ -40,15 +41,60 @@
     <dimen name="recommend_title_height">50dp</dimen>
     <dimen name="recommend_title_back_icon_marginleft">10dp</dimen>
     <dimen name="recommend_title_linear_width">187dp</dimen>
+    <dimen name="recommend_title_cityname_marginleft">4dp</dimen>
+    <dimen name="recommend_title_search_width">38dp</dimen>
+    <dimen name="recommend_tag_text_paddingleft">5dp</dimen>
+    <dimen name="recommend_tag_text_textsize">15sp</dimen>
+    <dimen name="recommend_tag_cursor_height">1dp</dimen>
     
     <!-- RecommendRouteFragment 相关 -->
-    <dimen name="recommend_item_height">136dp</dimen>
-    <dimen name="recommend_item_horizontal_margin">4dp</dimen>
+    
+    <dimen name="recommendroute_horizontal_margin">5dp</dimen>
+	<dimen name="recommendroute_vertical_margin">7dp</dimen>
+	<dimen name="recommendroute_listview_diverheight">5dp</dimen>
+	
+	<dimen name="recommend_item_horizontal_margin">4dp</dimen>
 	<dimen name="recommend_item_vertical_margin">5dp</dimen>
+	
 	<dimen name="recommend_item_text_size1">15sp</dimen>
 	<dimen name="recommend_item_name_left">14dp</dimen>
 	<dimen name="recommend_item_scene_left">8dp</dimen>
 	<dimen name="recommend_item_iv_right">6dp</dimen>
 	<dimen name="recommend_item_lovenum_right">14dp</dimen>
 	<dimen name="recommend_item_text_size2">12sp</dimen>
+	
+	
+	
+	
+	<dimen name="recommend_item_rec_width">46dp</dimen>
+	<dimen name="recommend_item_rec_height">46dp</dimen>
+	<dimen name="recommend_item_rec_marginleft">12dp</dimen>
+	<dimen name="recommend_item_rec_marginTop">54dp</dimen>
+	<dimen name="recommend_item_recicon_marginTop">6dp</dimen>
+	<dimen name="recommend_item_reclinear_marginTop">2dp</dimen>
+	<dimen name="recommend_item_rec_textsize">10sp</dimen>
+	
+	<!-- 与BigSceneListFragment相关 ,bigscenel代表list-->
+	<dimen name="bigscenel_linearlayout_padding">5dp</dimen>
+	<dimen name="bigscenel_gridview_spacing">5dp</dimen>
+	
+	<dimen name="bigscenel_item_name_marginLeft">13dp</dimen>
+	<dimen name="bigscenel_item_name_marginTop">14dp</dimen>
+	<dimen name="bigscenel_item_name_textsize">20sp</dimen>
+	
+	<dimen name="bigscenel_item_loveicon_marginLeft">14dp</dimen>
+	<dimen name="bigscenel_item_lovenum_marginLeft">6dp</dimen>
+	<dimen name="bigscenel_item_lovenum_textsize">12sp</dimen>
+	
+	<dimen name="bigscenel_item_musicicon_marginRight">8dp</dimen>
+	<dimen name="bigscenel_item_musicnum_marginRight">16dp</dimen>
+	
+	<dimen name="bigscenel_item_download_marginBottom">30dp</dimen>
+	<dimen name="bigscenel_item_download_marginRight">8dp</dimen>
+	<!-- Tab  -->
+	<dimen name="tab_height">38dp</dimen>
+	<dimen name="tab_textsize">13sp</dimen>
+	<dimen name="tab_tv_iv">5dp</dimen>
+	<dimen name="tab_cursor_height">1dp</dimen>
+
 </resources>

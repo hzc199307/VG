@@ -2,10 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="5dp"
-    android:paddingRight="5dp"
-    android:paddingTop="5dp"
-    android:paddingBottom="5dp"
+    android:paddingLeft="@dimen/bigscenel_linearlayout_padding"
+    android:paddingRight="@dimen/bigscenel_linearlayout_padding"
+    android:paddingTop="@dimen/bigscenel_linearlayout_padding"
+    android:paddingBottom="@dimen/bigscenel_linearlayout_padding"
     android:orientation="vertical" 
     android:background="@color/black">
 
@@ -16,8 +16,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:horizontalSpacing="5dp"
+        android:horizontalSpacing="@dimen/bigscenel_gridview_spacing"
         android:numColumns="2"
-        android:verticalSpacing="5dp" />
+        android:verticalSpacing="@dimen/bigscenel_gridview_spacing" />
 
 </LinearLayout>

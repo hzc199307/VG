@@ -124,6 +124,7 @@ public class GMapWebView extends WebView {
 		//		//webView.addJavascriptInterface(new Object(), "demo"); 
 		//		Log.v(TAG, "addJavascriptInterface");
 		//	}
+		this.setBackgroundColor(0X00000000);//TODO 可以设置未加载时候的背景色
 	}
 
 

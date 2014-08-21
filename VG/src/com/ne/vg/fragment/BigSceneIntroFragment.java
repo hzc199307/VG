@@ -28,4 +28,11 @@ public class BigSceneIntroFragment extends Fragment {
 		View rootView = inflater.inflate(R.layout.fragment_big_scene_intro, container, false);
 		return rootView;
 	}
+	
+	@Override
+	public void onDestroyView() {
+		// TODO Auto-generated method stub
+		super.onDestroyView();
+		Log.v(TAG, "onDestroyView");
+	}
 }

@@ -62,8 +62,8 @@ public class RouteDayFragment extends Fragment {
 		if(bigSceneListAdapter == null)
 			bigSceneListAdapter = new RouteDay_BigSceneListAdapter(getActivity());
 		rootView = inflater.inflate(R.layout.fragment_route_day, container,false);
-		tv= (TextView)rootView.findViewById(R.id.tv);
-		tv.setText(""+i);
+//		tv= (TextView)rootView.findViewById(R.id.tv);
+//		tv.setText(""+i);
 
 		listView_route_day_bigscenes = (ListView)rootView.findViewById(R.id.listView_route_day_bigscenes);
 		listView_route_day_bigscenes.setAdapter(bigSceneListAdapter);

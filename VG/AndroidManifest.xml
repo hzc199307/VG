@@ -35,16 +35,27 @@
             android:label="@string/title_activity_route" >
         </activity>
         <activity
-            android:name="com.ne.vg.activity.PlayMusicActivity"
+            android:name=".activity.PlayMusicActivity"
             android:label="@string/title_activity_play_music" >
         </activity>
+
         <service
-            android:name="com.ne.vg.service.MusicService"
+            android:name=".service.MusicService"
             android:enabled="true" >
             <intent-filter>
                 <action android:name="com.ne.vg.service.MusicService" />
             </intent-filter>
         </service>
+
+        <activity
+            android:name="com.ne.vg.activity.SceneActivity"
+            android:label="@string/title_activity_scene" >
+        </activity>
+
+        <activity
+            android:name=".MyLoveActivity"
+            android:label="@string/title_activity_my_love" >
+        </activity>
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />

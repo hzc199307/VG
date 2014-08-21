@@ -133,4 +133,34 @@ public class CreateData {
 		
 		return scenelist;
 	}
+
+
+
+	public static List<BigScene> getMyLove(){
+		List<BigScene> mylovelist = new ArrayList<BigScene>();
+		BigScene love1,love2,love3,love;
+		
+		love1 = new BigScene();
+		love1.setBigSceneName("¾°¸£¹¬");
+		love1.setLevel(4);
+		mylovelist.add(love1);
+		
+		love2 = new BigScene();
+		love2.setBigSceneName("´óÃ÷¹¬");
+		love2.setLevel(4);
+		mylovelist.add(love2);
+		
+		love3 = new BigScene();
+		love3.setBigSceneName("¾°¸£¹¬¾°¸£¹¬");
+		love3.setLevel(5);
+		mylovelist.add(love3);
+		for(int i=0 ;i<10 ;i++){
+			love = new BigScene();
+			love.setBigSceneName("¾°¸£¹¬");
+			love.setLevel(5);
+			mylovelist.add(love);
+		}
+		
+		return mylovelist;
+	}
 }

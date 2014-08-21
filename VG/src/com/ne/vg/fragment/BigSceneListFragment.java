@@ -30,23 +30,19 @@ import android.widget.AdapterView.OnItemClickListener;
  */
 public class BigSceneListFragment extends Fragment{
 	private final static String TAG="BigSceneListFragment";
-	
+
 	private GridView gridview;
 	//自定义的适配器
 	private BigSceneListAdapter gridAdapter;
-	//保存数据的链表
-	private List<Map<String, Object>> mData;
-	
-	
 	public BigSceneListFragment(){
-		
+
 	}
-	
+
 	@Override
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
 	}
-	
+
 	@Override
 	public View onCreateView(LayoutInflater inflater,
 			ViewGroup container, Bundle savedInstanceState)
@@ -59,8 +55,9 @@ public class BigSceneListFragment extends Fragment{
 		gridview = (GridView) rootView.findViewById(R.id.bigscene_gridview1);
 		InitListener();
 		return rootView;
-		
+
 	}
+	
 	/**
 	 * 
 	 * @Title: InitListener 
@@ -82,42 +79,10 @@ public class BigSceneListFragment extends Fragment{
 			}
 		});
 	}
-	
 	@Override
 	public void onStart(){
-		mData = getData();
 		gridAdapter = new BigSceneListAdapter(getActivity(), CreateData.getBigScenePs());
 		gridview.setAdapter(gridAdapter);
 		super.onStart();
 	}
-	/**
-	 * 
-	 * @Title: getData 
-	 * @Description: 获取数据到List中
-	 * @param @return
-	 * @return List<Map<String,Object>> 
-	 * @throws
-	 */
-	public List<Map<String, Object>> getData() {
-		// TODO Auto-generated method stub
-
-		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
-
-		Map<String, Object> map;
-		for(int i=0;i<10;i++){
-			map = new HashMap<String, Object>();
-			map.put("img",R.drawable.recommend_item_iv1);
-			map.put("isdowned", 0);
-			map.put("sceneName","景福宫景福宫");
-			map.put("loveNum","3225");
-			map.put("recordNum","18");
-			list.add(map);
-		}
-
-		return list;
-	}
-	
-	
-
-
 }

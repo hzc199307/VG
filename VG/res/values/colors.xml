@@ -28,5 +28,15 @@
     
     <!-- recommendActivity相关 -->
     <color name="special_red">#F26866</color>
+    
+    <!--RouteFragment 相关 -->
+    <color name="route_bg">#323232</color>
+    <color name="route_pagertab_text">#fc6662</color>
+    <color name="route_pagertab_bg">#ffffff</color>
+    
+    <!-- Tab  -->
+    <color name="tab_tv_selected">#fc6662</color>
+    <color name="tab_tv_normal">#969696</color>
+    <color name="tab_cursor">#F26866</color>
 
 </resources>
