@@ -7,7 +7,8 @@
     <include
         layout="@layout/title_recommend"
         android:focusable="true" />
-    <include
+
+    <include
         layout="@layout/tag_recommend"
         android:focusable="true" />
 

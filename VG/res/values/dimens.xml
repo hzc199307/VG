@@ -63,9 +63,6 @@
 	<dimen name="recommend_item_lovenum_right">14dp</dimen>
 	<dimen name="recommend_item_text_size2">12sp</dimen>
 	
-	
-	
-	
 	<dimen name="recommend_item_rec_width">46dp</dimen>
 	<dimen name="recommend_item_rec_height">46dp</dimen>
 	<dimen name="recommend_item_rec_marginleft">12dp</dimen>

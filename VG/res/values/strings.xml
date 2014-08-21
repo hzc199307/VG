@@ -11,6 +11,7 @@
     <string name="title_fragment_recommendroute">推荐路线</string>
     <string name="title_fragment_scenelist">景点列表</string>
     <string name="title_activity_route">RouteActivity</string>
+    <string name="title_activity_my_love">MyLoveActivity</string>
 
     <!-- HomeFragment 相关 -->
     <string name="title_fragment_home">热门城市</string>
@@ -34,6 +35,6 @@
     <string name="scene_tab_map">景点地图</string>
     <string name="scene_tab_list">景点列表</string>
 
-    <string name="title_activity_my_love">MyLoveActivity</string>
+    
 
 </resources>
