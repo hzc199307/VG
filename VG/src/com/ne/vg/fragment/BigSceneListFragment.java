@@ -5,11 +5,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.ne.vg.MyLoveActivity;
 import com.ne.vg.R;
 import com.ne.vg.activity.BigSceneDetailActivity;
 import com.ne.vg.activity.RouteActivity;
 import com.ne.vg.adapter.BigSceneListAdapter;
 import com.ne.vg.bean.CreateData;
+import com.ne.vg.util.NotifyUtil;
 
 
 
@@ -44,6 +46,9 @@ public class BigSceneListFragment extends Fragment{
 	@Override
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
+		
+		
+		
 	}
 
 	@Override
@@ -57,6 +62,10 @@ public class BigSceneListFragment extends Fragment{
 		//Init view
 		gridview = (GridView) rootView.findViewById(R.id.bigscene_gridview1);
 		InitListener();
+		
+		
+		
+		
 		return rootView;
 
 	}
@@ -78,6 +87,9 @@ public class BigSceneListFragment extends Fragment{
 					long arg3) {
 				Log.e("panshan"," " + position);
 				// TODO Auto-generated method stub
+				
+				
+								
 				Toast.makeText(getActivity().getApplicationContext(), "pic" + (position+1), Toast.LENGTH_SHORT).show();
 				startActivity(new Intent(getActivity(),BigSceneDetailActivity.class));
 			}

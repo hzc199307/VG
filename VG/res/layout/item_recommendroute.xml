@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:scaleType="centerCrop"
-        android:src="@drawable/recommend_item_iv1" />
+        android:src="@drawable/city_cinqueterre" />
 
     <!-- 底下白色的那一栏 -->
 

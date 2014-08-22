@@ -1,11 +1,13 @@
 package com.ne.vg.activity;
 
+import com.ne.vg.MyLoveActivity;
 import com.ne.vg.R;
 import com.ne.vg.R.drawable;
 import com.ne.vg.R.id;
 import com.ne.vg.R.layout;
 import com.ne.vg.R.menu;
 import com.ne.vg.adapter.RecommendAdapter;
+import com.ne.vg.util.NotifyUtil;
 
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
@@ -81,6 +83,10 @@ public class RecommendActivity extends FragmentActivity {
 		textView1.setOnClickListener(new MyOnClickListener(0));
 		textView2.setOnClickListener(new MyOnClickListener(1));
 		linearLayout.setOnClickListener(new MyOnClickListener(-1));
+		
+		/** 做个小测试，有关于notifyutil类的*/
+		NotifyUtil noti = new NotifyUtil(this, "panshan", "好好努力，天天向上", "加油", MyLoveActivity.class);
+		noti.showNotify();
 	}
 
 	/**
