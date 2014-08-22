@@ -24,7 +24,7 @@
 				var myOptions = {
 					zoom : 16,
 					center : myLatlngCen,
-					mapTypeId : google.maps.MapTypeId.ROADMAP               //道路地圖
+					mapTypeId : google.maps.MapTypeId.ROADMAP                //道路地圖
 				};
 				map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
 
@@ -44,9 +44,9 @@
 				//
 				//
 				google.maps.event.addListener(map, 'click', function() {
-    display();
-    window.demo.onClickedMap();
-  });
+					display();
+					window.demo.onClickedMap();
+				});
 			}
 			// var marker;
 			// function hehe() {
@@ -64,7 +64,8 @@
 			 */
 			function setCenter(lat, lng) {
 				myLatlngCen = new google.maps.LatLng(lat, lng);
-				map.setCenter(myLatlngCen);
+				map.panTo(myLatlngCen);
+				//map.setCenter(myLatlngCen);
 			}
 
 			////////////////////////////////MarkerUtil
@@ -103,7 +104,7 @@
 					//设置弹窗的内容    以嵌套html的形式添加点击事件
 					if(infoWindowStatus == true) {
 
-						//可被点击的 infoWindow内容
+						//閸欘垵顫﹂悙鐟板毊閻拷 infoWindow閸愬懎顔�
 						infoWindow.setContent('<span class="vright" onclick="onClickedInfoWindow(' + nowIndex + ')">' + markers[nowIndex].getTitle() + "..." + ' </span>');
 						//infoWindow.setContent('<input id="Button1" type="button" value="test" onclick="display()" /> ' + '<input id="Text1" type="text" />');
 						//infoWindow.setContent(markers[nowIndex].getTitle());
@@ -214,6 +215,41 @@
 			}
 
 			/**
+			 * 设置定位按钮
+			 */
+			var marker;
+			var symbol;
+
+			function setLocMarker(latitude, longitude, rotation) {
+				myLatlng = new google.maps.LatLng(latitude, longitude);
+				//map.setCenter(myLatlng);
+				map.panTo(myLatlng);
+				// if(symbol == null) {
+					// symbol = new google.maps.Symbol({
+						// path : google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
+						// scale : 5,
+						// rotation : rotation
+					// });
+				// }
+				// symbol.setRotation(rotation);
+				// map.panTo(myLatlng);
+
+				marker = new google.maps.Marker({
+					position : myLatlng,
+					map : map,
+					title : 'Hello World!',
+					icon : {
+						path : google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
+						scale : 5,
+						rotation : rotation
+					},
+					draggable : false,
+				});
+
+				marker.setMap(map);
+			}
+
+			/**
 			 * 弹窗显示 坐标
 			 */
 			function display(latlng) {
@@ -235,7 +271,7 @@
 	<body style="margin:0px; padding:0px;" onload="initialize()">
 		<form style="position:absolute;top:0px;left:0px;z-index:10;" action="">
 			<p>
-				<input type="button" id="btn_pmt" onclick="showRoute(false)" value="定位"/>
+				<input type="button" id="btn_pmt" onclick="window.demo.removeRoute()" value="定位"/>
 			</p>
 		</form>
 		<div id="map_canvas" style="width:100%; height:100%"></div>

@@ -3,7 +3,17 @@ package com.ne.vg.gmap;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.baidu.location.BDLocation;
+import com.baidu.location.BDLocationListener;
+import com.ne.vg.bmap.BMapLocationUtil;
+import com.ne.vg.bmap.BMapUtil;
+import com.ne.vg.bmap.LatLng;
+import com.ne.vg.util.LocationUtil;
+
 import android.content.Context;
+import android.location.Location;
+import android.location.LocationListener;
+import android.os.Bundle;
 import android.os.Handler;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -347,6 +357,8 @@ public class GMapWebView extends WebView {
 	}
 
 
+	private LocationUtil locationUtil;
+	private BMapLocationUtil bMapLocationUtil;
 	/**
 	 * JS map调用android代码的接口函数
 	 * 注意:android 4.2 之后版本提供给js调用的函数必须带有注释语句@JavascriptInterface
@@ -379,10 +391,16 @@ public class GMapWebView extends WebView {
 		@JavascriptInterface
 		public void removeRoute()
 		{
-			loadUrl("javascript:showRoute(false)");
+			handler.post(new Runnable() {
+
+				@Override
+				public void run() {
+					// TODO Auto-generated method stub
+					loadUrl("javascript:showRoute(false)");
+
+				}
+			});
 		}
-
-
 
 		/**
 		 * marker被点击事件
@@ -419,7 +437,7 @@ public class GMapWebView extends WebView {
 			});
 
 		}
-		
+
 		/**
 		 * 地图被点击事件
 		 */
@@ -439,11 +457,72 @@ public class GMapWebView extends WebView {
 		}
 
 	}
-	
+
 	private View.OnClickListener onMapClickListener;
 	@Override
 	public void setOnClickListener(OnClickListener onClickListener) {
 		this.onMapClickListener = onClickListener;
+	}
+
+
+	/**
+	 * 定位 地图插入定位坐标
+	 */
+	public void requestLoc() {
+		// TODO Auto-generated method stub
+		if(locationUtil ==null)
+			locationUtil = new LocationUtil(getContext(), new LocationListener() {
+
+				@Override
+				public void onStatusChanged(String arg0, int arg1, Bundle arg2) {
+					// TODO Auto-generated method stub
+
+				}
+
+				@Override
+				public void onProviderEnabled(String arg0) {
+					// TODO Auto-generated method stub
+
+				}
+
+				@Override
+				public void onProviderDisabled(String arg0) {
+					// TODO Auto-generated method stub
+
+				}
+
+				@Override
+				public void onLocationChanged(Location arg0) {
+					// TODO Auto-generated method stub
+					Toast.makeText(getContext(), ""+arg0.getLatitude()+" "+arg0.getLongitude()+" "+arg0.getBearing(), Toast.LENGTH_SHORT).show();
+					//loadUrl("javascript:setCenter("+arg0.getLatitude()+","+arg0.getLongitude()+")");
+					loadUrl("javascript:setLocMarker("+arg0.getLatitude()+","+arg0.getLongitude()+","+100+")");
+					locationUtil.stopLoc();
+				}
+			});
+		locationUtil.requestGPSLoc();
+		locationUtil.requestNetLoc();
+		/*
+				if(bMapLocationUtil==null)
+					bMapLocationUtil = new BMapLocationUtil(getContext(), new BDLocationListener() {
+
+						@Override
+						public void onReceivePoi(BDLocation arg0) {
+							// TODO Auto-generated method stub
+
+						}
+
+						@Override
+						public void onReceiveLocation(BDLocation arg0) {
+							// TODO Auto-generated method stub
+							LatLng latLng = BMapUtil.fromBaiduToGoogle(arg0);
+							Toast.makeText(getContext(), ""+latLng.getLatitude()+" "+latLng.getLongitude(), Toast.LENGTH_SHORT).show();
+							loadUrl("javascript:setCenter("+latLng.getLatitude()+","+arg0.getLongitude()+")");
+						}
+					});
+				bMapLocationUtil.requestLocation();
+		 */
+
 	}
 
 	@Override
@@ -451,7 +530,7 @@ public class GMapWebView extends WebView {
 		// TODO Auto-generated method stub
 		Log.v(TAG, "onDetachedFromWindow");
 		super.onDetachedFromWindow();
-		
+
 	}
 
 

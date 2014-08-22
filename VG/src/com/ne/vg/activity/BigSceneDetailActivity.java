@@ -180,6 +180,10 @@ public class BigSceneDetailActivity extends FragmentActivity {
 			destroyGMapFragment();
 			this.finish();
 			break;
+		case R.id.bsd_btn_location:
+			if(gMapFragment!=null)
+				gMapFragment.requestLoc();
+			break;	
 		case R.id.bsd_btn_up:
 			changeMapStatus();
 			break;

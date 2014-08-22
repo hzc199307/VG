@@ -100,4 +100,12 @@ public class GMapFragment extends Fragment{
 	{
 		this.onClickListener = onClickListener;
 	}
+	
+	/**
+	 * 定位 地图插入定位坐标
+	 */
+	public void requestLoc()
+	{
+		webviewGMap.requestLoc();
+	}
 }
