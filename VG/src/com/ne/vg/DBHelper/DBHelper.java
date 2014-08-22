@@ -1,31 +1,100 @@
 package com.ne.vg.DBHelper;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+
+import com.ne.vg.util.FileUtil;
+
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.os.Environment;
+import android.util.Log;
 
 public class DBHelper extends SQLiteOpenHelper{
 	
 	//用户数据库文件的版本
 	private static final int DB_VERSION = 1;
+	 //实例化一个file工具类
+	static FileUtil fileUtil = new FileUtil();
+	//数据库文件存放目标，存放在sdk上
+	private static String DB_PATH = fileUtil.getSDPATH() + "com.ne.vg"+"/databases/";
+	//TODO 这里需要修改为我们的数据 下面两个静态变量分别是目标文件的名称和在assets文件夹下的文件名
+	private static String DB_NAME = "city_scene.db";
+	private static String ASSETS_NAME = "db/city_scene.db";
+	public final Context mContext;
 
 	public DBHelper(Context context, String name, CursorFactory factory,
 			int version) {
 		super(context, name, factory, version);
-		// TODO Auto-generated constructor stub
+		this.mContext = context;
+	}
+	
+	public DBHelper(Context context, String name, int version){
+		this(context, name, null, version);
 	}
 
+	public DBHelper(Context context, String name) {
+		this(context, name, DB_VERSION);
+	}
+	/**
+	 * 
+	 * @Title: createDataBase 
+	 * @Description: 创建数据库，并从asset中复制数据到指定位置
+	 * @param @return
+	 * @param @throws IOException
+	 * @return boolean 
+	 * @throws
+	 */
+	public boolean createDataBase() throws IOException{
+		
+			//复制assets中的数据库文件到DB_PATH目录下
+			InputStream myInput = mContext.getAssets().open(ASSETS_NAME);
+			//往指定目录中写入数据
+			File file = fileUtil.write2SDFromInput(DB_PATH, DB_NAME, myInput);
+			//判断是否复制成功
+			if(file==null){
+				return false;
+			}
+			return true;
+		
+	}
+	
+	/**
+	 * 数据库创建时执行，如果不是预制的数据库，可以在这些写一些创建表和添加初始化数据的操作 如：db.execSQL("create table
+	 * cookdata (_id integer primary key,cook_name varchar(20),cook_sort
+	 * varchar(20))");
+	 */
 	@Override
 	public void onCreate(SQLiteDatabase arg0) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void onUpgrade(SQLiteDatabase arg0, int arg1, int arg2) {
-		// TODO Auto-generated method stub
+		/**
+		 * 数据库升级时执行，前面我们定义的DB_VERSION就是数据库版本，在版本升高时执行 一般做一些数据备份和恢复到新数据库的操作。
+		 */
 		
+	}
+	/**
+	 * 
+	 * @Title: query 
+	 * @Description: 执行对数据库的查询
+	 * @param @param sql
+	 * @param @param args
+	 * @param @return
+	 * @return Cursor 
+	 * @throws
+	 */
+	
+	public Cursor query(String sql, String[] args) {
+		SQLiteDatabase db = this.getReadableDatabase();
+		Cursor cursor = db.rawQuery(sql, args);
+		return cursor;
 	}
 
 }
