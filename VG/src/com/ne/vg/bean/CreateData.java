@@ -70,24 +70,24 @@ public class CreateData {
 		route1.setRouteName("五渔村必游之地");
 		route1.setRouteDay(3);
 		route1.setSceneNum(9);
-		route1.setLoveNum(2325);
-		route1.setResource(R.drawable.recommend_item_iv1);
+		route1.setCollectNum(2325);
+		route1.setResource("recommend_item_iv1");
 		listRoutes.add(route1);
 		
 		route2 = new RecommendRoute();
 		route2.setRouteName("五渔村必游之地");
 		route2.setRouteDay(3);
 		route2.setSceneNum(9);
-		route2.setLoveNum(2325);
-		route2.setResource(R.drawable.recommend_item_iv1);
+		route2.setCollectNum(2325);
+		route2.setResource("recommend_item_iv1");
 		listRoutes.add(route2);
 		
 		route3 = new RecommendRoute();
 		route3.setRouteName("五渔村必游之地");
 		route3.setRouteDay(3);
 		route3.setSceneNum(9);
-		route3.setLoveNum(2325);
-		route3.setResource(R.drawable.recommend_item_iv1);
+		route3.setCollectNum(2325);
+		route3.setResource("recommend_item_iv1");
 		listRoutes.add(route3);
 		
 		return listRoutes;

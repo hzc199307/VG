@@ -19,7 +19,7 @@ public class TableColumns {
 		public static final String routeDay = "routeDay";
 		public static final String collectNum = "collectNum";
 		public static final String routeContentID = "routeContentID";
-		public static final String source = "source";
+		public static final String resource = "resource";
 	}
 	public interface RouteContentColumns{
 		public static final String routeContentID = "routeContentID";
@@ -27,6 +27,9 @@ public class TableColumns {
 		public static final String secondScene = "secondScene";
 		public static final String thirdScene = "thirdScene";
 		public static final String forthScene = "forthScene";
+		public static final String fifthScene = "fifthScene";
+		public static final String sixthScene = "sixthScene";
+		public static final String seventhScene = "seventhScene";
 	}
 	public interface BigSceneColumns{
 		public static final String bigSceneName = "bigScenename";

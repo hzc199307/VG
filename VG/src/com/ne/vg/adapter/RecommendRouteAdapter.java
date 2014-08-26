@@ -28,11 +28,13 @@ public class RecommendRouteAdapter extends BaseAdapter{
 	private LayoutInflater mInflater;
 	//存储数据
 	List<RecommendRoute> mData;
+	private Context mContext;
 	
 	public RecommendRouteAdapter(Context context, List<RecommendRoute> mData)
 	{
 		mInflater = LayoutInflater.from(context);
 		this.mData = mData;
+		mContext = context;
 	
 	}
 
@@ -72,10 +74,15 @@ public class RecommendRouteAdapter extends BaseAdapter{
 			holder = (Holder)convertView.getTag();
 		}
 		RecommendRoute mRecommendRoute = mData.get(position);
-		holder.img.setBackgroundResource(mRecommendRoute.getResource());
+		
+		//将string类型的资源中获取int类型的标志id
+		int resId = mContext.getResources().getIdentifier(mRecommendRoute.getResource() ,"drawable","com.ne.vg");
+		if(resId>0)
+			holder.img.setBackgroundResource(resId);
+		
 		holder.sceneNum.setText(Integer.toString(mRecommendRoute.getSceneNum()));
 		holder.routeName.setText(mRecommendRoute.getRouteName());
-		holder.collectNum.setText(Integer.toString(mRecommendRoute.getLoveNum()));
+		holder.collectNum.setText(Integer.toString(mRecommendRoute.getCollectNum()));
 		//routeDay还需要加入天这个字
 		holder.routeDay.setText(mRecommendRoute.getRouteDay()+ "天");
 		//TODO click的响应目前先不写

@@ -32,13 +32,13 @@ public class SmallScene {
 	public double getLatitude() {
 		return latitude;
 	}
-	public void setLatitude(int latitude) {
+	public void setLatitude(double latitude) {
 		this.latitude = latitude;
 	}
 	public double getLongtitude() {
 		return longtitude;
 	}
-	public void setLongtitude(int longtitude) {
+	public void setLongtitude(double longtitude) {
 		this.longtitude = longtitude;
 	}
 	public int getBigSceneID() {

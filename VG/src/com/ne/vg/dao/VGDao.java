@@ -3,11 +3,19 @@ package com.ne.vg.dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.baidu.platform.comapi.map.base.m;
 import com.ne.vg.DBHelper.TableColumns.BigSceneColumns;
 import com.ne.vg.DBHelper.TableColumns.CityColumns;
+import com.ne.vg.DBHelper.TableColumns.RecommendRouteColumns;
+import com.ne.vg.DBHelper.TableColumns.RouteContentColumns;
+import com.ne.vg.DBHelper.TableColumns.SceneContentColumns;
+import com.ne.vg.DBHelper.TableColumns.SmallSceneColumns;
 import com.ne.vg.bean.BigScene;
 import com.ne.vg.bean.City;
 import com.ne.vg.bean.RecommendRoute;
+import com.ne.vg.bean.RouteContent;
+import com.ne.vg.bean.SceneContent;
+import com.ne.vg.bean.SmallScene;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -76,7 +84,7 @@ public class VGDao {
 	public List<BigScene> getBigScene(int cityID){
 		List<BigScene> listBigScenes = new ArrayList<BigScene>();
 		String[] args = {cityID+""};
-		Cursor cr = db.query("bigScene", null, "cityID=?", args, null, null, null);
+		Cursor cr = db.query("BigScene", null, "cityID=?", args, null, null, null);
 		int count = cr.getCount();
 		Log.v(TAG,"start getCity() count = " + count);
 		if(cr!=null){
@@ -108,10 +116,140 @@ public class VGDao {
 		Log.v(TAG,"getBigScene is finished!");
 		return listBigScenes;
 	}
-
+	
+	/**
+	 * 
+	 * @Title: getRecommendRoute 
+	 * @Description: 根据城市ID获取推荐路线列表
+	 * @param @param cityID
+	 * @param @return
+	 * @return List<RecommendRoute> 
+	 * @throws
+	 */
 	public List<RecommendRoute> getRecommendRoute(int cityID){
 		List<RecommendRoute> listRecommendRoutes = new ArrayList<RecommendRoute>();
-		
+		String[] args = {cityID+""};
+		Cursor cr = db.query("RecommendRoute", null, "cityID=?", args, null, null, null);
+		int count = cr.getCount();
+		Log.v(TAG,"start getRecommendRoute() count = " + count);
+		if(cr!=null){
+			cr.moveToFirst();
+			for(int i =0; i < count; i++){
+				RecommendRoute mRecommendRoute = new RecommendRoute();
+				mRecommendRoute.setCollectNum(cr.getInt(cr.getColumnIndex(RecommendRouteColumns.collectNum)));
+				mRecommendRoute.setResource(cr.getString(cr.getColumnIndex(RecommendRouteColumns.resource)));
+				mRecommendRoute.setRouteContentID(cr.getInt(cr.getColumnIndex(RecommendRouteColumns.routeContentID)));
+				mRecommendRoute.setRouteDay(cr.getInt(cr.getColumnIndex(RecommendRouteColumns.routeDay)));
+				mRecommendRoute.setRouteID(cr.getInt(cr.getColumnIndex(RecommendRouteColumns.routeID)));
+				mRecommendRoute.setRouteName(cr.getString(cr.getColumnIndex(RecommendRouteColumns.routeName)));
+				mRecommendRoute.setSceneNum(cr.getInt(cr.getColumnIndex(RecommendRouteColumns.sceneNum)));
+				
+				listRecommendRoutes.add(mRecommendRoute);
+				cr.moveToNext();
+			}
+		}
 		return listRecommendRoutes;
 	}
+	
+	/**
+	 * 
+	 * @Title: getSceneContent 
+	 * @Description: 通过大景点ID获取大景点列表的内容
+	 * @param @param contentID
+	 * @param @return
+	 * @return SceneContent 
+	 * @throws
+	 */
+	public SceneContent getSceneContent(int contentID){
+		SceneContent mSceneContent = new SceneContent();
+		String[] args = {contentID + ""};
+		Cursor cr = db.query("SceneContent", null, "contentID=?", args, null, null, null);
+		if(cr!=null){
+			mSceneContent.setAddress(cr.getString(cr.getColumnIndex(SceneContentColumns.address)));
+			
+			mSceneContent.setContent(cr.getString(cr.getColumnIndex(SceneContentColumns.content)));
+			mSceneContent.setPrice(cr.getString(cr.getColumnIndex(SceneContentColumns.price)));
+			mSceneContent.setRecommendLevel(cr.getInt(cr.getColumnIndex(SceneContentColumns.recommendLevel)));
+			mSceneContent.setRecommendScene(cr.getString(cr.getColumnIndex(SceneContentColumns.recommendScnene)));
+			mSceneContent.setRelativeScene(cr.getString(cr.getColumnIndex(SceneContentColumns.relativeScene)));
+			mSceneContent.setRoute(cr.getString(cr.getColumnIndex(SceneContentColumns.route)));
+			mSceneContent.setTelephone(cr.getString(cr.getColumnIndex(SceneContentColumns.telephone)));
+			mSceneContent.setWebsite(cr.getString(cr.getColumnIndex(SceneContentColumns.website)));
+			mSceneContent.setWorkingTime(cr.getString(cr.getColumnIndex(SceneContentColumns.workingTime)));
+		}
+		
+		
+		return mSceneContent;
+	}
+	
+	/**
+	 * 
+	 * @Title: getSmallScene 
+	 * @Description: TODO
+	 * @param @param bigSceneID
+	 * @param @return
+	 * @return List<SmallScene> 
+	 * @throws
+	 */
+	public List<SmallScene> getSmallScene(int bigSceneID){
+		List<SmallScene> listSmallScenes = new ArrayList<SmallScene>();
+		String[] args = {bigSceneID +""};
+		Cursor cr = db.query("SmallScne", null, "bigSceneID=?", args, null, null, null);
+		int count = cr.getCount();
+		if(cr!=null){
+			cr.moveToFirst();
+			for(int i = 0; i <count; i++){
+				SmallScene mSmallScene = new SmallScene();
+				mSmallScene.setContent(cr.getString(cr.getColumnIndex(SmallSceneColumns.content)));
+				mSmallScene.setLatitude(cr.getDouble(cr.getColumnIndex(SmallSceneColumns.latitude)));
+				mSmallScene.setLongtitude(cr.getDouble(cr.getColumnIndex(SmallSceneColumns.longtitude)));
+				mSmallScene.setResource(cr.getString(cr.getColumnIndex(SmallSceneColumns.resource)));
+				mSmallScene.setSmallSceneID(cr.getInt(cr.getColumnIndex(SmallSceneColumns.smallSceneID)));
+				mSmallScene.setSmallSceneName(cr.getString(cr.getColumnIndex(SmallSceneColumns.smallSceneName)));
+				
+				listSmallScenes.add(mSmallScene);
+				cr.moveToNext();
+			}
+		}
+		return listSmallScenes;
+	}
+	
+	/**
+	 * 
+	 * 这个有可能得修改下。。。
+	 * @Title: getRouteContent 
+	 * @Description: TODO
+	 * @param @param contentID
+	 * @param @return
+	 * @return List<RouteContent> 
+	 * @throws
+	 */
+	public List<RouteContent> getRouteContent(int routeContentID){
+		List<RouteContent> listRouteContents  = new ArrayList<RouteContent>();
+		String[] args = {routeContentID +""};
+		Cursor cr = db.query("RouteContent", null, "crouteContentID=?", args, null, null, null);
+		int count = cr.getCount();
+		if(cr!=null)
+		{
+			cr.moveToFirst();
+			for(int i = 0; i< count; i++){
+				RouteContent mRouteContent = new RouteContent();
+				mRouteContent.setFirstScene(cr.getString(cr.getColumnIndex(RouteContentColumns.firstScene)));
+				mRouteContent.setSecondScene(cr.getString(cr.getColumnIndex(RouteContentColumns.secondScene)));
+				mRouteContent.setThirdScene(cr.getString(cr.getColumnIndex(RouteContentColumns.thirdScene)));
+				mRouteContent.setForthScene(cr.getString(cr.getColumnIndex(RouteContentColumns.forthScene)));
+				mRouteContent.setFifthScene(cr.getString(cr.getColumnIndex(RouteContentColumns.fifthScene)));
+				mRouteContent.setSixthScene(cr.getString(cr.getColumnIndex(RouteContentColumns.sixthScene)));
+				mRouteContent.setSeventhScene(cr.getString(cr.getColumnIndex(RouteContentColumns.seventhScene)));
+				listRouteContents.add(mRouteContent);
+				
+				cr.moveToNext();
+			
+			}
+			
+			 
+		}
+		return listRouteContents;
+	}
+
 }
