@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStream;  
 import java.io.OutputStream;  
   
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Environment;  
 /**
  *   
@@ -51,8 +52,8 @@ public class FileUtil {
      */  
     public File createSDDir(String dirName){  
         File dir = new File(SDPATH + dirName); 
-        if(isFileExist(dirName))
-        	dir.mkdir();  
+        if(!isFileExist(dirName))
+        	dir.mkdirs();  
         return dir;  
     }  
       
@@ -79,6 +80,11 @@ public class FileUtil {
         try {  
             createSDDir(path);  
             file = createSDFile(path + fileName);  
+            
+            //这一行我不知道为什么要？
+            SQLiteDatabase.openOrCreateDatabase(file, null);
+            
+            
             output = new FileOutputStream(file);  
             byte[] buffer = new byte[FILESIZE];  
   

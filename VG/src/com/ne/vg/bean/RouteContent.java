@@ -2,7 +2,7 @@ package com.ne.vg.bean;
 
 public class RouteContent {
 	private int routeContentID;
-	private String firstScene,secondScene,thirdScene,forthScene,
+	private String firstScene,secondScene,thirdScene,fourthScene,
 					fifthScene,sixthScene,seventhScene;
 	public int getRouteContentID() {
 		return routeContentID;
@@ -28,11 +28,11 @@ public class RouteContent {
 	public void setThirdScene(String thirdScene) {
 		this.thirdScene = thirdScene;
 	}
-	public String getForthScene() {
-		return forthScene;
+	public String getFourthScene() {
+		return fourthScene;
 	}
-	public void setForthScene(String forthScene) {
-		this.forthScene = forthScene;
+	public void setFourthScene(String forthScene) {
+		this.fourthScene = forthScene;
 	}
 	public String getFifthScene() {
 		return fifthScene;

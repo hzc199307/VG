@@ -1,29 +1,19 @@
 package com.ne.vg.fragment;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.Toast;
-import android.widget.AdapterView.OnItemClickListener;
-
-import com.ne.vg.MainActivity;
 import com.ne.vg.R;
-import com.ne.vg.activity.RecommendActivity;
 import com.ne.vg.activity.RouteActivity;
 import com.ne.vg.adapter.RecommendRouteAdapter;
 import com.ne.vg.bean.CreateData;
+import com.ne.vg.dao.VGDao;
 /**
  * 
  * @ClassName: RecommendRouteFragment 
@@ -37,7 +27,13 @@ public class RecommendRouteFragment extends Fragment{
 	private ListView listview;
 	//自定义的适配器
 	private RecommendRouteAdapter gridAdapter;
+	private int cityID;
+	private VGDao mVgDao;
+	private Intent mIntent;
 	
+	public RecommendRouteFragment(int cityID){
+		this.cityID = cityID;
+	}
 	@Override
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
@@ -52,42 +48,28 @@ public class RecommendRouteFragment extends Fragment{
 				container, false);
 		//Init view
 		listview = (ListView) rootView.findViewById(R.id.recommendroute_listview);
-		InitListener();
-		gridAdapter = new RecommendRouteAdapter(getActivity(), CreateData.getRecommendRoute());
+		
+		
+		
+		//TODO 这里的数据需要转换，即第二个参数改为mVgDao.getRecommendRoute(cityID)那个
+		mVgDao = new VGDao(getActivity());
+		gridAdapter = new RecommendRouteAdapter(getActivity(), mVgDao.getRecommendRoute(cityID));
 		listview.setAdapter(gridAdapter);
 		listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position,long id) {
-				// TODO Auto-generated method stub
-				startActivity(new Intent(getActivity(),RouteActivity.class));
+				//TODO 下面是我自己修改的部分，带参数的startActivity
+				mIntent = new Intent(getActivity(),RouteActivity.class);
+				int routeID = mVgDao.getRecommendRoute(cityID).get(position).getRouteID();
+				mIntent.putExtra("routeID", routeID);
+				startActivity(mIntent);
 			}
 		});
 		super.onStart();
 		return rootView;
 		
 	}
-	/**
-	 * 
-	 * @Title: InitListener 
-	 * @Description: 初始化监听器Listener,用来监听List中的Item
-	 * @param 
-	 * @return void 
-	 * @throws
-	 */
-	private void InitListener() {
-		// TODO Auto-generated method stub
-		listview.setOnItemClickListener(new OnItemClickListener(){
-
-			@Override
-			public void onItemClick(AdapterView<?> arg0, View arg1, int position,
-					long arg3) {
-				Log.e("panshan"," " + position);
-				// TODO 这里是写跳转函数，跳转到其他页面。
-				Toast.makeText(getActivity().getApplicationContext(), "pic" + (position+1), Toast.LENGTH_SHORT).show(); 
-			}
-
-		});
-	}
+	
 	
 }

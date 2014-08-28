@@ -26,17 +26,17 @@ public class TableColumns {
 		public static final String firstScene = "firstScene";
 		public static final String secondScene = "secondScene";
 		public static final String thirdScene = "thirdScene";
-		public static final String forthScene = "forthScene";
+		public static final String fourthScene = "fourthScene";
 		public static final String fifthScene = "fifthScene";
 		public static final String sixthScene = "sixthScene";
 		public static final String seventhScene = "seventhScene";
 	}
 	public interface BigSceneColumns{
-		public static final String bigSceneName = "bigScenename";
+		public static final String bigSceneName = "bigSceneName";
 		public static final String latitude = "latitude";
 		public static final String longtitude = "longtitude";
 		public static final String cityID = "cityID";
-		public static final String bigCityID = "bigCityID";
+		public static final String bigSceneID = "bigSceneID";
 		public static final String level = "level";
 		public static final String resource = "resource";
 		public static final String contentID = "contentID";
@@ -50,7 +50,7 @@ public class TableColumns {
 		public static final String recommendLevel = "recommendLevel";
 		public static final String content = "content";
 		public static final String recommendScnene = "recommendScene";
-		public static final String address = "adress";
+		public static final String address = "address";
 		public static final String route = "route";
 		public static final String workingTime = "workingTime";
 		public static final String website = "website";

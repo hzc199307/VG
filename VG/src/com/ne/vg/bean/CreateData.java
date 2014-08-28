@@ -35,12 +35,14 @@ public class CreateData {
 		city1.setCityName("·ðÂÞÂ×Èø");
 		city1.setCityPinyin("Florence");
 		city1.setResource("city_florence");
+		city1.setCityID(1);
 		
 		listCities.add(city1);
 		city2 = new City();
 		city2.setCityName("ÂÞÂí");
 		city2.setCityPinyin("Roman");
 		city2.setResource("city_roman");
+		city2.setCityID(2);
 		listCities.add(city2);
 		for(int i=0;i<10;i++)
 		{
@@ -48,7 +50,9 @@ public class CreateData {
 			city.setCityName("ÎåÓæ´å");
 			city.setCityPinyin("Cinque Terre");
 			city.setResource("city_cinqueterre");
+			city.setCityID(i+3);
 			listCities.add(city);
+			
 		}
 		return listCities;
 	}
@@ -104,7 +108,7 @@ public class CreateData {
 			sc.setDowned(false);
 			sc.setRecordNum(18);
 			sc.setLoveNum(3252);
-			sc.setSrc(R.drawable.recommend_item_iv1);
+			sc.setResource("recommend_item_iv1");
 			scenelist.add(sc);
 		}
 		sc1 = new BigScene();
@@ -112,7 +116,7 @@ public class CreateData {
 		sc1.setDowned(true);
 		sc1.setRecordNum(18);
 		sc1.setLoveNum(3252);
-		sc1.setSrc(R.drawable.recommend_item_iv1);
+		sc1.setResource("recommend_item_iv1");
 		scenelist.add(sc1);
 
 		sc2 = new BigScene();
@@ -120,7 +124,7 @@ public class CreateData {
 		sc2.setDowned(true);
 		sc2.setRecordNum(18);
 		sc2.setLoveNum(3252);
-		sc2.setSrc(R.drawable.recommend_item_iv1);
+		sc2.setResource("recommend_item_iv1");
 		scenelist.add(sc2);
 
 		sc3 = new BigScene();
@@ -128,7 +132,7 @@ public class CreateData {
 		sc3.setDowned(false);
 		sc3.setRecordNum(18);
 		sc3.setLoveNum(3252);
-		sc3.setSrc(R.drawable.recommend_item_iv1);
+		sc3.setResource("recommend_item_iv1");
 		scenelist.add(sc3);
 		
 		return scenelist;

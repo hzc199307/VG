@@ -17,13 +17,16 @@ public class RouteActivity extends FragmentActivity {
 
 	private final String TAG= "RouteActivity";
 	private RouteFragment routeFragment;
+	private Intent mIntent;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		Log.v(TAG, "onCreate");
 		setContentView(R.layout.activity_route);
-		routeFragment = new RouteFragment();
+		mIntent = this.getIntent();
+		
+		routeFragment = new RouteFragment(mIntent.getExtras().getInt("routeID"));
 		getSupportFragmentManager().beginTransaction()
 		.add(R.id.route_frame, routeFragment)
 		.commit();

@@ -97,7 +97,12 @@ public class BigSceneListAdapter extends BaseAdapter{
 			holder = (Holder)convertView.getTag();
 		}
 		BigScene mBigScene = mData.get(position);
-		holder.img.setImageResource(mBigScene.getSrc());
+		
+
+		//将string类型的资源中获取int类型的标志id
+		int resId = context.getResources().getIdentifier(mBigScene.getResource() ,"drawable","com.ne.vg");
+		if(resId>0)
+			holder.img.setImageResource(resId);
 		//holder.download.setText((String)mData.get(position).get("download"));
 		holder.sceneName.setText(mBigScene.getBigSceneName());
 		holder.loveNum.setText(Integer.toString(mBigScene.getLoveNum()));

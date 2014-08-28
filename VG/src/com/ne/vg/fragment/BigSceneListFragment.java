@@ -11,6 +11,8 @@ import com.ne.vg.activity.BigSceneDetailActivity;
 import com.ne.vg.activity.RouteActivity;
 import com.ne.vg.adapter.BigSceneListAdapter;
 import com.ne.vg.bean.CreateData;
+import com.ne.vg.bean.SceneContent;
+import com.ne.vg.dao.VGDao;
 import com.ne.vg.util.NotifyUtil;
 
 
@@ -37,10 +39,14 @@ public class BigSceneListFragment extends Fragment{
 	private final static String TAG="BigSceneListFragment";
 
 	private GridView gridview;
+	private int cityID; 
+	private Intent mIntent;
+	private VGDao mVgDao;
 	//自定义的适配器
 	private BigSceneListAdapter gridAdapter;
-	public BigSceneListFragment(){
-
+	public BigSceneListFragment(int cityID){
+		Log.d(TAG, cityID+"");
+		this.cityID = cityID;
 	}
 
 	@Override
@@ -61,11 +67,10 @@ public class BigSceneListFragment extends Fragment{
 				container, false);
 		//Init view
 		gridview = (GridView) rootView.findViewById(R.id.bigscene_gridview1);
+		mVgDao = new VGDao(getActivity());
+		gridAdapter = new BigSceneListAdapter(getActivity(), mVgDao.getBigScene(cityID));
+		gridview.setAdapter(gridAdapter);
 		InitListener();
-		
-		
-		
-		
 		return rootView;
 
 	}
@@ -79,26 +84,22 @@ public class BigSceneListFragment extends Fragment{
 	 * @throws
 	 */
 	private void InitListener() {
-		// TODO Auto-generated method stub
+		// TODO 现在有反应了
 		gridview.setOnItemClickListener(new OnItemClickListener(){
 
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int position,
 					long arg3) {
 				Log.e("panshan"," " + position);
-				// TODO Auto-generated method stub
-				
-				
-								
+				// TODO Auto-generated method stub				
 				Toast.makeText(getActivity().getApplicationContext(), "pic" + (position+1), Toast.LENGTH_SHORT).show();
-				startActivity(new Intent(getActivity(),BigSceneDetailActivity.class));
+				mIntent = new Intent(getActivity(),BigSceneDetailActivity.class);
+				
+				int bigSceneID = mVgDao.getBigScene(cityID).get(position).getBigSceneID();
+				mIntent.putExtra("bigSceneID", bigSceneID);
+				startActivity(mIntent);
 			}
 		});
 	}
-	@Override
-	public void onStart(){
-		gridAdapter = new BigSceneListAdapter(getActivity(), CreateData.getBigScenePs());
-		gridview.setAdapter(gridAdapter);
-		super.onStart();
-	}
+	
 }

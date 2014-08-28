@@ -21,16 +21,18 @@ import android.view.ViewGroup;
 public class RecommendAdapter extends FragmentPagerAdapter{
 
 	int NUM_ITEM = 2;
-	public RecommendAdapter(FragmentManager fm) {
+	int cityID;
+	public RecommendAdapter(FragmentManager fm,int cityID) {
 		super(fm);
+		this.cityID = cityID;
 	}
 
 	@Override
 	public Fragment getItem(int position) {
 		switch(position){
 		//≥ı ºªØfragment
-		case 0:return new RecommendRouteFragment();
-		case 1:return new BigSceneListFragment();
+		case 0:return new RecommendRouteFragment(cityID);
+		case 1:return new BigSceneListFragment(cityID);
 		default:return null;
 		}
 	}

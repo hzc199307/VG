@@ -46,19 +46,20 @@ public class BigSceneDetailActivity extends FragmentActivity {
 	private boolean isMapBig = false;//记录地图是否被点击放大了
 	private ImageButton bsd_btn_up,bsd_btn_location;
 	private View big_scene_detail_other;
+	private Intent mIntent;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		Log.v(TAG, "onCreate");
 		setContentView(R.layout.activity_big_scene_detail);
-
+		
 		gmapFrame = (FrameLayout)findViewById(R.id.big_scene_detail_frame_map);
 		bsdScroll = (ScrollView)findViewById(R.id.bsd_scroll);
 		bsd_btn_up = (ImageButton)findViewById(R.id.bsd_btn_up);
 		bsd_btn_location = (ImageButton)findViewById(R.id.bsd_btn_location);
 		big_scene_detail_other = (View)findViewById(R.id.big_scene_detail_other);
-
+		mIntent = this.getIntent();
 		//		if(savedInstanceState == null)
 		//		{
 		//			if(gMapFragment==null)

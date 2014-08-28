@@ -13,24 +13,28 @@ import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Environment;
 import android.util.Log;
+import android.widget.Toast;
 
 public class DBHelper extends SQLiteOpenHelper{
 	
+	private static final String TAG = "DBHelper";
 	//用户数据库文件的版本
 	private static final int DB_VERSION = 1;
 	 //实例化一个file工具类
 	static FileUtil fileUtil = new FileUtil();
 	//数据库文件存放目标，存放在sdk上
-	private static String DB_PATH = fileUtil.getSDPATH() + "com.ne.vg"+"/databases/";
+	private static String DB_PATH = "com.ne.vg/databases/";
 	//TODO 这里需要修改为我们的数据 下面两个静态变量分别是目标文件的名称和在assets文件夹下的文件名
-	private static String DB_NAME = "city_scene.db";
-	private static String ASSETS_NAME = "db/city_scene.db";
+	private static String DB_NAME = "VG_test.db";
+	private static String ASSETS_NAME = "VG_test.db";
 	public final Context mContext;
+	private SQLiteDatabase myDatabase = null;
 
 	public DBHelper(Context context, String name, CursorFactory factory,
 			int version) {
-		super(context, name, factory, version);
+		super(context, name, null, version);
 		this.mContext = context;
+		Log.v(TAG, "onCreate");
 	}
 	
 	public DBHelper(Context context, String name, int version){
@@ -39,6 +43,10 @@ public class DBHelper extends SQLiteOpenHelper{
 
 	public DBHelper(Context context, String name) {
 		this(context, name, DB_VERSION);
+	}
+	
+	public DBHelper(Context context){
+		this(context,DB_PATH+DB_NAME);
 	}
 	/**
 	 * 
@@ -51,14 +59,21 @@ public class DBHelper extends SQLiteOpenHelper{
 	 */
 	public boolean createDataBase() throws IOException{
 		
+		Log.v(TAG, "111111111");
+		
 			//复制assets中的数据库文件到DB_PATH目录下
 			InputStream myInput = mContext.getAssets().open(ASSETS_NAME);
+			Log.v(TAG, "222222");
 			//往指定目录中写入数据
 			File file = fileUtil.write2SDFromInput(DB_PATH, DB_NAME, myInput);
+			Log.v(TAG, "33333");
 			//判断是否复制成功
 			if(file==null){
+				Log.v(TAG, "44444444");
 				return false;
 			}
+			Log.v(TAG, "5555555");
+			
 			return true;
 		
 	}
@@ -80,6 +95,15 @@ public class DBHelper extends SQLiteOpenHelper{
 		 */
 		
 	}
+	
+	
+	@Override
+	public synchronized void close() {
+		if (myDatabase != null) {
+			myDatabase.close();
+		}
+		super.close();
+	}
 	/**
 	 * 
 	 * @Title: query 
@@ -92,8 +116,9 @@ public class DBHelper extends SQLiteOpenHelper{
 	 */
 	
 	public Cursor query(String sql, String[] args) {
-		SQLiteDatabase db = this.getReadableDatabase();
+		SQLiteDatabase db = SQLiteDatabase.openDatabase("/sdcard/com.ne.vg/databases/VG_test.db", null, SQLiteDatabase.NO_LOCALIZED_COLLATORS);
 		Cursor cursor = db.rawQuery(sql, args);
+		
 		return cursor;
 	}
 

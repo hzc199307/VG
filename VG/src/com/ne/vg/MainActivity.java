@@ -1,5 +1,8 @@
 package com.ne.vg;
 
+import java.io.IOException;
+
+import com.ne.vg.DBHelper.DBHelper;
 import com.ne.vg.fragment.HomeFragment;
 import com.ne.vg.fragment.LeftSlidingMenuFragment;
 import com.ne.vg.fragment.MineFragment;
@@ -46,11 +49,16 @@ public class MainActivity extends SlidingFragmentActivity {
 	private TranslateAnimation animation1,animation2;
 
 	DisplayMetrics dm;
+	DBHelper mDbHelper;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
+		
+		
+		
+		
 		Log.v(TAG, "onCreate");
 		setContentView(R.layout.activity_main);
 
