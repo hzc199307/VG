@@ -12,14 +12,77 @@
         layout="@layout/tab_scene"
         android:focusable="true" />
 
-    <!-- viewpager的属性有可能需要修改 -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
 
-    <com.ne.vg.view.MyViewPager
-        android:id="@+id/scene_viewpager"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_gravity="center"
-        android:layout_weight="1.0"
-        android:flipInterval="30" />
+        <!-- viewpager的属性有可能需要修改 -->
+
+        <com.ne.vg.view.MyViewPager
+            android:id="@+id/scene_viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:flipInterval="30" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/scene_music_bottom_height"
+            android:layout_gravity="bottom"
+            android:background="@color/scene_music_bottom_bg"
+            android:orientation="horizontal"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp" >
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="14dp"
+                android:layout_weight="1" >
+
+                <SeekBar
+                    android:id="@+id/scene_music_seekbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:maxHeight="1dp"
+                    android:minHeight="1dp"
+                    android:progress="0"
+                    android:progressDrawable="@drawable/scene_music_progress"
+                    android:thumb="@drawable/scene_music_pausing_icon" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true" >
+
+                    <TextView
+                        android:id="@+id/scene_music_time_now"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:text="00:00"
+                        android:textColor="#d4d4d4"
+                        android:textSize="8sp" />
+
+                    <TextView
+                        android:id="@+id/scene_music_time_total"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:text="12:00"
+                        android:textColor="#d4d4d4"
+                        android:textSize="8sp" />
+                </RelativeLayout>
+            </RelativeLayout>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/scene_music_zan" />
+        </LinearLayout>
+    </FrameLayout>
 
 </LinearLayout>

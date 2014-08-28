@@ -93,5 +93,9 @@
 	<dimen name="tab_textsize">13sp</dimen>
 	<dimen name="tab_tv_iv">5dp</dimen>
 	<dimen name="tab_cursor_height">1dp</dimen>
+	
+	<!-- SceneActivity 相关 -->
+    
+    <dimen name="scene_music_bottom_height">48dp</dimen>
 
 </resources>

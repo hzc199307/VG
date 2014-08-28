@@ -38,5 +38,10 @@
     <color name="tab_tv_selected">#fc6662</color>
     <color name="tab_tv_normal">#969696</color>
     <color name="tab_cursor">#F26866</color>
+    
+    <!-- SceneActivity 相关 -->
+    <color name="scene_music_bottom_bg">#80000000</color>
+    <color name="scene_list_bg">#323232</color>
+    
 
 </resources>
