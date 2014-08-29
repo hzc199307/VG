@@ -10,6 +10,7 @@ import com.ne.vg.activity.RecommendActivity;
 import com.ne.vg.adapter.CityListAdapter;
 import com.ne.vg.bean.City;
 import com.ne.vg.bean.CreateData;
+import com.ne.vg.dao.VGDao;
 import com.slidingmenu.lib.app.SlidingFragmentActivity;
 
 import android.R.layout;
@@ -43,6 +44,9 @@ public class HomeFragment extends Fragment implements OnClickListener{
 	private ListView lv_city;
 	private CityListAdapter cityListAdapter ;
 	private View home_title_search_btn,home_title_left;
+	
+	private Intent intent;
+	private VGDao mVgDao;
 
 
 	@Override
@@ -50,10 +54,15 @@ public class HomeFragment extends Fragment implements OnClickListener{
 		// TODO Auto-generated method stub
 		Toast.makeText(getActivity(), TAG+ " onCreateView", Toast.LENGTH_SHORT).show();
 		Log.v(TAG, "onCreateView");
+		mVgDao = new VGDao(getActivity());
 		View view  = inflater.inflate(R.layout.fragment_home, container,false);
 		lv_city = (ListView)view.findViewById(R.id.lv_city);
+		
+		
 		if(cityListAdapter==null)
-			cityListAdapter = new CityListAdapter(getActivity(), CreateData.getCityList());
+			cityListAdapter = new CityListAdapter(getActivity(), mVgDao.getCity());
+
+		
 		lv_city.setAdapter(cityListAdapter);
 		
 		lv_city.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -61,7 +70,14 @@ public class HomeFragment extends Fragment implements OnClickListener{
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position,long id) {
 				// TODO Auto-generated method stub
-				startActivity(new Intent(getActivity(),RecommendActivity.class));
+				Log.d(TAG, "item" + position + "is clicked");
+				intent = new Intent(getActivity(),RecommendActivity.class);
+				City city = mVgDao.getCity().get(position);
+				intent.putExtra("cityID", city.getCityID());
+				
+				Log.d(TAG, "cityID:"+city.getCityID());
+				
+				startActivity(intent);
 				((MainActivity)getActivity()).destroyAllFragmentWithoutNow();
 			}
 		});

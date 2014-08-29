@@ -6,7 +6,7 @@ package com.ne.vg.bean;
 public class BigScene {
 
 	private String bigSceneName,resource;
-	private int cityID,bigSceneID,contentID,level,loveNum,recordNum,src;
+	private int cityID,bigSceneID,contentID,level,loveNum,recordNum;
 	public int getRecordNum() {
 		return recordNum;
 	}
@@ -76,12 +76,7 @@ public class BigScene {
 	public void setLoveNum(int loveNum) {
 		this.loveNum = loveNum;
 	}
-	public int getSrc() {
-		return src;
-	}
-	public void setSrc(int src) {
-		this.src = src;
-	}
+	
 	
 	
 	

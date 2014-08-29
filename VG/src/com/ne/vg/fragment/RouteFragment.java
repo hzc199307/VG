@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.ne.vg.R;
 import com.ne.vg.adapter.MyFragmentStatePagerAdapter2;
+import com.ne.vg.dao.VGDao;
 import com.ne.vg.gmap.GMapFragment;
 
 import android.annotation.SuppressLint;
@@ -41,6 +42,10 @@ public class RouteFragment extends Fragment{
 	private PagerTabStrip route_pagertab;
 	private MyFragmentStatePagerAdapter myPagerAdapter;
 	private GMapFragment gMapFragment ;
+	
+	private int routeID;
+	private VGDao mVgDao;
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -50,6 +55,11 @@ public class RouteFragment extends Fragment{
 		initMap();
 		initViewPager();
 		return rootView;
+	}
+	
+	public RouteFragment(int routeID){
+		Log.d(TAG, routeID + "");
+		this.routeID = routeID;
 	}
 
 	@Override
@@ -63,9 +73,10 @@ public class RouteFragment extends Fragment{
 	 * 初始化Map
 	 */
 	private void initMap() {
-		// TODO Auto-generated method stub
+		
 		if(gMapFragment==null)
 			gMapFragment = new GMapFragment();
+		//TODO 这里需要穿进去latitude和longtitude
 		if(!gMapFragment.isAdded())
 			getFragmentManager().beginTransaction()
 			.add(R.id.route_frame_map, gMapFragment)
@@ -87,7 +98,14 @@ public class RouteFragment extends Fragment{
 		route_pagertab.setDrawFullUnderline(false);
 		route_pagertab.setBackgroundColor(getResources().getColor(R.color.route_pagertab_bg));
 		route_pagertab.setTextSpacing(50);
-		myPagerAdapter = new MyFragmentStatePagerAdapter(getFragmentManager(),3);
+		
+		
+		mVgDao = new VGDao(getActivity());
+		
+		
+		//TODO 这里第二个参数应该是viewpager的页面数量
+		Log.d(TAG, "routeDay = " + mVgDao.getRoute(routeID).getRouteDay());
+		myPagerAdapter = new MyFragmentStatePagerAdapter(getFragmentManager(),mVgDao.getRoute(routeID).getRouteDay());
 		route_viewpager.setAdapter(myPagerAdapter);
 		route_viewpager.setCurrentItem(0);
 	}
@@ -102,7 +120,8 @@ public class RouteFragment extends Fragment{
 	public class MyFragmentStatePagerAdapter extends MyFragmentStatePagerAdapter2{
 
 		private int NUM_ITEMS = 3;
-
+		
+		private int routeContentID;
 		public MyFragmentStatePagerAdapter(FragmentManager fm ,int numOfFragment) {  
 			super(fm);  
 			NUM_ITEMS = numOfFragment;
@@ -118,14 +137,20 @@ public class RouteFragment extends Fragment{
 		 */
 		@Override  
 		public Fragment getItem(int position) {  
+			Log.d(TAG, "position="+position);
 			if(DEBUG)Log.v(TAG, "MyFragmentPagerAdapter getItem");
 			//Toast.makeText(getActivity(), TAG+ " getItem", Toast.LENGTH_SHORT).show();
 			// 返回相应的  fragment  
 			switch(position)
 			{
-			case 0:return new RouteDayFragment(0);
-			case 1:return new RouteDayFragment(1);
-			case 2:return new RouteDayFragment(2);
+			case 0:return new RouteDayFragment(0, routeContentID);
+			case 1:return new RouteDayFragment(1, routeContentID);
+			case 2:return new RouteDayFragment(2, routeContentID);
+			case 3:return new RouteDayFragment(3, routeContentID);
+			case 4:return new RouteDayFragment(4, routeContentID);
+			case 5:return new RouteDayFragment(5, routeContentID);
+			case 6:return new RouteDayFragment(6, routeContentID);
+			case 7:return new RouteDayFragment(7, routeContentID);
 			default:return null;
 			}
 		}
@@ -137,6 +162,8 @@ public class RouteFragment extends Fragment{
 		public Object instantiateItem(ViewGroup container, int position) {
 			// TODO Auto-generated method stub
 			if(DEBUG)Log.v(TAG, "MyFragmentPagerAdapter instantiateItem");
+			//获取routeContentID
+			routeContentID = mVgDao.getRoute(routeID).getRouteContentID();
 			//Toast.makeText(getActivity(), TAG+ " instantiateItem", Toast.LENGTH_SHORT).show();
 			return super.instantiateItem(container, position);
 		}

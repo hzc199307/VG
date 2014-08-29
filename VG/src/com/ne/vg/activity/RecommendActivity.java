@@ -12,10 +12,12 @@ import com.ne.vg.util.NotifyUtil;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,6 +28,7 @@ import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class RecommendActivity extends FragmentActivity {
 	
@@ -39,15 +42,19 @@ public class RecommendActivity extends FragmentActivity {
 	private int offset = 0;// 动画图片偏移量
 	private int currIndex = 0;// 当前页卡编号
 	private int bmpW;// 动画图片宽度
+	//测试数据
+	private Intent intent;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		intent = this.getIntent();
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_recommend);
 		InitImageView();
 		InitTextView();
 		InitViewPager();
+		
 	}
 	
 	/**
@@ -60,7 +67,9 @@ public class RecommendActivity extends FragmentActivity {
 	 */
 	private void InitViewPager() {
 		viewPager=(ViewPager) findViewById(R.id.recommend_viewPager); 
-		recommendAdapter = new RecommendAdapter(getSupportFragmentManager() );
+		//第二个参数是cityID
+		Log.d(TAG, "cityID=" + intent.getExtras().getInt("cityID"));
+		recommendAdapter = new RecommendAdapter(getSupportFragmentManager(),intent.getExtras().getInt("cityID") );
 		viewPager.setAdapter(recommendAdapter);  
 	    viewPager.setCurrentItem(0);  
 	    viewPager.setOnPageChangeListener(new MyOnPageChangeListener());  
@@ -136,6 +145,8 @@ public class RecommendActivity extends FragmentActivity {
 					imageView1.setImageResource(R.drawable.recommend_routelist_icon);
 					textView2.setTextColor(getResources().getColor(R.color.special_red));
 					imageView2.setImageResource(R.drawable.recommend_scenelist_icon_s);
+					
+					Toast.makeText(getApplicationContext(), intent.getExtras().getString("panshan"), Toast.LENGTH_SHORT).show();
 					
 				}else{
 					textView1.setTextColor(getResources().getColor(R.color.special_red));

@@ -35,7 +35,10 @@ public class VGDao {
 	private SQLiteDatabase db;
 	//Context.MODE_PRIVATE代表该数据库是私有的只能被应用内访问
 	public VGDao(Context context){
-		db = context.openOrCreateDatabase("", Context.MODE_PRIVATE, null);
+		//读取外部sd卡上的文件就用最后那个属性
+		//db = SQLiteDatabase.openDatabase("/sdcard/com.ne.vg/databases/VG_text.db", null, SQLiteDatabase.NO_LOCALIZED_COLLATORS);
+		db = context.openOrCreateDatabase
+				("/sdcard/com.ne.vg/databases/VG_test.db", Context.MODE_PRIVATE, null);
 	}
 	
 	/**
@@ -48,7 +51,7 @@ public class VGDao {
 	 */
 	public List<City> getCity(){
 		List<City> listCities = new ArrayList<City>();
-		Cursor cr = db.query("City", null, null, null, null, null, null);
+		Cursor cr = db.query("city", null, null, null, null, null, null);
 		int count = cr.getCount();
 		Log.v(TAG,"start getCity() count = " + count);
 		if(cr!=null){
@@ -84,18 +87,18 @@ public class VGDao {
 	public List<BigScene> getBigScene(int cityID){
 		List<BigScene> listBigScenes = new ArrayList<BigScene>();
 		String[] args = {cityID+""};
-		Cursor cr = db.query("BigScene", null, "cityID=?", args, null, null, null);
+		Cursor cr = db.query("bigScene", null, "cityID=?", args, null, null, null);
 		int count = cr.getCount();
-		Log.v(TAG,"start getCity() count = " + count);
+		Log.d(TAG,"start getCity() count = " + count);
 		if(cr!=null){
 			cr.moveToFirst();
 			for(int i = 0; i < count; i++){
 				BigScene mBigScene = new BigScene();
-				mBigScene.setBigSceneID(cr.getInt(cr.getColumnIndex(BigSceneColumns.bigCityID)));
+				mBigScene.setBigSceneID(cr.getInt(cr.getColumnIndex(BigSceneColumns.bigSceneID)));
 				mBigScene.setBigSceneName(cr.getString(cr.getColumnIndex(BigSceneColumns.bigSceneName)));
 				mBigScene.setContentID(cr.getInt(cr.getColumnIndex(BigSceneColumns.contentID)));
 				//mBigScene.setDowned(cr.get(cr.getColumnIndex(BigSceneColumns.bigCityID)));
-				int l = cr.getInt(cr.getColumnIndex(BigSceneColumns.bigCityID));
+				int l = cr.getInt(cr.getColumnIndex(BigSceneColumns.bigSceneID));
 				if(l == 1){
 					mBigScene.setDowned(true);
 				}else{
@@ -129,7 +132,8 @@ public class VGDao {
 	public List<RecommendRoute> getRecommendRoute(int cityID){
 		List<RecommendRoute> listRecommendRoutes = new ArrayList<RecommendRoute>();
 		String[] args = {cityID+""};
-		Cursor cr = db.query("RecommendRoute", null, "cityID=?", args, null, null, null);
+		Log.d(TAG, "cityID=" + cityID);
+		Cursor cr = db.query("recommendRoute", null, "cityID=?", args, null, null, null);
 		int count = cr.getCount();
 		Log.v(TAG,"start getRecommendRoute() count = " + count);
 		if(cr!=null){
@@ -154,7 +158,7 @@ public class VGDao {
 	/**
 	 * 
 	 * @Title: getSceneContent 
-	 * @Description: 通过大景点ID获取大景点列表的内容
+	 * @Description: 通过大景点ID获取大景点列表的详细内容
 	 * @param @param contentID
 	 * @param @return
 	 * @return SceneContent 
@@ -163,7 +167,7 @@ public class VGDao {
 	public SceneContent getSceneContent(int contentID){
 		SceneContent mSceneContent = new SceneContent();
 		String[] args = {contentID + ""};
-		Cursor cr = db.query("SceneContent", null, "contentID=?", args, null, null, null);
+		Cursor cr = db.query("sceneContent", null, "contentID=?", args, null, null, null);
 		if(cr!=null){
 			mSceneContent.setAddress(cr.getString(cr.getColumnIndex(SceneContentColumns.address)));
 			
@@ -185,7 +189,7 @@ public class VGDao {
 	/**
 	 * 
 	 * @Title: getSmallScene 
-	 * @Description: TODO
+	 * @Description: 通过大景点ID来获取小景点列表
 	 * @param @param bigSceneID
 	 * @param @return
 	 * @return List<SmallScene> 
@@ -194,7 +198,7 @@ public class VGDao {
 	public List<SmallScene> getSmallScene(int bigSceneID){
 		List<SmallScene> listSmallScenes = new ArrayList<SmallScene>();
 		String[] args = {bigSceneID +""};
-		Cursor cr = db.query("SmallScne", null, "bigSceneID=?", args, null, null, null);
+		Cursor cr = db.query("smallScne", null, "bigSceneID=?", args, null, null, null);
 		int count = cr.getCount();
 		if(cr!=null){
 			cr.moveToFirst();
@@ -216,6 +220,27 @@ public class VGDao {
 	
 	/**
 	 * 
+	 * @Title: getRoute 
+	 * @Description: 主要用于获取路线的天数跟路线信息ID
+	 * @param @param RouteID
+	 * @param @return
+	 * @return RecommendRoute 
+	 * @throws
+	 */
+	public RecommendRoute getRoute (int RouteID){
+		RecommendRoute mRecommendRoute = new RecommendRoute();
+		String[] args = {RouteID+ ""};
+		Cursor cr = db.query("recommendRoute", null, "RouteID=?", args, null, null, null);
+		if(cr!=null){
+			cr.moveToFirst();
+			mRecommendRoute.setRouteDay(cr.getInt(cr.getColumnIndex(RecommendRouteColumns.routeDay)));
+			mRecommendRoute.setRouteContentID(cr.getInt(cr.getColumnIndex(RecommendRouteColumns.routeContentID)));
+		}
+		return mRecommendRoute;
+	}
+	
+	/**
+	 * 
 	 * 这个有可能得修改下。。。
 	 * @Title: getRouteContent 
 	 * @Description: TODO
@@ -224,32 +249,51 @@ public class VGDao {
 	 * @return List<RouteContent> 
 	 * @throws
 	 */
-	public List<RouteContent> getRouteContent(int routeContentID){
-		List<RouteContent> listRouteContents  = new ArrayList<RouteContent>();
+	public RouteContent getRouteContent(int routeContentID){
+		RouteContent mRouteContent = new RouteContent();
 		String[] args = {routeContentID +""};
-		Cursor cr = db.query("RouteContent", null, "crouteContentID=?", args, null, null, null);
+		Cursor cr = db.query("routeContent", null, "routeContentID=?", args, null, null, null);
 		int count = cr.getCount();
 		if(cr!=null)
 		{
 			cr.moveToFirst();
-			for(int i = 0; i< count; i++){
-				RouteContent mRouteContent = new RouteContent();
+			
+				
 				mRouteContent.setFirstScene(cr.getString(cr.getColumnIndex(RouteContentColumns.firstScene)));
 				mRouteContent.setSecondScene(cr.getString(cr.getColumnIndex(RouteContentColumns.secondScene)));
 				mRouteContent.setThirdScene(cr.getString(cr.getColumnIndex(RouteContentColumns.thirdScene)));
-				mRouteContent.setForthScene(cr.getString(cr.getColumnIndex(RouteContentColumns.forthScene)));
+				mRouteContent.setFourthScene(cr.getString(cr.getColumnIndex(RouteContentColumns.fourthScene)));
 				mRouteContent.setFifthScene(cr.getString(cr.getColumnIndex(RouteContentColumns.fifthScene)));
 				mRouteContent.setSixthScene(cr.getString(cr.getColumnIndex(RouteContentColumns.sixthScene)));
 				mRouteContent.setSeventhScene(cr.getString(cr.getColumnIndex(RouteContentColumns.seventhScene)));
-				listRouteContents.add(mRouteContent);
 				
-				cr.moveToNext();
 			
-			}
 			
 			 
 		}
-		return listRouteContents;
+		return mRouteContent;
 	}
 
+	/**
+	 * 
+	 * @Title: getRecommendSceneContent 
+	 * @Description: 用于获取推荐路线每一天具体景点的情况
+	 * @param @param bigSceneID
+	 * @param @return
+	 * @return BigScene 
+	 * @throws
+	 */
+	public BigScene getRecommendSceneContent(int bigSceneID){
+		BigScene mBigScene = new BigScene();
+		String[] args = {bigSceneID +""};
+		Cursor cr = db.query("bigScene", null, "bigSceneID= ?", args, null, null, null);
+		
+		if(cr!=null){
+			cr.moveToFirst();
+			mBigScene.setBigSceneName(cr.getString(cr.getColumnIndex(BigSceneColumns.bigSceneName)));
+			mBigScene.setLoveNum(cr.getInt(cr.getColumnIndex(BigSceneColumns.loveNum)));
+			mBigScene.setRecordNum(cr.getInt(cr.getColumnIndex(BigSceneColumns.recordNum)));
+		}
+		return mBigScene;
+	}
 }

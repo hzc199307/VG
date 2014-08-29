@@ -15,6 +15,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * 首页的city列表适配器 
@@ -84,7 +85,7 @@ public class CityListAdapter extends BaseAdapter{
 		ViewHolderData viewHolderData = null;
 
 		if (convertView == null) {// 这样做可以使view循环利用，而不会有多少个item就产生多少个view
-			Log.v(TAG, "convertView 是空的 ");
+			
 			viewHolderData = new ViewHolderData();
 			convertView = inflater.inflate(R.layout.item_city, null);// 引用布局文件
 			viewHolderData.cityName = (TextView)convertView.findViewById(R.id.cityName);
@@ -99,6 +100,12 @@ public class CityListAdapter extends BaseAdapter{
 
 		City myCity = listData.get(position);
 		viewHolderData.cityName.setText(myCity.getCityName());
+		
+		
+		Toast.makeText(mContext, "cityName=" + myCity.getCityName(), Toast.LENGTH_SHORT).show();
+		Log.d(TAG, "cityName=" + myCity.getCityName());
+		Log.d(TAG, "cityID:"+myCity.getCityID());
+		
 		viewHolderData.cityPinyin.setText(myCity.getCityPinyin());
 		int resId = mContext.getResources().getIdentifier(myCity.getResource() ,"drawable","com.ne.vg");
 		if(resId>0)
