@@ -5,6 +5,13 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.widget.Toast;
 
+/**
+ * android自带定位工具
+ * @ClassName: LocationUtil 
+ * @author 贺智超
+ * @Description: TODO 
+ * @date 2014-9-1 下午2:29:48
+ */
 public class LocationUtil {
 
 	LocationManager manager;

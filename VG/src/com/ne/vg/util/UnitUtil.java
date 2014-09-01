@@ -2,6 +2,13 @@ package com.ne.vg.util;
 
 import android.content.Context;
 
+/**
+ * dp px 等单位换算
+ * @ClassName: UnitUtil 
+ * @author 贺智超
+ * @Description: TODO 
+ * @date 2014-9-1 下午2:30:38
+ */
 public class UnitUtil {
 	public static int dip2px(Context context, float dipValue){ 
 		final float scale = context.getResources().getDisplayMetrics().density; 
