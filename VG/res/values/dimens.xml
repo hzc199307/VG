@@ -97,5 +97,8 @@
 	<!-- SceneActivity 相关 -->
     
     <dimen name="scene_music_bottom_height">48dp</dimen>
+    
+    <!-- 通用 -->
+    <dimen name="shadow_top_height">2dp</dimen>
 
 </resources>

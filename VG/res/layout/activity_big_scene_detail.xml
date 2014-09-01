@@ -9,131 +9,143 @@
         layout="@layout/title_big_scene_detail"
         android:focusable="true" />
 
-    <ScrollView
-        android:id="@+id/bsd_scroll"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:background="#323232"
-        android:scrollbars="none" >
-	
-        <!-- 我将下面第二个属性fill_parent改为了wrap_content -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" >
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
 
-            <!-- 地图 -->
+        <ScrollView
+            android:id="@+id/bsd_scroll"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="#323232"
+            android:scrollbars="none" >
 
-            <FrameLayout
+            <!-- 我将下面第二个属性fill_parent改为了wrap_content -->
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" >
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <!-- 地图 -->
 
                 <FrameLayout
-                    android:id="@+id/big_scene_detail_frame_map"
                     android:layout_width="match_parent"
-                    android:layout_height="170dp" >
+                    android:layout_height="wrap_content" >
+
+                    <FrameLayout
+                        android:id="@+id/big_scene_detail_frame_map"
+                        android:layout_width="match_parent"
+                        android:layout_height="170dp" >
+                    </FrameLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:orientation="vertical" >
+
+                        <ImageButton
+                            android:id="@+id/bsd_btn_location"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="left"
+                            android:layout_marginBottom="7dp"
+                            android:layout_marginLeft="9dp"
+                            android:background="#00000000"
+                            android:onClick="onClick"
+                            android:scaleType="centerInside"
+                            android:src="@drawable/bsd_btn_location_icon"
+                            android:visibility="gone" />
+
+                        <ImageButton
+                            android:id="@+id/bsd_btn_up"
+                            android:layout_width="match_parent"
+                            android:layout_height="27dp"
+                            android:background="#CD323232"
+                            android:onClick="onClick"
+                            android:scaleType="centerInside"
+                            android:src="@drawable/bsd_btn_up_icon"
+                            android:visibility="gone" />
+                    </LinearLayout>
                 </FrameLayout>
 
                 <LinearLayout
+                    android:id="@+id/big_scene_detail_other"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:layout_gravity="bottom" >
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:visibility="visible" >
 
-                    <ImageButton
-                        android:id="@+id/bsd_btn_location"
+                    <!-- 进入语音导游的button -->
+
+                    <LinearLayout
+                        android:id="@+id/bsd_enter_scene_btn"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="left"
-                        android:background="#00000000"
+                        android:layout_height="43dp"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="14dp"
+                        android:layout_marginTop="14dp"
+                        android:background="@drawable/bsd_btn_bg"
+                        android:gravity="center_vertical"
                         android:onClick="onClick"
-                        android:scaleType="centerInside"
-                        android:src="@drawable/bsd_btn_location_icon"
-                        android:layout_marginLeft="9dp"
-                        android:layout_marginBottom="7dp"
-                        android:visibility="gone" />
+                        android:orientation="horizontal" >
 
-                    <ImageButton
-                        android:id="@+id/bsd_btn_up"
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="进入语音导游"
+                            android:textColor="#ffffff"
+                            android:textSize="14sp" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="7dp"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/bsd_btn_download_icon" />
+                    </LinearLayout>
+
+                    <View
                         android:layout_width="match_parent"
-                        android:layout_height="27dp"
-                        android:background="#CD323232"
-                        android:onClick="onClick"
-                        android:scaleType="centerInside"
-                        android:src="@drawable/bsd_btn_up_icon"
-                        android:visibility="gone" />
-                </LinearLayout>
-            </FrameLayout>
+                        android:layout_height="0.667dp"
+                        android:background="@color/big_scene_detail_devide_line" />
 
-            <LinearLayout
-                android:id="@+id/big_scene_detail_other"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:visibility="visible" >
+                    <!-- 景点等级、介绍  BigSceneIntroFragment -->
 
-                <!-- 进入语音导游的button -->
-
-                <LinearLayout
-                    android:id="@+id/bsd_enter_scene_btn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="43dp"
-                    android:layout_gravity="center"
-                    android:layout_marginBottom="14dp"
-                    android:layout_marginTop="14dp"
-                    android:background="@drawable/bsd_btn_bg"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:onClick="onClick" >
-
-                    <TextView
+                    <FrameLayout
+                        android:id="@+id/frame_big_scene_intro"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="进入语音导游"
-                        android:textColor="#ffffff"
-                        android:textSize="14sp" />
+                        android:paddingBottom="14dp"
+                        android:paddingTop="13dp" >
+                    </FrameLayout>
 
-                    <ImageView
-                        android:layout_width="wrap_content"
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.667dp"
+                        android:background="@color/big_scene_detail_devide_line" />
+
+                    <!-- 景点介绍详情 -->
+
+                    <FrameLayout
+                        android:id="@+id/frame_big_scene_intro_detail"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="7dp"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/bsd_btn_download_icon" />
+                        android:paddingBottom="14dp"
+                        android:paddingTop="13dp" >
+                    </FrameLayout>
                 </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="0.667dp"
-                    android:background="@color/big_scene_detail_devide_line" />
-
-                <!-- 景点等级、介绍  BigSceneIntroFragment -->
-
-                <FrameLayout
-                    android:id="@+id/frame_big_scene_intro"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingBottom="14dp"
-                    android:paddingTop="13dp" >
-                </FrameLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="0.667dp"
-                    android:background="@color/big_scene_detail_devide_line" />
-
-                <!-- 景点介绍详情 -->
-
-                <FrameLayout
-                    android:id="@+id/frame_big_scene_intro_detail"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingBottom="14dp"
-                    android:paddingTop="13dp" >
-                </FrameLayout>
             </LinearLayout>
-        </LinearLayout>
-    </ScrollView>
+        </ScrollView>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/shadow_top_height"
+            android:layout_gravity="top"
+            android:background="@drawable/shadow_top" />
+    </FrameLayout>
 
 </LinearLayout>

@@ -160,6 +160,7 @@ public class RouteDayFragment extends Fragment {
 	
 	@Override
 	public void onDestroy() {
+		mVgDao.closeDatabase();
 		// TODO Auto-generated method stub
 		super.onDestroy();
 		Log.v(TAG, "onDestroy");

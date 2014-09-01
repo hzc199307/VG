@@ -119,6 +119,8 @@ public class DBHelper extends SQLiteOpenHelper{
 		SQLiteDatabase db = SQLiteDatabase.openDatabase("/sdcard/com.ne.vg/databases/VG_test.db", null, SQLiteDatabase.NO_LOCALIZED_COLLATORS);
 		Cursor cursor = db.rawQuery(sql, args);
 		
+		//TODO ¹Ø±ÕÊý¾Ý¿â
+		db.close();
 		return cursor;
 	}
 

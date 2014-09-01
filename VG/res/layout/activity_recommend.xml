@@ -8,9 +8,21 @@
         layout="@layout/title_recommend"
         android:focusable="true" />
 
-    <include
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <include
         layout="@layout/tab_recommend"
         android:focusable="true" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/shadow_top_height"
+            android:layout_gravity="top"
+            android:background="@drawable/shadow_top" />
+    </FrameLayout>
+    
 
     <!-- viewpager的属性有可能需要修改 -->
 

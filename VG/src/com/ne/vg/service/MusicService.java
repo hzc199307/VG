@@ -11,6 +11,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.media.MediaPlayer;
+import android.os.Binder;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.telephony.PhoneStateListener;
@@ -23,11 +24,22 @@ public class MusicService extends Service{
 	private static final String TAG= "MusicService";
 	//音乐播放控件
 	private MediaPlayer mediaPlayer;
+	private MyBinder mBinder = new MyBinder();
+	private int oldresource;
 	
+	public class MyBinder extends Binder{
+		public MusicService getService(){
+			return MusicService.this;
+		}
+	}
+
+	/**
+	 * 通过MyBinder来实现交互
+	 */
 	@Override
 	public IBinder onBind(Intent arg0) {
 		// TODO Auto-generated method stub
-		return null;
+		return mBinder;
 	}
 	
 	/**
@@ -40,7 +52,8 @@ public class MusicService extends Service{
 		
 		if(mediaPlayer == null){
 			//TODO 这里需要加入音频文件的id
-			mediaPlayer = MediaPlayer.create(this, R.raw.fengwei);
+			oldresource = R.raw.fengwei;
+			mediaPlayer = MediaPlayer.create(this, oldresource);
 			mediaPlayer.setLooping(false);
 	}
 		//意图过滤器   
@@ -52,7 +65,7 @@ public class MusicService extends Service{
   
         //创建一个电话服务   
         TelephonyManager manager = (TelephonyManager) getSystemService(TELEPHONY_SERVICE);  
-        Log.d(TAG, "listen occurs problems!");
+        
         //监听电话状态，接电话时停止播放 
         /**
          * 这里出现了bug，若监听则第一次点击play按钮无法播放,已解决。
@@ -84,6 +97,7 @@ public class MusicService extends Service{
         	}
         }  
     }  
+
     /* 
      * 收到广播时暂停 
      */  
@@ -92,6 +106,8 @@ public class MusicService extends Service{
             pause();  
         }  
     }  
+    
+    
 	@Override
 	/**
 	 * onDestroy是最后销毁service时调用。
@@ -117,31 +133,45 @@ public class MusicService extends Service{
 			Bundle bundle = intent.getExtras();
 			if(bundle!=null){
 				//从bundle中取出传过来的音频文件
-				int musicresource = bundle.getInt("musicresource");
-				//如果现在存在mediaPlayer则停止。
-				if(mediaPlayer != null){
+				int newResource = bundle.getInt("musicresource");
+				//如果点击了其他item项则停止现有项
+				if(newResource != oldresource)
+				{
 					pause();
+					//TODO 这里需要加入音频文件的id
+					mediaPlayer = MediaPlayer.create(this, newResource);
+					//这里setLooping有可能不用设置
+					mediaPlayer.setLooping(false);
+					play();
 				}
-				//TODO 这里需要加入音频文件的id
-				mediaPlayer = MediaPlayer.create(this, musicresource);
-				//这里setLooping有可能不用设置
-				mediaPlayer.setLooping(false);
+				else{
+					if(mediaPlayer.isPlaying())
+						stop();
+					else{
+						play();
+					}
+				}
+				oldresource = newResource;
+				
 				
 				
 				int op = bundle.getInt("op");
 				Toast.makeText(getApplicationContext(), "on start ,op :"+op, Toast.LENGTH_SHORT).show();
-				switch(op){
-				case 1:
-					play();
-					break;
-				case 2:
-					stop();
-					break;
-				case 3:
-					pause();
-					break;
+				//TODO 如果op不为0
+				if(op!=0){
+					switch(op){
+					case 1:
+						play();
+						break;
+					case 2:
+						stop();
+						break;
+					case 3:
+						pause();
+						break;
 					
 					
+					}
 				}
 			}
 					
@@ -197,6 +227,12 @@ public class MusicService extends Service{
 			}
 		}
 	}
-
+	
+	public MediaPlayer getPlayer(){
+	
+		return mediaPlayer;
+	}
+	
+	
 
 }

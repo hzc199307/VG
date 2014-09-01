@@ -110,7 +110,7 @@ public class PlayMusicFragment extends Fragment{
 					startSer(1);
 				}else{
 					//暂停音乐
-					startSer(2);
+					startSer(3);
 				}
 				//更新界面，及图片改变
 				showButtonNotify();
@@ -216,6 +216,7 @@ public class PlayMusicFragment extends Fragment{
 	@Override
 	public void onDestroy(){
 		super.onDestroy();
+		//应该还需要注销广播
 		
 		Toast.makeText(getActivity(), "activity is detroyed", Toast.LENGTH_SHORT).show();
 		mNotificationManager.cancel(notifyId);//删除一个特定的通知ID对应的通知
@@ -236,8 +237,8 @@ public class PlayMusicFragment extends Fragment{
 		RemoteViews mRemoteViews = new RemoteViews(getActivity().getPackageName(), R.layout.statusbar);
 		mRemoteViews.setImageViewResource(R.id.custom_song_icon, R.drawable.sing_icon);
 		//API3.0 以上的时候显示按钮，否则消失
-		mRemoteViews.setTextViewText(R.id.tv_custom_song_singer, "周杰伦");
-		mRemoteViews.setTextViewText(R.id.tv_custom_song_name, "七里香");
+		mRemoteViews.setTextViewText(R.id.tv_custom_song_singer, "谢霆锋");
+		mRemoteViews.setTextViewText(R.id.tv_custom_song_name, "十二道锋味");
 		//如果版本号低于3.0，那么不显示按钮
 		if(android.os.Build.VERSION.SDK_INT<=9){
 			mRemoteViews.setViewVisibility(R.id.ll_custom_button, View.GONE);

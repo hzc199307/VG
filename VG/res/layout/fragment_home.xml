@@ -9,9 +9,20 @@
         layout="@layout/title_home"
         android:focusable="true" />
 
-    <include
-        layout="@layout/item_city_head"
-        android:focusable="true" />
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <include
+            layout="@layout/item_city_head"
+            android:focusable="true" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/shadow_top_height"
+            android:layout_gravity="top"
+            android:background="@drawable/shadow_top" />
+    </FrameLayout>
 
     <!--
         <TextView

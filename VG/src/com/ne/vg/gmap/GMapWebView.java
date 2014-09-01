@@ -500,8 +500,9 @@ public class GMapWebView extends WebView {
 					locationUtil.stopLoc();
 				}
 			});
-		locationUtil.requestGPSLoc();
-		locationUtil.requestNetLoc();
+//		locationUtil.requestGPSLoc();
+//		locationUtil.requestNetLoc();
+		locationUtil.requestLoc();
 		/*
 				if(bMapLocationUtil==null)
 					bMapLocationUtil = new BMapLocationUtil(getContext(), new BDLocationListener() {

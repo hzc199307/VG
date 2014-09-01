@@ -23,6 +23,15 @@
     <!-- 开机自启动 --> 
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" /> 
     
+    <!-- SystemUtil的需要 -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />  
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />  
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />  
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />  
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />  
+    <uses-permission android:name="android.permission.INTERNET" />  
+    
+    <!-- 以下都是百度地图API所需 -->
     <!-- 使用网络功能所需权限 -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" >
     </uses-permission>
