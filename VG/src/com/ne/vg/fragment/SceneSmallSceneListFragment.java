@@ -7,7 +7,7 @@ import com.ne.vg.VGApplication;
 import com.ne.vg.activity.PlayMusicActivity;
 import com.ne.vg.activity.SceneActivity;
 import com.ne.vg.adapter.SceneSmallSceneListAdapter;
-import com.ne.vg.fragment.PlayMusicFragment.ButtonBroadcastReceiver;
+import com.ne.vg.receiver.MusicBroadcastReceiver;
 
 import android.app.Activity;
 import android.app.Notification;
@@ -36,7 +36,7 @@ public class SceneSmallSceneListFragment extends Fragment {
 	
 	private NotificationManager mNotificationManager;
 	/** 通知栏按钮广播 */
-	public ButtonBroadcastReceiver bReceiver;
+	public MusicBroadcastReceiver bReceiver;
 	/** 通知栏按钮点击事件对应的ACTION */
 	public final static String ACTION_BUTTON = "com.notifications.intent.action.ButtonClick";
 	public final static String INTENT_BUTTONID_TAG = "ButtonId";
@@ -77,7 +77,7 @@ public class SceneSmallSceneListFragment extends Fragment {
 	 */
 	private void initButtonReceiver() {
 		// TODO Auto-generated method stub
-		bReceiver = new ButtonBroadcastReceiver();
+		bReceiver = new MusicBroadcastReceiver(this,isPlaying);
 		IntentFilter  intentFilter = new IntentFilter();
 		intentFilter.addAction(ACTION_BUTTON);
 		getActivity().registerReceiver(bReceiver, intentFilter);
@@ -166,37 +166,37 @@ public class SceneSmallSceneListFragment extends Fragment {
 	 * @Description:广播监听按钮点击事件 
 	 * @date 2014-8-14 下午7:32:33
 	 */
-	public class ButtonBroadcastReceiver extends BroadcastReceiver{
-
-		@Override
-		public void onReceive(Context context, Intent intent) {
-			
-			// TODO Auto-generated method stub
-			String action = intent.getAction();
-			if(action.equals(ACTION_BUTTON)){
-				//通过传递过来的ID判断按钮点击属性或者通过getResultCode()获得相应点击事件
-				int buttonId = intent.getIntExtra(INTENT_BUTTONID_TAG, 0);
-				if(buttonId == BUTTON_PALY_ID){
-					String play_status = "";
-					isPlaying = !isPlaying;
-					
-					if(isPlaying){
-						play_status = "开始播放";
-						startSer(1);
-					}else{
-						play_status = "已暂停";
-						startSer(2);
-					}
-					//更新界面，及图片改变
-					showButtonNotify();
-					Log.d(TAG , play_status);
-					Toast.makeText(getActivity(), play_status, Toast.LENGTH_SHORT).show();
-					
-				}
-			}
-		}
-		
-	}
+//	public class ButtonBroadcastReceiver extends BroadcastReceiver{
+//
+//		@Override
+//		public void onReceive(Context context, Intent intent) {
+//			
+//			// TODO Auto-generated method stub
+//			String action = intent.getAction();
+//			if(action.equals(ACTION_BUTTON)){
+//				//通过传递过来的ID判断按钮点击属性或者通过getResultCode()获得相应点击事件
+//				int buttonId = intent.getIntExtra(INTENT_BUTTONID_TAG, 0);
+//				if(buttonId == BUTTON_PALY_ID){
+//					String play_status = "";
+//					isPlaying = !isPlaying;
+//					
+//					if(isPlaying){
+//						play_status = "开始播放";
+//						startSer(1);
+//					}else{
+//						play_status = "已暂停";
+//						startSer(2);
+//					}
+//					//更新界面，及图片改变
+//					showButtonNotify();
+//					Log.d(TAG , play_status);
+//					Toast.makeText(getActivity(), play_status, Toast.LENGTH_SHORT).show();
+//					
+//				}
+//			}
+//		}
+//		
+//	}
 	
 	public void startSer(int op){
 		Bundle bundle = new Bundle();
