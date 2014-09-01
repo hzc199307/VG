@@ -81,8 +81,8 @@ public class FileUtil {
             createSDDir(path);  
             file = createSDFile(path + fileName);  
             
-            //这一行我不知道为什么要？
-            SQLiteDatabase.openOrCreateDatabase(file, null);
+            //TODO 这一行我不知道为什么要？
+            //SQLiteDatabase.openOrCreateDatabase(file, null);
             
             
             output = new FileOutputStream(file);  
@@ -102,6 +102,9 @@ public class FileUtil {
             	//TODO 将两个流关闭,这里有可能会报错
                 output.close();
                 input.close();
+                
+                //这里还需要关闭数据库吧
+                
             } catch (IOException e) {  
                 e.printStackTrace();  
             }  

@@ -9,6 +9,7 @@ import com.ne.vg.fragment.MineFragment;
 import com.ne.vg.fragment.RouteFragment;
 import com.ne.vg.fragment.SearchFragment;
 import com.ne.vg.fragment.SettingFragment;
+import com.ne.vg.service.MusicService;
 import com.slidingmenu.lib.SlidingMenu;
 import com.slidingmenu.lib.SlidingMenu.OnCloseListener;
 import com.slidingmenu.lib.SlidingMenu.OnClosedListener;
@@ -18,6 +19,7 @@ import com.slidingmenu.lib.app.SlidingFragmentActivity;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -51,6 +53,7 @@ public class MainActivity extends SlidingFragmentActivity {
 	DisplayMetrics dm;
 	DBHelper mDbHelper;
 
+	private VGApplication app;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -88,7 +91,21 @@ public class MainActivity extends SlidingFragmentActivity {
 		animation2 = new TranslateAnimation(-(int)(dm.widthPixels*behindWidth), 0, 0, 0);
 
 		initSlidingMenu();
-
+		initService();
+	}
+	/**
+	 * 
+	 * @Title: initService 
+	 * @Description: 初始服务
+	 * @param 
+	 * @return void 
+	 * @throws
+	 */
+	public void initService()
+	{
+		app = (VGApplication) this.getApplication();
+		Intent serviceIntent = new Intent(this,MusicService.class);
+		bindService(serviceIntent, app.mConnection, BIND_AUTO_CREATE);
 	}
 
 	@Override
@@ -295,6 +312,8 @@ public class MainActivity extends SlidingFragmentActivity {
 		//		destroyFragment(searchFragment);
 		//		destroyFragment(settingFragment);
 		nowFragment = null;
+		//解除服务的绑定
+		unbindService(app.mConnection);
 		super.onDestroy();
 	}
 
@@ -338,4 +357,6 @@ public class MainActivity extends SlidingFragmentActivity {
 		destroyFragmentNotNow(searchFragment);
 		destroyFragmentNotNow(settingFragment);
 	}
+	
+	
 }

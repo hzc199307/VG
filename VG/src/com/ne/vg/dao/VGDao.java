@@ -296,4 +296,16 @@ public class VGDao {
 		}
 		return mBigScene;
 	}
+
+	/**
+	 * 
+	 * @Title: closeDatabase 
+	 * @Description: TODO
+	 * @param 
+	 * @return void 
+	 * @throws
+	 */
+	public void closeDatabase(){
+		db.close();
+	}
 }

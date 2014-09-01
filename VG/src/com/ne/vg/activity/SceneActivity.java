@@ -1,9 +1,12 @@
 package com.ne.vg.activity;
 
 import com.ne.vg.R;
+import com.ne.vg.VGApplication;
 import com.ne.vg.fragment.BigSceneListFragment;
 import com.ne.vg.fragment.SceneSmallSceneListFragment;
+import com.ne.vg.fragment.SceneSmallSceneListFragment.OnMusicSelectedListener;
 import com.ne.vg.gmap.GMapFragment;
+import com.ne.vg.util.MusicPlayerUtil;
 import com.ne.vg.view.MyViewPager;
 
 import android.support.v4.app.Fragment;
@@ -13,7 +16,9 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.content.Context;
+import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -23,8 +28,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
+import android.widget.SeekBar;
+import android.widget.TextView;
 
-public class SceneActivity extends FragmentActivity implements View.OnClickListener{
+public class SceneActivity extends FragmentActivity implements View.OnClickListener,OnMusicSelectedListener{
 
 	private final static String TAG = "SceneActivity";
 
@@ -35,17 +42,98 @@ public class SceneActivity extends FragmentActivity implements View.OnClickListe
 	private View scene_map_layout,scene_list_layout;
 	private int offset = 0;// 动画图片偏移量
 	private int currIndex = 0;// 当前页卡编号
+	private SeekBar mSeekBar;// 初始化seekBar
 	private MyOnPageChangeListener myOnPageChangeListener;
-
+	
+	private TextView scene_music_time_now;
+	private TextView scene_music_time_total;
 	private GMapFragment gMapFragment ;
 
+	private VGApplication app;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		//初始化VGApplication
+		// TODO Auto-generated method stub
+		
+		app = (VGApplication)this.getApplication();
+		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_scene);
 		initTab();
 		initTabAnim();
 		initViewPager();
+		initSeekBar();
+		//启动线程
+		handler.post(updateThread);
+	}
+	
+	
+	Handler handler = new Handler();
+	Runnable updateThread = new Runnable()
+	{
+		public void run() 
+		{
+			mSeekBar = (SeekBar)findViewById(R.id.scene_music_seekbar);
+	      //获得歌曲现在播放位置并设置成播放进度条的值
+			mSeekBar.setProgress(app.mBinder.getService().getPlayer().getCurrentPosition());
+			scene_music_time_now.setText(MusicPlayerUtil.milliSecondsToTimer(app.mBinder.getService().getPlayer().getCurrentPosition()));
+	      //每次延迟100毫秒再启动线程
+			handler.postDelayed(updateThread, 100);
+	    }
+	};
+	
+	/**
+	 * 
+	 * @Title: initSeekBar 
+	 * @Description: 初始化seekBar
+	 * @param 
+	 * @return void 
+	 * @throws
+	 */
+	public void initSeekBar() {
+		MediaPlayer player = app.mBinder.getService().getPlayer();
+		scene_music_time_total.setText(MusicPlayerUtil.milliSecondsToTimer(player.getDuration()));
+		scene_music_time_now.setText(MusicPlayerUtil.milliSecondsToTimer(player.getCurrentPosition()));
+		mSeekBar = (SeekBar)findViewById(R.id.scene_music_seekbar);
+		//获得歌曲的长度并设置成播放进度条的最大值  
+		if(player!=null)
+			mSeekBar.setMax(player.getDuration()); 
+		else{
+			Log.d(TAG, "player is null!");
+		}
+		//mSeekBar.setMax(player.getDuration());  
+		
+		mSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+			
+			//滑动停止时调用的
+			@Override
+			public void onStopTrackingTouch(SeekBar arg0) {
+				// TODO Auto-generated method stub
+				//停止滑动则播放音乐
+				app.mBinder.getService().play();
+				scene_music_time_now.setText(MusicPlayerUtil.milliSecondsToTimer(app.mBinder.getService().getPlayer().getCurrentPosition()));
+			}
+			
+			//滑动开始时调用的
+			@Override
+			public void onStartTrackingTouch(SeekBar arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			//滑块滑动时调用的
+			@Override
+			public void onProgressChanged(SeekBar arg0, int progress, boolean fromUser) {
+				// TODO Auto-generated method stub
+				 // fromUser判断是用户改变的滑块的值  
+                if(fromUser==true){
+                	//先暂停音乐
+                	app.mBinder.getService().stop();
+                	//player.seekTo(progress); 
+                	app.mBinder.getService().getPlayer().seekTo(progress);
+                }  
+			}
+		});
 	}
 
 	/**
@@ -70,6 +158,9 @@ public class SceneActivity extends FragmentActivity implements View.OnClickListe
 		scene_list_layout = (View)findViewById(R.id.scene_list_layout);
 		scene_map_layout.setOnClickListener(this);
 		scene_list_layout.setOnClickListener(this);
+		scene_music_time_now = (TextView)findViewById(R.id.scene_music_time_now);
+		scene_music_time_total = (TextView)findViewById(R.id.scene_music_time_total);
+		
 	}
 
 	/**
@@ -170,6 +261,7 @@ public class SceneActivity extends FragmentActivity implements View.OnClickListe
 		case R.id.scene_list_layout:
 			viewPager.setCurrentItem(LIST_STATUS);
 			break;
+		
 		default:
 			break;
 		}
@@ -189,6 +281,14 @@ public class SceneActivity extends FragmentActivity implements View.OnClickListe
 		destroyGMapFragment();
 		this.finish();
 		return super.onKeyDown(keyCode, event);
+	}
+
+
+	@Override
+	public void onMusicSelected() {
+		// TODO Auto-generated method stub
+		//更新seekBar
+		initSeekBar();
 	}
 
 }

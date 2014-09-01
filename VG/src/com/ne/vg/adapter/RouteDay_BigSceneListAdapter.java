@@ -39,6 +39,7 @@ public class RouteDay_BigSceneListAdapter extends BaseAdapter{
 //	}
 	
 	public void destroy() {
+		mVgDao.closeDatabase();
 		bigSceneIDs=null;
 	}
 
