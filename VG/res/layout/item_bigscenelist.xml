@@ -3,7 +3,8 @@
     android:id="@+id/frame1"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:descendantFocusability="blocksDescendants">
+    android:descendantFocusability="blocksDescendants"
+    android:background="@color/recommend_bg">
 
     <!-- descendantFocusability属性是避免button屏蔽整个item的响应 -->
 
@@ -16,7 +17,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:scaleType="center"
-        android:src="@drawable/recommend_item_iv1" />
+        android:src="@drawable/city_florence"
+         />
 
     <!-- 加入的阴影 -->
 	<!-- 需要说明的是，下载之前height为match_parent,下载之后为39dp -->

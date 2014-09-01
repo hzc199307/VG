@@ -31,7 +31,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/recommend_title_back_icon_marginleft"
             android:gravity="center_vertical"
-            android:src="@drawable/recommend_title_back_icon" />
+            android:src="@drawable/title_back_icon" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -59,7 +59,7 @@
             android:layout_centerVertical="true"
             android:background="@color/none"
             android:clickable="true"
-            android:src="@drawable/home_title_search_icon" />
+            android:src="@drawable/title_search_icon" />
     </LinearLayout>
 
 </RelativeLayout>

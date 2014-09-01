@@ -47,7 +47,7 @@
         android:layout_centerVertical="true"
         android:paddingLeft="@dimen/home_title_search_icon_paddingright"
         android:paddingRight="@dimen/home_title_search_icon_paddingright"
-        android:src="@drawable/home_title_search_icon"
+        android:src="@drawable/title_search_icon"
         android:background="@color/none"
         android:clickable="true" />
 

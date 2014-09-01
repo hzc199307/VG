@@ -9,13 +9,13 @@
         android:focusable="true" />
 
     <include
-        layout="@layout/tag_recommend"
+        layout="@layout/tab_recommend"
         android:focusable="true" />
 
     <!-- viewpager的属性有可能需要修改 -->
 
     <android.support.v4.view.ViewPager
-        android:id="@+id/recommend_viewPager"
+        android:id="@+id/recommend_viewpager"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_gravity="center"

@@ -28,6 +28,7 @@
     
     <!-- recommendActivity相关 -->
     <color name="special_red">#F26866</color>
+    <color name="recommend_bg">#323232</color>
     
     <!--RouteFragment 相关 -->
     <color name="route_bg">#323232</color>
