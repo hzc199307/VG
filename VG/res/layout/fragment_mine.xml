@@ -2,38 +2,56 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/mine_bg"
     android:orientation="vertical" >
-    
-    <TextView
+
+    <include
+        android:id="@+id/mine_title"
+        layout="@layout/title_mine"
+        android:focusable="true" />
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="MineFragment"
-        android:textColor="@color/black" />
-    
-    <Button
-        android:id="@+id/btn_panshan"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="panshan"
-        android:textColor="@color/black" />
-    
-    <Button
-        android:id="@+id/btn_zhichao"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="zhichao"
-        android:textColor="@color/black" />
-    <Button
-        android:id="@+id/btn_bofangyieyue"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="播放音乐"
-        android:textColor="@color/black" />
-    <Button
-        android:id="@+id/btn_mylove"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="我喜欢的"
-        android:textColor="@color/black" />
+        android:layout_height="match_parent"
+        android:scrollbars="none" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="111dp" >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/mine_item_height"
+                android:background="@color/mine_item_bg" >
+
+                <ImageView
+                    android:id="@+id/mine_item_download_iv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="11dp"
+                    android:src="@drawable/mine_item_download_icon" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/mine_item_download_iv"
+                    android:layout_marginLeft="9dp"
+                    android:text="yu hgjghjg"
+                    android:textColor="#ffffff" />
+                
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="11dp"
+                    android:src="@drawable/mine_item_enter_icon" />
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

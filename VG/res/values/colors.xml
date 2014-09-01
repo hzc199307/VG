@@ -44,5 +44,11 @@
     <color name="scene_music_bottom_bg">#80000000</color>
     <color name="scene_list_bg">#323232</color>
     
-
+    <!-- MineFragment -->
+    <color name="mine_bg">#323232</color>
+    <color name="mine_item_bg_normal">#3b3b3b</color>
+    <color name="mine_item_bg_pressed">#454545</color>
+    <color name="mine_item_tv_normal">#d4d4d4</color>
+    <color name="mine_item_tv_pressed">#fc6662</color>
+    
 </resources>

@@ -3,10 +3,37 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-
+    
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="SearchFragment" />
+        android:layout_height="wrap_content"
+        android:text="MineFragment"
+        android:textColor="@color/black" />
+    
+    <Button
+        android:id="@+id/btn_panshan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="panshan"
+        android:textColor="@color/black" />
+    
+    <Button
+        android:id="@+id/btn_zhichao"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="zhichao"
+        android:textColor="@color/black" />
+    <Button
+        android:id="@+id/btn_bofangyieyue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="播放音乐"
+        android:textColor="@color/black" />
+    <Button
+        android:id="@+id/btn_mylove"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="我喜欢的"
+        android:textColor="@color/black" />
 
 </LinearLayout>
