@@ -22,7 +22,7 @@ public class LocationUtil {
 
 	private final static String TAG = "LocationUtil";
 	private final static boolean DEBUG = true;
-	
+
 	LocationManager manager;
 	LocationListener mLocationListener;
 	Context mContext;
@@ -65,12 +65,15 @@ public class LocationUtil {
 	 */
 	public void requestLoc()
 	{
-		// 通过GPS卫星定位，定位级别可以精确到街（通过24颗卫星定位，在室外和空旷的地方定位准确、速度快） 
-		if(manager.isProviderEnabled(LocationManager.GPS_PROVIDER))
-			requestGPSLoc();
-		// 通过WLAN或移动网络(3G/2G)确定的位置（也称作AGPS，辅助GPS定位。主要用于在室内或遮盖物（建筑群或茂密的深林等）密集的地方定位） 
-		else if(manager.isProviderEnabled(LocationManager.NETWORK_PROVIDER))
-			requestNetLoc();
+		if(manager.isProviderEnabled(LocationManager.GPS_PROVIDER)||manager.isProviderEnabled(LocationManager.NETWORK_PROVIDER))
+		{
+			// 通过GPS卫星定位，定位级别可以精确到街（通过24颗卫星定位，在室外和空旷的地方定位准确、速度快） 
+			if(manager.isProviderEnabled(LocationManager.GPS_PROVIDER))
+				requestGPSLoc();
+			// 通过WLAN或移动网络(3G/2G)确定的位置（也称作AGPS，辅助GPS定位。主要用于在室内或遮盖物（建筑群或茂密的深林等）密集的地方定位） 
+			if(manager.isProviderEnabled(LocationManager.NETWORK_PROVIDER))
+				requestNetLoc();
+		}
 		//百度地图的定位，可以在定位服务未开启的情况下使用
 		else if(SystemUtil.getGPRSStatus()||SystemUtil.getWifiStatus())
 		{
@@ -113,7 +116,7 @@ public class LocationUtil {
 		location.setLongitude(bdLocation.getLongitude());
 		return location;
 	}
-	
+
 	@Override
 	protected void finalize() throws Throwable {
 		stopLoc();
