@@ -114,7 +114,7 @@ public class MusicService extends Service{
 	 */
 	public void onDestroy(){
 		Log.d(TAG, "onDestroy");
-		Toast.makeText(getApplicationContext(), "stop media player", Toast.LENGTH_SHORT).show();
+		Toast.makeText(getApplicationContext(), "stop media player", Toast.LENGTH_LONG).show();
 		if(mediaPlayer!=null){
 			mediaPlayer.stop();
 			mediaPlayer.release();

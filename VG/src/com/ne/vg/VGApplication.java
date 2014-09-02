@@ -5,14 +5,17 @@ import java.util.LinkedList;
 import java.util.List;
 
 import com.ne.vg.DBHelper.DBHelper;
+import com.ne.vg.util.MusicNotification;
 import com.ne.vg.util.SystemUtil;
 
+import com.ne.vg.receiver.MusicBroadcastReceiver;
 import com.ne.vg.service.MusicService;
 
 import android.app.Activity;
 import android.app.Application;
 import android.app.NotificationManager;
 import android.content.ComponentName;
+import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.database.Cursor;
 import android.os.IBinder;
@@ -24,6 +27,13 @@ public class VGApplication extends Application{
 	private List<Activity> mList = new LinkedList<Activity>();   //用于存放每个Activity的List  
 	private static VGApplication instance;    //SysApplication实例     
 	
+	public boolean isPlaying=false;
+	/** 通知栏按钮广播 */
+	public MusicBroadcastReceiver bReceiver;
+	/** 通知栏按钮点击事件对应的ACTION */
+	public final static String ACTION_BUTTON = "com.notifications.intent.action.ButtonClick";
+	
+	public MusicNotification mNotification;
 	//私有构造器，防止外面实例化该对象，
 	public VGApplication(){
 		
@@ -41,10 +51,21 @@ public class VGApplication extends Application{
 		Log.v(TAG, "onCreate");
 		SystemUtil.init(this);//SystemUtil的初始化
 		onDB();
+		//注册通知栏响应的广播
+		initButtonReceiver();
 		
 		super.onCreate();
 	}
 	
+	private void initButtonReceiver() {
+		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub
+		bReceiver = new MusicBroadcastReceiver(this);
+		IntentFilter  intentFilter = new IntentFilter();
+		intentFilter.addAction(ACTION_BUTTON);
+		registerReceiver(bReceiver, intentFilter);
+	}
+
 	public void exit() {    //遍历List，退出每一个Activity     
         try {     
             for (Activity activity : mList) {     
@@ -118,4 +139,18 @@ public class VGApplication extends Application{
 		
 //		mNotification.cancel(getResources().getString(R.string.app_name));
 	}
+	/**
+	 * 
+	 * @Title: showNotify 
+	 * @Description: TODO
+	 * @param 
+	 * @return 显示及更新通知栏 
+	 * @throws
+	 */
+//	public void showNotify(){
+//		mNotification = new MusicNotification(getApplicationContext());
+//		mNotification.showButtonNotify();
+//	}
+	
+	
 }

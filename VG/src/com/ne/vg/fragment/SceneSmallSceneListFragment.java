@@ -8,6 +8,7 @@ import com.ne.vg.activity.PlayMusicActivity;
 import com.ne.vg.activity.SceneActivity;
 import com.ne.vg.adapter.SceneSmallSceneListAdapter;
 import com.ne.vg.receiver.MusicBroadcastReceiver;
+import com.ne.vg.util.MusicNotification;
 
 import android.app.Activity;
 import android.app.Notification;
@@ -33,8 +34,6 @@ import android.widget.ListView;
 public class SceneSmallSceneListFragment extends Fragment {
 
 	private final static String TAG= "SceneSmallSceneListFragment";
-	
-	private NotificationManager mNotificationManager;
 	/** 通知栏按钮广播 */
 	public MusicBroadcastReceiver bReceiver;
 	/** 通知栏按钮点击事件对应的ACTION */
@@ -43,10 +42,10 @@ public class SceneSmallSceneListFragment extends Fragment {
 	/** 播放/暂停 按钮点击 ID */
 	public final static int BUTTON_PALY_ID = 2;
 	/**播放状态的初始化*/
-	private boolean isPlaying = false; 
+	public boolean isPlaying; 
 	/** Notification的ID */
 	int notifyId = 100;
-	
+	private VGApplication app;
 	
 	private Intent intent;
 	private Bundle bundle;
@@ -54,16 +53,21 @@ public class SceneSmallSceneListFragment extends Fragment {
 	private ListView smallSceneListView ;
 	private OnMusicSelectedListener mListener;
 	
+	public MusicNotification mNotification;
+	
 
 
 	@Override
 	public void onCreate(Bundle savedInstanceState){
 		
 		super.onCreate(savedInstanceState);
+		app = (VGApplication)this.getActivity().getApplication();
 		intent = new Intent("com.ne.vg.service.MusicService");
-		mNotificationManager = (NotificationManager)getActivity().getSystemService(getActivity().NOTIFICATION_SERVICE);
-		 //初始化自定义广播
-        initButtonReceiver();
+		isPlaying = app.isPlaying;
+		
+		 //初始化自定义通知栏
+		mNotification = new MusicNotification(getActivity().getApplicationContext());
+        
 	}
 	
 	
@@ -75,13 +79,7 @@ public class SceneSmallSceneListFragment extends Fragment {
 	 * @return void 
 	 * @throws
 	 */
-	private void initButtonReceiver() {
-		// TODO Auto-generated method stub
-		bReceiver = new MusicBroadcastReceiver(this,isPlaying);
-		IntentFilter  intentFilter = new IntentFilter();
-		intentFilter.addAction(ACTION_BUTTON);
-		getActivity().registerReceiver(bReceiver, intentFilter);
-	}
+	
 
 
 	@Override
@@ -114,7 +112,9 @@ public class SceneSmallSceneListFragment extends Fragment {
 				
 				
 				//更新界面，及图片改变
-				showButtonNotify();
+//				app.showNotify();
+				
+				mNotification.showButtonNotify();
 				//调用Activity中的函数,用来更新seekBar
 				mListener.onMusicSelected();
 				
@@ -208,58 +208,5 @@ public class SceneSmallSceneListFragment extends Fragment {
 		getActivity().startService(intent);
 	}
 	
-	/**
-	 * 后面是有关广播的部分
-	 */
 	
-	public void showButtonNotify() {
-		// TODO Auto-generated method stub
-		//实例化通知栏构造器NotificationCompat
-		NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(getActivity());
-		//Notification的自定义布局是RemoteViews
-		RemoteViews mRemoteViews = new RemoteViews(getActivity().getPackageName(), R.layout.statusbar);
-		
-		mRemoteViews.setImageViewResource(R.id.custom_song_icon, R.drawable.sing_icon);
-		//API3.0 以上的时候显示按钮，否则消失
-		mRemoteViews.setTextViewText(R.id.tv_custom_song_singer, "谢霆锋");
-		mRemoteViews.setTextViewText(R.id.tv_custom_song_name, "十二道锋味");
-		//如果版本号低于3.0，那么不显示按钮
-		if(android.os.Build.VERSION.SDK_INT<=9){
-			mRemoteViews.setViewVisibility(R.id.ll_custom_button, View.GONE);
-			
-		}else{
-			mRemoteViews.setViewVisibility(R.id.ll_custom_button, View.VISIBLE);
-			if(isPlaying){
-				mRemoteViews.setImageViewResource(R.id.btn_custom_play, R.drawable.test_btn_pause2);
-			}else{
-				mRemoteViews.setImageViewResource(R.id.btn_custom_play, R.drawable.test_btn_play2);				
-			}
-		}
-		
-		//点击的事件处理
-		Intent buttonIntent = new Intent(ACTION_BUTTON);
-		
-		/*播放/暂停 按钮*/
-		buttonIntent.putExtra(INTENT_BUTTONID_TAG, BUTTON_PALY_ID);
-		PendingIntent intent_paly = PendingIntent.getBroadcast(getActivity(), 2, buttonIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-		mRemoteViews.setOnClickPendingIntent(R.id.btn_custom_play, intent_paly);
-	
-		//该参数代表着在顶部常驻
-		Intent intent = new Intent(getActivity(),SceneActivity.class);
-		PendingIntent pendingIntent= PendingIntent.getActivity(getActivity(), 1, intent, Notification.FLAG_ONGOING_EVENT);
-		
-		mBuilder.setContent(mRemoteViews)
-				//设置通知栏点击意图
-				.setContentIntent(pendingIntent)
-				.setWhen(System.currentTimeMillis())// 通知产生的时间，会在通知信息里显示
-				.setTicker("正在播放")
-				.setPriority(Notification.PRIORITY_DEFAULT)// 设置该通知优先级
-				.setOngoing(true)
-				.setSmallIcon(R.drawable.sing_icon);
-		Notification notify = mBuilder.build();
-		notify.flags = Notification.FLAG_ONGOING_EVENT;  
-		//第一个参数为自定义的通知唯一标识，发送通知请求
-        mNotificationManager.notify(notifyId, notify);
-	
-	}
 }

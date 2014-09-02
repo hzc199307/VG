@@ -1,6 +1,8 @@
 package com.ne.vg;
 
 import java.io.IOException;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import com.ne.vg.DBHelper.DBHelper;
 import com.ne.vg.fragment.HomeFragment;
@@ -23,6 +25,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.ScaleAnimation;
@@ -364,5 +367,42 @@ public class MainActivity extends SlidingFragmentActivity {
 		destroyFragmentNotNow(settingFragment);
 	}
 	
-	
+	private static Boolean isExit = false;
+	/**
+	 * 
+	 */
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event)
+	{
+		if(keyCode == KeyEvent.KEYCODE_BACK)
+		{
+			//调用双击退出函数
+			exitBy2Click();
+		}
+		return false;
+	}
+	private void exitBy2Click() {
+		// TODO Auto-generated method stub
+		Timer tExit = null;
+		if(isExit == false){
+			//准备退出
+			isExit = true;
+			Toast.makeText(getApplication(), "再按一次退出程序", Toast.LENGTH_LONG).show();
+			tExit = new Timer();
+			//如果2s内没有按下返回键，则启动定时器取消掉刚才的操作
+			tExit.schedule(new TimerTask(){
+
+				@Override
+				public void run() {
+					// TODO Auto-generated method stub
+					isExit = false;
+				}
+				
+			}, 2000);
+		}else{
+			//退出整个程序,第一句我不知道加不加。。
+			unbindService(app.mConnection);
+			app.exit();
+		}
+	}
 }

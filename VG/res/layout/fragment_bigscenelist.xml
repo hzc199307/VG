@@ -19,6 +19,7 @@
         android:horizontalSpacing="@dimen/bigscenel_gridview_spacing"
         android:numColumns="2"
         android:listSelector="@color/recommend_bg"
+        
         android:verticalSpacing="@dimen/bigscenel_gridview_spacing"
         android:background="@color/recommend_bg" />
 

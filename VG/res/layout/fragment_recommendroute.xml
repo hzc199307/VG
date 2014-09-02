@@ -17,6 +17,7 @@
         android:layout_height="wrap_content"
         android:background="@color/recommend_bg"
         android:divider="@color/recommend_bg"
+        android:layoutAnimation="@anim/navagation_gridview_anim"
         android:dividerHeight="@dimen/recommendroute_listview_diverheight"
         android:gravity="center" >
     </ListView>

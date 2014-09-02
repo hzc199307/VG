@@ -1,10 +1,14 @@
 package com.ne.vg.receiver;
 
+import com.ne.vg.R;
+import com.ne.vg.VGApplication;
 import com.ne.vg.fragment.SceneSmallSceneListFragment;
+import com.ne.vg.util.MusicNotification;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -16,17 +20,19 @@ public class MusicBroadcastReceiver extends BroadcastReceiver{
 	public final static String INTENT_BUTTONID_TAG = "ButtonId";
 	/** 播放/暂停 按钮点击 ID */
 	public final static int BUTTON_PALY_ID = 2;
-	/**播放状态的初始化*/
-	private boolean isPlaying;
-	private SceneSmallSceneListFragment sceneSmallSceneListFragment;
+	private Intent intent = new Intent("com.ne.vg.service.MusicService");
 	
-	public MusicBroadcastReceiver(SceneSmallSceneListFragment sceneSmallSceneListFragment,boolean b){
-		this.isPlaying = b;
-		this.sceneSmallSceneListFragment = sceneSmallSceneListFragment;
+	private VGApplication app;
+	
+	public MusicNotification mNotification ;
+	
+	public MusicBroadcastReceiver(VGApplication app)
+	{
+		this.app = app;
 	}
 	@Override
 	public void onReceive(Context context, Intent intent) {
-		
+		 mNotification= new MusicNotification(app.getApplicationContext());
 		// TODO Auto-generated method stub
 		String action = intent.getAction();
 		if(action.equals(ACTION_BUTTON)){
@@ -34,22 +40,35 @@ public class MusicBroadcastReceiver extends BroadcastReceiver{
 			int buttonId = intent.getIntExtra(INTENT_BUTTONID_TAG, 0);
 			if(buttonId == BUTTON_PALY_ID){
 				String play_status = "";
-				isPlaying = !isPlaying;
+				app.isPlaying = !app.isPlaying;
 				
-				if(isPlaying){
+				if(app.isPlaying){
 					play_status = "开始播放";
-					sceneSmallSceneListFragment.startSer(1);
+					startSer(1);
+					
 				}else{
 					play_status = "已暂停";
-					sceneSmallSceneListFragment.startSer(2);
+					startSer(2);
 				}
 				//更新界面，及图片改变
-				sceneSmallSceneListFragment.showButtonNotify();
+				//app.showNotify();
+				mNotification.showButtonNotify();
+				
 				Log.d(TAG , play_status);
 				
 				
 			}
 		}
+	}
+	public void startSer(int op){
+		
+		Bundle bundle = new Bundle();
+		//op:1是播放，2是停止，3是暂停,0代表不处理
+		bundle.putInt("op", op);
+		//这个是播放的歌曲
+		bundle.putInt("musicresource",R.raw.fengwei);
+		intent.putExtras(bundle);
+		app.startService(intent);
 	}
 	
 
