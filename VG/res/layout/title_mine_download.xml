@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="@dimen/home_title_height"
+    android:gravity="center_vertical" >
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@drawable/home_title_bg" />
+
+    <LinearLayout
+        android:id="@+id/mine_download_title_left"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:clickable="true"
+        android:onClick="onClick" >
+
+        <ImageView
+            android:id="@+id/mine_download_title_back_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="@dimen/home_title_menu_icon_marginleft"
+            android:src="@drawable/title_back_icon" />
+
+        <TextView
+            android:id="@+id/mine_download_title_name"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:singleLine="true"
+            android:layout_marginLeft="@dimen/home_title_menu_icon_marginleft"
+            android:text="离线解说" 
+            android:textSize="17sp"
+            android:textColor="@color/white"/>
+    </LinearLayout>
+
+    <Button 
+        android:id="@+id/mine_download_title_edit_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:paddingLeft="@dimen/home_title_search_icon_paddingright"
+        android:paddingRight="@dimen/home_title_search_icon_paddingright"
+        android:src="@drawable/title_search_icon"
+        android:background="@color/none"
+        android:text="编辑"
+        android:textSize="13sp"
+        android:textColor="#ffffff"
+        android:clickable="true"/>
+
+</RelativeLayout>

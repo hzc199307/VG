@@ -141,8 +141,12 @@
         </service>
 
         <activity
-            android:name="com.ne.vg.activity.MineCollectionActivity"
+            android:name=".activity.MineCollectionActivity"
             android:label="@string/title_activity_mine_collection" >
+        </activity>
+        <activity
+            android:name="com.ne.vg.activity.MineDownloadActivity"
+            android:label="@string/title_activity_mine_download" >
         </activity>
     </application>
 

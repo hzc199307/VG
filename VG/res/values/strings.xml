@@ -12,6 +12,7 @@
     <string name="title_fragment_scenelist">景点列表</string>
     <string name="title_activity_route">RouteActivity</string>
     <string name="title_activity_my_love">MyLoveActivity</string>
+    <string name="loading">Loading</string>
 
     <!-- HomeFragment 相关 -->
     <string name="title_fragment_home">热门城市</string>
@@ -37,5 +38,6 @@
     <!-- MineFragment -->
     <string name="title_fragment_mine">我的</string>
     <string name="title_activity_mine_collection">MineCollectionActivity</string>
+    <string name="title_activity_mine_download">MineDownloadActivity</string>
 
 </resources>

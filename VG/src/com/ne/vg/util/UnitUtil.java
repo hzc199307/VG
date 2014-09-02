@@ -1,6 +1,7 @@
 package com.ne.vg.util;
 
 import android.content.Context;
+import android.util.DisplayMetrics;
 
 /**
  * dp px µ»µ•ŒªªªÀ„
@@ -29,4 +30,10 @@ public class UnitUtil {
 	public static int getRemainderHeightPxFromPx(Context context, int pxValue) {
 		return context.getResources().getDisplayMetrics().heightPixels-pxValue;
 	}
+	
+	public static int convertDpToPixel(Context context,float dp) {
+        DisplayMetrics metrics = context.getResources().getDisplayMetrics();
+        float px = dp * (metrics.densityDpi / 160f);
+        return (int) px;
+    }
 }

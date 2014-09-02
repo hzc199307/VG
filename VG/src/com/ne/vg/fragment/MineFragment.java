@@ -4,6 +4,7 @@ import com.ne.vg.MyLoveActivity;
 import com.ne.vg.R;
 import com.ne.vg.activity.BigSceneDetailActivity;
 import com.ne.vg.activity.MineCollectionActivity;
+import com.ne.vg.activity.MineDownloadActivity;
 import com.ne.vg.activity.PlayMusicActivity;
 import com.ne.vg.activity.RecommendActivity;
 import com.ne.vg.activity.RouteActivity;
@@ -77,7 +78,11 @@ public class MineFragment extends Fragment implements View.OnClickListener{
 	public void onClick(View view) {
 		// TODO Auto-generated method stub
 		switch (view.getId()) {
-		
+
+		case R.id.mine_item_download:
+			//TODO 跳转到我喜爱的页面
+			startActivity(new Intent(getActivity(),MineDownloadActivity.class));
+			break;
 		case R.id.mine_item_love:
 			//TODO 跳转到我喜爱的页面
 			startActivity(new Intent(getActivity(),MyLoveActivity.class));

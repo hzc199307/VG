@@ -18,7 +18,7 @@ import android.widget.Toast;
 
 public class MineCollectionFragment extends Fragment {
 
-	private static final String TAG = "RecommendRouteFragment";
+	private static final String TAG = "MineCollectionFragment";
 	//ListView控件
 	private ListView listview;
 	//自定义的适配器

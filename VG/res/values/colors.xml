@@ -52,4 +52,9 @@
     <color name="mine_item_tv_pressed">#fc6662</color>
     <color name="mine_item_num_tv">#a0a0a0</color>
     
+    <!-- swipelistview -->
+    <color name="swipeDrawableChecked">#deeff3</color>
+    
+    
+    
 </resources>
