@@ -50,5 +50,6 @@
     <color name="mine_item_bg_pressed">#454545</color>
     <color name="mine_item_tv_normal">#d4d4d4</color>
     <color name="mine_item_tv_pressed">#fc6662</color>
+    <color name="mine_item_num_tv">#a0a0a0</color>
     
 </resources>

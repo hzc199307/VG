@@ -24,6 +24,8 @@ import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.ScaleAnimation;
 import android.view.animation.TranslateAnimation;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -157,6 +159,8 @@ public class MainActivity extends SlidingFragmentActivity {
 				setCoverIvVisibility(View.VISIBLE);
 				if(nowFragment == homeFragment)
 					homeFragment.startAnimation(animation1);
+				else if(nowFragment == mineFragment)
+					mineFragment.startAnimation(animation1);
 				//				leftSlidingMenuFragment.startAnimation(animation2);
 			}
 		});
@@ -167,6 +171,8 @@ public class MainActivity extends SlidingFragmentActivity {
 				setCoverIvVisibility(View.GONE);
 				if(nowFragment == homeFragment)
 					homeFragment.clearAnimation();
+				else if(nowFragment == mineFragment)
+					mineFragment.clearAnimation();
 				//				leftSlidingMenuFragment.clearAnimation();
 			}
 		});
@@ -263,7 +269,7 @@ public class MainActivity extends SlidingFragmentActivity {
 
 	public void showMenu(View view)
 	{
-		mSlidingMenu.showMenu();
+		mSlidingMenu.showMenu(true);
 	}
 
 	/**

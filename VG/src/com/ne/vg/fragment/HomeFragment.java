@@ -44,7 +44,7 @@ public class HomeFragment extends Fragment implements OnClickListener{
 	private ListView lv_city;
 	private CityListAdapter cityListAdapter ;
 	private View home_title_search_btn,home_title_left;
-	
+
 	private Intent intent;
 	private VGDao mVgDao;
 
@@ -57,14 +57,14 @@ public class HomeFragment extends Fragment implements OnClickListener{
 		mVgDao = new VGDao(getActivity());
 		View view  = inflater.inflate(R.layout.fragment_home, container,false);
 		lv_city = (ListView)view.findViewById(R.id.lv_city);
-		
-		
+
+
 		if(cityListAdapter==null)
 			cityListAdapter = new CityListAdapter(getActivity(), mVgDao.getCity());
 
-		
+
 		lv_city.setAdapter(cityListAdapter);
-		
+
 		lv_city.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
 			@Override
@@ -74,9 +74,9 @@ public class HomeFragment extends Fragment implements OnClickListener{
 				intent = new Intent(getActivity(),RecommendActivity.class);
 				City city = mVgDao.getCity().get(position);
 				intent.putExtra("cityID", city.getCityID());
-				
+
 				Log.d(TAG, "cityID:"+city.getCityID());
-				
+
 				startActivity(intent);
 				((MainActivity)getActivity()).destroyAllFragmentWithoutNow();
 			}
@@ -96,7 +96,7 @@ public class HomeFragment extends Fragment implements OnClickListener{
 		{
 		case R.id.home_title_search_btn:
 			//点击标题左边按钮弹出左侧菜单
-			
+
 			break;
 		default:
 			break;
@@ -110,21 +110,23 @@ public class HomeFragment extends Fragment implements OnClickListener{
 		cityListAdapter.destroy();
 		cityListAdapter = null;
 	}
-	
+
 	/**
 	 * 开始标题栏动画
 	 */
 	public void startAnimation(TranslateAnimation animation) {
 		animation.setDuration(400);
 		animation.setFillAfter(true);
-		home_title_left.startAnimation(animation);
+		if(home_title_left!=null)
+			home_title_left.startAnimation(animation);
 	}
-	
+
 	/**
 	 * 关闭标题栏动画
 	 */
 	public void clearAnimation() {
-		home_title_left.clearAnimation();
+		if(home_title_left!=null&&home_title_left.getAnimation()!=null)
+			home_title_left.clearAnimation();
 	}
 
 }

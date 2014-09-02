@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="@dimen/recommend_title_height"
+    android:layout_height="@dimen/title_height"
     android:gravity="center_vertical"
     android:padding="0.0px" >
 
@@ -15,7 +15,7 @@
     <!-- 左边的返回按钮 -->
 
     <LinearLayout
-        android:id="@+id/mylove_back"
+        android:id="@+id/mine_collection_back"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_alignParentLeft="true"
@@ -23,21 +23,21 @@
         android:ellipsize="end"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:paddingRight="@dimen/recommend_title_back_icon_marginleft"
+        android:paddingRight="@dimen/title_left_icon_marginleft"
         android:singleLine="true" >
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/recommend_title_back_icon_marginleft"
+            android:layout_marginLeft="@dimen/title_left_icon_marginleft"
             android:gravity="center_vertical"
             android:src="@drawable/title_back_icon" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/recommend_title_cityname_marginleft"
-            android:text="我喜欢的"
+            android:layout_marginLeft="@dimen/title_left_tv_marginleftof_icon"
+            android:text="路线收藏"
             android:textColor="@color/white"
             android:textSize="17sp" />
     </LinearLayout>
@@ -45,7 +45,7 @@
     <!-- 右侧的查询按钮 -->
 
     <LinearLayout
-        android:id="@+id/mylove_search"
+        android:id="@+id/mine_collection_search"
         android:layout_width="@dimen/recommend_title_search_width"
         android:layout_height="match_parent"
         android:layout_alignParentRight="true"

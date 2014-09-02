@@ -28,14 +28,14 @@
     <string name="left_search_tv_bottom">Search</string>
     <string name="left_setting_tv_top">设置</string>
     <string name="left_setting_tv_bottom">Setting</string>
-    
-    
-    <!-- SceneActivity  -->
+
+    <!-- SceneActivity -->
     <string name="title_activity_scene">SceneActivity</string>
     <string name="scene_tab_map">景点地图</string>
     <string name="scene_tab_list">景点列表</string>
 
     <!-- MineFragment -->
     <string name="title_fragment_mine">我的</string>
+    <string name="title_activity_mine_collection">MineCollectionActivity</string>
 
 </resources>
