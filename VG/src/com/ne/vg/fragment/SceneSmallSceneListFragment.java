@@ -208,13 +208,17 @@ public class SceneSmallSceneListFragment extends Fragment {
 		getActivity().startService(intent);
 	}
 	
+	/**
+	 * 后面是有关广播的部分
+	 */
+	
 	public void showButtonNotify() {
 		// TODO Auto-generated method stub
-
 		//实例化通知栏构造器NotificationCompat
 		NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(getActivity());
 		//Notification的自定义布局是RemoteViews
 		RemoteViews mRemoteViews = new RemoteViews(getActivity().getPackageName(), R.layout.statusbar);
+		
 		mRemoteViews.setImageViewResource(R.id.custom_song_icon, R.drawable.sing_icon);
 		//API3.0 以上的时候显示按钮，否则消失
 		mRemoteViews.setTextViewText(R.id.tv_custom_song_singer, "谢霆锋");
@@ -243,6 +247,7 @@ public class SceneSmallSceneListFragment extends Fragment {
 		//该参数代表着在顶部常驻
 		Intent intent = new Intent(getActivity(),SceneActivity.class);
 		PendingIntent pendingIntent= PendingIntent.getActivity(getActivity(), 1, intent, Notification.FLAG_ONGOING_EVENT);
+		
 		mBuilder.setContent(mRemoteViews)
 				//设置通知栏点击意图
 				.setContentIntent(pendingIntent)

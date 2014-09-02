@@ -278,8 +278,18 @@ public class SceneActivity extends FragmentActivity implements View.OnClickListe
 
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		destroyGMapFragment();
-		this.finish();
+		if(event.getRepeatCount() == 0)//√ª”–÷ÿ∏¥
+		{
+			switch (keyCode) {
+			case KeyEvent.KEYCODE_BACK:
+				destroyGMapFragment();
+				this.finish();
+				break;
+
+			default:
+				break;
+			}
+		}
 		return super.onKeyDown(keyCode, event);
 	}
 
