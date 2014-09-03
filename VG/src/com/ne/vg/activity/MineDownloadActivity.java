@@ -10,6 +10,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 public class MineDownloadActivity extends FragmentActivity {
 
@@ -24,6 +25,15 @@ public class MineDownloadActivity extends FragmentActivity {
 			.add(R.id.mine_download_frame, new MineDownloadFragment()).commit();
 		}
 
+	}
+	
+	public void onClick(View view) {
+		switch (view.getId()) {
+		case R.id.mine_download_title_left://±êÌâÀ¸×ó°´Å¥
+			this.finish();
+		default:
+			break;
+		}
 	}
 
 }

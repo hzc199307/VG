@@ -24,7 +24,8 @@
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:paddingRight="@dimen/title_left_icon_marginleft"
-        android:singleLine="true" >
+        android:singleLine="true"
+        android:onClick="onClick" >
 
         <ImageView
             android:layout_width="wrap_content"

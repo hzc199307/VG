@@ -14,6 +14,7 @@ import com.ne.vg.dao.VGDao;
 import com.slidingmenu.lib.app.SlidingFragmentActivity;
 
 import android.R.layout;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -48,6 +49,18 @@ public class HomeFragment extends Fragment implements OnClickListener{
 	private Intent intent;
 	private VGDao mVgDao;
 
+//	private ProgressDialog progressDialog;
+	private View home_tab_locationEnter,home_tab_randomEnter;
+
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+//		progressDialog = new ProgressDialog(getActivity());
+//		progressDialog.setMessage(getString(R.string.loading));
+//		progressDialog.setCancelable(false);
+
+	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState) {
@@ -84,7 +97,10 @@ public class HomeFragment extends Fragment implements OnClickListener{
 		home_title_search_btn = (ImageButton)view.findViewById(R.id.home_title_search_btn);
 		home_title_search_btn.setOnClickListener(this);
 
-		home_title_left = (View)view.findViewById(R.id.home_title_left);
+		home_tab_locationEnter = (View)view.findViewById(R.id.home_tab_locationEnter);
+		home_tab_locationEnter.setOnClickListener(this);
+		home_tab_randomEnter = (View)view.findViewById(R.id.home_tab_randomEnter);
+		home_tab_randomEnter.setOnClickListener(this);
 
 		return view;
 	}
@@ -95,7 +111,14 @@ public class HomeFragment extends Fragment implements OnClickListener{
 		switch(id)
 		{
 		case R.id.home_title_search_btn:
-			//点击标题左边按钮弹出左侧菜单
+
+			break;
+		case R.id.home_tab_locationEnter: 
+			MainActivity mainActivity = (MainActivity)getActivity();
+			mainActivity.showProgressDialog(R.string.locating);
+			//progressDialog.isShowing();
+			break;
+		case R.id.home_tab_randomEnter:
 
 			break;
 		default:

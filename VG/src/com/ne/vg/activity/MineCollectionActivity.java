@@ -4,6 +4,7 @@ import com.ne.vg.R;
 import com.ne.vg.fragment.MineCollectionFragment;
 
 import android.support.v4.app.FragmentActivity;
+import android.view.View;
 import android.os.Bundle;
 
 
@@ -22,4 +23,13 @@ public class MineCollectionActivity extends FragmentActivity {
 
 	}
 
+	public void onClick(View view) {
+		switch (view.getId()) {
+		case R.id.mine_collection_back://±êÌâÀ¸×ó°´Å¥
+			this.finish();
+		default:
+			break;
+		}
+	}
+	
 }

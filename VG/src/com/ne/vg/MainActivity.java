@@ -21,7 +21,12 @@ import com.slidingmenu.lib.app.SlidingFragmentActivity;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -59,16 +64,19 @@ public class MainActivity extends SlidingFragmentActivity {
 	DBHelper mDbHelper;
 
 	private VGApplication app;
+
+	private ProgressDialog progressDialog;//正在加载的弹出框
+	
+	private AlertDialog.Builder builder;//定位完成的弹出框
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		
-		
-		
-		
 		Log.v(TAG, "onCreate");
 		setContentView(R.layout.activity_main);
+
+		progressDialog = new ProgressDialog(this);
 
 		fragmentManager = getSupportFragmentManager();
 
@@ -96,9 +104,9 @@ public class MainActivity extends SlidingFragmentActivity {
 		animation2 = new TranslateAnimation(-(int)(dm.widthPixels*behindWidth), 0, 0, 0);
 
 		initSlidingMenu();
-		
+
 	}
-	
+
 	@Override
 	protected void onResume() {
 		// TODO Auto-generated method stub
@@ -270,7 +278,65 @@ public class MainActivity extends SlidingFragmentActivity {
 		home_iv_cover.setVisibility(visibility);
 	}
 
+	/**
+	 * 显示加载弹出框
+	 * @param stringID
+	 */
+	public void showProgressDialog(int stringID)
+	{
+		progressDialog.setMessage(getString(stringID));
+		progressDialog.setCancelable(true);
+		progressDialog.show();
+		progressDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
 
+			@Override
+			public void onDismiss(DialogInterface dialog) {
+				
+
+			}
+		});
+	}
+	
+	
+
+	/**
+	 * 关闭加载弹出框
+	 */
+	public void dismissProgressDialog()
+	{
+		progressDialog.dismiss();
+	}
+	
+	/**
+	 * 显示双按钮弹出框 TODO 处理有关定位
+	 */
+	public void showBuilder() {
+		
+		builder = new Builder(this);
+		builder.setMessage("确定进入吗？");
+		builder.setTitle("最近的城市  ````");
+		builder.setPositiveButton("确认", new OnClickListener() {
+
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+//				Intent intent = new Intent(mContext,CityActivity.class); // 跳转到城市景点详情页面 
+//				Bundle bundle = new Bundle();                           //创建Bundle对象   
+//				bundle.putString("cityName", mCityBean.getCityName());     //装入数据  
+//				bundle.putInt("cityID", mCityBean.getCityID());
+//				intent.putExtras(bundle);                               //把Bundle塞入Intent里面   
+//				startActivity(intent);                                     //开始切换 
+				dialog.dismiss();
+			}
+		});
+		builder.setNegativeButton("取消", new OnClickListener() {
+
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				dialog.dismiss();
+			}
+		});
+		builder.create().show();
+	}
 
 	@Override
 	protected void onRestoreInstanceState(Bundle savedInstanceState) {
@@ -308,7 +374,7 @@ public class MainActivity extends SlidingFragmentActivity {
 		//		destroyFragment(settingFragment);
 		nowFragment = null;
 		//解除服务的绑定
-		
+
 		super.onDestroy();
 	}
 
@@ -352,16 +418,17 @@ public class MainActivity extends SlidingFragmentActivity {
 		destroyFragmentNotNow(searchFragment);
 		destroyFragmentNotNow(settingFragment);
 	}
-	
+
 	private static Boolean isExit = false;
-	/**
-	 * 
-	 */
+
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event)
 	{
+		Log.v(TAG, "onKeyDown");
 		if(keyCode == KeyEvent.KEYCODE_BACK)
 		{
+			Log.v(TAG, "back");
+
 			//调用双击退出函数
 			exitBy2Click();
 		}
@@ -383,7 +450,7 @@ public class MainActivity extends SlidingFragmentActivity {
 					// TODO Auto-generated method stub
 					isExit = false;
 				}
-				
+
 			}, 2000);
 		}else{
 			//退出整个程序,第一句我不知道加不加。。

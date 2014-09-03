@@ -6,6 +6,7 @@
     android:orientation="horizontal" >
 
     <RelativeLayout
+        android:id="@+id/home_tab_locationEnter"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
@@ -43,6 +44,7 @@
         android:background="@color/home_item_city_head_devide_line" />
 
     <RelativeLayout
+        android:id="@+id/home_tab_randomEnter"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
