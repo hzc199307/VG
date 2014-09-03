@@ -15,11 +15,13 @@ import android.app.Activity;
 import android.app.Application;
 import android.app.NotificationManager;
 import android.content.ComponentName;
+import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.database.Cursor;
 import android.os.IBinder;
 import android.util.Log;
+import android.widget.Toast;
 
 public class VGApplication extends Application{
 	
@@ -53,10 +55,24 @@ public class VGApplication extends Application{
 		onDB();
 		//注册通知栏响应的广播
 		initButtonReceiver();
-		
+		initService();
 		super.onCreate();
 	}
 	
+	/**
+	 * 
+	 * @Title: initService 
+	 * @Description: 初始服务
+	 * @param 
+	 * @return void 
+	 * @throws
+	 */
+	public void initService()
+	{
+		Intent serviceIntent = new Intent(this,MusicService.class);
+		bindService(serviceIntent, this.mConnection, BIND_AUTO_CREATE);
+	}
+
 	private void initButtonReceiver() {
 		// TODO Auto-generated method stub
 		// TODO Auto-generated method stub
@@ -75,14 +91,15 @@ public class VGApplication extends Application{
         } catch (Exception e) {     
             e.printStackTrace();     
         } finally {
+        	unbindService(this.mConnection);
         	clearNotify(100);
             System.exit(0);     
         }     
     }
 	@Override
 	public void onTerminate(){
-		Log.d(TAG, "is on terminate!");
-		
+		Toast.makeText(getApplicationContext(), "onTerminate", Toast.LENGTH_LONG).show();
+		unbindService(this.mConnection);
 		clearNotify(100);
 		super.onTerminate();
 	}
@@ -96,7 +113,8 @@ public class VGApplication extends Application{
 			if(mDbHelper.createDataBase())
 				Log.v(TAG, "success create table");
 				;
-		}catch(IOException e){
+		}catch(IOException e)
+		{
 			e.printStackTrace();
 		}
 		Cursor mCursor = mDbHelper
@@ -128,6 +146,7 @@ public class VGApplication extends Application{
 	 */
 	@Override
 	public void onLowMemory(){
+		Toast.makeText(getApplicationContext(), "onLowMemory", Toast.LENGTH_LONG).show();
 		super.onLowMemory();         
 	    System.gc();   //告诉系统回收 
 		

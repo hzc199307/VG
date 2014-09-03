@@ -96,23 +96,9 @@ public class MainActivity extends SlidingFragmentActivity {
 		animation2 = new TranslateAnimation(-(int)(dm.widthPixels*behindWidth), 0, 0, 0);
 
 		initSlidingMenu();
-		initService();
+		
 	}
-	/**
-	 * 
-	 * @Title: initService 
-	 * @Description: 初始服务
-	 * @param 
-	 * @return void 
-	 * @throws
-	 */
-	public void initService()
-	{
-		app = (VGApplication) this.getApplication();
-		Intent serviceIntent = new Intent(this,MusicService.class);
-		bindService(serviceIntent, app.mConnection, BIND_AUTO_CREATE);
-	}
-
+	
 	@Override
 	protected void onResume() {
 		// TODO Auto-generated method stub
@@ -322,7 +308,7 @@ public class MainActivity extends SlidingFragmentActivity {
 		//		destroyFragment(settingFragment);
 		nowFragment = null;
 		//解除服务的绑定
-		unbindService(app.mConnection);
+		
 		super.onDestroy();
 	}
 

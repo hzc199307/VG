@@ -110,7 +110,12 @@ public class SceneActivity extends FragmentActivity implements View.OnClickListe
 			public void onStopTrackingTouch(SeekBar arg0) {
 				// TODO Auto-generated method stub
 				//Õ£÷πª¨∂Ø‘Ú≤•∑≈“Ù¿÷
-				app.mBinder.getService().play();
+				if(app.isPlaying==true){
+					app.mBinder.getService().play();
+				}
+				else{
+					app.mBinder.getService().stop();
+				}
 				scene_music_time_now.setText(MusicPlayerUtil.milliSecondsToTimer(app.mBinder.getService().getPlayer().getCurrentPosition()));
 			}
 			
