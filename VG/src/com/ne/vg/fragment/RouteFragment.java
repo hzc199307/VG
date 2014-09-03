@@ -94,7 +94,7 @@ public class RouteFragment extends Fragment{
 
 		route_pagertab.setTextColor(getResources().getColor(R.color.route_pagertab_text));
 		//设置字体大小好像不太对route_pagertab.setTextSize(TypedValue.COMPLEX_UNIT_SP, getResources().getDimension(R.dimen.route_pagertab_textsize));
-		route_pagertab.setTabIndicatorColor(getResources().getColor(R.color.none)); 
+		route_pagertab.setTabIndicatorColor(getResources().getColor(R.color.white)); 
 		route_pagertab.setDrawFullUnderline(false);
 		route_pagertab.setBackgroundColor(getResources().getColor(R.color.route_pagertab_bg));
 		route_pagertab.setTextSpacing(50);

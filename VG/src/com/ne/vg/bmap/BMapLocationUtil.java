@@ -17,6 +17,7 @@ import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.MyLocationOverlay;
 
 /**
+ * （暂时把方向传感器的关掉了）
  * 百度地图 定位 工具类 （基于baiduMap SDK V2.4.1  、baidu loc sdk V4.1）
  * @ClassName: BMapLocationUtil 
  * @author 贺智超
@@ -187,11 +188,11 @@ public class BMapLocationUtil {
 	@SuppressWarnings({ "deprecation" })
 	private void registerOrientation()
 	{
-		if(sensorManager!=null&&mySensorEventListener!=null)
-		{
-			Sensor sensor_orientation=sensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION);
-		    sensorManager.registerListener(mySensorEventListener,sensor_orientation, SensorManager.SENSOR_DELAY_UI);
-		}
+//		if(sensorManager!=null&&mySensorEventListener!=null)
+//		{
+//			Sensor sensor_orientation=sensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION);
+//		    sensorManager.registerListener(mySensorEventListener,sensor_orientation, SensorManager.SENSOR_DELAY_UI);
+//		}
 	}
 	
 	/**
@@ -199,8 +200,8 @@ public class BMapLocationUtil {
 	 */
 	private void unRegisterOrientation()
 	{
-		if(sensorManager!=null&&mySensorEventListener!=null)
-			sensorManager.unregisterListener(mySensorEventListener);
+//		if(sensorManager!=null&&mySensorEventListener!=null)
+//			sensorManager.unregisterListener(mySensorEventListener);
 	}
 
 	/**
