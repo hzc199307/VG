@@ -59,7 +59,7 @@ public class SceneSmallSceneListFragment extends Fragment {
 	public ImageView animationIV;
 	public AnimationDrawable animationDrawable;
 	public View divider;
-	
+	private ImageView button;
 	private String cityName;
 	private String bigSceneName;
 	private int bigSceneID;
@@ -130,10 +130,15 @@ public class SceneSmallSceneListFragment extends Fragment {
 				animationIV.setImageResource(R.drawable.scene_music_isplaying_animation);
 				animationDrawable = (AnimationDrawable) animationIV
 						.getDrawable();
+				button = (ImageView)view.findViewById(R.id.scene_item_smallscene_button);
 				//如果正在播放则播动画
 				if(!app.mBinder.getService().isPlaying)
 				{
 					animationDrawable.start();
+					button.setImageResource(R.drawable.scene_music_pause_icon);
+				}else
+				{
+					button.setImageResource(R.drawable.scene_music_play_icon);
 				}
 				divider = (View)view.findViewById(R.id.scene_item_smallscene_divider2);
 				//0代表visible
@@ -199,7 +204,6 @@ public class SceneSmallSceneListFragment extends Fragment {
 		//op:1是播放，2是停止，3是暂停,0代表不处理
 		bundle.putInt("op", op);
 		//这个是播放的歌曲
-		Log.d(TAG, "cityName="+cityName);
 		Log.d(TAG, "bigSceneName="+bigSceneName);
 		bundle.putString("musicresource",MusicPlayerUtil.getVoicePath(cityName, bigSceneName, "2大教堂"));
 		intent.putExtras(bundle);

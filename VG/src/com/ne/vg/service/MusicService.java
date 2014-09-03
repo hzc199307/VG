@@ -27,6 +27,7 @@ public class MusicService extends Service{
 	private MediaPlayer mediaPlayer;
 	private MyBinder mBinder = new MyBinder();
 	private String oldresource;
+	private String newResource;
 	public boolean isPlaying;
 
 	public class MyBinder extends Binder{
@@ -37,6 +38,7 @@ public class MusicService extends Service{
 
 	/**
 	 * 通过MyBinder来实现交互
+	 * 先onCreate再onBind
 	 */
 	@Override
 	public IBinder onBind(Intent arg0) {
@@ -57,8 +59,9 @@ public class MusicService extends Service{
 		if(mediaPlayer == null){
 			//TODO 这里需要加入音频文件的id
 			oldresource = null;
-			mediaPlayer = new MediaPlayer();
+			mediaPlayer = MediaPlayer.create(this, R.raw.fengwei);
 			try {
+				//mediaPlayer.setDataSource(oldresource);
 				mediaPlayer.prepare();
 			} catch (IllegalStateException e) {
 				// TODO Auto-generated catch block
@@ -147,7 +150,7 @@ public class MusicService extends Service{
 			Bundle bundle = intent.getExtras();
 			if(bundle!=null){
 				//从bundle中取出传过来的音频文件
-				String newResource = bundle.getString("musicresource");
+				newResource = bundle.getString("musicresource");
 				//这个代表是notification所触发的广播调用的service传过来的参数
 				if(newResource == null){
 					newResource = oldresource;
@@ -162,6 +165,7 @@ public class MusicService extends Service{
 					try {
 						mediaPlayer.setDataSource(newResource);
 						mediaPlayer.prepare();
+						Log.d(TAG, "new mediaPlayer is created");
 					} catch (IllegalArgumentException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();

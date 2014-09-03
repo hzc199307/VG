@@ -111,16 +111,19 @@ public class SceneActivity extends FragmentActivity implements View.OnClickListe
 	 */
 	public void initSeekBar() {
 		MediaPlayer player = app.mBinder.getService().getPlayer();
-		scene_music_time_total.setText(MusicPlayerUtil.milliSecondsToTimer(player.getDuration()));
-		scene_music_time_now.setText(MusicPlayerUtil.milliSecondsToTimer(player.getCurrentPosition()));
+		
 		mSeekBar = (SeekBar)findViewById(R.id.scene_music_seekbar);
 		//获得歌曲的长度并设置成播放进度条的最大值  
 		if(player!=null){
+			scene_music_time_total.setText(MusicPlayerUtil.milliSecondsToTimer(player.getDuration()));
+			scene_music_time_now.setText(MusicPlayerUtil.milliSecondsToTimer(player.getCurrentPosition()));
+			
 			mSeekBar.setMax(player.getDuration());
 			Log.d(TAG, "duration is:" + player.getDuration());
 		}
 			
 		else{
+			mSeekBar.setMax(0);
 			Log.d(TAG, "player is null!");
 		}
 		//mSeekBar.setMax(player.getDuration());  
