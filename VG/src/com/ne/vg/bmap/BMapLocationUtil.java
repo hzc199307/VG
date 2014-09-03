@@ -45,7 +45,7 @@ public class BMapLocationUtil {
 		option.setLocationMode(LocationMode.Hight_Accuracy);//设置定位模式
 		option.setOpenGps(true);//打开gps
 		option.setCoorType("bd09ll");     //设置坐标类型
-		option.setScanSpan(2000);
+		option.setScanSpan(3000);
 		option.setIsNeedAddress(true);//返回的定位结果包含地址信息
 		option.setNeedDeviceDirect(true);
 		mLocClient.setLocOption(option);	
@@ -106,7 +106,7 @@ public class BMapLocationUtil {
 	 * 定位每2秒一次
 	 */
 	public void requestLocationEvery2() {
-		setScanSpan(2000);
+		setScanSpan(3000);
 		mLocClient.start();
 		registerOrientation();
 	}
