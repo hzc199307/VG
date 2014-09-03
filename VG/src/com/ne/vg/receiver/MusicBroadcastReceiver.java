@@ -40,15 +40,15 @@ public class MusicBroadcastReceiver extends BroadcastReceiver{
 			int buttonId = intent.getIntExtra(INTENT_BUTTONID_TAG, 0);
 			if(buttonId == BUTTON_PALY_ID){
 				String play_status = "";
-				app.isPlaying = !app.isPlaying;
+				app.mBinder.getService().isPlaying = !app.mBinder.getService().isPlaying;
 				
-				if(app.isPlaying){
+				if(app.mBinder.getService().isPlaying){
 					play_status = "开始播放";
 					startSer(1);
 					
 				}else{
 					play_status = "已暂停";
-					startSer(2);
+					startSer(3);
 				}
 				//更新界面，及图片改变
 				//app.showNotify();
@@ -66,7 +66,7 @@ public class MusicBroadcastReceiver extends BroadcastReceiver{
 		//op:1是播放，2是停止，3是暂停,0代表不处理
 		bundle.putInt("op", op);
 		//这个是播放的歌曲
-		bundle.putInt("musicresource",R.raw.fengwei);
+		bundle.putString("musicresource",null);
 		intent.putExtras(bundle);
 		app.startService(intent);
 	}

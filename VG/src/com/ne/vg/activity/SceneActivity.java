@@ -2,6 +2,7 @@ package com.ne.vg.activity;
 
 import com.ne.vg.R;
 import com.ne.vg.VGApplication;
+import com.ne.vg.dao.VGDao;
 import com.ne.vg.fragment.BigSceneListFragment;
 import com.ne.vg.fragment.SceneSmallSceneListFragment;
 import com.ne.vg.fragment.SceneSmallSceneListFragment.OnMusicSelectedListener;
@@ -9,6 +10,7 @@ import com.ne.vg.gmap.GMapFragment;
 import com.ne.vg.util.MusicPlayerUtil;
 import com.ne.vg.view.MyViewPager;
 
+import android.R.mipmap;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -16,6 +18,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.content.Context;
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
@@ -48,14 +51,28 @@ public class SceneActivity extends FragmentActivity implements View.OnClickListe
 	private TextView scene_music_time_now;
 	private TextView scene_music_time_total;
 	private GMapFragment gMapFragment ;
-
+	private TextView scene_title_name;
 	private VGApplication app;
+	private Intent mIntent;
+	private VGDao mVgDao;
+	private String cityName;
+	private String bigSceneName;
+	private int bigSceneID;
+	private boolean isPlaying;
+	
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		//初始化VGApplication
 		// TODO Auto-generated method stub
 		
 		app = (VGApplication)this.getApplication();
+		mVgDao = new VGDao(this);
+		mIntent = this.getIntent();
+		cityName = mIntent.getExtras().getString("cityName");
+		bigSceneName = mIntent.getExtras().getString("bigSceneName");
+		bigSceneID = mIntent.getExtras().getInt("bigSceneID");
+		
 		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_scene);
@@ -67,7 +84,9 @@ public class SceneActivity extends FragmentActivity implements View.OnClickListe
 		handler.post(updateThread);
 	}
 	
-	
+	/**
+	 * 该线程用来实时更新seekbar
+	 */
 	Handler handler = new Handler();
 	Runnable updateThread = new Runnable()
 	{
@@ -96,8 +115,11 @@ public class SceneActivity extends FragmentActivity implements View.OnClickListe
 		scene_music_time_now.setText(MusicPlayerUtil.milliSecondsToTimer(player.getCurrentPosition()));
 		mSeekBar = (SeekBar)findViewById(R.id.scene_music_seekbar);
 		//获得歌曲的长度并设置成播放进度条的最大值  
-		if(player!=null)
-			mSeekBar.setMax(player.getDuration()); 
+		if(player!=null){
+			mSeekBar.setMax(player.getDuration());
+			Log.d(TAG, "duration is:" + player.getDuration());
+		}
+			
 		else{
 			Log.d(TAG, "player is null!");
 		}
@@ -110,11 +132,12 @@ public class SceneActivity extends FragmentActivity implements View.OnClickListe
 			public void onStopTrackingTouch(SeekBar arg0) {
 				// TODO Auto-generated method stub
 				//停止滑动则播放音乐
-				if(app.isPlaying==true){
+				Log.d(TAG, "isPlaying=" + isPlaying);
+				if(isPlaying==true){
 					app.mBinder.getService().play();
 				}
 				else{
-					app.mBinder.getService().stop();
+					app.mBinder.getService().pause();
 				}
 				scene_music_time_now.setText(MusicPlayerUtil.milliSecondsToTimer(app.mBinder.getService().getPlayer().getCurrentPosition()));
 			}
@@ -123,7 +146,7 @@ public class SceneActivity extends FragmentActivity implements View.OnClickListe
 			@Override
 			public void onStartTrackingTouch(SeekBar arg0) {
 				// TODO Auto-generated method stub
-				
+				isPlaying = app.mBinder.getService().isPlaying;
 			}
 			
 			//滑块滑动时调用的
@@ -132,8 +155,9 @@ public class SceneActivity extends FragmentActivity implements View.OnClickListe
 				// TODO Auto-generated method stub
 				 // fromUser判断是用户改变的滑块的值  
                 if(fromUser==true){
+                	
                 	//先暂停音乐
-                	app.mBinder.getService().stop();
+                	app.mBinder.getService().pause();
                 	//player.seekTo(progress); 
                 	app.mBinder.getService().getPlayer().seekTo(progress);
                 }  
@@ -161,6 +185,8 @@ public class SceneActivity extends FragmentActivity implements View.OnClickListe
 	private void initTab() {
 		scene_map_layout = (View)findViewById(R.id.scene_map_layout);
 		scene_list_layout = (View)findViewById(R.id.scene_list_layout);
+		scene_title_name = (TextView)findViewById(R.id.scene_title_name);
+		scene_title_name.setText(bigSceneName);
 		scene_map_layout.setOnClickListener(this);
 		scene_list_layout.setOnClickListener(this);
 		scene_music_time_now = (TextView)findViewById(R.id.scene_music_time_now);
@@ -235,7 +261,7 @@ public class SceneActivity extends FragmentActivity implements View.OnClickListe
 				gMapFragment = new GMapFragment();
 				return gMapFragment;
 			case 1:
-				return new SceneSmallSceneListFragment();
+				return new SceneSmallSceneListFragment(cityName,bigSceneName,bigSceneID);
 			default:return null;
 			}
 		}

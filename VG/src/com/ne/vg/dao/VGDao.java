@@ -74,6 +74,25 @@ public class VGDao {
 		return  listCities;
 		
 	}
+	
+	/**
+	 * 
+	 * @Title: getCityName 
+	 * @Description: 通过城市ID获取城市名称
+	 * @param @param cityID
+	 * @param @return
+	 * @return String 
+	 * @throws
+	 */
+	public String getCityName(int cityID)
+	{
+		String name = "";
+		String[] args = {cityID+""};
+		Cursor cr = db.query("city", null, "cityID=?", args, null, null, null);
+		cr.moveToFirst();
+		name = cr.getString(cr.getColumnIndex(CityColumns.cityName));
+		return name;
+	}
 
 	/**
 	 * 
@@ -120,6 +139,14 @@ public class VGDao {
 		return listBigScenes;
 	}
 	
+	public String getBigSceneName(int BigSceneID){
+		String name = "";
+		String[] arg = {BigSceneID+""};
+		Cursor cr = db.query("bigScene", null, "bigSceneID=?", arg, null, null, null);
+		cr.moveToFirst();
+		name = cr.getString(cr.getColumnIndex(BigSceneColumns.bigSceneName));
+		return name;
+	}
 	/**
 	 * 
 	 * @Title: getRecommendRoute 
@@ -198,7 +225,7 @@ public class VGDao {
 	public List<SmallScene> getSmallScene(int bigSceneID){
 		List<SmallScene> listSmallScenes = new ArrayList<SmallScene>();
 		String[] args = {bigSceneID +""};
-		Cursor cr = db.query("smallScne", null, "bigSceneID=?", args, null, null, null);
+		Cursor cr = db.query("smallScene", null, "bigSceneID=?", args, null, null, null);
 		int count = cr.getCount();
 		if(cr!=null){
 			cr.moveToFirst();
