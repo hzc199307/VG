@@ -82,7 +82,7 @@ public class MusicService extends Service{
         	switch(state){
         	//空闲，没有任何活动。new 的时候会转到这个状态。
         	case TelephonyManager.CALL_STATE_IDLE:      
-                Toast.makeText(getApplication(), "call not answer", Toast.LENGTH_LONG).show();      
+                
                 break;      
             //来电          
             case TelephonyManager.CALL_STATE_RINGING:      

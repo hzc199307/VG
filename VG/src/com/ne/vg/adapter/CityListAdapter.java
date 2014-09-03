@@ -102,7 +102,7 @@ public class CityListAdapter extends BaseAdapter{
 		viewHolderData.cityName.setText(myCity.getCityName());
 		
 		
-		Toast.makeText(mContext, "cityName=" + myCity.getCityName(), Toast.LENGTH_SHORT).show();
+		
 		Log.d(TAG, "cityName=" + myCity.getCityName());
 		Log.d(TAG, "cityID:"+myCity.getCityID());
 		

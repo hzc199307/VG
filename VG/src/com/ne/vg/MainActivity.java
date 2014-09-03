@@ -11,7 +11,7 @@ import com.ne.vg.fragment.MineFragment;
 import com.ne.vg.fragment.RouteFragment;
 import com.ne.vg.fragment.SearchFragment;
 import com.ne.vg.fragment.SettingFragment;
-import com.ne.vg.service.MusicService;
+
 import com.slidingmenu.lib.SlidingMenu;
 import com.slidingmenu.lib.SlidingMenu.OnCloseListener;
 import com.slidingmenu.lib.SlidingMenu.OnClosedListener;

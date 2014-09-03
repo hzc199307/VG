@@ -50,7 +50,7 @@ public class VGApplication extends Application{
 	
 	@Override
 	public void onCreate(){
-		Log.v(TAG, "onCreate");
+		Log.d(TAG, "onCreate");
 		SystemUtil.init(this);//SystemUtil的初始化
 		onDB();
 		//注册通知栏响应的广播
