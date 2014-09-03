@@ -93,11 +93,12 @@ public class MusicPlayerUtil {
 		/* 取得SD Card路径做为录音的文件位置 */
 		if (sdCardExit){
 			myVoiceDir = Environment.getExternalStorageDirectory();
-			String path = myVoiceDir.getPath()+"/VoiceGuider/voice/"+city+"/"+bigScene+"/"+smallScene+".mp3";
+			String path = myVoiceDir.getPath()+"/com.ne.vg/voice/"+city+"/"+bigScene+"/"+smallScene+".mp3";
 			myVoiceFile = new File(path);
 			if (!myVoiceFile.exists()) {
 				Log.v(TAG,"音频文件不存在");;
 			}
+			Log.d(TAG,"music path=" + myVoiceFile.getPath());
 			return myVoiceFile.getPath();
 		}
 		else

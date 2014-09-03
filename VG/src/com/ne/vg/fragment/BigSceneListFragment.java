@@ -17,6 +17,7 @@ import com.ne.vg.util.NotifyUtil;
 
 
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -44,17 +45,22 @@ public class BigSceneListFragment extends Fragment{
 	private VGDao mVgDao;
 	//自定义的适配器
 	private BigSceneListAdapter gridAdapter;
+	private String cityName;
 	public BigSceneListFragment(int cityID){
 		Log.d(TAG, cityID+"");
+		
 		this.cityID = cityID;
+		
 	}
+
 
 	@Override
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
 		
+		mVgDao = new VGDao(getActivity());
 		
-		
+		this.cityName = mVgDao.getCityName(cityID);
 	}
 
 	@Override
@@ -67,7 +73,7 @@ public class BigSceneListFragment extends Fragment{
 				container, false);
 		//Init view
 		gridview = (GridView) rootView.findViewById(R.id.bigscene_gridview1);
-		mVgDao = new VGDao(getActivity());
+		
 		gridAdapter = new BigSceneListAdapter(getActivity(), mVgDao.getBigScene(cityID));
 		gridview.setAdapter(gridAdapter);
 		InitListener();
@@ -97,6 +103,7 @@ public class BigSceneListFragment extends Fragment{
 				
 				int bigSceneID = mVgDao.getBigScene(cityID).get(position).getBigSceneID();
 				mIntent.putExtra("bigSceneID", bigSceneID);
+				mIntent.putExtra("cityName", cityName);
 				startActivity(mIntent);
 			}
 		});

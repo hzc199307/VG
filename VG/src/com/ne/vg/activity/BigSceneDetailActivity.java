@@ -2,6 +2,7 @@ package com.ne.vg.activity;
 
 import com.ne.vg.R;
 import com.ne.vg.TestFragment;
+import com.ne.vg.dao.VGDao;
 import com.ne.vg.fragment.BigSceneIntroDetailFragment;
 import com.ne.vg.fragment.BigSceneIntroFragment;
 import com.ne.vg.fragment.HomeFragment;
@@ -47,19 +48,24 @@ public class BigSceneDetailActivity extends FragmentActivity {
 	private ImageButton bsd_btn_up,bsd_btn_location;
 	private View big_scene_detail_other;
 	private Intent mIntent;
+	private VGDao mVgDao;
+	private String bigSceneName;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		Log.v(TAG, "onCreate");
 		setContentView(R.layout.activity_big_scene_detail);
-		
 		gmapFrame = (FrameLayout)findViewById(R.id.big_scene_detail_frame_map);
 		bsdScroll = (ScrollView)findViewById(R.id.bsd_scroll);
 		bsd_btn_up = (ImageButton)findViewById(R.id.bsd_btn_up);
 		bsd_btn_location = (ImageButton)findViewById(R.id.bsd_btn_location);
 		big_scene_detail_other = (View)findViewById(R.id.big_scene_detail_other);
+		
+		/** 跟数据传输相关*/
+		mVgDao = new VGDao(this);
 		mIntent = this.getIntent();
+		bigSceneName = mVgDao.getBigSceneName(mIntent.getExtras().getInt("bigSceneID"));
 		//		if(savedInstanceState == null)
 		//		{
 		//			if(gMapFragment==null)
@@ -200,7 +206,11 @@ public class BigSceneDetailActivity extends FragmentActivity {
 			break;
 		case R.id.bsd_enter_scene_btn:
 			destroyGMapFragment();
-			startActivity(new Intent(this,SceneActivity.class));
+			Intent myIntent = new Intent(this,SceneActivity.class); 
+			myIntent.putExtra("cityName", mIntent.getExtras().getString("cityName"));
+			myIntent.putExtra("bigSceneName", bigSceneName);
+			myIntent.putExtra("bigSceneID", mIntent.getExtras().getInt("bigSceneID"));
+			startActivity(myIntent);
 			break;
 		default:
 			break;

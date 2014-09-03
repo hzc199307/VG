@@ -7,8 +7,10 @@ import com.ne.vg.VGApplication;
 import com.ne.vg.activity.PlayMusicActivity;
 import com.ne.vg.activity.SceneActivity;
 import com.ne.vg.adapter.SceneSmallSceneListAdapter;
+import com.ne.vg.dao.VGDao;
 import com.ne.vg.receiver.MusicBroadcastReceiver;
 import com.ne.vg.util.MusicNotification;
+import com.ne.vg.util.MusicPlayerUtil;
 
 import android.app.Activity;
 import android.app.Notification;
@@ -42,9 +44,7 @@ public class SceneSmallSceneListFragment extends Fragment {
 	public final static String ACTION_BUTTON = "com.notifications.intent.action.ButtonClick";
 	public final static String INTENT_BUTTONID_TAG = "ButtonId";
 	/** 播放/暂停 按钮点击 ID */
-	public final static int BUTTON_PALY_ID = 2;
-	/**播放状态的初始化*/
-	public boolean isPlaying; 
+	public final static int BUTTON_PALY_ID = 2; 
 	/** Notification的ID */
 	int notifyId = 100;
 	private VGApplication app;
@@ -59,14 +59,25 @@ public class SceneSmallSceneListFragment extends Fragment {
 	public ImageView animationIV;
 	public AnimationDrawable animationDrawable;
 	public View divider;
-
+	
+	private String cityName;
+	private String bigSceneName;
+	private int bigSceneID;
+	public VGDao mDao;
+	
+	public SceneSmallSceneListFragment(String cityName,String bigSceneName,int bigSceneID)
+	{
+		this.cityName = cityName;
+		this.bigSceneName = bigSceneName;
+		this.bigSceneID = bigSceneID;
+	}
 	@Override
 	public void onCreate(Bundle savedInstanceState){
 		
 		super.onCreate(savedInstanceState);
 		app = (VGApplication)this.getActivity().getApplication();
 		intent = new Intent("com.ne.vg.service.MusicService");
-		isPlaying = app.isPlaying;
+		mDao = new VGDao(getActivity());
 		
 		 //初始化自定义通知栏
 		mNotification = new MusicNotification(getActivity().getApplicationContext());
@@ -91,7 +102,8 @@ public class SceneSmallSceneListFragment extends Fragment {
 		Log.v(TAG, "onCreateView");
 		View rootView = inflater.inflate(R.layout.fragment_scene_smallscenelist, container, false);
 		smallSceneListView= (ListView)rootView.findViewById(R.id.smallSceneListView);
-		smallSceneListView.setAdapter(new SceneSmallSceneListAdapter(getActivity()));
+		smallSceneListView.setAdapter(new SceneSmallSceneListAdapter(getActivity(),mDao.getSmallScene(bigSceneID)));
+		
 		InitListener();
 		return rootView;
 	}
@@ -104,6 +116,9 @@ public class SceneSmallSceneListFragment extends Fragment {
 			public void onItemClick(AdapterView<?> arg0, View view, int position,
 					long arg3) {
 				Log.d(TAG, " item " + position +" is clicked!");
+				startSer(0);
+				
+				
 				if(animationDrawable!=null){
 					animationDrawable.stop();
 				}
@@ -115,7 +130,8 @@ public class SceneSmallSceneListFragment extends Fragment {
 				animationIV.setImageResource(R.drawable.scene_music_isplaying_animation);
 				animationDrawable = (AnimationDrawable) animationIV
 						.getDrawable();
-				if(!isPlaying)
+				//如果正在播放则播动画
+				if(!app.mBinder.getService().isPlaying)
 				{
 					animationDrawable.start();
 				}
@@ -126,9 +142,8 @@ public class SceneSmallSceneListFragment extends Fragment {
 				/**
 				 * 这一段只是用来测试，还需要重新写
 				 */
-				startSer(0);
 				
-				isPlaying = !isPlaying;
+				
 				
 				
 				//更新界面，及图片改变
@@ -179,51 +194,14 @@ public class SceneSmallSceneListFragment extends Fragment {
 		}
 	}
 	
-	/**
-	 * 
-	 * @ClassName: ButtonBroadcastReceiver 
-	 * @author 潘杉
-	 * @Description:广播监听按钮点击事件 
-	 * @date 2014-8-14 下午7:32:33
-	 */
-//	public class ButtonBroadcastReceiver extends BroadcastReceiver{
-//
-//		@Override
-//		public void onReceive(Context context, Intent intent) {
-//			
-//			// TODO Auto-generated method stub
-//			String action = intent.getAction();
-//			if(action.equals(ACTION_BUTTON)){
-//				//通过传递过来的ID判断按钮点击属性或者通过getResultCode()获得相应点击事件
-//				int buttonId = intent.getIntExtra(INTENT_BUTTONID_TAG, 0);
-//				if(buttonId == BUTTON_PALY_ID){
-//					String play_status = "";
-//					isPlaying = !isPlaying;
-//					
-//					if(isPlaying){
-//						play_status = "开始播放";
-//						startSer(1);
-//					}else{
-//						play_status = "已暂停";
-//						startSer(2);
-//					}
-//					//更新界面，及图片改变
-//					showButtonNotify();
-//					Log.d(TAG , play_status);
-//					Toast.makeText(getActivity(), play_status, Toast.LENGTH_SHORT).show();
-//					
-//				}
-//			}
-//		}
-//		
-//	}
-	
 	public void startSer(int op){
 		Bundle bundle = new Bundle();
 		//op:1是播放，2是停止，3是暂停,0代表不处理
 		bundle.putInt("op", op);
 		//这个是播放的歌曲
-		bundle.putInt("musicresource",R.raw.fengwei);
+		Log.d(TAG, "cityName="+cityName);
+		Log.d(TAG, "bigSceneName="+bigSceneName);
+		bundle.putString("musicresource",MusicPlayerUtil.getVoicePath(cityName, bigSceneName, "2大教堂"));
 		intent.putExtras(bundle);
 		getActivity().startService(intent);
 	}

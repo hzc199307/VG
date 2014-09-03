@@ -13,22 +13,23 @@ import android.widget.TextView;
 import com.ne.vg.R;
 import com.ne.vg.bean.BigScene;
 import com.ne.vg.bean.CreateData;
+import com.ne.vg.bean.SmallScene;
 
 
 public class SceneSmallSceneListAdapter extends BaseAdapter{
 	 
 	private final String TAG = "RouteDay_BigSceneListAdapter";
-	private List<BigScene> listData = null;
+	private List<SmallScene> listData = null;
 	private LayoutInflater inflater = null;
 
 	int sizeOfBigScene = 0;
 
 	public SceneSmallSceneListAdapter(Context context) {
-		setListData(CreateData.getBigSceneList());
+		//setListData(CreateData.getBigSceneList());
 		inflater = LayoutInflater.from(context);
 	}
 
-	public SceneSmallSceneListAdapter(Context context,List<BigScene> list) {
+	public SceneSmallSceneListAdapter(Context context,List<SmallScene> list) {
 		setListData(list);
 		inflater = LayoutInflater.from(context);
 	}
@@ -38,11 +39,11 @@ public class SceneSmallSceneListAdapter extends BaseAdapter{
 		listData=null;
 	}
 
-	public void setListData(List<BigScene> list){
+	public void setListData(List<SmallScene> list){
 		if (list != null) {
 			listData = list;
 		}else {
-			listData = new ArrayList<BigScene>();
+			listData = new ArrayList<SmallScene>();
 		}
 		sizeOfBigScene = listData.size();
 	}
@@ -52,7 +53,7 @@ public class SceneSmallSceneListAdapter extends BaseAdapter{
 	}
 
 	@Override
-	public BigScene getItem(int position) {
+	public SmallScene getItem(int position) {
 		if(listData == null) return null;
 		return listData.get(position);
 	}
@@ -78,9 +79,9 @@ public class SceneSmallSceneListAdapter extends BaseAdapter{
 		{
 			viewHolder = (ViewHolder) convertView.getTag();// 如果是使用已经存在的view，则从tag中获取就可以了
 		}
-		BigScene myBigScene = listData.get(position);
+		SmallScene mySmallScene = listData.get(position);
 		//int id = mContext.getResources().getIdentifier("city_"+myCity.getCityPinyin() ,"drawable","com.ne.voiceguider");
-		viewHolder.scene_item_smallscene_name.setText(myBigScene.getBigSceneName());
+		viewHolder.scene_item_smallscene_name.setText(mySmallScene.getSmallSceneName());
 		return convertView;
 	}
 
@@ -93,7 +94,7 @@ public class SceneSmallSceneListAdapter extends BaseAdapter{
 	 * 添加列表项
 	 * @param item
 	 */
-	public void addItem(BigScene item) {
+	public void addItem(SmallScene item) {
 		this.listData.add(item);
 	}
 }
