@@ -29,7 +29,6 @@ public class VGApplication extends Application{
 	private List<Activity> mList = new LinkedList<Activity>();   //用于存放每个Activity的List  
 	private static VGApplication instance;    //SysApplication实例     
 	
-	public boolean isPlaying=false;
 	/** 通知栏按钮广播 */
 	public MusicBroadcastReceiver bReceiver;
 	/** 通知栏按钮点击事件对应的ACTION */

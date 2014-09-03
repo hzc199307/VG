@@ -20,8 +20,6 @@ public class MusicNotification {
 	public final static String INTENT_BUTTONID_TAG = "ButtonId";
 	/** 播放/暂停 按钮点击 ID */
 	public final static int BUTTON_PALY_ID = 2;
-	/**播放状态的初始化*/
-	public boolean isPlaying;
 	VGApplication app;
 	/** Notification的ID */
 	int notifyId = 100;
@@ -29,7 +27,6 @@ public class MusicNotification {
 		mNotificationManager =(NotificationManager)context.getSystemService(context.NOTIFICATION_SERVICE);
 		this.context = context;
 		app = (VGApplication)context;
-		isPlaying = app.isPlaying;
 	}
 	public void showButtonNotify() {
 		// TODO Auto-generated method stub
@@ -48,7 +45,8 @@ public class MusicNotification {
 			
 		}else{
 			mRemoteViews.setViewVisibility(R.id.ll_custom_button, View.VISIBLE);
-			if(isPlaying){
+			//如果正在播放，则设置为播放状态，否则设置为暂停状态。
+			if(!app.mBinder.getService().isPlaying){
 				mRemoteViews.setImageViewResource(R.id.btn_custom_play, R.drawable.test_btn_play2);
 			}else{
 				mRemoteViews.setImageViewResource(R.id.btn_custom_play, R.drawable.test_btn_pause2);				
