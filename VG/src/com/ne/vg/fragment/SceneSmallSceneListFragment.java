@@ -22,6 +22,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
@@ -68,6 +69,8 @@ public class SceneSmallSceneListFragment extends Fragment {
 	public VGDao mDao;
 	private SceneSmallSceneListAdapter mAdapter;
 	private smallBroadcastReceiver sReceiver;
+	private Handler mHandler;
+	private int mPosition;
 	
 	public SceneSmallSceneListFragment(String cityName,String bigSceneName,int bigSceneID)
 	{
@@ -131,48 +134,61 @@ public class SceneSmallSceneListFragment extends Fragment {
 				Log.d(TAG, " item " + position +" is clicked!");
 				currentView = view;
 				startSer(0);
-				app.playSceneID = (int)mAdapter.getItemId(position);
-				
-				if(animationDrawable!=null){
-					animationDrawable.stop();
-				}
-				if(divider2!=null){
-					//8代表为gone,0代表可见
-					divider.setVisibility(0);
-					divider2.setVisibility(8);
-				}
-				animationIV = (ImageView) view.findViewById(R.id.animationIV);
-				animationIV.setImageResource(R.drawable.scene_music_isplaying_animation);
-				animationDrawable = (AnimationDrawable) animationIV
-						.getDrawable();
-				button = (ImageView)view.findViewById(R.id.scene_item_smallscene_button);
-				//如果正在播放则播动画
-				Log.d(TAG, "isPlaying =" + app.mBinder.getService().isPlaying);
-				if(!app.mBinder.getService().isPlaying)
-				{
-					animationDrawable.start();
-					button.setImageResource(R.drawable.scene_music_pause_icon);
-				}else
-				{
-					button.setImageResource(R.drawable.scene_music_play_icon);
-				}
-				divider = (View)view.findViewById(R.id.scene_item_smallscene_divider1);
-				divider2 = (View)view.findViewById(R.id.scene_item_smallscene_divider2);
-				//8代表为gone
-				divider.setVisibility(8);
-				//0代表visible
-				divider2.setVisibility(0);
-				// TODO 开启服务并更新seekbar
+				mPosition = position;
 				/**
-				 * 这一段只是用来测试，还需要重新写
+				 * 这里是重点，由于startSer是在后台开启的，所以需要延时执行后面的代码。
 				 */
-				
-				//更新界面，及图片改变
-//				app.showNotify();
-				
-				mNotification.showButtonNotify();
-				//调用Activity中的函数,用来更新seekBar
-				mListener.onMusicSelected();
+				mHandler = new Handler();
+				Runnable runnable = new Runnable(){
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+						app.playSceneID = (int)mAdapter.getItemId(mPosition);
+						
+						if(animationDrawable!=null){
+							animationDrawable.stop();
+						}
+						if(divider2!=null){
+							//8代表为gone,0代表可见
+							divider.setVisibility(0);
+							divider2.setVisibility(8);
+						}
+						animationIV = (ImageView) currentView.findViewById(R.id.animationIV);
+						animationIV.setImageResource(R.drawable.scene_music_isplaying_animation);
+						animationDrawable = (AnimationDrawable) animationIV
+								.getDrawable();
+						button = (ImageView)currentView.findViewById(R.id.scene_item_smallscene_button);
+						//如果正在播放则播动画
+						Log.d(TAG, "isPlaying =" + app.mBinder.getService().isPlaying);
+						if(!app.mBinder.getService().isPlaying)
+						{
+							animationDrawable.start();
+							button.setImageResource(R.drawable.scene_music_pause_icon);
+						}else
+						{
+							button.setImageResource(R.drawable.scene_music_play_icon);
+						}
+						divider = (View)currentView.findViewById(R.id.scene_item_smallscene_divider1);
+						divider2 = (View)currentView.findViewById(R.id.scene_item_smallscene_divider2);
+						//8代表为gone
+						divider.setVisibility(8);
+						//0代表visible
+						divider2.setVisibility(0);
+						// TODO 开启服务并更新seekbar
+						/**
+						 * 这一段只是用来测试，还需要重新写
+						 */
+						
+						//更新界面，及图片改变
+//						app.showNotify();
+						
+						mNotification.showButtonNotify();
+						//调用Activity中的函数,用来更新seekBar
+						mListener.onMusicSelected();
+						
+					}      
+		        };  
+		        mHandler.postDelayed(runnable, 500);// 打开定时器，执行操作 
 				
 			}
 			
