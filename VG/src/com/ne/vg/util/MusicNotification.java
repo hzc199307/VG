@@ -29,6 +29,7 @@ public class MusicNotification {
 		app = (VGApplication)context;
 	}
 	public void showButtonNotify() {
+		
 		// TODO Auto-generated method stub
 		//实例化通知栏构造器NotificationCompat
 		NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context);

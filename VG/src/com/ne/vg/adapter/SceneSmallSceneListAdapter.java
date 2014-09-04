@@ -4,16 +4,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
+import android.graphics.drawable.AnimationDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ne.vg.R;
+import com.ne.vg.VGApplication;
+import com.ne.vg.activity.SceneActivity;
 import com.ne.vg.bean.BigScene;
 import com.ne.vg.bean.CreateData;
 import com.ne.vg.bean.SmallScene;
+import com.ne.vg.fragment.SceneSmallSceneListFragment;
 
 
 public class SceneSmallSceneListAdapter extends BaseAdapter{
@@ -21,17 +26,20 @@ public class SceneSmallSceneListAdapter extends BaseAdapter{
 	private final String TAG = "RouteDay_BigSceneListAdapter";
 	private List<SmallScene> listData = null;
 	private LayoutInflater inflater = null;
-
+	private VGApplication app;
 	int sizeOfBigScene = 0;
+	public AnimationDrawable animationDrawable;
 
 	public SceneSmallSceneListAdapter(Context context) {
 		//setListData(CreateData.getBigSceneList());
 		inflater = LayoutInflater.from(context);
+		
 	}
 
 	public SceneSmallSceneListAdapter(Context context,List<SmallScene> list) {
 		setListData(list);
 		inflater = LayoutInflater.from(context);
+		app = (VGApplication)((SceneActivity)context).getApplication();
 	}
 	
 	public void destroy() {
@@ -60,7 +68,9 @@ public class SceneSmallSceneListAdapter extends BaseAdapter{
 
 	@Override
 	public long getItemId(int position) {
-		return position;
+		if(listData == null)
+			return 0;
+		return listData.get(position).getSmallSceneID();
 	}
 
 	@Override
@@ -73,6 +83,9 @@ public class SceneSmallSceneListAdapter extends BaseAdapter{
 			viewHolder = new ViewHolder();
 			convertView = inflater.inflate(R.layout.scene_item_small_scene, null);// 引用布局文件
 			viewHolder.scene_item_smallscene_name = (TextView)convertView.findViewById(R.id.scene_item_smallscene_name);	
+			viewHolder.button = (ImageView)convertView.findViewById(R.id.scene_item_smallscene_button);
+			viewHolder.animationIV = (ImageView) convertView.findViewById(R.id.animationIV);
+			viewHolder.divider2 = (View)convertView.findViewById(R.id.scene_item_smallscene_divider2);
 			convertView.setTag(viewHolder);// 如果是新产生的view，则设置tag
 		} 
 		else
@@ -82,11 +95,30 @@ public class SceneSmallSceneListAdapter extends BaseAdapter{
 		SmallScene mySmallScene = listData.get(position);
 		//int id = mContext.getResources().getIdentifier("city_"+myCity.getCityPinyin() ,"drawable","com.ne.voiceguider");
 		viewHolder.scene_item_smallscene_name.setText(mySmallScene.getSmallSceneName());
+		
+		/**
+		 * 这段代码来判断是否有正在播放的item，同时设定其状态
+		 */
+		if(app.playSceneID == mySmallScene.getSmallSceneID() && app.mBinder.getService().isPlaying==true)
+		{
+			viewHolder.button.setImageResource(R.drawable.scene_music_pause_icon);
+			viewHolder.animationIV.setImageResource(R.drawable.scene_music_isplaying_animation);
+			animationDrawable = (AnimationDrawable) viewHolder.animationIV
+					.getDrawable();
+			animationDrawable.start();
+		}
+		if(app.playSceneID == mySmallScene.getSmallSceneID()){
+			viewHolder.divider2.setVisibility(0);
+		}
+		
 		return convertView;
 	}
 
 	class ViewHolder {
 		public TextView scene_item_smallscene_name;
+		public ImageView button;
+		public ImageView animationIV;
+		public View divider2;
 	}
 
 

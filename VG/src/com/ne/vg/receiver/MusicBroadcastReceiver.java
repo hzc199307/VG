@@ -20,7 +20,7 @@ public class MusicBroadcastReceiver extends BroadcastReceiver{
 	public final static String INTENT_BUTTONID_TAG = "ButtonId";
 	/** 播放/暂停 按钮点击 ID */
 	public final static int BUTTON_PALY_ID = 2;
-	private Intent intent = new Intent("com.ne.vg.service.MusicService");
+	private Intent mIntent = new Intent("com.ne.vg.service.MusicService");
 	
 	private VGApplication app;
 	
@@ -67,8 +67,8 @@ public class MusicBroadcastReceiver extends BroadcastReceiver{
 		bundle.putInt("op", op);
 		//这个是播放的歌曲
 		bundle.putString("musicresource",null);
-		intent.putExtras(bundle);
-		app.startService(intent);
+		mIntent.putExtras(bundle);
+		app.startService(mIntent);
 	}
 	
 

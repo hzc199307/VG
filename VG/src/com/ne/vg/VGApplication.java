@@ -33,6 +33,8 @@ public class VGApplication extends Application{
 	public MusicBroadcastReceiver bReceiver;
 	/** 通知栏按钮点击事件对应的ACTION */
 	public final static String ACTION_BUTTON = "com.notifications.intent.action.ButtonClick";
+	//定义一个全局变量来存储当前播放的smallSceneID
+	public int playSceneID;
 	
 	public MusicNotification mNotification;
 	//私有构造器，防止外面实例化该对象，
