@@ -58,24 +58,15 @@ public class DBHelper extends SQLiteOpenHelper{
 	 * @throws
 	 */
 	public boolean createDataBase() throws IOException{
-		
-		Log.v(TAG, "111111111");
-		
 			//复制assets中的数据库文件到DB_PATH目录下
 			InputStream myInput = mContext.getAssets().open(ASSETS_NAME);
-			Log.v(TAG, "222222");
 			//往指定目录中写入数据
 			File file = fileUtil.write2SDFromInput(DB_PATH, DB_NAME, myInput);
-			Log.v(TAG, "33333");
 			//判断是否复制成功
 			if(file==null){
-				Log.v(TAG, "44444444");
 				return false;
 			}
-			Log.v(TAG, "5555555");
-			
 			return true;
-		
 	}
 	
 	/**
