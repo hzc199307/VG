@@ -86,6 +86,7 @@ public class LocationUtil {
 
 				@Override
 				public void onReceiveLocation(BDLocation bdLocation) {
+					Log.v(TAG, "BMapLocationUtil BDLocationListener onReceiveLocation");
 					mLocationListener.onLocationChanged(LocationUtil.fromBDLocationToLocation(bdLocation));
 				}
 			});
