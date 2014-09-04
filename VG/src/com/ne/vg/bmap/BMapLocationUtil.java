@@ -6,6 +6,7 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
@@ -34,19 +35,34 @@ public class BMapLocationUtil {
 	private LocationClientOption option = new LocationClientOption();
 //	private MapView mMapView;
 	
-	public BMapLocationUtil(Context mContext,BDLocationListener mListener)
+	public BMapLocationUtil(Context context,BDLocationListener mListener)
 	{
-		this.mContext = mContext;
+		this.mContext = context;
 		//定位初始化
 		mLocClient = new LocationClient(mContext);
 		locData = new LocationData();
 		myListener = mListener;
+		myListener = new BDLocationListener() {
+			
+			@Override
+			public void onReceivePoi(BDLocation arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void onReceiveLocation(BDLocation arg0) {
+				// TODO Auto-generated method stub
+				Log.v(TAG, "定位成功 ");	
+				Toast.makeText(mContext, "onReceiveLocation from baidu", Toast.LENGTH_SHORT).show();
+			}
+		};
 		mLocClient.registerLocationListener(myListener);
 		option.setLocationMode(LocationMode.Hight_Accuracy);//设置定位模式
 		option.setOpenGps(true);//打开gps
 		option.setCoorType("bd09ll");     //设置坐标类型
 		option.setScanSpan(3000);
-		option.setIsNeedAddress(true);//返回的定位结果包含地址信息
+		option.setIsNeedAddress(false);//返回的定位结果包含地址信息
 		option.setNeedDeviceDirect(true);
 		mLocClient.setLocOption(option);	
 	}
@@ -97,6 +113,7 @@ public class BMapLocationUtil {
 			mLocClient.requestLocation();
 		else
 		{
+			Log.v(TAG, "requestLocation else");
 			mLocClient.start();
 			registerOrientation();
 		}
@@ -132,8 +149,8 @@ public class BMapLocationUtil {
 	 * 暂停定位
 	 */
 	public void stop() {
-		mLocClient.stop();
-		unRegisterOrientation();
+//		mLocClient.stop();
+//		unRegisterOrientation();
 	}
 	
 	/**
@@ -141,10 +158,10 @@ public class BMapLocationUtil {
 	 */
 	public void destroy() {
 		// TODO Auto-generated method stub
-		mLocClient.unRegisterLocationListener(myListener);
-		mLocClient.stop();
-		mLocClient = null;
-		unRegisterOrientation();
+//		mLocClient.unRegisterLocationListener(myListener);
+//		mLocClient.stop();
+//		mLocClient = null;
+//		unRegisterOrientation();
 	}
 	
 	/**

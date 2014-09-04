@@ -6,7 +6,7 @@ import java.util.List;
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.ne.vg.bmap.BMapLocationUtil;
-import com.ne.vg.bmap.BMapUtil;
+import com.ne.vg.bmap.BMapOtherUtil;
 import com.ne.vg.bmap.LatLng;
 import com.ne.vg.util.LocationUtil;
 
@@ -37,10 +37,12 @@ public class GMapWebView extends WebView {
 	private final String CHINA_URL = "file:///android_asset/map.html";
 	private final String FOREIGN_URL = "";
 
+	private Context context;
 	public GMapWebView(Context context, AttributeSet attrs)
 	{
 		super(context, attrs);
 
+		this.context = context;
 		init();
 
 		//view = LayoutInflater.from(context).inflate(R.layout.location_button, this);// 引用布局文件
@@ -471,7 +473,7 @@ public class GMapWebView extends WebView {
 	public void requestLoc() {
 		// TODO Auto-generated method stub
 		if(locationUtil ==null)
-			locationUtil = new LocationUtil(getContext(), new LocationListener() {
+			locationUtil = new LocationUtil(context, new LocationListener() {
 
 				@Override
 				public void onStatusChanged(String arg0, int arg1, Bundle arg2) {

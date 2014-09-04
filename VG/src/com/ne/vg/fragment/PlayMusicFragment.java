@@ -72,7 +72,7 @@ public class PlayMusicFragment extends Fragment{
 	@Override
 	public View onCreateView(LayoutInflater inflater,
 			ViewGroup container, Bundle savedInstanceState){
-		Toast.makeText(getActivity(), TAG + " onCreateView", Toast.LENGTH_SHORT).show();
+		//Toast.makeText(getActivity(), TAG + " onCreateView", Toast.LENGTH_SHORT).show();
 		View rootView = inflater.inflate(R.layout.fragement_playmusic,
 				container, false);
 		//Init view

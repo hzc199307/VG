@@ -97,8 +97,8 @@ public class MainActivity extends SlidingFragmentActivity {
 		//获得手机的宽度和高度像素单位为px  
 		String strPM = "手机屏幕分辨率为:" + dm.widthPixels+"* "+dm.heightPixels;  
 
-		Toast.makeText(getApplicationContext(), strPM, Toast.LENGTH_SHORT).show();
-		Toast.makeText(getApplicationContext(), getResources().getDisplayMetrics().densityDpi+"", Toast.LENGTH_SHORT).show(); 
+		//Toast.makeText(getApplicationContext(), strPM, Toast.LENGTH_SHORT).show();
+		//Toast.makeText(getApplicationContext(), getResources().getDisplayMetrics().densityDpi+"", Toast.LENGTH_SHORT).show(); 
 
 		animation1 = new TranslateAnimation(0, (int)(dm.widthPixels*(1-behindWidth-0.05)), 0, 0);
 		animation2 = new TranslateAnimation(-(int)(dm.widthPixels*behindWidth), 0, 0, 0);

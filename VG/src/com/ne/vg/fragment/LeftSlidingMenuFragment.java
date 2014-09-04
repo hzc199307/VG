@@ -23,17 +23,17 @@ import android.widget.Toast;
 public class LeftSlidingMenuFragment extends Fragment implements View.OnClickListener{
 
 	private final static String TAG = "LeftSlidingMenuFragment";
-	
-	
+
+
 	private View home_layout,mine_layout,search_layout,setting_layout;
 
 	private MainActivity mainActivity;
 	@Override
 	public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
-		Toast.makeText(getActivity(), TAG+ " onCreateView", Toast.LENGTH_SHORT).show();
+		//Toast.makeText(getActivity(), TAG+ " onCreateView", Toast.LENGTH_SHORT).show();
 		View view  = inflater.inflate(R.layout.fragment_leftslidingmenu, container,false);
-		
+
 		home_layout = (View)view.findViewById(R.id.home_layout);
 		home_layout.setOnClickListener(this);
 		mine_layout = (View)view.findViewById(R.id.mine_layout);
@@ -42,17 +42,17 @@ public class LeftSlidingMenuFragment extends Fragment implements View.OnClickLis
 		search_layout.setOnClickListener(this);
 		setting_layout = (View)view.findViewById(R.id.setting_layout);
 		setting_layout.setOnClickListener(this);
-		
+
 		mainActivity = (MainActivity) getActivity();
-		
+
 		home_layout.setSelected(true);
 		mine_layout.setSelected(false);
 		search_layout.setSelected(false);
 		setting_layout.setSelected(false);
-	
+
 		return view;
 	}
-	
+
 	@Override
 	public void onClick(View view) {
 		// TODO Auto-generated method stub
@@ -89,32 +89,32 @@ public class LeftSlidingMenuFragment extends Fragment implements View.OnClickLis
 			break;
 		}
 	}
-	
-//	/**
-//	 * 开始标题栏动画
-//	 */
-//	public void startAnimation(TranslateAnimation animation) {
-//		animation.setDuration(400);
-//		animation.setFillAfter(true);
-//		home_layout.startAnimation(animation);
-//		animation.setDuration(animation.getDuration()+500);
-//		mine_layout.startAnimation(animation);
-//		animation.setDuration(animation.getDuration()+500);
-//		search_layout.startAnimation(animation);
-//		animation.setDuration(animation.getDuration()+500);
-//		setting_layout.startAnimation(animation);
-//	}
-//	
-//	/**
-//	 * 关闭标题栏动画
-//	 */
-//	public void clearAnimation() {
-//		home_layout.clearAnimation();
-//		mine_layout.clearAnimation();
-//		search_layout.clearAnimation();
-//		setting_layout.clearAnimation();
-//	}
-	
+
+	//	/**
+	//	 * 开始标题栏动画
+	//	 */
+	//	public void startAnimation(TranslateAnimation animation) {
+	//		animation.setDuration(400);
+	//		animation.setFillAfter(true);
+	//		home_layout.startAnimation(animation);
+	//		animation.setDuration(animation.getDuration()+500);
+	//		mine_layout.startAnimation(animation);
+	//		animation.setDuration(animation.getDuration()+500);
+	//		search_layout.startAnimation(animation);
+	//		animation.setDuration(animation.getDuration()+500);
+	//		setting_layout.startAnimation(animation);
+	//	}
+	//	
+	//	/**
+	//	 * 关闭标题栏动画
+	//	 */
+	//	public void clearAnimation() {
+	//		home_layout.clearAnimation();
+	//		mine_layout.clearAnimation();
+	//		search_layout.clearAnimation();
+	//		setting_layout.clearAnimation();
+	//	}
+
 	@Override
 	public void onDestroyView() {
 		// TODO Auto-generated method stub

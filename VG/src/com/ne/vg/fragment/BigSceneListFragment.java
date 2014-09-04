@@ -68,7 +68,7 @@ public class BigSceneListFragment extends Fragment{
 			ViewGroup container, Bundle savedInstanceState)
 	{
 		//TODO
-		Toast.makeText(getActivity(), TAG + " onCreateView", Toast.LENGTH_SHORT).show();
+		//Toast.makeText(getActivity(), TAG + " onCreateView", Toast.LENGTH_SHORT).show();
 		View rootView = inflater.inflate(R.layout.fragment_bigscenelist,
 				container, false);
 		//Init view

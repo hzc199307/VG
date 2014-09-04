@@ -36,7 +36,7 @@ public class MyLoveFragment extends Fragment{
 	public View onCreateView(LayoutInflater inflater,ViewGroup container, Bundle savedInstanceState)
 	{
 		//TODO
-		Toast.makeText(getActivity(), TAG + " onCreateView", Toast.LENGTH_SHORT).show();
+		//Toast.makeText(getActivity(), TAG + " onCreateView", Toast.LENGTH_SHORT).show();
 		View rootView = inflater.inflate(R.layout.fragment_mylove,
 				container, false);
 		//Init view

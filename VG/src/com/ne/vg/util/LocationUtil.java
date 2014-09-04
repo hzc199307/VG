@@ -78,25 +78,32 @@ public class LocationUtil {
 		else if(SystemUtil.getGPRSStatus()||SystemUtil.getWifiStatus())
 		{
 			if(DEBUG)Log.v(TAG, "requestBMapLoc");
-			bMapLocationUtil = new BMapLocationUtil(mContext, new BDLocationListener() {
-
-				@Override
-				public void onReceivePoi(BDLocation bdLocation) {	
-				}
-
-				@Override
-				public void onReceiveLocation(BDLocation bdLocation) {
-					Log.v(TAG, "BMapLocationUtil BDLocationListener onReceiveLocation");
-					mLocationListener.onLocationChanged(LocationUtil.fromBDLocationToLocation(bdLocation));
-				}
-			});
-			bMapLocationUtil.start();
+			if(bMapLocationUtil==null)
+				bMapLocationUtil = new BMapLocationUtil(mContext, bdLocationListener);
+			bMapLocationUtil.requestLocation();//bMapLocationUtil.start();
 		}
 		else
 		{
 			if(DEBUG)Log.v(TAG, "no loc");
 		}
 	}
+	
+	private BDLocationListener bdLocationListener = new BDLocationListener() {
+		
+		@Override
+		public void onReceivePoi(BDLocation arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+		
+		@Override
+		public void onReceiveLocation(BDLocation bdLocation) {
+			// TODO Auto-generated method stub
+			Toast.makeText(mContext, "onReceiveLocation from baidu", Toast.LENGTH_SHORT).show();
+			Log.v(TAG, "BMapLocationUtil BDLocationListener onReceiveLocation");
+			mLocationListener.onLocationChanged(LocationUtil.fromBDLocationToLocation(bdLocation));
+		}
+	};
 
 	public void stopLoc()
 	{
@@ -118,11 +125,11 @@ public class LocationUtil {
 		return location;
 	}
 
-	@Override
-	protected void finalize() throws Throwable {
-		stopLoc();
-		if(bMapLocationUtil!=null)
-			bMapLocationUtil.destroy();
-		super.finalize();
-	}
+//	@Override
+//	protected void finalize() throws Throwable {
+//		stopLoc();
+//		if(bMapLocationUtil!=null)
+//			bMapLocationUtil.destroy();
+//		super.finalize();
+//	}
 }

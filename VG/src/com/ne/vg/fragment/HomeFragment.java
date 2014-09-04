@@ -65,7 +65,7 @@ public class HomeFragment extends Fragment implements OnClickListener{
 	@Override
 	public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
-		Toast.makeText(getActivity(), TAG+ " onCreateView", Toast.LENGTH_SHORT).show();
+		//Toast.makeText(getActivity(), TAG+ " onCreateView", Toast.LENGTH_SHORT).show();
 		Log.v(TAG, "onCreateView");
 		mVgDao = new VGDao(getActivity());
 		View view  = inflater.inflate(R.layout.fragment_home, container,false);
