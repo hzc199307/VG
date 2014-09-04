@@ -99,7 +99,7 @@ public class VGApplication extends Application{
     }
 	@Override
 	public void onTerminate(){
-		Toast.makeText(getApplicationContext(), "onTerminate", Toast.LENGTH_LONG).show();
+		Log.d(TAG, "on Terminate()");
 		unbindService(this.mConnection);
 		clearNotify(100);
 		super.onTerminate();
@@ -147,7 +147,7 @@ public class VGApplication extends Application{
 	 */
 	@Override
 	public void onLowMemory(){
-		Toast.makeText(getApplicationContext(), "onLowMemory", Toast.LENGTH_LONG).show();
+		Log.d(TAG, "onLowMemory");
 		super.onLowMemory();         
 	    System.gc();   //告诉系统回收 
 		

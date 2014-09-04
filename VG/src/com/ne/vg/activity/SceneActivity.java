@@ -60,6 +60,8 @@ public class SceneActivity extends FragmentActivity implements View.OnClickListe
 	private int bigSceneID;
 	private boolean isPlaying;
 	
+	private boolean isSeekbarChanged;
+	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -149,6 +151,7 @@ public class SceneActivity extends FragmentActivity implements View.OnClickListe
 			@Override
 			public void onStartTrackingTouch(SeekBar arg0) {
 				// TODO Auto-generated method stub
+				
 				isPlaying = app.mBinder.getService().isPlaying;
 			}
 			

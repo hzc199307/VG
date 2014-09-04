@@ -22,6 +22,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.app.AlertDialog;
+import android.app.NotificationManager;
 import android.app.AlertDialog.Builder;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -374,8 +375,14 @@ public class MainActivity extends SlidingFragmentActivity {
 		//		destroyFragment(settingFragment);
 		nowFragment = null;
 		//解除服务的绑定
-
+		clearNotify(100);
 		super.onDestroy();
+	}
+
+	private void clearNotify(int i) {
+		// TODO Auto-generated method stub
+		NotificationManager mNotificationManager = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
+		mNotificationManager.cancel(i);//删除一个特定的通知ID对应的通知
 	}
 
 	/**
