@@ -16,6 +16,9 @@ import com.ne.vg.activity.SceneActivity;
 public class MusicNotification {
 	private NotificationManager mNotificationManager;
 	private Context context;
+	private RemoteViews mRemoteViews;
+	private String musicName;
+	private String author;
 	public final static String ACTION_BUTTON = "com.notifications.intent.action.ButtonClick";
 	public final static String INTENT_BUTTONID_TAG = "ButtonId";
 	/** 播放/暂停 按钮点击 ID */
@@ -34,12 +37,12 @@ public class MusicNotification {
 		//实例化通知栏构造器NotificationCompat
 		NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context);
 		//Notification的自定义布局是RemoteViews
-		RemoteViews mRemoteViews = new RemoteViews(context.getPackageName(), R.layout.statusbar);
+		mRemoteViews = new RemoteViews(context.getPackageName(), R.layout.statusbar);
 		
 		mRemoteViews.setImageViewResource(R.id.custom_song_icon, R.drawable.sing_icon);
 		//API3.0 以上的时候显示按钮，否则消失
-		mRemoteViews.setTextViewText(R.id.tv_custom_song_singer, "谢霆锋");
-		mRemoteViews.setTextViewText(R.id.tv_custom_song_name, "十二道锋味");
+		mRemoteViews.setTextViewText(R.id.tv_custom_song_singer, musicName);
+		mRemoteViews.setTextViewText(R.id.tv_custom_song_name, author);
 		//如果版本号低于3.0，那么不显示按钮
 		if(android.os.Build.VERSION.SDK_INT<=9){
 			mRemoteViews.setViewVisibility(R.id.ll_custom_button, View.GONE);
@@ -79,5 +82,9 @@ public class MusicNotification {
 		//第一个参数为自定义的通知唯一标识，发送通知请求
         mNotificationManager.notify(notifyId, notify);
 	
+	}
+	public void showName(String musicName){
+		this.musicName = musicName;
+		this.author = "天才小土豆";
 	}
 }

@@ -1,5 +1,7 @@
 package com.ne.vg.service;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 
 import com.ne.vg.R;
@@ -29,6 +31,8 @@ public class MusicService extends Service{
 	private String oldresource;
 	private String newResource;
 	public boolean isPlaying;
+	//这个是用来通知
+	public boolean startSuccess;
 
 	public class MyBinder extends Binder{
 		public MusicService getService(){
@@ -54,22 +58,14 @@ public class MusicService extends Service{
 		Log.d(TAG, "onCreate");
 		//初始时设置为没有播放
 		isPlaying = false;
+		startSuccess = false;
 		Toast.makeText(getApplicationContext(), "show media player", Toast.LENGTH_SHORT).show();
-
+		
 		if(mediaPlayer == null){
 			//TODO 这里需要加入音频文件的id
 			oldresource = null;
 			mediaPlayer = MediaPlayer.create(this, R.raw.fengwei);
-			try {
-				//mediaPlayer.setDataSource(oldresource);
-				mediaPlayer.prepare();
-			} catch (IllegalStateException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+		
 
 			mediaPlayer.setLooping(false);
 		}
@@ -143,11 +139,12 @@ public class MusicService extends Service{
 	 */
 	@Override
 	public void onStart(Intent intent, int startId){
-		Log.d(TAG,"onStart");
+		Log.d(TAG,"service is onStart");
 
 		if(intent !=null){
 
 			Bundle bundle = intent.getExtras();
+			Log.d(TAG, "intent is not null");
 			if(bundle!=null){
 				//从bundle中取出传过来的音频文件
 				newResource = bundle.getString("musicresource");
@@ -160,10 +157,14 @@ public class MusicService extends Service{
 				if(!newResource.equals(oldresource))
 				{
 					stop();
+					
 					//TODO 这里需要加入音频文件的id
 					mediaPlayer = new MediaPlayer();
 					try {
-						mediaPlayer.setDataSource(newResource);
+						//mediaPlayer.setDataSource(newResource);
+						File file = new File(newResource);
+						FileInputStream fis = new FileInputStream(file);
+						mediaPlayer.setDataSource(fis.getFD());
 						mediaPlayer.prepare();
 						Log.d(TAG, "new mediaPlayer is created");
 					} catch (IllegalArgumentException e) {
@@ -220,9 +221,14 @@ public class MusicService extends Service{
 
 					}
 				}
+				Log.d(TAG, "bundle is not null");
 			}
+			
 
 		}
+		//完成onStart()
+		startSuccess = true;
+		Log.d(TAG,"startSuccess="+startSuccess);
 		Log.d(TAG, "isPlaying="+ isPlaying);
 
 	}
@@ -266,14 +272,14 @@ public class MusicService extends Service{
 	 * @throws IOException
 	 */
 	public void stop(){
-		if(mediaPlayer != null){
+		if(mediaPlayer != null&&mediaPlayer.isPlaying()){
 			isPlaying = false;
-			mediaPlayer.pause();
 			mediaPlayer.stop();
 			// 在调用stop后如果需要再次通过start进行播放,需要之前调用prepare函数  
-			mediaPlayer.release();
-			mediaPlayer = null;
+			
 		}
+		mediaPlayer.release();
+		mediaPlayer = null;
 	}
 
 	public MediaPlayer getPlayer(){

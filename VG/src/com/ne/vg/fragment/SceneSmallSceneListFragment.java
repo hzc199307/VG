@@ -65,12 +65,14 @@ public class SceneSmallSceneListFragment extends Fragment {
 	private ImageView button;
 	private String cityName;
 	private String bigSceneName;
+	private String smallSceneName;
 	private int bigSceneID;
 	public VGDao mDao;
 	private SceneSmallSceneListAdapter mAdapter;
 	private smallBroadcastReceiver sReceiver;
 	private Handler mHandler;
 	private int mPosition;
+	
 	
 	public SceneSmallSceneListFragment(String cityName,String bigSceneName,int bigSceneID)
 	{
@@ -133,11 +135,20 @@ public class SceneSmallSceneListFragment extends Fragment {
 					long arg3) {
 				Log.d(TAG, " item " + position +" is clicked!");
 				currentView = view;
+				
+				smallSceneName = mDao.getSmallScene(bigSceneID).get(position).getSmallSceneName();
 				startSer(0);
 				mPosition = position;
 				/**
 				 * 这里是重点，由于startSer是在后台开启的，所以需要延时执行后面的代码。
 				 */
+				
+//				//一直到onStart执行完了才能tiaochuxunhuan
+//				while(app.mBinder.getService().startSuccess ==false){
+//					
+//				}
+
+				
 				mHandler = new Handler();
 				Runnable runnable = new Runnable(){
 					@Override
@@ -160,7 +171,7 @@ public class SceneSmallSceneListFragment extends Fragment {
 						button = (ImageView)currentView.findViewById(R.id.scene_item_smallscene_button);
 						//如果正在播放则播动画
 						Log.d(TAG, "isPlaying =" + app.mBinder.getService().isPlaying);
-						if(!app.mBinder.getService().isPlaying)
+						if(app.mBinder.getService().isPlaying)
 						{
 							animationDrawable.start();
 							button.setImageResource(R.drawable.scene_music_pause_icon);
@@ -181,24 +192,27 @@ public class SceneSmallSceneListFragment extends Fragment {
 						
 						//更新界面，及图片改变
 //						app.showNotify();
-						
+						mNotification.showName(smallSceneName);
 						mNotification.showButtonNotify();
 						//调用Activity中的函数,用来更新seekBar
 						mListener.onMusicSelected();
 						
 					}      
 		        };  
-		        mHandler.postDelayed(runnable, 500);// 打开定时器，执行操作 
-				
+		        mHandler.postDelayed(runnable, 600);// 打开定时器，执行操作 
+		    	app.mBinder.getService().startSuccess = false;
 			}
 			
+		
 		});
 	}
 
 	@Override
 	public void onDestroyView() {
 		// TODO Auto-generated method stub
+		getActivity().unregisterReceiver(sReceiver);
 		super.onDestroyView();
+		
 		Log.v(TAG, "onDestroyView");
 	}
 	
@@ -237,7 +251,7 @@ public class SceneSmallSceneListFragment extends Fragment {
 		bundle.putInt("op", op);
 		//这个是播放的歌曲
 		Log.d(TAG, "bigSceneName="+bigSceneName);
-		bundle.putString("musicresource",MusicPlayerUtil.getVoicePath(cityName, bigSceneName, "2大教堂"));
+		bundle.putString("musicresource",MusicPlayerUtil.getVoicePath(cityName, bigSceneName, smallSceneName));
 		intent.putExtras(bundle);
 		getActivity().startService(intent);
 	}

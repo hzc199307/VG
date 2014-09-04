@@ -9,6 +9,7 @@ import com.ne.vg.R.menu;
 import com.ne.vg.activity.SceneActivity.MyOnPageChangeListener;
 import com.ne.vg.activity.SceneActivity.SceneAdapter;
 import com.ne.vg.adapter.RecommendAdapter;
+import com.ne.vg.dao.VGDao;
 import com.ne.vg.util.NotifyUtil;
 import com.ne.vg.view.MyViewPager;
 
@@ -42,9 +43,11 @@ public class RecommendActivity extends FragmentActivity implements View.OnClickL
 	private TextView textView1,textView2;
 	private ImageView imageView1,imageView2;
 	private LinearLayout linearLayout;
+	private TextView recommend_cityname;
 	private int offset = 0;// 动画图片偏移量
 	private int currIndex = 0;// 当前页卡编号
 	private int bmpW;// 动画图片宽度
+	private VGDao mVgDao;
 
 	private final static int ROUTELIST_STATUS = 0,SCENELIST_STATUS = 1;
 	private View recommend_routelist_layout,recommend_scenelist_layout;
@@ -58,7 +61,7 @@ public class RecommendActivity extends FragmentActivity implements View.OnClickL
 		super.onCreate(savedInstanceState);
 		intent = this.getIntent();
 		setContentView(R.layout.activity_recommend);
-
+		mVgDao = new VGDao(this);
 		initTab();
 		initTabAnim();
 		initViewPager();
@@ -84,7 +87,9 @@ public class RecommendActivity extends FragmentActivity implements View.OnClickL
 	 * @Description: 初始化动画，这个就是页卡滑动时，下面的横线也滑动的效果，在这里需要计算一些数据
 	 */
 	private void initTabAnim() {
-		view= (View) findViewById(R.id.recommend_cursor);   
+		view= (View) findViewById(R.id.recommend_cursor);
+		recommend_cityname = (TextView)findViewById(R.id.recommend_cityname);
+		recommend_cityname.setText(mVgDao.getCityName(intent.getExtras().getInt("cityID")));
 		DisplayMetrics dm = new DisplayMetrics();  
 		getWindowManager().getDefaultDisplay().getMetrics(dm);  
 		int screenW = dm.widthPixels;// 获取分辨率宽度  

@@ -76,7 +76,9 @@ public class MainActivity extends SlidingFragmentActivity {
 
 		Log.v(TAG, "onCreate");
 		setContentView(R.layout.activity_main);
-
+		//初始化app
+		app = (VGApplication)this.getApplication();
+		
 		progressDialog = new ProgressDialog(this);
 
 		fragmentManager = getSupportFragmentManager();
@@ -376,6 +378,8 @@ public class MainActivity extends SlidingFragmentActivity {
 		nowFragment = null;
 		//解除服务的绑定
 		clearNotify(100);
+		//这里是试验一下
+		getApplication().unbindService(app.mConnection);
 		super.onDestroy();
 	}
 
@@ -461,7 +465,7 @@ public class MainActivity extends SlidingFragmentActivity {
 			}, 2000);
 		}else{
 			//退出整个程序,第一句我不知道加不加。。
-			unbindService(app.mConnection);
+			//unbindService(app.mConnection);
 			app.exit();
 		}
 	}
