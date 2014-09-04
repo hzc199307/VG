@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
+import com.ne.vg.VGApplication;
 import com.ne.vg.bmap.BMapLocationUtil;
 import com.ne.vg.bmap.BMapOtherUtil;
 import com.ne.vg.bmap.LatLng;
@@ -79,19 +80,30 @@ public class GMapWebView extends WebView {
 	{
 		setupWebView();
 
-		listMarkerItems = new ArrayList<MarkerItem>();
-		MarkerItem item1,item2,item3;
-		item1 = new MyMarkerItem(23.0, 113, "1", "");
-		item2 = new MyMarkerItem(23.500000, 113.500000, "2", "marker1.png");
-		item3 = new MyMarkerItem(23.100000, 113.100000, "3", "marker1.png");
-		listMarkerItems.add(item1);
-		listMarkerItems.add(item2);
-		listMarkerItems.add(item3);
+//		listMarkerItems = new ArrayList<MarkerItem>();
+//		MarkerItem item1,item2,item3;
+//		item1 = new MyMarkerItem(23.0, 113, "1", "");
+//		item2 = new MyMarkerItem(23.500000, 113.500000, "2", "marker1.png");
+//		item3 = new MyMarkerItem(23.100000, 113.100000, "3", "marker1.png");
+//		listMarkerItems.add(item1);
+//		listMarkerItems.add(item2);
+//		listMarkerItems.add(item3);
+//
+//		setMarkerData(listMarkerItems, null, true, null);
+//		setRouteData(listMarkerItems);
+//		showMarkerSpan();
 
-		setMarkerData(listMarkerItems, null, true, null);
-		setRouteData(listMarkerItems);
-		showMarkerSpan();
-
+	}
+	
+	public void setMarkerItems(List<MarkerItem> listMarkerItems) {
+		// TODO Auto-generated method stub
+		this.listMarkerItems = listMarkerItems;
+		if(listMarkerItems!=null)
+		{
+			setMarkerData(listMarkerItems, null, true, null);
+//			setRouteData(listMarkerItems);
+			showMarkerSpan();
+		}
 	}
 
 	private void setupWebView()
@@ -175,10 +187,18 @@ public class GMapWebView extends WebView {
 		String getIcon();
 
 	}
-	public class MyMarkerItem implements MarkerItem,Latlng
+	public static class MyMarkerItem implements MarkerItem,Latlng
 	{
 		String title,icon;
 		double lat,lng;
+		
+		public MyMarkerItem(double lat,double lng,String title) {
+			// TODO Auto-generated constructor stub
+			this.lat = lat;
+			this.lng = lng;
+			this.title = title;
+			this.icon = "marker1.png";
+		}
 
 		public MyMarkerItem(double lat,double lng,String title,String icon) {
 			// TODO Auto-generated constructor stub
@@ -280,7 +300,7 @@ public class GMapWebView extends WebView {
 						//this.loadUrl("javascript:addMarker(23.0, 113.0, 'marker1.png', 'A')");
 						loadUrl("javascript:addMarker("+markerItem.getLat()+","+ markerItem.getLng()+",'"+ markerItem.getIcon()+"','"+ markerItem.getTitle()+"')");
 					}
-					showRoute();
+					//showRoute();
 					showSpan();
 					loadUrl("javascript:setInfoWindowStatus("+infoWindowStatus+")");
 
@@ -348,7 +368,8 @@ public class GMapWebView extends WebView {
 			latlng = (Latlng) listLatlngs.get(i);
 			this.loadUrl("javascript:addPoint("+latlng.getLat()+","+latlng.getLng()+")");
 		}
-		this.loadUrl("javascript:showRoute(true)");
+		if(size>1)
+			this.loadUrl("javascript:showRoute(true)");
 	}
 	/**
 	 * ÒÆ³ýÂ·Ïß
@@ -465,6 +486,11 @@ public class GMapWebView extends WebView {
 	public void setOnClickListener(OnClickListener onClickListener) {
 		this.onMapClickListener = onClickListener;
 	}
+	
+	public void setCenter(double lat,double lng) {
+		// TODO Auto-generated method stub
+		loadUrl("javascript:setCenter("+lat+","+lng+")");
+	}
 
 
 	/**
@@ -473,7 +499,8 @@ public class GMapWebView extends WebView {
 	public void requestLoc() {
 		// TODO Auto-generated method stub
 		if(locationUtil ==null)
-			locationUtil = new LocationUtil(context, new LocationListener() {
+			locationUtil = new LocationUtil(getContext(), new LocationListener() {
+				
 
 				@Override
 				public void onStatusChanged(String arg0, int arg1, Bundle arg2) {

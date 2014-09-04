@@ -2,6 +2,7 @@ package com.ne.vg.activity;
 
 import com.ne.vg.R;
 import com.ne.vg.TestFragment;
+import com.ne.vg.bean.BigScene;
 import com.ne.vg.dao.VGDao;
 import com.ne.vg.fragment.BigSceneIntroDetailFragment;
 import com.ne.vg.fragment.BigSceneIntroFragment;
@@ -24,6 +25,7 @@ import android.widget.FrameLayout.LayoutParams;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 /**
@@ -50,6 +52,9 @@ public class BigSceneDetailActivity extends FragmentActivity {
 	private Intent mIntent;
 	private VGDao mVgDao;
 	private String bigSceneName;
+	
+	private TextView big_scene_detail_title_name;
+	private BigScene bigScene;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -62,10 +67,16 @@ public class BigSceneDetailActivity extends FragmentActivity {
 		bsd_btn_location = (ImageButton)findViewById(R.id.bsd_btn_location);
 		big_scene_detail_other = (View)findViewById(R.id.big_scene_detail_other);
 		
+		big_scene_detail_title_name = (TextView)findViewById(R.id.big_scene_detail_title_name);
+		
 		/** 跟数据传输相关*/
 		mVgDao = new VGDao(this);
 		mIntent = this.getIntent();
+		
+		bigScene = mVgDao.getBigSceneObject(mIntent.getExtras().getInt("bigSceneID"));
+		
 		bigSceneName = mVgDao.getBigSceneName(mIntent.getExtras().getInt("bigSceneID"));
+		big_scene_detail_title_name.setText(bigSceneName);
 		//		if(savedInstanceState == null)
 		//		{
 		//			if(gMapFragment==null)
@@ -108,6 +119,12 @@ public class BigSceneDetailActivity extends FragmentActivity {
 					}
 				}
 			});
+			if(bigScene!=null)
+			{
+				gMapFragment.setCenter(bigScene.getLatitude(), bigScene.getLongtitude());
+			}
+			
+				
 		}
 		if(bigSceneIntroFragment==null)
 			bigSceneIntroFragment = new BigSceneIntroFragment();

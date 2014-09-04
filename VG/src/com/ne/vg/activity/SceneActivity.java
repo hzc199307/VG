@@ -1,12 +1,16 @@
 package com.ne.vg.activity;
 
+import java.util.List;
+
 import com.ne.vg.R;
 import com.ne.vg.VGApplication;
+import com.ne.vg.bean.SmallScene;
 import com.ne.vg.dao.VGDao;
 import com.ne.vg.fragment.BigSceneListFragment;
 import com.ne.vg.fragment.SceneSmallSceneListFragment;
 import com.ne.vg.fragment.SceneSmallSceneListFragment.OnMusicSelectedListener;
 import com.ne.vg.gmap.GMapFragment;
+import com.ne.vg.gmap.GMapWebView.MarkerItem;
 import com.ne.vg.util.MusicPlayerUtil;
 import com.ne.vg.view.MyViewPager;
 
@@ -62,6 +66,7 @@ public class SceneActivity extends FragmentActivity implements View.OnClickListe
 	
 	private boolean isSeekbarChanged;
 	
+	private List<SmallScene> listSmallScenes;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +80,7 @@ public class SceneActivity extends FragmentActivity implements View.OnClickListe
 		bigSceneName = mIntent.getExtras().getString("bigSceneName");
 		bigSceneID = mIntent.getExtras().getInt("bigSceneID");
 		
+		listSmallScenes = mVgDao.getSmallScene(bigSceneID);
 		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_scene);
@@ -265,6 +271,7 @@ public class SceneActivity extends FragmentActivity implements View.OnClickListe
 			case 0:
 				Log.v(TAG, "new GMapFragment()");
 				gMapFragment = new GMapFragment();
+				gMapFragment.setSmallScenes(listSmallScenes);
 				return gMapFragment;
 			case 1:
 				return new SceneSmallSceneListFragment(cityName,bigSceneName,bigSceneID);

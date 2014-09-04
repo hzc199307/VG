@@ -11,11 +11,14 @@ import com.ne.vg.adapter.CityListAdapter;
 import com.ne.vg.bean.City;
 import com.ne.vg.bean.CreateData;
 import com.ne.vg.dao.VGDao;
+import com.ne.vg.util.LocationUtil;
 import com.slidingmenu.lib.app.SlidingFragmentActivity;
 
 import android.R.layout;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.location.Location;
+import android.location.LocationListener;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -116,6 +119,7 @@ public class HomeFragment extends Fragment implements OnClickListener{
 		case R.id.home_tab_locationEnter: 
 			MainActivity mainActivity = (MainActivity)getActivity();
 			mainActivity.showProgressDialog(R.string.locating);
+			//requestLoc();
 			//progressDialog.isShowing();
 			break;
 		case R.id.home_tab_randomEnter:
@@ -124,6 +128,48 @@ public class HomeFragment extends Fragment implements OnClickListener{
 		default:
 			break;
 		}
+	}
+	
+	private LocationUtil locationUtil;
+	/**
+	 * 定位 地图插入定位坐标
+	 */
+	public void requestLoc() {
+		// TODO Auto-generated method stub
+		if(locationUtil ==null)
+			locationUtil = new LocationUtil(getActivity(), new LocationListener() {
+				
+
+				@Override
+				public void onStatusChanged(String arg0, int arg1, Bundle arg2) {
+					// TODO Auto-generated method stub
+
+				}
+
+				@Override
+				public void onProviderEnabled(String arg0) {
+					// TODO Auto-generated method stub
+
+				}
+
+				@Override
+				public void onProviderDisabled(String arg0) {
+					// TODO Auto-generated method stub
+
+				}
+
+				@Override
+				public void onLocationChanged(Location arg0) {
+					// TODO Auto-generated method stub
+					Toast.makeText(getActivity(), ""+arg0.getLatitude()+" "+arg0.getLongitude()+" "+arg0.getBearing(), Toast.LENGTH_SHORT).show();
+					//loadUrl("javascript:setCenter("+arg0.getLatitude()+","+arg0.getLongitude()+")");
+					//loadUrl("javascript:setLocMarker("+arg0.getLatitude()+","+arg0.getLongitude()+","+100+")");
+					locationUtil.stopLoc();
+				}
+			});
+//		locationUtil.requestGPSLoc();
+//		locationUtil.requestNetLoc();
+		locationUtil.requestLoc();
 	}
 
 	@Override

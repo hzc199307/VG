@@ -139,6 +139,20 @@ public class VGDao {
 		return listBigScenes;
 	}
 	
+	public BigScene getBigSceneObject(int BigSceneID){
+		BigScene mBigScene = new BigScene();
+		String[] arg = {BigSceneID+""};
+		Cursor cr = db.query("bigScene", null, "bigSceneID=?", arg, null, null, null);
+		cr.moveToFirst();
+		mBigScene.setLatitude(cr.getDouble(cr.getColumnIndex(BigSceneColumns.latitude)));
+		mBigScene.setLevel(cr.getInt(cr.getColumnIndex(BigSceneColumns.level)));
+		mBigScene.setLongtitude(cr.getDouble(cr.getColumnIndex(BigSceneColumns.longtitude)));
+		mBigScene.setLoveNum(cr.getInt(cr.getColumnIndex(BigSceneColumns.loveNum)));
+		mBigScene.setRecordNum(cr.getInt(cr.getColumnIndex(BigSceneColumns.recordNum)));
+		mBigScene.setResource(cr.getString(cr.getColumnIndex(BigSceneColumns.resource)));
+		return mBigScene;
+	}
+	
 	public String getBigSceneName(int BigSceneID){
 		String name = "";
 		String[] arg = {BigSceneID+""};

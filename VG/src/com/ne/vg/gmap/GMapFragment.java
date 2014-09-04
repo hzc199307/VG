@@ -1,6 +1,13 @@
 package com.ne.vg.gmap;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.ne.vg.R;
+import com.ne.vg.bean.SmallScene;
+import com.ne.vg.bmap.LatLng;
+import com.ne.vg.gmap.GMapWebView.MarkerItem;
+import com.ne.vg.gmap.GMapWebView.MyMarkerItem;
 
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
@@ -62,9 +69,64 @@ public class GMapFragment extends Fragment{
 		// 添加一个对象, 让JS可以访问该对象的方法, 该对象中可以调用JS中的方法  
 		//        webviewGMap.addJavascriptInterface(new Contact(), "contact");  
 		
-		if(onClickListener!=null)webviewGMap.setOnClickListener(onClickListener);
+		
 		return view;
 	}
+	@Override
+	public void onResume() 
+	{
+		super.onResume();
+		Log.v(TAG, "onResume");
+		if(isSet==false&&webviewGMap!=null&&listMarkerItems!=null)
+		{
+			isSet = true;
+			webviewGMap.setMarkerItems(listMarkerItems);
+		}
+		if(onClickListener!=null)webviewGMap.setOnClickListener(onClickListener);
+		if(latLngCenter!=null)webviewGMap.setCenter(latLngCenter.getLatitude(), latLngCenter.getLongitude());
+	};
+	
+	List<MarkerItem> listMarkerItems;
+	boolean isSet = false;
+	/**
+	 * 向地图设置数据
+	 * @param listSmallScenes
+	 */
+	public void setSmallScenes(List<SmallScene> listSmallScenes) {
+		// TODO Auto-generated method stub
+		int size = listSmallScenes.size();
+		listMarkerItems = new ArrayList<MarkerItem>();
+		SmallScene smallScene;
+		MarkerItem item ;
+		for(int i=0;i<size;i++)
+		{
+			smallScene = listSmallScenes.get(i);
+			//item = new MyMarkerItem(23, 43, "1");
+			item = new MyMarkerItem(smallScene.getLatitude(), smallScene.getLongtitude(), (i+1)+smallScene.getSmallSceneName());
+			listMarkerItems.add(item);
+		}
+		if(webviewGMap!=null)
+		{
+			isSet = true;
+			webviewGMap.setMarkerItems(listMarkerItems);
+		}
+			
+	}
+	
+	
+	private LatLng latLngCenter;
+	public void setCenter(double lat,double lng) {
+		// TODO Auto-generated method stub
+		if(webviewGMap!=null)
+		{
+			webviewGMap.setCenter(lat, lng);
+		}
+		latLngCenter = new LatLng(lat, lng);
+	}
+//	public void setMarkerItems(List<MarkerItem> listMarkerItems) {
+//		// TODO Auto-generated method stub
+//		webviewGMap.setMarkerItems(listMarkerItems);
+//	}
 
 	@Override
 	public void onDestroyView() {

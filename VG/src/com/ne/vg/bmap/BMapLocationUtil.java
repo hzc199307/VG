@@ -6,7 +6,6 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
@@ -18,7 +17,6 @@ import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.MyLocationOverlay;
 
 /**
- * （暂时把方向传感器的关掉了）
  * 百度地图 定位 工具类 （基于baiduMap SDK V2.4.1  、baidu loc sdk V4.1）
  * @ClassName: BMapLocationUtil 
  * @author 贺智超
@@ -35,34 +33,19 @@ public class BMapLocationUtil {
 	private LocationClientOption option = new LocationClientOption();
 //	private MapView mMapView;
 	
-	public BMapLocationUtil(Context context,BDLocationListener mListener)
+	public BMapLocationUtil(Context mContext,BDLocationListener mListener)
 	{
-		this.mContext = context;
+		this.mContext = mContext;
 		//定位初始化
 		mLocClient = new LocationClient(mContext);
 		locData = new LocationData();
 		myListener = mListener;
-		myListener = new BDLocationListener() {
-			
-			@Override
-			public void onReceivePoi(BDLocation arg0) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void onReceiveLocation(BDLocation arg0) {
-				// TODO Auto-generated method stub
-				Log.v(TAG, "定位成功 ");	
-				Toast.makeText(mContext, "onReceiveLocation from baidu", Toast.LENGTH_SHORT).show();
-			}
-		};
 		mLocClient.registerLocationListener(myListener);
 		option.setLocationMode(LocationMode.Hight_Accuracy);//设置定位模式
 		option.setOpenGps(true);//打开gps
 		option.setCoorType("bd09ll");     //设置坐标类型
-		option.setScanSpan(3000);
-		option.setIsNeedAddress(false);//返回的定位结果包含地址信息
+		option.setScanSpan(2000);
+		option.setIsNeedAddress(true);//返回的定位结果包含地址信息
 		option.setNeedDeviceDirect(true);
 		mLocClient.setLocOption(option);	
 	}
@@ -113,7 +96,6 @@ public class BMapLocationUtil {
 			mLocClient.requestLocation();
 		else
 		{
-			Log.v(TAG, "requestLocation else");
 			mLocClient.start();
 			registerOrientation();
 		}
@@ -123,7 +105,7 @@ public class BMapLocationUtil {
 	 * 定位每2秒一次
 	 */
 	public void requestLocationEvery2() {
-		setScanSpan(3000);
+		setScanSpan(2000);
 		mLocClient.start();
 		registerOrientation();
 	}
@@ -149,8 +131,8 @@ public class BMapLocationUtil {
 	 * 暂停定位
 	 */
 	public void stop() {
-//		mLocClient.stop();
-//		unRegisterOrientation();
+		mLocClient.stop();
+		unRegisterOrientation();
 	}
 	
 	/**
@@ -158,10 +140,10 @@ public class BMapLocationUtil {
 	 */
 	public void destroy() {
 		// TODO Auto-generated method stub
-//		mLocClient.unRegisterLocationListener(myListener);
-//		mLocClient.stop();
-//		mLocClient = null;
-//		unRegisterOrientation();
+		mLocClient.unRegisterLocationListener(myListener);
+		mLocClient.stop();
+		mLocClient = null;
+		unRegisterOrientation();
 	}
 	
 	/**
@@ -205,11 +187,11 @@ public class BMapLocationUtil {
 	@SuppressWarnings({ "deprecation" })
 	private void registerOrientation()
 	{
-//		if(sensorManager!=null&&mySensorEventListener!=null)
-//		{
-//			Sensor sensor_orientation=sensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION);
-//		    sensorManager.registerListener(mySensorEventListener,sensor_orientation, SensorManager.SENSOR_DELAY_UI);
-//		}
+		if(sensorManager!=null&&mySensorEventListener!=null)
+		{
+			Sensor sensor_orientation=sensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION);
+		    sensorManager.registerListener(mySensorEventListener,sensor_orientation, SensorManager.SENSOR_DELAY_UI);
+		}
 	}
 	
 	/**
@@ -217,8 +199,8 @@ public class BMapLocationUtil {
 	 */
 	private void unRegisterOrientation()
 	{
-//		if(sensorManager!=null&&mySensorEventListener!=null)
-//			sensorManager.unregisterListener(mySensorEventListener);
+		if(sensorManager!=null&&mySensorEventListener!=null)
+			sensorManager.unregisterListener(mySensorEventListener);
 	}
 
 	/**
