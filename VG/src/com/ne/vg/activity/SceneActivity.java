@@ -76,10 +76,10 @@ public class SceneActivity extends FragmentActivity implements View.OnClickListe
 		app = (VGApplication)this.getApplication();
 		mVgDao = new VGDao(this);
 		mIntent = this.getIntent();
-		cityName = mIntent.getExtras().getString("cityName");
-		bigSceneName = mIntent.getExtras().getString("bigSceneName");
-		bigSceneID = mIntent.getExtras().getInt("bigSceneID");
 		
+		bigSceneID = mIntent.getExtras().getInt("bigSceneID");
+		bigSceneName = mVgDao.getBigSceneObject(bigSceneID).getBigSceneName();
+		cityName = mVgDao.getCityName(mVgDao.getBigSceneObject(bigSceneID).getCityID());
 		listSmallScenes = mVgDao.getSmallScene(bigSceneID);
 		
 		super.onCreate(savedInstanceState);
