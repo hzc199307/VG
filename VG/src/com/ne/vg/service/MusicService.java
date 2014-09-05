@@ -59,7 +59,7 @@ public class MusicService extends Service{
 		//初始时设置为没有播放
 		isPlaying = false;
 		startSuccess = false;
-		Toast.makeText(getApplicationContext(), "show media player", Toast.LENGTH_SHORT).show();
+		//Toast.makeText(getApplicationContext(), "show media player", Toast.LENGTH_SHORT).show();
 		
 		if(mediaPlayer == null){
 			//TODO 这里需要加入音频文件的id
@@ -99,12 +99,12 @@ public class MusicService extends Service{
 				break;      
 				//来电          
 			case TelephonyManager.CALL_STATE_RINGING:      
-				Toast.makeText(getApplication(), "incoming", Toast.LENGTH_LONG).show();      
+				//Toast.makeText(getApplication(), "incoming", Toast.LENGTH_LONG).show();      
 				pause();
 				break;      
 				//摘机状态。
 			case TelephonyManager.CALL_STATE_OFFHOOK:      
-				Toast.makeText(getApplication(), "in a call", Toast.LENGTH_LONG).show();      
+				//Toast.makeText(getApplication(), "in a call", Toast.LENGTH_LONG).show();      
 				pause();
 				break;
 			}
@@ -127,7 +127,7 @@ public class MusicService extends Service{
 	 */
 	public void onDestroy(){
 		Log.d(TAG, "onDestroy");
-		Toast.makeText(getApplicationContext(), "stop media player", Toast.LENGTH_LONG).show();
+		//Toast.makeText(getApplicationContext(), "stop media player", Toast.LENGTH_LONG).show();
 		if(mediaPlayer!=null){
 			mediaPlayer.stop();
 			mediaPlayer.release();
@@ -202,7 +202,7 @@ public class MusicService extends Service{
 				oldresource = newResource;
 
 				int op = bundle.getInt("op");
-				Toast.makeText(getApplicationContext(), "on start ,op :"+op, Toast.LENGTH_SHORT).show();
+				//Toast.makeText(getApplicationContext(), "on start ,op :"+op, Toast.LENGTH_SHORT).show();
 				//TODO 如果op不为0
 				if(op!=0){
 					switch(op){
@@ -242,7 +242,7 @@ public class MusicService extends Service{
 	 */
 	public void play(){
 		if(!mediaPlayer.isPlaying()){
-			Toast.makeText(getApplicationContext(), "is not play", Toast.LENGTH_SHORT).show();
+			//Toast.makeText(getApplicationContext(), "is not play", Toast.LENGTH_SHORT).show();
 			isPlaying = true;
 			mediaPlayer.start();
 		}

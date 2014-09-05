@@ -81,7 +81,7 @@ public class MusicNotification {
 		
 		mBuilder.setContent(mRemoteViews)
 				//设置通知栏点击意图
-				.setContentIntent(pendingIntent)
+				//.setContentIntent(pendingIntent)
 				.setWhen(System.currentTimeMillis())// 通知产生的时间，会在通知信息里显示
 				.setTicker("正在播放")
 				.setPriority(Notification.PRIORITY_DEFAULT)// 设置该通知优先级

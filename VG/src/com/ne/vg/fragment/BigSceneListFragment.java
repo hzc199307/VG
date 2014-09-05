@@ -98,7 +98,7 @@ public class BigSceneListFragment extends Fragment{
 					long arg3) {
 				Log.e("panshan"," " + position);
 				// TODO Auto-generated method stub				
-				Toast.makeText(getActivity().getApplicationContext(), "pic" + (position+1), Toast.LENGTH_SHORT).show();
+				
 				mIntent = new Intent(getActivity(),BigSceneDetailActivity.class);
 				
 				int bigSceneID = mVgDao.getBigScene(cityID).get(position).getBigSceneID();

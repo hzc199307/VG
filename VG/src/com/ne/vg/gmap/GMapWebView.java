@@ -586,7 +586,7 @@ public class GMapWebView extends WebView {
 				@Override
 				public void onLocationChanged(Location arg0) {
 					// TODO Auto-generated method stub
-					Toast.makeText(getContext(), ""+arg0.getLatitude()+" "+arg0.getLongitude()+" "+arg0.getBearing(), Toast.LENGTH_SHORT).show();
+					Toast.makeText(getContext(), "定位成功："+arg0.getLatitude()+" "+arg0.getLongitude()+" "+arg0.getBearing(), Toast.LENGTH_SHORT).show();
 					//loadUrl("javascript:setCenter("+arg0.getLatitude()+","+arg0.getLongitude()+")");
 					loadUrl("javascript:setLocMarker("+arg0.getLatitude()+","+arg0.getLongitude()+","+100+")");
 					locationUtil.stopLoc();
