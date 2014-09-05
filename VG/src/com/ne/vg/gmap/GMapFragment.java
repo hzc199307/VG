@@ -68,8 +68,8 @@ public class GMapFragment extends Fragment{
 		//		});
 		// 添加一个对象, 让JS可以访问该对象的方法, 该对象中可以调用JS中的方法  
 		//        webviewGMap.addJavascriptInterface(new Contact(), "contact");  
-		
-		
+
+
 		return view;
 	}
 	@Override
@@ -83,9 +83,13 @@ public class GMapFragment extends Fragment{
 			webviewGMap.setMarkerItems(listMarkerItems);
 		}
 		if(onClickListener!=null)webviewGMap.setOnClickListener(onClickListener);
-		if(latLngCenter!=null)webviewGMap.setCenter(latLngCenter.getLatitude(), latLngCenter.getLongitude());
+		if(latLngCenter!=null)
+		{
+			Log.v(TAG, "webviewGMap.setCenter");
+			webviewGMap.setCenter(latLngCenter.getLatitude(), latLngCenter.getLongitude());
+		}
 	};
-	
+
 	List<MarkerItem> listMarkerItems;
 	boolean isSet = false;
 	/**
@@ -110,10 +114,10 @@ public class GMapFragment extends Fragment{
 			isSet = true;
 			webviewGMap.setMarkerItems(listMarkerItems);
 		}
-			
+
 	}
-	
-	
+
+
 	private LatLng latLngCenter;
 	public void setCenter(double lat,double lng) {
 		// TODO Auto-generated method stub
@@ -123,10 +127,10 @@ public class GMapFragment extends Fragment{
 		}
 		latLngCenter = new LatLng(lat, lng);
 	}
-//	public void setMarkerItems(List<MarkerItem> listMarkerItems) {
-//		// TODO Auto-generated method stub
-//		webviewGMap.setMarkerItems(listMarkerItems);
-//	}
+	//	public void setMarkerItems(List<MarkerItem> listMarkerItems) {
+	//		// TODO Auto-generated method stub
+	//		webviewGMap.setMarkerItems(listMarkerItems);
+	//	}
 
 	@Override
 	public void onDestroyView() {
@@ -156,13 +160,13 @@ public class GMapFragment extends Fragment{
 		Log.v(TAG, "onDestroy");
 		//Toast.makeText(getActivity(), TAG+ " onDestroy", Toast.LENGTH_SHORT).show();
 	}
-	
+
 	private View.OnClickListener onClickListener;
 	public void setOnClickListener(View.OnClickListener onClickListener)
 	{
 		this.onClickListener = onClickListener;
 	}
-	
+
 	/**
 	 * 定位 地图插入定位坐标
 	 */

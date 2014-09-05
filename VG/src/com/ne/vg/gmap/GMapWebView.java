@@ -79,7 +79,7 @@ public class GMapWebView extends WebView {
 	public void init()
 	{
 		setupWebView();
-
+		setWebViewClient();
 //		listMarkerItems = new ArrayList<MarkerItem>();
 //		MarkerItem item1,item2,item3;
 //		item1 = new MyMarkerItem(23.0, 113, "1", "");
@@ -102,7 +102,7 @@ public class GMapWebView extends WebView {
 		{
 			setMarkerData(listMarkerItems, null, true, null);
 //			setRouteData(listMarkerItems);
-			showMarkerSpan();
+			showMarkerSpan();wantShowMarkerSpan=true;
 		}
 	}
 
@@ -267,6 +267,7 @@ public class GMapWebView extends WebView {
 	 * 展示所有的Marker。
 	 * 如果页面加载完，就直接执行代码；  如果没加载完，等加载完成再执行。
 	 */
+	private boolean wantShowMarkerSpan = false;
 	public void showMarkerSpan()
 	{
 
@@ -285,28 +286,57 @@ public class GMapWebView extends WebView {
 		}
 		else
 		{
-			this.setWebViewClient(new WebViewClient()
-			{
-				@Override
-				public void onPageFinished(WebView view, String url) 
-				{
-					// TODO Auto-generated method stub
-					super.onPageFinished(view, url);
-					isPageFinished = true;
-					MarkerItem markerItem;
-					for(int i=0;i<dataSize;i++)
-					{
-						markerItem = listMarkerItems.get(i);
-						//this.loadUrl("javascript:addMarker(23.0, 113.0, 'marker1.png', 'A')");
-						loadUrl("javascript:addMarker("+markerItem.getLat()+","+ markerItem.getLng()+",'"+ markerItem.getIcon()+"','"+ markerItem.getTitle()+"')");
-					}
-					//showRoute();
-					showSpan();
-					loadUrl("javascript:setInfoWindowStatus("+infoWindowStatus+")");
-
-				}
-			});
+//			this.setWebViewClient(new WebViewClient()
+//			{
+//				@Override
+//				public void onPageFinished(WebView view, String url) 
+//				{
+//					// TODO Auto-generated method stub
+//					super.onPageFinished(view, url);
+//					Log.v(TAG, "onPageFinished");
+//					if(latLngCenter!=null)
+//					{
+//						Log.v(TAG, "onPageFinished setCenter");
+//						loadUrl("javascript:setCenter("+latLngCenter.getLatitude()+","+latLngCenter.getLongitude()+")");
+//					}
+//					isPageFinished = true;
+//					MarkerItem markerItem;
+//					for(int i=0;i<dataSize;i++)
+//					{
+//						markerItem = listMarkerItems.get(i);
+//						//this.loadUrl("javascript:addMarker(23.0, 113.0, 'marker1.png', 'A')");
+//						loadUrl("javascript:addMarker("+markerItem.getLat()+","+ markerItem.getLng()+",'"+ markerItem.getIcon()+"','"+ markerItem.getTitle()+"')");
+//					}
+//					//showRoute();
+//					showSpan();
+//					loadUrl("javascript:setInfoWindowStatus("+infoWindowStatus+")");
+//
+//				}
+//			});
 		}
+	}
+	
+	/**
+	 * onPageFinished监听
+	 */
+	public void setWebViewClient() {
+		this.setWebViewClient(new WebViewClient()
+		{
+			@Override
+			public void onPageFinished(WebView view, String url) 
+			{
+				// TODO Auto-generated method stub
+				super.onPageFinished(view, url);
+				isPageFinished = true;
+				Log.v(TAG, "onPageFinished");
+				if(latLngCenter!=null)
+				{
+					Log.v(TAG, "onPageFinished setCenter");
+					loadUrl("javascript:setCenter("+latLngCenter.getLatitude()+","+latLngCenter.getLongitude()+")");
+				}
+				if(wantShowMarkerSpan)showMarkerSpan();
+			}
+		});
 	}
 
 	/**
@@ -487,11 +517,11 @@ public class GMapWebView extends WebView {
 		this.onMapClickListener = onClickListener;
 	}
 	
+	private LatLng latLngCenter;
 	public void setCenter(double lat,double lng) {
 		// TODO Auto-generated method stub
-		loadUrl("javascript:setCenter("+lat+","+lng+")");
+		latLngCenter = new LatLng(lat, lng);
 	}
-
 
 	/**
 	 * 定位 地图插入定位坐标
