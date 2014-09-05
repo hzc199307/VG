@@ -21,7 +21,7 @@ import android.content.ServiceConnection;
 import android.database.Cursor;
 import android.os.IBinder;
 import android.util.Log;
-import android.widget.Toast;
+
 
 public class VGApplication extends Application{
 	
