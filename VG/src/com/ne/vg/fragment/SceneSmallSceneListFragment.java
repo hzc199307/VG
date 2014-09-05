@@ -158,6 +158,7 @@ public class SceneSmallSceneListFragment extends Fragment {
 						
 						if(animationDrawable!=null){
 							animationDrawable.stop();
+							button.setImageResource(R.drawable.scene_music_play_icon);
 						}
 						if(divider2!=null){
 							//8代表为gone,0代表可见
