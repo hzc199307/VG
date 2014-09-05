@@ -17,8 +17,8 @@ public class MusicNotification {
 	private NotificationManager mNotificationManager;
 	private Context context;
 	private RemoteViews mRemoteViews;
-	private String musicName;
-	private String author;
+	private static String musicName;
+	private static String author;
 	public final static String ACTION_BUTTON = "com.notifications.intent.action.ButtonClick";
 	public final static String INTENT_BUTTONID_TAG = "ButtonId";
 	/** ²¥·Å/ÔÝÍ£ °´Å¥µã»÷ ID */
