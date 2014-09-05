@@ -106,7 +106,7 @@ public class GMapFragment extends Fragment{
 		{
 			smallScene = listSmallScenes.get(i);
 			//item = new MyMarkerItem(23, 43, "1");
-			item = new MyMarkerItem(smallScene.getLatitude(), smallScene.getLongtitude(), (i+1)+smallScene.getSmallSceneName());
+			item = new MyMarkerItem(smallScene.getLatitude(), smallScene.getLongtitude(), (i+1)+"."+smallScene.getSmallSceneName());
 			listMarkerItems.add(item);
 		}
 		if(webviewGMap!=null)

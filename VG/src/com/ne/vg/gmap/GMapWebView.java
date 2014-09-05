@@ -281,7 +281,7 @@ public class GMapWebView extends WebView {
 				//this.loadUrl("javascript:addMarker(23.0, 113.0, 'marker1.png', 'A')");
 				loadUrl("javascript:addMarker("+markerItem.getLat()+","+ markerItem.getLng()+",'"+ markerItem.getIcon()+"','"+ markerItem.getTitle()+"')");
 			}
-			showRoute();
+			//showRoute();
 			showSpan();
 			loadUrl("javascript:setInfoWindowStatus("+this.infoWindowStatus+")");
 		}
@@ -355,7 +355,8 @@ public class GMapWebView extends WebView {
 	 */
 	public void showSpan()
 	{
-		this.loadUrl("javascript:showSpan()");
+		//this.loadUrl("javascript:showSpan()");
+		this.loadUrl("javascript:showSpanWithAnimation()");
 	}
 
 	/**

@@ -142,9 +142,9 @@ public class RouteDayFragment extends Fragment {
 				// TODO Auto-generated method stub
 				mIntent = new Intent(getActivity(),BigSceneDetailActivity.class);
 				//这里的position是不是从0开始算的？
-				mIntent.putExtra("bigSceneID",bigSceneIDs[position]);
-				startActivity(mIntent);
-				((RouteActivity)getActivity()).destroyGMapFragment();
+//				mIntent.putExtra("bigSceneID",bigSceneIDs[position]);
+//				startActivity(mIntent);
+//				((RouteActivity)getActivity()).destroyGMapFragment();
 			}
 		});
 		return rootView;
