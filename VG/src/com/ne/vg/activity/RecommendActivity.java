@@ -107,10 +107,12 @@ public class RecommendActivity extends FragmentActivity implements View.OnClickL
 		Log.d(TAG, "cityID=" + intent.getExtras().getInt("cityID"));
 		recommendAdapter = new RecommendAdapter(getSupportFragmentManager(),intent.getExtras().getInt("cityID") );
 		viewPager.setAdapter(recommendAdapter);  
-		viewPager.setCurrentItem(ROUTELIST_STATUS);  
+		//viewPager.setCurrentItem(ROUTELIST_STATUS);  TODO
+		viewPager.setCurrentItem(SCENELIST_STATUS);
 		myOnPageChangeListener = new MyOnPageChangeListener();
 		viewPager.setOnPageChangeListener(myOnPageChangeListener);  
-		myOnPageChangeListener.onPageSelected(ROUTELIST_STATUS);
+		//myOnPageChangeListener.onPageSelected(ROUTELIST_STATUS); TODO
+		myOnPageChangeListener.onPageSelected(SCENELIST_STATUS);
 	}
 
 	//	/**
