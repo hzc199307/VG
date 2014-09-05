@@ -97,6 +97,7 @@ public class HomeFragment extends Fragment implements OnClickListener{
 				((MainActivity)getActivity()).destroyAllFragmentWithoutNow();
 			}
 		});
+		home_title_left = (View)view.findViewById(R.id.home_title_left);
 		home_title_search_btn = (ImageButton)view.findViewById(R.id.home_title_search_btn);
 		home_title_search_btn.setOnClickListener(this);
 
