@@ -101,7 +101,7 @@ public class GMapWebView extends WebView {
 		if(listMarkerItems!=null)
 		{
 			setMarkerData(listMarkerItems, null, true, null);
-//			setRouteData(listMarkerItems);
+			setRouteData(listMarkerItems);
 			showMarkerSpan();wantShowMarkerSpan=true;
 		}
 	}
@@ -256,7 +256,7 @@ public class GMapWebView extends WebView {
 	{
 		this.listMarkerItems = listMarkerItems;
 		dataSize = listMarkerItems.size();
-		Toast.makeText(getContext(), "设置了"+dataSize+"个Marker", Toast.LENGTH_SHORT).show();
+		//Toast.makeText(getContext(), "设置了"+dataSize+"个Marker", Toast.LENGTH_SHORT).show();
 		this.onMarkerClickListener = onMarkerClickListener;
 		this.infoWindowClickListener = infoWindowClickListener;
 		this.infoWindowStatus = infoWindowStatus;
@@ -273,7 +273,7 @@ public class GMapWebView extends WebView {
 
 		if(isPageFinished == true)
 		{
-			Toast.makeText(getContext(), "showMarker,isPageFinished "+isPageFinished, Toast.LENGTH_SHORT).show();
+			//Toast.makeText(getContext(), "showMarker,isPageFinished "+isPageFinished, Toast.LENGTH_SHORT).show();
 			MarkerItem markerItem;
 			for(int i=0;i<dataSize;i++)
 			{
@@ -281,6 +281,7 @@ public class GMapWebView extends WebView {
 				//this.loadUrl("javascript:addMarker(23.0, 113.0, 'marker1.png', 'A')");
 				loadUrl("javascript:addMarker("+markerItem.getLat()+","+ markerItem.getLng()+",'"+ markerItem.getIcon()+"','"+ markerItem.getTitle()+"')");
 			}
+			showRoute();
 			showSpan();
 			loadUrl("javascript:setInfoWindowStatus("+this.infoWindowStatus+")");
 		}
@@ -431,7 +432,20 @@ public class GMapWebView extends WebView {
 			handler.post(new Runnable() {
 				@Override
 				public void run() {
-					Toast.makeText(getContext(), "js调用了Android方法 testMap", Toast.LENGTH_SHORT).show();
+					//Toast.makeText(getContext(), "js调用了Android方法 testMap", Toast.LENGTH_SHORT).show();
+					Log.v(TAG, "js调用了Android方法 testMap");
+				}
+			});
+
+		}
+		
+		@JavascriptInterface 
+		public void test()
+		{
+			handler.post(new Runnable() {
+				@Override
+				public void run() {
+					//Toast.makeText(getContext(), "js调用了Android方法 test", Toast.LENGTH_SHORT).show();
 					Log.v(TAG, "js调用了Android方法 testMap");
 				}
 			});
@@ -464,7 +478,7 @@ public class GMapWebView extends WebView {
 			handler.post(new Runnable() {
 				@Override
 				public void run() {
-					Toast.makeText(getContext(), "js调用了Android方法onMarkerClick "+index, Toast.LENGTH_SHORT).show();
+					//Toast.makeText(getContext(), "js调用了Android方法onMarkerClick "+index, Toast.LENGTH_SHORT).show();
 					Log.v(TAG, "js调用了Android方法onMarkerClick "+index);
 					if(onMarkerClickListener!=null)
 						onMarkerClickListener.onMarkerClick(listMarkerItems.get(index));
@@ -482,10 +496,28 @@ public class GMapWebView extends WebView {
 			handler.post(new Runnable() {
 				@Override
 				public void run() {
-					Toast.makeText(getContext(), "js调用了Android方法onClickedInfoWindow "+index, Toast.LENGTH_SHORT).show();
+					//Toast.makeText(getContext(), "js调用了Android方法onClickedInfoWindow "+index, Toast.LENGTH_SHORT).show();
 					Log.v(TAG, "js调用了Android方法onClickedInfoWindow "+index);
 					if(infoWindowClickListener!=null)
 						infoWindowClickListener.onClickedInfoWindow(listMarkerItems.get(index));
+				}
+			});
+
+		}
+		
+		/**
+		 * infoWindow被点击事件
+		 */
+		@JavascriptInterface 
+		public void getTitle(final int index)
+		{
+			handler.post(new Runnable() {
+				@Override
+				public void run() {
+					//Toast.makeText(getContext(), "js调用了Android方法onClickedInfoWindow "+index, Toast.LENGTH_SHORT).show();
+					Log.v(TAG, "js调用了Android方法getTitle "+index);
+					MarkerItem markerItem = listMarkerItems.get(index);
+					loadUrl("javascript:setTitle("+markerItem.getTitle()+")");
 				}
 			});
 
@@ -500,7 +532,7 @@ public class GMapWebView extends WebView {
 			handler.post(new Runnable() {
 				@Override
 				public void run() {
-					Toast.makeText(getContext(), "js调用了Android方法onClickedMap ", Toast.LENGTH_SHORT).show();
+					//Toast.makeText(getContext(), "js调用了Android方法onClickedMap ", Toast.LENGTH_SHORT).show();
 					Log.v(TAG, "js调用了Android方法onClickedMap ");
 					if(onMapClickListener!=null)
 						onMapClickListener.onClick(getRootView());

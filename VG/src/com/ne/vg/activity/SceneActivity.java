@@ -187,8 +187,10 @@ public class SceneActivity extends FragmentActivity implements View.OnClickListe
 		viewPager.setAdapter(sceneAdapter);
 		myOnPageChangeListener = new MyOnPageChangeListener();
 		viewPager.setOnPageChangeListener(myOnPageChangeListener);  
-		viewPager.setCurrentItem(MAP_STATUS);  
-		myOnPageChangeListener.onPageSelected(MAP_STATUS);
+//		viewPager.setCurrentItem(MAP_STATUS);  
+//		myOnPageChangeListener.onPageSelected(MAP_STATUS);
+		viewPager.setCurrentItem(LIST_STATUS);  
+		myOnPageChangeListener.onPageSelected(LIST_STATUS);
 	}
 
 	/**

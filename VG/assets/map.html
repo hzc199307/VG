@@ -107,6 +107,7 @@
 					if(infoWindowStatus == true) {
 
 						//閸欘垵顫﹂悙鐟板毊閻拷 infoWindow閸愬懎顔�
+						getTitle(nowIndex);
 						infoWindow.setContent("<span onclick='onClickedInfoWindow(" + nowIndex + ")' style='padding-right:33px;background:url(map_play.png) center right no-repeat;display:inline-block;height:22px;line-height:22px'>"+markers[nowIndex].getTitle()+" </span>");
 						//infoWindow.setContent("<span class='vright' onclick='onClickedInfoWindow(" + nowIndex + ')">' + markers[nowIndex].getTitle() + "..." +' </span> <img src="map_play"/>');
 						//infoWindow.setContent('<input id="Button1" type="button" value="test" onclick="display()" /> ' + '<input id="Text1" type="text" />');
@@ -172,6 +173,19 @@
 			 */
 			function onClickedInfoWindow(index) {
 				window.demo.onClickedInfoWindow(index);
+			}
+			
+			var title;
+			/**
+			 * 调用android的onClickedInfoWindow函数处理
+			 * @param index 被点击的是第index个marker的infoWindow
+			 */
+			function getTitle(index) {
+				window.demo.getTitle(index);
+			}
+			
+			function setTitle(t) {
+				title = t;
 			}
 
 			////////////////PolylineUtil
