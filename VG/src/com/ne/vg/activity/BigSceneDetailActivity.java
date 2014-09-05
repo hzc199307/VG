@@ -48,6 +48,7 @@ public class BigSceneDetailActivity extends FragmentActivity {
 	private ScrollView bsdScroll;//滚动布局
 	private boolean isMapBig = false;//记录地图是否被点击放大了
 	private ImageButton bsd_btn_up,bsd_btn_location;
+	
 	private View big_scene_detail_other;
 	private Intent mIntent;
 	private VGDao mVgDao;
@@ -76,6 +77,7 @@ public class BigSceneDetailActivity extends FragmentActivity {
 		bigScene = mVgDao.getBigSceneObject(mIntent.getExtras().getInt("bigSceneID"));
 		
 		bigSceneName = mVgDao.getBigSceneName(mIntent.getExtras().getInt("bigSceneID"));
+		Log.d(TAG, bigSceneName);
 		big_scene_detail_title_name.setText(bigSceneName);
 		//		if(savedInstanceState == null)
 		//		{
@@ -224,8 +226,6 @@ public class BigSceneDetailActivity extends FragmentActivity {
 		case R.id.bsd_enter_scene_btn:
 			destroyGMapFragment();
 			Intent myIntent = new Intent(this,SceneActivity.class); 
-			myIntent.putExtra("cityName", mIntent.getExtras().getString("cityName"));
-			myIntent.putExtra("bigSceneName", bigSceneName);
 			myIntent.putExtra("bigSceneID", mIntent.getExtras().getInt("bigSceneID"));
 			startActivity(myIntent);
 			break;

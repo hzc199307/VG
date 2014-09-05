@@ -144,6 +144,8 @@ public class VGDao {
 		String[] arg = {BigSceneID+""};
 		Cursor cr = db.query("bigScene", null, "bigSceneID=?", arg, null, null, null);
 		cr.moveToFirst();
+		mBigScene.setCityID(cr.getInt(cr.getColumnIndex(BigSceneColumns.cityID)));
+		mBigScene.setBigSceneName(cr.getString(cr.getColumnIndex(BigSceneColumns.bigSceneName)));
 		mBigScene.setLatitude(cr.getDouble(cr.getColumnIndex(BigSceneColumns.latitude)));
 		mBigScene.setLevel(cr.getInt(cr.getColumnIndex(BigSceneColumns.level)));
 		mBigScene.setLongtitude(cr.getDouble(cr.getColumnIndex(BigSceneColumns.longtitude)));
@@ -257,6 +259,29 @@ public class VGDao {
 			}
 		}
 		return listSmallScenes;
+	}
+	
+	/**
+	 * 
+	 * @Title: getBigSceneID 
+	 * @Description: 通过smallSceneName获取bigSceneID
+	 * @param @param smallSceneID
+	 * @param @return
+	 * @return int 
+	 * @throws
+	 */
+	public int getBigSceneID(String smallSceneName){
+		SmallScene mScene = new SmallScene();
+		String[] args = {smallSceneName};
+		Cursor cr = db.query("smallScene", null, "smallSceneName=?", args, null, null, null);
+		
+		if(cr!=null){
+			cr.moveToFirst();
+			mScene.setBigSceneID(cr.getInt(cr.getColumnIndex(SmallSceneColumns.bigSceneID)));
+		}
+		return mScene.getBigSceneID();	
+		
+		
 	}
 	
 	/**

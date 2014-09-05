@@ -6,12 +6,14 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.NotificationCompat;
+import android.util.Log;
 import android.view.View;
 import android.widget.RemoteViews;
 
 import com.ne.vg.R;
 import com.ne.vg.VGApplication;
 import com.ne.vg.activity.SceneActivity;
+import com.ne.vg.dao.VGDao;
 
 public class MusicNotification {
 	private NotificationManager mNotificationManager;
@@ -23,6 +25,7 @@ public class MusicNotification {
 	public final static String INTENT_BUTTONID_TAG = "ButtonId";
 	/** 播放/暂停 按钮点击 ID */
 	public final static int BUTTON_PALY_ID = 2;
+	private VGDao mVgDao;
 	VGApplication app;
 	/** Notification的ID */
 	int notifyId = 100;
@@ -30,6 +33,7 @@ public class MusicNotification {
 		mNotificationManager =(NotificationManager)context.getSystemService(context.NOTIFICATION_SERVICE);
 		this.context = context;
 		app = (VGApplication)context;
+		mVgDao = new VGDao(context.getApplicationContext());
 	}
 	public void showButtonNotify() {
 		
@@ -67,6 +71,12 @@ public class MusicNotification {
 	
 		//该参数代表着在顶部常驻
 		Intent intent = new Intent(context,SceneActivity.class);
+		//TODO 由于music_scenename和smallScene相同故可以用一下方法
+		//以后传过来的如果不同，则这里需要改进。
+		intent.putExtra("bigSceneID", mVgDao.getBigSceneID(musicName));
+		Log.d("musicNotification", "musicName=" + musicName);
+		Log.d("musicNotification", "bigSceneID="+mVgDao.getBigSceneID(musicName));
+		
 		PendingIntent pendingIntent= PendingIntent.getActivity(context, 1, intent, Notification.FLAG_ONGOING_EVENT);
 		
 		mBuilder.setContent(mRemoteViews)
