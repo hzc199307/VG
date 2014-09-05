@@ -16,8 +16,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:scaleType="center"
-        android:src="@drawable/city_florence"
+        android:scaleType="centerCrop"
+        android:src="@drawable/bigscene_bisaxieta"
          />
 
     <!-- 加入的阴影 -->
