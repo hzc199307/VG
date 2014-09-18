@@ -4,6 +4,9 @@ public class City {
 	private double latitude,longtitude;
 	private int cityID,routeNum,sceneNum;
 	private String cityName,cityPinyin,resource;
+	public City(){
+		
+	}
 	public double getLatitude() {
 		return latitude;
 	}

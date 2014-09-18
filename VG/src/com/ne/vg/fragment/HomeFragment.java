@@ -8,6 +8,8 @@ import com.ne.vg.R;
 import com.ne.vg.activity.BigSceneDetailActivity;
 import com.ne.vg.activity.RecommendActivity;
 import com.ne.vg.adapter.CityListAdapter;
+import com.ne.vg.adapter.CommonAdapter;
+import com.ne.vg.adapter.ViewHolder;
 import com.ne.vg.bean.City;
 import com.ne.vg.bean.CreateData;
 import com.ne.vg.dao.VGDao;
@@ -47,6 +49,7 @@ public class HomeFragment extends Fragment implements OnClickListener{
 
 	private ListView lv_city;
 	private CityListAdapter cityListAdapter ;
+	private CommonAdapter<City> mAdapter;
 	private View home_title_search_btn,home_title_left;
 
 	private Intent intent;
@@ -79,8 +82,21 @@ public class HomeFragment extends Fragment implements OnClickListener{
 			cityListAdapter = new CityListAdapter(getActivity(), mVgDao.getCity());
 
 
-		lv_city.setAdapter(cityListAdapter);
+		//lv_city.setAdapter(cityListAdapter);
+		
+		mAdapter = new CommonAdapter<City>(getActivity(), mVgDao.getCity(), R.layout.item_city) {
 
+			@Override
+			public void convert(ViewHolder helper, City item) {
+				// TODO Auto-generated method stub
+				helper.setText(R.id.cityName, item.getCityName());
+				helper.setText(R.id.cityPinyin, item.getCityPinyin());
+				helper.setImageResource(R.id.item_city_bg, item.getResource());
+			}
+			
+		};
+		lv_city.setAdapter(mAdapter);
+		
 		lv_city.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
 			@Override
