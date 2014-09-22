@@ -85,6 +85,7 @@ public class SceneSmallSceneListAdapter extends BaseAdapter{
 			viewHolder.scene_item_smallscene_name = (TextView)convertView.findViewById(R.id.scene_item_smallscene_name);	
 			viewHolder.button = (ImageView)convertView.findViewById(R.id.scene_item_smallscene_button);
 			viewHolder.animationIV = (ImageView) convertView.findViewById(R.id.animationIV);
+			viewHolder.divider1 = (View)convertView.findViewById(R.id.scene_item_smallscene_divider1);
 			viewHolder.divider2 = (View)convertView.findViewById(R.id.scene_item_smallscene_divider2);
 			convertView.setTag(viewHolder);// 如果是新产生的view，则设置tag
 		} 
@@ -108,6 +109,7 @@ public class SceneSmallSceneListAdapter extends BaseAdapter{
 			animationDrawable.start();
 		}
 		if(app.playSceneID == mySmallScene.getSmallSceneID()){
+			viewHolder.divider1.setVisibility(8);
 			viewHolder.divider2.setVisibility(0);
 		}
 		
@@ -118,6 +120,7 @@ public class SceneSmallSceneListAdapter extends BaseAdapter{
 		public TextView scene_item_smallscene_name;
 		public ImageView button;
 		public ImageView animationIV;
+		public View divider1;
 		public View divider2;
 	}
 

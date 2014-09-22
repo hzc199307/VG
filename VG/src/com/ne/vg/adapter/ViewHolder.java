@@ -1,6 +1,7 @@
 package com.ne.vg.adapter;
 
 import android.content.Context;
+import android.graphics.drawable.AnimationDrawable;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-/*ViewHolder的优化*/
+/*自定义的ViewHolder*/
 public class ViewHolder
 {
 	//SparseView 和Map类似，但是效率比Map高
@@ -63,7 +64,42 @@ public class ViewHolder
 		view.setImageResource(resId);
 		return this;
 	}
-
+	
+	public ViewHolder setImageResourceByInt(int viewId, int drawableId){
+		ImageView view = getView(viewId);
+		view.setImageResource(drawableId);
+		return this;
+	}
+	public ViewHolder setView(int viewId, int i){
+		View view = getView(viewId);
+		view.setVisibility(i);
+		return this;
+	}
+	/**
+	 * 
+	 * @Title: setAnimation 
+	 * @Description: 1代表开始播放动画，0代表停止动画
+	 * @param @param viewId
+	 * @param @param drawableId
+	 * @param @param isStart
+	 * @param @return
+	 * @return ViewHolder 
+	 * @throws
+	 */
+	public ViewHolder setAnimation(int viewId, int drawableId,int isStart){
+		ImageView view = getView(viewId);
+		view.setImageResource(drawableId);
+		AnimationDrawable animationDrawable;
+		animationDrawable = (AnimationDrawable) view
+				.getDrawable();
+		if(isStart == 1){
+			animationDrawable.start();
+		}
+		if(isStart == 0)
+			animationDrawable.stop();
+		
+		return this;
+	}
 
 	public View getConvertView(){
 		return mConvertView;

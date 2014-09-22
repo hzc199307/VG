@@ -88,7 +88,7 @@ public class SceneActivity extends FragmentActivity implements View.OnClickListe
 		initTabAnim();
 		initViewPager();
 		initSeekBar();
-		//启动线程
+		//启动handler
 		handler.post(updateThread);
 	}
 	

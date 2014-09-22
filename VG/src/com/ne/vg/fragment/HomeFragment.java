@@ -78,8 +78,8 @@ public class HomeFragment extends Fragment implements OnClickListener{
 		lv_city = (ListView)view.findViewById(R.id.lv_city);
 
 
-		if(cityListAdapter==null)
-			cityListAdapter = new CityListAdapter(getActivity(), mVgDao.getCity());
+//		if(cityListAdapter==null)
+//			cityListAdapter = new CityListAdapter(getActivity(), mVgDao.getCity());
 
 
 		//lv_city.setAdapter(cityListAdapter);

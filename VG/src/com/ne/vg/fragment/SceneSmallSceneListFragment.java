@@ -6,7 +6,10 @@ import com.ne.vg.R;
 import com.ne.vg.VGApplication;
 import com.ne.vg.activity.PlayMusicActivity;
 import com.ne.vg.activity.SceneActivity;
+import com.ne.vg.adapter.CommonAdapter;
 import com.ne.vg.adapter.SceneSmallSceneListAdapter;
+import com.ne.vg.adapter.ViewHolder;
+import com.ne.vg.bean.SmallScene;
 import com.ne.vg.dao.VGDao;
 import com.ne.vg.receiver.MusicBroadcastReceiver;
 import com.ne.vg.util.MusicNotification;
@@ -66,12 +69,15 @@ public class SceneSmallSceneListFragment extends Fragment {
 	private String cityName;
 	private String bigSceneName;
 	private String smallSceneName;
+	private int smallSceneId;
 	private int bigSceneID;
 	public VGDao mDao;
-	private SceneSmallSceneListAdapter mAdapter;
+	private CommonAdapter<SmallScene> mAdapter;
 	private smallBroadcastReceiver sReceiver;
 	private Handler mHandler;
 	private int mPosition;
+	private int oldValue;
+	private int newValue;
 	
 	
 	public SceneSmallSceneListFragment(String cityName,String bigSceneName,int bigSceneID)
@@ -80,6 +86,8 @@ public class SceneSmallSceneListFragment extends Fragment {
 		this.bigSceneName = bigSceneName;
 		this.bigSceneID = bigSceneID;
 	}
+	
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState){
 		
@@ -91,6 +99,7 @@ public class SceneSmallSceneListFragment extends Fragment {
 		 //初始化自定义通知栏
 		mNotification = new MusicNotification(getActivity().getApplicationContext());
 		initSmallReceiver();
+		
 	}
 	
 	
@@ -110,18 +119,36 @@ public class SceneSmallSceneListFragment extends Fragment {
 	 * @return void 
 	 * @throws
 	 */
-	
-
-
 	@Override
 	public View onCreateView(LayoutInflater inflater,ViewGroup container, Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		Log.v(TAG, "onCreateView");
 		View rootView = inflater.inflate(R.layout.fragment_scene_smallscenelist, container, false);
 		smallSceneListView= (ListView)rootView.findViewById(R.id.smallSceneListView);
-		mAdapter = new SceneSmallSceneListAdapter(getActivity(),mDao.getSmallScene(bigSceneID));
+		//mAdapter = new SceneSmallSceneListAdapter(getActivity(),mDao.getSmallScene(bigSceneID));
+		mAdapter = new CommonAdapter<SmallScene>(getActivity(), mDao.getSmallScene(bigSceneID), R.layout.scene_item_small_scene) {
+
+			@Override
+			public void convert(ViewHolder helper, SmallScene item){
+				// TODO Auto-generated method stub
+				helper.setText(R.id.scene_item_smallscene_name, item.getSmallSceneName());
+				//如果正在播放
+				if(app.playSceneID == item.getSmallSceneID() && app.mBinder.getService().isPlaying==true){
+					helper.setImageResourceByInt(R.id.scene_item_smallscene_button, R.drawable.scene_music_pause_icon);
+					//播放动画
+					helper.setAnimation(R.id.animationIV,R.drawable.scene_music_isplaying_animation,1);
+					helper.setView(R.id.scene_item_smallscene_divider1,8);
+					helper.setView(R.id.scene_item_smallscene_divider2,0);
+				}else{
+					helper.setImageResourceByInt(R.id.scene_item_smallscene_button, R.drawable.scene_music_play_icon);
+					//暂停动画
+					helper.setAnimation(R.id.animationIV,R.drawable.scene_music_isplaying_animation,0);
+					helper.setView(R.id.scene_item_smallscene_divider1,0);
+					helper.setView(R.id.scene_item_smallscene_divider2,8);
+				}	
+			}	
+		};
 		smallSceneListView.setAdapter(mAdapter);
-		
 		InitListener();
 		return rootView;
 	}
@@ -137,71 +164,43 @@ public class SceneSmallSceneListFragment extends Fragment {
 				currentView = view;
 				
 				smallSceneName = mDao.getSmallScene(bigSceneID).get(position).getSmallSceneName();
+				smallSceneId = mDao.getSmallScene(bigSceneID).get(position).getSmallSceneID();
 				startSer(0);
-				mPosition = position;
+				//更新界面
+				mAdapter.notifyDataSetChanged();
+				
+				
 				/**
 				 * 这里是重点，由于startSer是在后台开启的，所以需要延时执行后面的代码。
 				 */
-				
-//				//一直到onStart执行完了才能tiaochuxunhuan
-//				while(app.mBinder.getService().startSuccess ==false){
-//					
-//				}
-
-				
 				mHandler = new Handler();
 				Runnable runnable = new Runnable(){
 					@Override
 					public void run() {
 						// TODO Auto-generated method stub
-						app.playSceneID = (int)mAdapter.getItemId(mPosition);
+						app.playSceneID = smallSceneId;
 						
-						if(animationDrawable!=null){
-							animationDrawable.stop();
-							button.setImageResource(R.drawable.scene_music_play_icon);
-						}
-						if(divider2!=null){
-							//8代表为gone,0代表可见
-							divider.setVisibility(0);
-							divider2.setVisibility(8);
-						}
-						animationIV = (ImageView) currentView.findViewById(R.id.animationIV);
-						animationIV.setImageResource(R.drawable.scene_music_isplaying_animation);
-						animationDrawable = (AnimationDrawable) animationIV
-								.getDrawable();
-						button = (ImageView)currentView.findViewById(R.id.scene_item_smallscene_button);
-						//如果正在播放则播动画
-						Log.d(TAG, "isPlaying =" + app.mBinder.getService().isPlaying);
-						if(app.mBinder.getService().isPlaying)
-						{
-							animationDrawable.start();
-							button.setImageResource(R.drawable.scene_music_pause_icon);
-						}else
-						{
-							button.setImageResource(R.drawable.scene_music_play_icon);
-						}
-						divider = (View)currentView.findViewById(R.id.scene_item_smallscene_divider1);
-						divider2 = (View)currentView.findViewById(R.id.scene_item_smallscene_divider2);
-						//8代表为gone
-						divider.setVisibility(8);
-						//0代表visible
-						divider2.setVisibility(0);
 						// TODO 开启服务并更新seekbar
 						/**
 						 * 这一段只是用来测试，还需要重新写
 						 */
+						if(app.mBinder.getService().isPlayStatusChanged()==true)
+							//更新界面
+							mAdapter.notifyDataSetChanged();
 						
-						//更新界面，及图片改变
-//						app.showNotify();
 						mNotification.showName(smallSceneName);
 						mNotification.showButtonNotify();
 						//调用Activity中的函数,用来更新seekBar
 						mListener.onMusicSelected();
-						
+						//TODO 最后来更新列表
+						//mAdapter.notifyDataSetChanged();
+						mHandler.postDelayed(this, 300);// 打开定时器，执行操作 
 					}      
 		        };  
-		        mHandler.postDelayed(runnable, 600);// 打开定时器，执行操作 
+		        //TODO 这里的延迟跟用户体验密切相关
+		        mHandler.post(runnable);// 打开定时器，执行操作 
 		    	app.mBinder.getService().startSuccess = false;
+		    	
 			}
 			
 		
