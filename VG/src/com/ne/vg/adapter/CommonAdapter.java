@@ -60,4 +60,10 @@ public abstract class CommonAdapter<T> extends BaseAdapter
 				position);
 	}
 
+	public void destroy() {
+		// TODO Auto-generated method stub
+		mDatas.clear();
+		mDatas = null;
+	}
+
 }

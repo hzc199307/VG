@@ -24,6 +24,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.drawable.AnimationDrawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
@@ -119,6 +120,8 @@ public class SceneSmallSceneListFragment extends Fragment {
 	 * @return void 
 	 * @throws
 	 */
+	
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater,ViewGroup container, Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -132,13 +135,17 @@ public class SceneSmallSceneListFragment extends Fragment {
 			public void convert(ViewHolder helper, SmallScene item){
 				// TODO Auto-generated method stub
 				helper.setText(R.id.scene_item_smallscene_name, item.getSmallSceneName());
+				Log.d(TAG, "playSceneID="+app.playSceneID);
+				Log.d(TAG, "itemID="+ item.getSmallSceneID());
 				//如果正在播放
 				if(app.playSceneID == item.getSmallSceneID() && app.mBinder.getService().isPlaying==true){
+					
 					helper.setImageResourceByInt(R.id.scene_item_smallscene_button, R.drawable.scene_music_pause_icon);
 					//播放动画
 					helper.setAnimation(R.id.animationIV,R.drawable.scene_music_isplaying_animation,1);
 					helper.setView(R.id.scene_item_smallscene_divider1,8);
 					helper.setView(R.id.scene_item_smallscene_divider2,0);
+					
 				}else{
 					helper.setImageResourceByInt(R.id.scene_item_smallscene_button, R.drawable.scene_music_play_icon);
 					//暂停动画
@@ -148,6 +155,7 @@ public class SceneSmallSceneListFragment extends Fragment {
 				}	
 			}	
 		};
+		
 		smallSceneListView.setAdapter(mAdapter);
 		InitListener();
 		return rootView;
@@ -165,9 +173,15 @@ public class SceneSmallSceneListFragment extends Fragment {
 				
 				smallSceneName = mDao.getSmallScene(bigSceneID).get(position).getSmallSceneName();
 				smallSceneId = mDao.getSmallScene(bigSceneID).get(position).getSmallSceneID();
-				startSer(0);
-				//更新界面
-				mAdapter.notifyDataSetChanged();
+				//设置playSceneID的值为当前选中的值。
+				app.playSceneID = smallSceneId;
+//				startSer(0);
+//				//更新界面
+//				mAdapter.notifyDataSetChanged();
+				ServiceTask sTask = new ServiceTask();
+				sTask.execute(0);
+				mNotification.showName(smallSceneName);
+				mNotification.showButtonNotify();
 				
 				
 				/**
@@ -178,23 +192,24 @@ public class SceneSmallSceneListFragment extends Fragment {
 					@Override
 					public void run() {
 						// TODO Auto-generated method stub
-						app.playSceneID = smallSceneId;
+						
 						
 						// TODO 开启服务并更新seekbar
 						/**
 						 * 这一段只是用来测试，还需要重新写
 						 */
 						if(app.mBinder.getService().isPlayStatusChanged()==true)
+						{
 							//更新界面
 							mAdapter.notifyDataSetChanged();
-						
-						mNotification.showName(smallSceneName);
-						mNotification.showButtonNotify();
+							mNotification.showName(smallSceneName);
+							mNotification.showButtonNotify();
+						}
+							
 						//调用Activity中的函数,用来更新seekBar
 						mListener.onMusicSelected();
 						//TODO 最后来更新列表
-						//mAdapter.notifyDataSetChanged();
-						mHandler.postDelayed(this, 300);// 打开定时器，执行操作 
+						mHandler.postDelayed(this, 600);// 打开定时器，执行操作 
 					}      
 		        };  
 		        //TODO 这里的延迟跟用户体验密切相关
@@ -206,6 +221,139 @@ public class SceneSmallSceneListFragment extends Fragment {
 		
 		});
 	}
+	
+	class ServiceTask extends AsyncTask<Integer, Integer, String>{
+		/**
+		 * 该方法将在执行实际的后台操作前被UI 线程调用。
+		 */
+		@Override  
+	    protected void onPreExecute() {  
+	        //第一个执行方法  
+	        super.onPreExecute();  
+	    } 
+		/**
+		 * 将在onPreExecute 方法执行后马上执行，该方法运行在后台线程中。
+		 * 这里将主要负责执行那些很耗时的后台处理工作。
+		 */
+		@Override
+		protected String doInBackground(Integer... params) {
+			// TODO Auto-generated method stub
+			startSer(0);
+			return null;
+		}
+		/**
+		 * 在publishProgress方法被调用后，
+		 * UI 线程将调用这个方法从而在界面上展示任务的进展情况，例如通过一个进度条进行展示。
+		 */
+		@Override
+		protected void onProgressUpdate(Integer... params){
+			super.onProgressUpdate(params);
+		}
+		
+		@Override  
+        protected void onPostExecute(String result) {  
+            //doInBackground返回时触发，换句话说，就是doInBackground执行完后触发  
+            //这里的result就是上面doInBackground执行后的返回值，所以这里是"执行完毕"  
+			mAdapter.notifyDataSetChanged(); 
+            super.onPostExecute(result);  
+        }  
+		
+		
+	}
+	
+//	@Override
+//	public View onCreateView(LayoutInflater inflater,ViewGroup container, Bundle savedInstanceState) {
+//		// TODO Auto-generated method stub
+//		Log.v(TAG, "onCreateView");
+//		View rootView = inflater.inflate(R.layout.fragment_scene_smallscenelist, container, false);
+//		smallSceneListView= (ListView)rootView.findViewById(R.id.smallSceneListView);
+//		mAdapter = new SceneSmallSceneListAdapter(getActivity(),mDao.getSmallScene(bigSceneID));
+//		smallSceneListView.setAdapter(mAdapter);
+//		
+//		InitListener();
+//		return rootView;
+//	}
+//	private void InitListener() {
+//		// TODO Auto-generated method stub
+//		smallSceneListView.setOnItemClickListener(new OnItemClickListener(){
+//
+//			@Override
+//			public void onItemClick(AdapterView<?> arg0, View view, int position,
+//					long arg3) {
+//				Log.d(TAG, " item " + position +" is clicked!");
+//				currentView = view;
+//				
+//				smallSceneName = mDao.getSmallScene(bigSceneID).get(position).getSmallSceneName();
+//				startSer(0);
+//				mPosition = position;
+//				/**
+//				 * 这里是重点，由于startSer是在后台开启的，所以需要延时执行后面的代码。
+//				 */
+//				
+////				//一直到onStart执行完了才能tiaochuxunhuan
+////				while(app.mBinder.getService().startSuccess ==false){
+////					
+////				}
+//
+//				
+//				mHandler = new Handler();
+//				Runnable runnable = new Runnable(){
+//					@Override
+//					public void run() {
+//						// TODO Auto-generated method stub
+//						app.playSceneID = (int)mAdapter.getItemId(mPosition);
+//						
+//						if(animationDrawable!=null){
+//							animationDrawable.stop();
+//							button.setImageResource(R.drawable.scene_music_play_icon);
+//						}
+//						if(divider2!=null){
+//							//8代表为gone,0代表可见
+//							divider.setVisibility(0);
+//							divider2.setVisibility(8);
+//						}
+//						animationIV = (ImageView) currentView.findViewById(R.id.animationIV);
+//						animationIV.setImageResource(R.drawable.scene_music_isplaying_animation);
+//						animationDrawable = (AnimationDrawable) animationIV
+//								.getDrawable();
+//						button = (ImageView)currentView.findViewById(R.id.scene_item_smallscene_button);
+//						//如果正在播放则播动画
+//						Log.d(TAG, "isPlaying =" + app.mBinder.getService().isPlaying);
+//						if(app.mBinder.getService().isPlaying)
+//						{
+//							animationDrawable.start();
+//							button.setImageResource(R.drawable.scene_music_pause_icon);
+//						}else
+//						{
+//							button.setImageResource(R.drawable.scene_music_play_icon);
+//						}
+//						divider = (View)currentView.findViewById(R.id.scene_item_smallscene_divider1);
+//						divider2 = (View)currentView.findViewById(R.id.scene_item_smallscene_divider2);
+//						//8代表为gone
+//						divider.setVisibility(8);
+//						//0代表visible
+//						divider2.setVisibility(0);
+//						// TODO 开启服务并更新seekbar
+//						/**
+//						 * 这一段只是用来测试，还需要重新写
+//						 */
+//						
+//						//更新界面，及图片改变
+////						app.showNotify();
+//						mNotification.showName(smallSceneName);
+//						mNotification.showButtonNotify();
+//						//调用Activity中的函数,用来更新seekBar
+//						mListener.onMusicSelected();
+//						
+//					}      
+//		        };  
+//		        mHandler.postDelayed(runnable, 600);// 打开定时器，执行操作 
+//		    	app.mBinder.getService().startSuccess = false;
+//			}
+//			
+//		
+//		});
+//	}
 
 	@Override
 	public void onDestroyView() {
@@ -293,4 +441,6 @@ public class SceneSmallSceneListFragment extends Fragment {
 			}	
 		}	
 	}
+
+	
 }

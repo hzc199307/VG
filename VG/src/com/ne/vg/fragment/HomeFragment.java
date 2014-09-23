@@ -48,7 +48,6 @@ public class HomeFragment extends Fragment implements OnClickListener{
 	private final static String TAG = "HomeFragment";
 
 	private ListView lv_city;
-	private CityListAdapter cityListAdapter ;
 	private CommonAdapter<City> mAdapter;
 	private View home_title_search_btn,home_title_left;
 
@@ -193,8 +192,8 @@ public class HomeFragment extends Fragment implements OnClickListener{
 	public void onDestroy() {
 		super.onDestroy();
 		Log.v(TAG, "onDestroy");
-		cityListAdapter.destroy();
-		cityListAdapter = null;
+		mAdapter.destroy();
+		mAdapter = null;
 	}
 
 	/**

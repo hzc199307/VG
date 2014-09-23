@@ -35,6 +35,7 @@ public class MusicNotification {
 		app = (VGApplication)context;
 		mVgDao = new VGDao(context.getApplicationContext());
 	}
+	
 	public void showButtonNotify() {
 		
 		// TODO Auto-generated method stub

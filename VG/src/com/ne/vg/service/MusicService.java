@@ -30,6 +30,8 @@ public class MusicService extends Service{
 	private MyBinder mBinder = new MyBinder();
 	private String oldresource;
 	private String newResource;
+	//用来记录两次资源是否相等的标志位，给isPlayStatusChanged函数使用
+	private boolean Changeflag = false;
 	public boolean isPlaying;
 	private boolean oldPlaying;
 	//这个是用来通知
@@ -43,9 +45,10 @@ public class MusicService extends Service{
 
 	public boolean isPlayStatusChanged()
 	{
-		if(isPlaying!=oldPlaying)
+		if(isPlaying!=oldPlaying||Changeflag == true)
 		{
 			oldPlaying = isPlaying;
+			Changeflag = false;
 			return true;
 		}
 		else
@@ -167,6 +170,7 @@ public class MusicService extends Service{
 				//如果点击了其他item项则停止现有项
 				if(!newResource.equals(oldresource))
 				{
+					Changeflag = true;
 					stop();
 					//TODO 这里需要加入音频文件的id
 					mediaPlayer = new MediaPlayer();
@@ -195,6 +199,7 @@ public class MusicService extends Service{
 					
 				}
 				else{
+					Changeflag = false;
 					//本次点击与上次点击的item相同
 					if(mediaPlayer.isPlaying())
 					{

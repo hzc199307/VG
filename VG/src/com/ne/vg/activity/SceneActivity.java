@@ -127,7 +127,7 @@ public class SceneActivity extends FragmentActivity implements View.OnClickListe
 			scene_music_time_now.setText(MusicPlayerUtil.milliSecondsToTimer(player.getCurrentPosition()));
 			
 			mSeekBar.setMax(player.getDuration());
-			Log.d(TAG, "duration is:" + player.getDuration());
+			
 		}
 			
 		else{
