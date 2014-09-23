@@ -12,7 +12,7 @@
         android:orientation="horizontal" >
 
         <LinearLayout
-            android:id="@+id/scene_map_layout"
+            android:id="@+id/search_abroad_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1.0"
@@ -21,24 +21,24 @@
             android:orientation="horizontal" >
 
             <ImageView
-                android:id="@+id/scene_map_iv"
+                android:id="@+id/search_abroad_iv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/scene_map_icon_selector" />
+                android:src="@drawable/search_abroad_icon_selector" />
 
             <TextView
-                android:id="@+id/scene_map_tv"
+                android:id="@+id/search_abroad_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:paddingLeft="@dimen/tab_tv_iv"
-                android:text="@string/scene_tab_map"
+                android:text="@string/search_tab_abroad"
                 android:textColor="@color/tab_tv_selector"
                 android:textSize="@dimen/tab_textsize" />
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/scene_list_layout"
+            android:id="@+id/search_list_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1.0"
@@ -47,18 +47,18 @@
             android:orientation="horizontal" >
 
             <ImageView
-                android:id="@+id/scene_list_iv"
+                android:id="@+id/search_china_iv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/scene_list_icon_selector" />
+                android:src="@drawable/search_china_icon_selector" />
 
             <TextView
-                android:id="@+id/scene_list_tv"
+                android:id="@+id/search_china_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:paddingLeft="@dimen/tab_tv_iv"
-                android:text="@string/scene_tab_list"
+                android:text="@string/search_tab_china"
                 android:textColor="@color/tab_tv_selector"
                 android:textSize="@dimen/tab_textsize" />
         </LinearLayout>
@@ -71,7 +71,7 @@
         android:weightSum="2" >
 
         <View
-            android:id="@+id/scene_cursor"
+            android:id="@+id/search_cursor"
             android:layout_width="match_parent"
             android:layout_height="@dimen/tab_cursor_height"
             android:layout_weight="1"

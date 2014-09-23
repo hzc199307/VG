@@ -83,7 +83,7 @@
     <dimen name="tab_height">38dp</dimen>
     <dimen name="tab_textsize">13sp</dimen>
     <dimen name="tab_tv_iv">5dp</dimen>
-    <dimen name="tab_cursor_height">1dp</dimen>
+    <dimen name="tab_cursor_height">2dp</dimen>
 
     <!-- SceneActivity 相关 -->
 
@@ -107,6 +107,12 @@
     <dimen name="title_height">50dp</dimen>
     <dimen name="title_left_icon_marginleft">10dp</dimen>
     <dimen name="title_left_tv_marginleftof_icon">10dp</dimen>
+    <dimen name="title_left_edit_marginleft">36dp</dimen>
     <dimen name="title_right_icon_paddingright">10dp</dimen>
+    
+    <!-- SearchFragment 相关 -->
+    <dimen name="search_title_edit_width">273dp</dimen>
+    <dimen name="search_title_edit_height">34dp</dimen>
+    
 
 </resources>
