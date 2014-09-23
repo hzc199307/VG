@@ -69,6 +69,9 @@ public class MainActivity extends SlidingFragmentActivity {
 	private ProgressDialog progressDialog;//正在加载的弹出框
 	
 	private AlertDialog.Builder builder;//定位完成的弹出框
+	
+	private boolean enter2ndF = false;//是否进入了二层页面
+	private Fragment lastFragment = null;//是否进入了二层页面
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -161,6 +164,8 @@ public class MainActivity extends SlidingFragmentActivity {
 					homeFragment.startAnimation(animation1);
 				else if(nowFragment == mineFragment)
 					mineFragment.startAnimation(animation1);
+				else if(nowFragment == searchFragment)
+					searchFragment.startAnimation(animation1);
 				//				leftSlidingMenuFragment.startAnimation(animation2);
 			}
 		});
@@ -173,6 +178,8 @@ public class MainActivity extends SlidingFragmentActivity {
 					homeFragment.clearAnimation();
 				else if(nowFragment == mineFragment)
 					mineFragment.clearAnimation();
+				else if(nowFragment == searchFragment)
+					searchFragment.clearAnimation();
 				//				leftSlidingMenuFragment.clearAnimation();
 			}
 		});
@@ -214,10 +221,21 @@ public class MainActivity extends SlidingFragmentActivity {
 		if (!toFragment.isAdded()) { //判断是否被add过
 			transaction.add(R.id.main_content_frame, toFragment).commit(); // add下一个到Activity中
 		} 
-		if(toFragment.isHidden()){   //判断是否被隐藏过
+		if(toFragment.isHidden()){   //判断是否被隐藏过 
 			transaction.show(toFragment).commit(); // 显示下一个
 		}
 		mSlidingMenu.showContent();
+		enter2ndF = false;
+	}
+	
+	/**
+	 * 跳转到另外一个Fragment 且可以返回
+	 * @param toFragment
+	 */
+	private void switchContentCanBack(Fragment toFragment) {
+
+		switchContent(toFragment);
+		enter2ndF = true;
 	}
 
 	/**
@@ -247,6 +265,18 @@ public class MainActivity extends SlidingFragmentActivity {
 		if(searchFragment == null)
 			searchFragment = new SearchFragment();
 		switchContent(searchFragment);
+	}
+	
+	/**
+	 * 跳转到SearchFragment 且可以返回到lastFragment
+	 */
+	public void switchContentToSearchCanBack(Fragment lastFragment)
+	{
+		this.lastFragment = lastFragment;
+		if(searchFragment == null)
+			searchFragment = new SearchFragment();
+		switchContentCanBack(searchFragment);
+		searchFragment.clearAnimation();
 	}
 	/**
 	 * 跳转到SettingFragment
@@ -439,11 +469,19 @@ public class MainActivity extends SlidingFragmentActivity {
 		if(keyCode == KeyEvent.KEYCODE_BACK)
 		{
 			Log.v(TAG, "back");
-
-			//调用双击退出函数
-			exitBy2Click();
+			if(enter2ndF == true)
+			{
+				switchContent(lastFragment);
+			}
+			else
+			{
+				//调用双击退出函数
+				exitBy2Click();
+			}
+			return false;
 		}
-		return false;
+		return super.onKeyDown(keyCode, event);
+		
 	}
 	private void exitBy2Click() {
 		// TODO Auto-generated method stub

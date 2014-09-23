@@ -31,6 +31,7 @@ public class MusicService extends Service{
 	private String oldresource;
 	private String newResource;
 	public boolean isPlaying;
+	private boolean oldPlaying;
 	//这个是用来通知
 	public boolean startSuccess;
 
@@ -40,6 +41,17 @@ public class MusicService extends Service{
 		}
 	}
 
+	public boolean isPlayStatusChanged()
+	{
+		if(isPlaying!=oldPlaying)
+		{
+			oldPlaying = isPlaying;
+			return true;
+		}
+		else
+			return false;
+	}
+	
 	/**
 	 * 通过MyBinder来实现交互
 	 * 先onCreate再onBind
@@ -57,8 +69,7 @@ public class MusicService extends Service{
 	public void onCreate(){
 		Log.d(TAG, "onCreate");
 		//初始时设置为没有播放
-		isPlaying = false;
-		startSuccess = false;
+		oldPlaying = isPlaying = false;
 		//Toast.makeText(getApplicationContext(), "show media player", Toast.LENGTH_SHORT).show();
 		
 		if(mediaPlayer == null){
@@ -157,11 +168,9 @@ public class MusicService extends Service{
 				if(!newResource.equals(oldresource))
 				{
 					stop();
-					
 					//TODO 这里需要加入音频文件的id
 					mediaPlayer = new MediaPlayer();
 					try {
-						//mediaPlayer.setDataSource(newResource);
 						File file = new File(newResource);
 						FileInputStream fis = new FileInputStream(file);
 						mediaPlayer.setDataSource(fis.getFD());
@@ -180,27 +189,23 @@ public class MusicService extends Service{
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-
 					//这里setLooping有可能不用设置
 					mediaPlayer.setLooping(false);
 					play();
 					
 				}
 				else{
+					//本次点击与上次点击的item相同
 					if(mediaPlayer.isPlaying())
 					{
-						pause();
-						
+						pause();						
 					}
 					else{
 						play();
-						
 					}
-					
 				}
 				oldresource = null;
 				oldresource = newResource;
-
 				int op = bundle.getInt("op");
 				//Toast.makeText(getApplicationContext(), "on start ,op :"+op, Toast.LENGTH_SHORT).show();
 				//TODO 如果op不为0
@@ -208,17 +213,13 @@ public class MusicService extends Service{
 					switch(op){
 					case 1:
 						play();
-						
 						break;
 					case 2:
 						stop();
-						
 						break;
 					case 3:
 						pause();
 						break;
-
-
 					}
 				}
 				Log.d(TAG, "bundle is not null");

@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 
 /**
@@ -28,46 +29,23 @@ public class SearchFragment extends Fragment implements View.OnClickListener{
 	
 private final static String TAG = "SearchFragment";
 	
-	private Button btn_panshan,btn_zhichao,btn_bofang,btn_mylove;
+
+private View search_title_all;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		//Toast.makeText(getActivity(), TAG+ " onCreateView", Toast.LENGTH_SHORT).show();
 		View view  = inflater.inflate(R.layout.fragment_search, container,false);
-		btn_panshan = (Button)view.findViewById(R.id.btn_panshan);
-		btn_panshan.setOnClickListener(this);
-		btn_zhichao = (Button)view.findViewById(R.id.btn_zhichao);
-		btn_zhichao.setOnClickListener(this); 
-		btn_bofang = (Button)view.findViewById(R.id.btn_bofangyieyue);
-		btn_bofang.setOnClickListener(this);
-		btn_mylove = (Button)view.findViewById(R.id.btn_mylove);
-		btn_mylove.setOnClickListener(this);
+
+		search_title_all = (View)view.findViewById(R.id.search_title_all);
+		
 		return view;
 	}
 	@Override
 	public void onClick(View view) {
 		// TODO Auto-generated method stub
 		switch (view.getId()) {
-		case R.id.btn_panshan:
-			//TODO 潘杉 你要执行的跳转
-			startActivity(new Intent(getActivity(),RecommendActivity.class));
-			break;
-		case R.id.btn_zhichao:
-			//TODO 
-			//getFragmentManager().beginTransaction().hide(this).add(R.id.content_frame, new RouteFragment()).addToBackStack(null).commit();
-			startActivity(new Intent(getActivity(),RouteActivity.class));
-			//startActivity(new Intent(getActivity(),BigSceneDetailActivity.class));
-			break;
-		case R.id.btn_bofangyieyue:
-			//TODO 播放音乐跳转的地方
-			startActivity(new Intent(getActivity(),PlayMusicActivity.class));
-			break;
-		case R.id.btn_mylove:
-			//TODO 跳转到我喜爱的页面
-			startActivity(new Intent(getActivity(),MyLoveActivity.class));
-			break;
-			
 		default:
 			break;
 		}
@@ -77,6 +55,24 @@ private final static String TAG = "SearchFragment";
 	public void onDestroyView() {
 		// TODO Auto-generated method stub
 		super.onDestroyView();
-		Log.v(TAG, "onDestroy");
+		Log.v(TAG, "onDestroyView");
+	}
+	
+	/**
+	 * 开始标题栏动画
+	 */
+	public void startAnimation(TranslateAnimation animation) {
+		animation.setDuration(400);
+		animation.setFillAfter(true);
+		if(search_title_all!=null)
+			search_title_all.startAnimation(animation);
+	}
+
+	/**
+	 * 关闭标题栏动画
+	 */
+	public void clearAnimation() {
+		if(search_title_all!=null&&search_title_all.getAnimation()!=null)
+			search_title_all.clearAnimation();
 	}
 }
