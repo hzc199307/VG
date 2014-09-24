@@ -57,7 +57,16 @@ public class ViewHolder
 		view.setText(text);
 		return this;
 	}
-
+	/**
+	 * 
+	 * @Title: setImageResource 
+	 * @Description: 通过String来设置图片资源
+	 * @param @param viewId
+	 * @param @param drawableId
+	 * @param @return
+	 * @return ViewHolder 
+	 * @throws
+	 */
 	public ViewHolder setImageResource(int viewId, String  drawableId){
 		int resId = mContext.getResources().getIdentifier(drawableId, "drawable","com.ne.vg");
 		ImageView view = getView(viewId);
@@ -65,11 +74,31 @@ public class ViewHolder
 		return this;
 	}
 	
+	/**
+	 * 
+	 * @Title: setImageResourceByInt 
+	 * @Description: 通过Int来设置ImageView的资源
+	 * @param @param viewId
+	 * @param @param drawableId
+	 * @param @return
+	 * @return ViewHolder 
+	 * @throws
+	 */
 	public ViewHolder setImageResourceByInt(int viewId, int drawableId){
 		ImageView view = getView(viewId);
 		view.setImageResource(drawableId);
 		return this;
 	}
+	/**
+	 * 
+	 * @Title: setView 
+	 * @Description: 用来设置View的可见性，0代表visible,4代表invisible，8代表gone
+	 * @param @param viewId
+	 * @param @param i
+	 * @param @return
+	 * @return ViewHolder 
+	 * @throws
+	 */
 	public ViewHolder setView(int viewId, int i){
 		View view = getView(viewId);
 		view.setVisibility(i);

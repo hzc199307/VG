@@ -15,7 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
-
+@Deprecated
 public class RouteDay_BigSceneListAdapter extends BaseAdapter{
  
 	private final String TAG = "RouteDay_BigSceneListAdapter";

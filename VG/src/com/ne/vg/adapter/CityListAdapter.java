@@ -16,7 +16,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
+@Deprecated
 /**
  * 首页的city列表适配器 
  * 有1种布局显示

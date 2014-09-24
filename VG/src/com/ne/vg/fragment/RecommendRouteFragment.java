@@ -11,8 +11,9 @@ import android.widget.ListView;
 import android.widget.Toast;
 import com.ne.vg.R;
 import com.ne.vg.activity.RouteActivity;
-import com.ne.vg.adapter.RecommendRouteAdapter;
-import com.ne.vg.bean.CreateData;
+import com.ne.vg.adapter.CommonAdapter;
+import com.ne.vg.adapter.ViewHolder;
+import com.ne.vg.bean.RecommendRoute;
 import com.ne.vg.dao.VGDao;
 /**
  * 
@@ -26,7 +27,7 @@ public class RecommendRouteFragment extends Fragment{
 	//ListView控件
 	private ListView listview;
 	//自定义的适配器
-	private RecommendRouteAdapter gridAdapter;
+	private CommonAdapter<RecommendRoute> gridAdapter;
 	private int cityID;
 	private VGDao mVgDao;
 	private Intent mIntent;
@@ -53,7 +54,21 @@ public class RecommendRouteFragment extends Fragment{
 		
 		//TODO 这里的数据需要转换，即第二个参数改为mVgDao.getRecommendRoute(cityID)那个
 		mVgDao = new VGDao(getActivity());
-		gridAdapter = new RecommendRouteAdapter(getActivity(), mVgDao.getRecommendRoute(cityID));
+		//gridAdapter = new RecommendRouteAdapter(getActivity(), mVgDao.getRecommendRoute(cityID));
+		gridAdapter = new CommonAdapter<RecommendRoute>(getActivity(), mVgDao.getRecommendRoute(cityID),R.layout.item_recommendroute) {
+
+			@Override
+			public void convert(ViewHolder helper, RecommendRoute item) {
+				helper.setImageResource(R.id.recommendroute_view01, item.getResource());
+				helper.setText(R.id.recommendroute_sceneNum, Integer.toString(item.getSceneNum()));
+				helper.setText(R.id.recommendroute_name, item.getRouteName());
+				helper.setText(R.id.recommendroute_scenenum, item.getRouteDay()+ "天");
+				helper.setText(R.id.recommendroute_lovenum, Integer.toString(item.getCollectNum()));
+				//TODO click的响应目前先不写
+			}
+		};
+		
+		
 		listview.setAdapter(gridAdapter);
 		listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 

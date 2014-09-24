@@ -1,11 +1,17 @@
 package com.ne.vg.fragment;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.ne.vg.MainActivity;
 import com.ne.vg.R;
 import com.ne.vg.activity.BigSceneDetailActivity;
 import com.ne.vg.activity.RecommendActivity;
 import com.ne.vg.activity.RouteActivity;
+import com.ne.vg.adapter.CommonAdapter;
 import com.ne.vg.adapter.RouteDay_BigSceneListAdapter;
+import com.ne.vg.adapter.ViewHolder;
+import com.ne.vg.bean.BigScene;
 import com.ne.vg.dao.VGDao;
 
 import android.app.Activity;
@@ -34,7 +40,7 @@ public class RouteDayFragment extends Fragment {
 	private View rootView;
 	private TextView tv;
 	private ListView listView_route_day_bigscenes;
-	private RouteDay_BigSceneListAdapter bigSceneListAdapter;
+	private CommonAdapter<BigScene> bigSceneListAdapter;
 
 	int i =-1;
 	int routeContentID;
@@ -117,8 +123,26 @@ public class RouteDayFragment extends Fragment {
 				bigSceneIDs = mVgDao.getRouteContent(routeContentID).getSeventhScene().split(",");
 			}
 			break;
+		}	
+	}
+	
+	/**
+	 * 
+	 * @Title: ArrayToList 
+	 * @Description: 将数组转换为List
+	 * @param @param sceneId
+	 * @param @return
+	 * @return List<BigScene> 
+	 * @throws
+	 */
+	public List<BigScene> ArrayToList(String[] sceneId)
+	{
+		List<BigScene> scene = new ArrayList<BigScene>();
+		for(int i =0; i <sceneId.length ; i++)
+		{
+			scene.add(mVgDao.getBigSceneObject(Integer.parseInt(sceneId[i])));
 		}
-		
+		return scene;
 	}
 
 	@Override
@@ -127,13 +151,24 @@ public class RouteDayFragment extends Fragment {
 		Log.v(TAG, "onCreateView");
 		//Toast.makeText(getActivity(), TAG+ " "+i+" onCreateView", Toast.LENGTH_SHORT).show();
 
-		if(bigSceneListAdapter == null)
-			bigSceneListAdapter = new RouteDay_BigSceneListAdapter(getActivity(),bigSceneIDs);
+		
 		rootView = inflater.inflate(R.layout.fragment_route_day, container,false);
 //		tv= (TextView)rootView.findViewById(R.id.tv);
 //		tv.setText(""+i);
 
+		
 		listView_route_day_bigscenes = (ListView)rootView.findViewById(R.id.listView_route_day_bigscenes);
+		if(bigSceneListAdapter == null)
+//			bigSceneListAdapter = new RouteDay_BigSceneListAdapter(getActivity(),bigSceneIDs);
+			bigSceneListAdapter = new CommonAdapter<BigScene>(getActivity(),ArrayToList(bigSceneIDs),R.layout.route_item_big_scene) {
+				@Override
+				public void convert(ViewHolder helper, BigScene myBigScene) {
+					// TODO Auto-generated method stub
+					helper.setText(R.id.bigSceneName, myBigScene.getBigSceneName());
+					helper.setText(R.id.num1, ""+myBigScene.getLoveNum());
+					helper.setText(R.id.num2, ""+myBigScene.getRecordNum());
+				}
+			};
 		listView_route_day_bigscenes.setAdapter(bigSceneListAdapter);
 		listView_route_day_bigscenes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
