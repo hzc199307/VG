@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
-        <ScrollView
+        <com.ne.vg.view.MyScrollView
             android:id="@+id/bsd_scroll"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
@@ -77,7 +77,8 @@
                     android:orientation="vertical"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
-                    android:visibility="visible" >
+                    android:visibility="visible"
+                    android:clickable="false" >
 
                     <!-- 进入语音导游的button -->
 
@@ -90,6 +91,7 @@
                         android:layout_marginTop="14dp"
                         android:background="@drawable/bsd_btn_bg"
                         android:gravity="center_vertical"
+                        android:clickable="true"
                         android:onClick="onClick"
                         android:orientation="horizontal" >
 
@@ -139,7 +141,7 @@
                     </FrameLayout>
                 </LinearLayout>
             </LinearLayout>
-        </ScrollView>
+        </com.ne.vg.view.MyScrollView>
 
         <ImageView
             android:layout_width="match_parent"

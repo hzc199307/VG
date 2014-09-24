@@ -48,12 +48,12 @@ public class BigSceneDetailActivity extends FragmentActivity {
 	private ScrollView bsdScroll;//滚动布局
 	private boolean isMapBig = false;//记录地图是否被点击放大了
 	private ImageButton bsd_btn_up,bsd_btn_location;
-	
+
 	private View big_scene_detail_other;
 	private Intent mIntent;
 	private VGDao mVgDao;
 	private String bigSceneName;
-	
+
 	private TextView big_scene_detail_title_name;
 	private BigScene bigScene;
 
@@ -67,15 +67,15 @@ public class BigSceneDetailActivity extends FragmentActivity {
 		bsd_btn_up = (ImageButton)findViewById(R.id.bsd_btn_up);
 		bsd_btn_location = (ImageButton)findViewById(R.id.bsd_btn_location);
 		big_scene_detail_other = (View)findViewById(R.id.big_scene_detail_other);
-		
+
 		big_scene_detail_title_name = (TextView)findViewById(R.id.big_scene_detail_title_name);
-		
+
 		/** 跟数据传输相关*/
 		mVgDao = new VGDao(this);
 		mIntent = this.getIntent();
-		
+
 		bigScene = mVgDao.getBigSceneObject(mIntent.getExtras().getInt("bigSceneID"));
-		
+
 		bigSceneName = mVgDao.getBigSceneName(mIntent.getExtras().getInt("bigSceneID"));
 		Log.d(TAG, bigSceneName);
 		big_scene_detail_title_name.setText(bigSceneName);
@@ -121,12 +121,21 @@ public class BigSceneDetailActivity extends FragmentActivity {
 					}
 				}
 			});
+			gMapFragment.setOnTouchListener(new View.OnTouchListener() {
+				
+				@Override
+				public boolean onTouch(View v, MotionEvent event) {
+					// TODO Auto-generated method stub
+					Log.v(TAG, "gMapFragment onTouch "+event.getAction());
+					return false;
+				}
+			});
 			if(bigScene!=null)
 			{
 				gMapFragment.setCenter(bigScene.getLatitude(), bigScene.getLongtitude());
 			}
-			
-				
+
+
 		}
 		if(bigSceneIntroFragment==null)
 			bigSceneIntroFragment = new BigSceneIntroFragment();
@@ -187,6 +196,7 @@ public class BigSceneDetailActivity extends FragmentActivity {
 	{
 		if(!isMapBig)
 		{
+			//放大地图至全屏
 			lastMapHeight = gmapFrame.getHeight();//保存之前的高度
 			bsd_btn_up.setVisibility(View.VISIBLE);
 			bsd_btn_location.setVisibility(View.VISIBLE);
@@ -199,6 +209,7 @@ public class BigSceneDetailActivity extends FragmentActivity {
 		}
 		else
 		{
+			//恢复原状
 			bsd_btn_up.setVisibility(View.INVISIBLE);
 			bsd_btn_location.setVisibility(View.INVISIBLE);
 			FrameLayout.LayoutParams linearParams = (LayoutParams) gmapFrame.getLayoutParams();

@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
@@ -83,6 +84,7 @@ public class GMapFragment extends Fragment{
 			webviewGMap.setMarkerItems(listMarkerItems);
 		}
 		if(onClickListener!=null)webviewGMap.setOnClickListener(onClickListener);
+		if(onTouchListener!=null)webviewGMap.setOnTouchListener(onTouchListener);
 		if(latLngCenter!=null)
 		{
 			Log.v(TAG, "webviewGMap.setCenter");
@@ -173,5 +175,18 @@ public class GMapFragment extends Fragment{
 	public void requestLoc()
 	{
 		webviewGMap.requestLoc();
+	}
+	
+	
+	public void onTouchEvent(MotionEvent event) {
+		// TODO Auto-generated method stub
+		webviewGMap.onTouchEvent(event);
+	}
+	
+	private View.OnTouchListener onTouchListener;
+	public void setOnTouchListener(View.OnTouchListener onTouchListener) {
+		// TODO Auto-generated method stub
+		this.onTouchListener = onTouchListener;
+		
 	}
 }

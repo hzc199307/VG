@@ -18,6 +18,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebSettings;
@@ -80,21 +81,21 @@ public class GMapWebView extends WebView {
 	{
 		setupWebView();
 		setWebViewClient();
-//		listMarkerItems = new ArrayList<MarkerItem>();
-//		MarkerItem item1,item2,item3;
-//		item1 = new MyMarkerItem(23.0, 113, "1", "");
-//		item2 = new MyMarkerItem(23.500000, 113.500000, "2", "marker1.png");
-//		item3 = new MyMarkerItem(23.100000, 113.100000, "3", "marker1.png");
-//		listMarkerItems.add(item1);
-//		listMarkerItems.add(item2);
-//		listMarkerItems.add(item3);
-//
-//		setMarkerData(listMarkerItems, null, true, null);
-//		setRouteData(listMarkerItems);
-//		showMarkerSpan();
+		//		listMarkerItems = new ArrayList<MarkerItem>();
+		//		MarkerItem item1,item2,item3;
+		//		item1 = new MyMarkerItem(23.0, 113, "1", "");
+		//		item2 = new MyMarkerItem(23.500000, 113.500000, "2", "marker1.png");
+		//		item3 = new MyMarkerItem(23.100000, 113.100000, "3", "marker1.png");
+		//		listMarkerItems.add(item1);
+		//		listMarkerItems.add(item2);
+		//		listMarkerItems.add(item3);
+		//
+		//		setMarkerData(listMarkerItems, null, true, null);
+		//		setRouteData(listMarkerItems);
+		//		showMarkerSpan();
 
 	}
-	
+
 	public void setMarkerItems(List<MarkerItem> listMarkerItems) {
 		// TODO Auto-generated method stub
 		this.listMarkerItems = listMarkerItems;
@@ -191,7 +192,7 @@ public class GMapWebView extends WebView {
 	{
 		String title,icon;
 		double lat,lng;
-		
+
 		public MyMarkerItem(double lat,double lng,String title) {
 			// TODO Auto-generated constructor stub
 			this.lat = lat;
@@ -287,36 +288,36 @@ public class GMapWebView extends WebView {
 		}
 		else
 		{
-//			this.setWebViewClient(new WebViewClient()
-//			{
-//				@Override
-//				public void onPageFinished(WebView view, String url) 
-//				{
-//					// TODO Auto-generated method stub
-//					super.onPageFinished(view, url);
-//					Log.v(TAG, "onPageFinished");
-//					if(latLngCenter!=null)
-//					{
-//						Log.v(TAG, "onPageFinished setCenter");
-//						loadUrl("javascript:setCenter("+latLngCenter.getLatitude()+","+latLngCenter.getLongitude()+")");
-//					}
-//					isPageFinished = true;
-//					MarkerItem markerItem;
-//					for(int i=0;i<dataSize;i++)
-//					{
-//						markerItem = listMarkerItems.get(i);
-//						//this.loadUrl("javascript:addMarker(23.0, 113.0, 'marker1.png', 'A')");
-//						loadUrl("javascript:addMarker("+markerItem.getLat()+","+ markerItem.getLng()+",'"+ markerItem.getIcon()+"','"+ markerItem.getTitle()+"')");
-//					}
-//					//showRoute();
-//					showSpan();
-//					loadUrl("javascript:setInfoWindowStatus("+infoWindowStatus+")");
-//
-//				}
-//			});
+			//			this.setWebViewClient(new WebViewClient()
+			//			{
+			//				@Override
+			//				public void onPageFinished(WebView view, String url) 
+			//				{
+			//					// TODO Auto-generated method stub
+			//					super.onPageFinished(view, url);
+			//					Log.v(TAG, "onPageFinished");
+			//					if(latLngCenter!=null)
+			//					{
+			//						Log.v(TAG, "onPageFinished setCenter");
+			//						loadUrl("javascript:setCenter("+latLngCenter.getLatitude()+","+latLngCenter.getLongitude()+")");
+			//					}
+			//					isPageFinished = true;
+			//					MarkerItem markerItem;
+			//					for(int i=0;i<dataSize;i++)
+			//					{
+			//						markerItem = listMarkerItems.get(i);
+			//						//this.loadUrl("javascript:addMarker(23.0, 113.0, 'marker1.png', 'A')");
+			//						loadUrl("javascript:addMarker("+markerItem.getLat()+","+ markerItem.getLng()+",'"+ markerItem.getIcon()+"','"+ markerItem.getTitle()+"')");
+			//					}
+			//					//showRoute();
+			//					showSpan();
+			//					loadUrl("javascript:setInfoWindowStatus("+infoWindowStatus+")");
+			//
+			//				}
+			//			});
 		}
 	}
-	
+
 	/**
 	 * onPageFinished监听
 	 */
@@ -439,7 +440,7 @@ public class GMapWebView extends WebView {
 			});
 
 		}
-		
+
 		@JavascriptInterface 
 		public void test()
 		{
@@ -505,7 +506,7 @@ public class GMapWebView extends WebView {
 			});
 
 		}
-		
+
 		/**
 		 * infoWindow被点击事件
 		 */
@@ -549,7 +550,7 @@ public class GMapWebView extends WebView {
 	public void setOnClickListener(OnClickListener onClickListener) {
 		this.onMapClickListener = onClickListener;
 	}
-	
+
 	private LatLng latLngCenter;
 	public void setCenter(double lat,double lng) {
 		// TODO Auto-generated method stub
@@ -563,7 +564,7 @@ public class GMapWebView extends WebView {
 		// TODO Auto-generated method stub
 		if(locationUtil ==null)
 			locationUtil = new LocationUtil(getContext(), new LocationListener() {
-				
+
 
 				@Override
 				public void onStatusChanged(String arg0, int arg1, Bundle arg2) {
@@ -592,8 +593,8 @@ public class GMapWebView extends WebView {
 					locationUtil.stopLoc();
 				}
 			});
-//		locationUtil.requestGPSLoc();
-//		locationUtil.requestNetLoc();
+		//		locationUtil.requestGPSLoc();
+		//		locationUtil.requestNetLoc();
 		locationUtil.requestLoc();
 		/*
 				if(bMapLocationUtil==null)
@@ -626,5 +627,21 @@ public class GMapWebView extends WebView {
 
 	}
 
+	@Override
+	public boolean onTouchEvent(MotionEvent event) {
+		// TODO Auto-generated method stub
+		Log.d(TAG, event.getAction()+"");
+
+		/**
+		 * 人为的对webview小小的滚动一下，这样才能使地图可以移动
+		 * 解决小米系统的 “Should not happen: no rect-based-test nodes found” 报错
+		 */
+		if(event.getAction() == MotionEvent.ACTION_DOWN){  
+			int temp_ScrollY = this.getScrollY();  
+			this.scrollTo(this.getScrollX(), this.getScrollY() + 1);  
+			this.scrollTo(this.getScrollX(), temp_ScrollY);//返回原来位置，可不加  
+		}  
+		return super.onTouchEvent(event);
+	}
 
 }

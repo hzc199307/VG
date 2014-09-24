@@ -108,6 +108,7 @@
     <dimen name="title_left_icon_marginleft">10dp</dimen>
     <dimen name="title_left_tv_marginleftof_icon">10dp</dimen>
     <dimen name="title_left_edit_marginleft">36dp</dimen>
+    <dimen name="title_left_edit_marginright">9dp</dimen>
     <dimen name="title_right_icon_paddingright">10dp</dimen>
     
     <!-- SearchFragment 相关 -->
