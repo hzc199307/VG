@@ -76,6 +76,7 @@ public class SceneSmallSceneListFragment extends Fragment {
 	private CommonAdapter<SmallScene> mAdapter;
 	private smallBroadcastReceiver sReceiver;
 	private Handler mHandler;
+	private Runnable runnable;
 	private int mPosition;
 	private int oldValue;
 	private int newValue;
@@ -86,6 +87,8 @@ public class SceneSmallSceneListFragment extends Fragment {
 		this.cityName = cityName;
 		this.bigSceneName = bigSceneName;
 		this.bigSceneID = bigSceneID;
+		Log.d(TAG, "bigSceneName=" + bigSceneName);
+		
 	}
 	
 	
@@ -94,6 +97,8 @@ public class SceneSmallSceneListFragment extends Fragment {
 		
 		super.onCreate(savedInstanceState);
 		app = (VGApplication)this.getActivity().getApplication();
+		//判断该fragment存在
+		app.setSmallSceneFragmentExisted(true);
 		intent = new Intent("com.ne.vg.service.MusicService");
 		mDao = new VGDao(getActivity());
 		
@@ -133,10 +138,11 @@ public class SceneSmallSceneListFragment extends Fragment {
 
 			@Override
 			public void convert(ViewHolder helper, SmallScene item){
+				
 				// TODO Auto-generated method stub
 				helper.setText(R.id.scene_item_smallscene_name, item.getSmallSceneName());
 				Log.d(TAG, "playSceneID="+app.playSceneID);
-				Log.d(TAG, "itemID="+ item.getSmallSceneID());
+				Log.d(TAG, "页面刷新 ");
 				//如果正在播放
 				if(app.playSceneID == item.getSmallSceneID() && app.mBinder.getService().isPlaying==true){
 					
@@ -175,20 +181,22 @@ public class SceneSmallSceneListFragment extends Fragment {
 				smallSceneId = mDao.getSmallScene(bigSceneID).get(position).getSmallSceneID();
 				//设置playSceneID的值为当前选中的值。
 				app.playSceneID = smallSceneId;
+				Log.d(TAG, "play scene id is :" + app.playSceneID);
+				Log.d(TAG, "smallSceneName is :" + smallSceneName);
 //				startSer(0);
 //				//更新界面
 //				mAdapter.notifyDataSetChanged();
 				ServiceTask sTask = new ServiceTask();
-				sTask.execute(0);
-				mNotification.showName(smallSceneName);
-				mNotification.showButtonNotify();
+				mHandler = new Handler();
+				
+				
 				
 				
 				/**
 				 * 这里是重点，由于startSer是在后台开启的，所以需要延时执行后面的代码。
 				 */
-				mHandler = new Handler();
-				Runnable runnable = new Runnable(){
+				
+				runnable = new Runnable(){
 					@Override
 					public void run() {
 						// TODO Auto-generated method stub
@@ -202,18 +210,23 @@ public class SceneSmallSceneListFragment extends Fragment {
 						{
 							//更新界面
 							mAdapter.notifyDataSetChanged();
-							mNotification.showName(smallSceneName);
+							mNotification.showName(mDao.getSmallSceneName(app.playSceneID));
+							Log.d(TAG, "Notify1 is start");
+							Log.d(TAG, "app.playID="+ app.playSceneID);
+							Log.d(TAG, "smallSceneName =" + smallSceneName + "smallSceneId ="+smallSceneId);
 							mNotification.showButtonNotify();
 						}
 							
 						//调用Activity中的函数,用来更新seekBar
 						mListener.onMusicSelected();
 						//TODO 最后来更新列表
-						mHandler.postDelayed(this, 600);// 打开定时器，执行操作 
+						if(mHandler!=null)
+							mHandler.postDelayed(this, 600);// 打开定时器，执行操作 
 					}      
 		        };  
 		        //TODO 这里的延迟跟用户体验密切相关
-		        mHandler.post(runnable);// 打开定时器，执行操作 
+		       
+		        sTask.execute(0);
 		    	app.mBinder.getService().startSuccess = false;
 		    	
 			}
@@ -237,7 +250,7 @@ public class SceneSmallSceneListFragment extends Fragment {
 		 */
 		@Override
 		protected String doInBackground(Integer... params) {
-			// TODO Auto-generated method stub
+			// TODO 先开启服务
 			startSer(0);
 			return null;
 		}
@@ -253,8 +266,14 @@ public class SceneSmallSceneListFragment extends Fragment {
 		@Override  
         protected void onPostExecute(String result) {  
             //doInBackground返回时触发，换句话说，就是doInBackground执行完后触发  
-            //这里的result就是上面doInBackground执行后的返回值，所以这里是"执行完毕"  
+            //这里的result就是上面doInBackground执行后的返回值，所以这里是"执行完毕" 
+			//服务完成后，刷新页面
 			mAdapter.notifyDataSetChanged(); 
+//			mNotification.showName(smallSceneName);
+//			
+//			mNotification.showButtonNotify();
+//			Log.d(TAG, "Notify2 is start");
+			mHandler.post(runnable);// 打开定时器，执行操作 
             super.onPostExecute(result);  
         }  
 		
@@ -359,6 +378,15 @@ public class SceneSmallSceneListFragment extends Fragment {
 	public void onDestroyView() {
 		// TODO Auto-generated method stub
 		getActivity().unregisterReceiver(sReceiver);
+		Log.d(TAG,"runnable is null?" + (runnable==null));
+		//停止计时器
+		if(runnable!=null){
+			mHandler.removeCallbacks(runnable);
+		}
+		mHandler= null;
+		
+		//判断该fragment不存在
+		app.setSmallSceneFragmentExisted(false);
 		super.onDestroyView();
 		
 		Log.v(TAG, "onDestroyView");

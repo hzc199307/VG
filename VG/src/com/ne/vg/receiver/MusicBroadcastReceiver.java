@@ -52,7 +52,13 @@ public class MusicBroadcastReceiver extends BroadcastReceiver{
 				}
 				//更新界面，及图片改变
 				//app.showNotify();
-				mNotification.showButtonNotify();
+				/**
+				 * broadcast里面不应该刷新mNotification,通过fragment来刷新即可。
+				 * 但是fragment销毁的时候，receiver应该发生更新。用一个标志位来判断。
+				 */
+				//如果存在，则不更新，若不存在，则更新mNotification
+				if(!app.isSmallSceneFragmentExisted())
+					mNotification.showButtonNotify();
 				
 				Log.d(TAG , play_status);
 				

@@ -37,6 +37,8 @@ public class VGApplication extends Application{
 	public int playSceneID;
 	
 	public MusicNotification mNotification;
+	//标志位，判断SceneSmallSceneListFrament是否存在，由此来判断是否在musicBroadReceiver中是否更新
+	private boolean SmallSceneFragmentExisted = false;
 	//私有构造器，防止外面实例化该对象，
 	public VGApplication(){
 		
@@ -171,6 +173,14 @@ public class VGApplication extends Application{
 //		mNotification = new MusicNotification(getApplicationContext());
 //		mNotification.showButtonNotify();
 //	}
+
+	public boolean isSmallSceneFragmentExisted() {
+		return SmallSceneFragmentExisted;
+	}
+
+	public void setSmallSceneFragmentExisted(boolean smallSceneFragmentExisted) {
+		SmallSceneFragmentExisted = smallSceneFragmentExisted;
+	}
 	
 	
 }

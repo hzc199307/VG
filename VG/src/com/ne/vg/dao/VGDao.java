@@ -363,6 +363,17 @@ public class VGDao {
 		return mBigScene;
 	}
 
+	public String getSmallSceneName(int smallSceneID){
+		SmallScene mScene = new SmallScene();
+		String[] args = {smallSceneID+""};
+		Cursor cr = db.query("smallScene", null, "smallSceneID=?", args, null, null, null);
+		
+		if(cr!=null){
+			cr.moveToFirst();
+			mScene.setSmallSceneName(cr.getString(cr.getColumnIndex(SmallSceneColumns.smallSceneName)));
+		}
+		return mScene.getSmallSceneName();	
+	}
 	/**
 	 * 
 	 * @Title: closeDatabase 
