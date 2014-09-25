@@ -28,6 +28,14 @@ public class LeftSlidingMenuFragment extends Fragment implements View.OnClickLis
 	private View home_layout,mine_layout,search_layout,setting_layout;
 
 	private MainActivity mainActivity;
+	
+//	@Override
+//	public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState) {
+//
+//		View view  = inflater.inflate(R.layout.test_fragment, container,false);
+//		return view;
+//	}
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
