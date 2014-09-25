@@ -115,5 +115,12 @@
     <dimen name="search_title_edit_width">273dp</dimen>
     <dimen name="search_title_edit_height">34dp</dimen>
     
+    <!-- SettingFragment -->
+    <dimen name="setting_margin">20dp</dimen>
+    <dimen name="setting_item_height">50dp</dimen>
+    <dimen name="setting_item_tv_left_marginleft">11dp</dimen>
+    <dimen name="setting_item_tv_right_marginright">26dp</dimen>
+    <dimen name="setting_item_ic_right_marginright">11dp</dimen>
+    
 
 </resources>

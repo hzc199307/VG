@@ -2,13 +2,13 @@
 
     <!--
         Base application theme, dependent on API level. This theme is replaced
-        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
+        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
     -->
     <style name="AppBaseTheme" parent="Theme.AppCompat.Light">
         <!--
             Theme customizations available in newer API levels can go in
             res/values-vXX/styles.xml, while customizations related to
-            backward-compatibility can go here.
+            backward-compatibility can go here.
         -->
     </style>
 
@@ -31,6 +31,37 @@
         <item name="android:layout_height">48dip</item>
         <item name="android:layout_gravity">center|right</item>
         <item name="android:background">?android:listChoiceBackgroundIndicator</item>
+    </style>
+
+    <!--                           自定义style                            -->
+    <!-- SettingFragment -->
+    <style name="setting_RlBtn_Style">
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+        <item name="android:layout_height">@dimen/setting_item_height</item>
+        <item name="android:background">@drawable/mine_item_bg</item>
+    </style>
+
+    <style name="setting_RlBtn_tv_left_Style">
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:layout_marginLeft">@dimen/setting_item_tv_left_marginleft</item>
+        <item name="android:textColor">@color/mine_item_tv</item>
+        <item name="android:textSize">@dimen/mine_item_tv</item>
+    </style>
+
+    <style name="setting_RlBtn_iv_right_Style">
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:layout_marginRight">@dimen/setting_item_ic_right_marginright</item>
+        <item name="android:src">@drawable/mine_item_enter_icon</item>
+    </style>
+
+    <style name="setting_RlBtn_tv_right_Style">
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:layout_marginRight">@dimen/setting_item_tv_right_marginright</item>
+        <item name="android:textColor">@color/mine_item_num_tv</item>
+        <item name="android:textSize">@dimen/mine_item_num_tv</item>
     </style>
 
 </resources>

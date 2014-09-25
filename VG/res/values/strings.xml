@@ -44,5 +44,9 @@
     <!-- SearchFragment 相关 -->
     <string name="search_tab_abroad">国际</string>
     <string name="search_tab_china">国内</string>
+    
+    <!-- SettingFragment -->
+    <string name="title_fragment_setting">设置</string>
+    
 
 </resources>
