@@ -1,4 +1,4 @@
-package com.ne.vg.fragment;
+package com.ne.vg.main;
 
 import com.ne.vg.MyLoveActivity;
 import com.ne.vg.R;
@@ -27,7 +27,7 @@ import android.widget.Toast;
  * @Description: TODO 
  * @date 2014-9-2 上午11:30:02
  */
-public class MineFragment extends Fragment implements View.OnClickListener{
+public class MineFragment extends AnimationFragment implements View.OnClickListener{
 
 	private final static String TAG = "MineFragment";
 
@@ -40,6 +40,7 @@ public class MineFragment extends Fragment implements View.OnClickListener{
 		Log.v(TAG, "onCreateView");
 		View view  = inflater.inflate(R.layout.fragment_mine, container,false);
 		mine_title_left = (View)view.findViewById(R.id.mine_title_left);
+		super.setAnimView(mine_title_left);
 		mine_item_download = (View)view.findViewById(R.id.mine_item_download);
 		mine_item_love = (View)view.findViewById(R.id.mine_item_love);
 		mine_item_collection = (View)view.findViewById(R.id.mine_item_collection);
@@ -47,24 +48,6 @@ public class MineFragment extends Fragment implements View.OnClickListener{
 		mine_item_love.setOnClickListener(this);
 		mine_item_collection.setOnClickListener(this);
 		return view;
-	}
-
-	/**
-	 * 开始标题栏动画
-	 */
-	public void startAnimation(TranslateAnimation animation) {
-		animation.setDuration(400);
-		animation.setFillAfter(true);
-		if(mine_title_left!=null)
-			mine_title_left.startAnimation(animation);
-	} 
-
-	/**
-	 * 关闭标题栏动画
-	 */
-	public void clearAnimation() {
-		if(mine_title_left!=null&&mine_title_left.getAnimation()!=null)
-			mine_title_left.clearAnimation();
 	}
 
 	@Override

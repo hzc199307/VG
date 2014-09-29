@@ -1,9 +1,8 @@
-package com.ne.vg.fragment;
+package com.ne.vg.main;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.ne.vg.MainActivity;
 import com.ne.vg.R;
 import com.ne.vg.activity.BigSceneDetailActivity;
 import com.ne.vg.activity.RecommendActivity;
@@ -43,7 +42,7 @@ import android.widget.Toast;
  * @Description: TODO 
  * @date 2014-8-12 下午3:21:59
  */
-public class HomeFragment extends Fragment implements OnClickListener{
+public class HomeFragment extends AnimationFragment implements OnClickListener{
 
 	private final static String TAG = "HomeFragment";
 
@@ -113,6 +112,7 @@ public class HomeFragment extends Fragment implements OnClickListener{
 			}
 		});
 		home_title_left = (View)view.findViewById(R.id.home_title_left);
+		super.setAnimView(home_title_left);
 		home_title_search_btn = (ImageButton)view.findViewById(R.id.home_title_search_btn);
 		home_title_search_btn.setOnClickListener(this);
 
@@ -130,7 +130,7 @@ public class HomeFragment extends Fragment implements OnClickListener{
 		switch(id)
 		{
 		case R.id.home_title_search_btn:
-			((MainActivity) getActivity()).switchContentToSearchCanBack(this);
+			((MainActivity) getActivity()).switchContentCanBackToSearchFrom(this);
 			break;
 		case R.id.home_tab_locationEnter: 
 			MainActivity mainActivity = (MainActivity)getActivity();
@@ -195,23 +195,4 @@ public class HomeFragment extends Fragment implements OnClickListener{
 		mAdapter.destroy();
 		mAdapter = null;
 	}
-
-	/**
-	 * 开始标题栏动画
-	 */
-	public void startAnimation(TranslateAnimation animation) {
-		animation.setDuration(400);
-		animation.setFillAfter(true);
-		if(home_title_left!=null)
-			home_title_left.startAnimation(animation);
-	}
-
-	/**
-	 * 关闭标题栏动画
-	 */
-	public void clearAnimation() {
-		if(home_title_left!=null&&home_title_left.getAnimation()!=null)
-			home_title_left.clearAnimation();
-	}
-
 }

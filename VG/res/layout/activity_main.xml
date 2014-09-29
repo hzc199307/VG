@@ -11,7 +11,7 @@
         />
 
     <ImageView
-        android:id="@+id/home_iv_cover"
+        android:id="@+id/main_iv_cover"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="@dimen/home_title_height"

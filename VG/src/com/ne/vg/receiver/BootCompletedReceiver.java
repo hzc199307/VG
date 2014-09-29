@@ -1,6 +1,6 @@
 package com.ne.vg.receiver;
 
-import com.ne.vg.MainActivity;
+import com.ne.vg.main.MainActivity;
 import com.ne.vg.service.PushService;
 
 import android.content.BroadcastReceiver;

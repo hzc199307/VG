@@ -1,4 +1,4 @@
-package com.ne.vg.fragment;
+package com.ne.vg.main;
 
 import com.ne.vg.MyLoveActivity;
 import com.ne.vg.R;
@@ -23,7 +23,7 @@ import android.widget.Button;
  * @Description: TODO 
  * @date 2014-8-12 下午3:21:19
  */
-public class SearchFragment extends Fragment implements View.OnClickListener{
+public class SearchFragment extends AnimationFragment implements View.OnClickListener{
 
 	
 	
@@ -39,7 +39,7 @@ private View search_title_all;
 		View view  = inflater.inflate(R.layout.fragment_search, container,false);
 
 		search_title_all = (View)view.findViewById(R.id.search_title_all);
-		
+		super.setAnimView(search_title_all);
 		return view;
 	}
 	@Override
@@ -56,23 +56,5 @@ private View search_title_all;
 		// TODO Auto-generated method stub
 		super.onDestroyView();
 		Log.v(TAG, "onDestroyView");
-	}
-	
-	/**
-	 * 开始标题栏动画
-	 */
-	public void startAnimation(TranslateAnimation animation) {
-		animation.setDuration(400);
-		animation.setFillAfter(true);
-		if(search_title_all!=null)
-			search_title_all.startAnimation(animation);
-	}
-
-	/**
-	 * 关闭标题栏动画
-	 */
-	public void clearAnimation() {
-		if(search_title_all!=null&&search_title_all.getAnimation()!=null)
-			search_title_all.clearAnimation();
 	}
 }

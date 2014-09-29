@@ -1,4 +1,4 @@
-package com.ne.vg.fragment;
+package com.ne.vg.main;
 
 import com.ne.vg.R;
 
@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.TranslateAnimation;
 
-public class SettingFragment extends Fragment {
+public class SettingFragment extends AnimationFragment {
 
 	private final static String TAG = "SettingFragment";
 	private View setting_title_left;
@@ -22,31 +22,14 @@ public class SettingFragment extends Fragment {
 		Log.v(TAG, "onCreateView");
 		View view  = inflater.inflate(R.layout.fragment_setting, container,false);
 		setting_title_left = (View)view.findViewById(R.id.setting_title_left);
+		super.setAnimView(setting_title_left);
 		return view;
 	}
-	
+
 	@Override
 	public void onDestroyView() {
 		// TODO Auto-generated method stub
 		super.onDestroyView();
 		Log.v(TAG, "onDestroyView");
-	}
-	
-	/**
-	 * 开始标题栏动画
-	 */
-	public void startAnimation(TranslateAnimation animation) {
-		animation.setDuration(400);
-		animation.setFillAfter(true);
-		if(setting_title_left!=null)
-			setting_title_left.startAnimation(animation);
-	}
-
-	/**
-	 * 关闭标题栏动画
-	 */
-	public void clearAnimation() {
-		if(setting_title_left!=null&&setting_title_left.getAnimation()!=null)
-			setting_title_left.clearAnimation();
 	}
 }

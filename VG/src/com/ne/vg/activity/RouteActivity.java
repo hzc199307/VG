@@ -1,9 +1,9 @@
 package com.ne.vg.activity;
 
 import com.ne.vg.R;
-import com.ne.vg.fragment.MineFragment;
 import com.ne.vg.fragment.RouteFragment;
 import com.ne.vg.gmap.GMapFragment;
+import com.ne.vg.main.MineFragment;
 
 import android.support.v4.app.FragmentActivity;
 import android.content.Intent;

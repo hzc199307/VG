@@ -1,20 +1,19 @@
-package com.ne.vg;
+package com.ne.vg.main;
 
-import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import com.ne.vg.R;
+import com.ne.vg.VGApplication;
 import com.ne.vg.DBHelper.DBHelper;
-import com.ne.vg.fragment.HomeFragment;
+import com.ne.vg.R.id;
+import com.ne.vg.R.layout;
 import com.ne.vg.fragment.LeftSlidingMenuFragment;
-import com.ne.vg.fragment.MineFragment;
-import com.ne.vg.fragment.RouteFragment;
-import com.ne.vg.fragment.SearchFragment;
-import com.ne.vg.fragment.SettingFragment;
+import com.ne.vg.util.LogUtil;
+import com.ne.vg.util.MusicNotification;
 
 import com.slidingmenu.lib.SlidingMenu;
 import com.slidingmenu.lib.SlidingMenu.OnCloseListener;
-import com.slidingmenu.lib.SlidingMenu.OnClosedListener;
 import com.slidingmenu.lib.SlidingMenu.OnOpenListener;
 import com.slidingmenu.lib.app.SlidingFragmentActivity;
 
@@ -26,69 +25,65 @@ import android.app.NotificationManager;
 import android.app.AlertDialog.Builder;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.ScaleAnimation;
 import android.view.animation.TranslateAnimation;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 
 public class MainActivity extends SlidingFragmentActivity {
 
-	private final static double behindWidth = 0.75;
+	private final static double behindWidth = 0.75;//侧边栏比例参数
 	private final static String TAG = "MainActivity";
 
 	protected SlidingMenu mSlidingMenu;
-	private ImageButton ivTitleBtnLeft;
 
 	private FragmentManager fragmentManager;//fragment管理器
 
+	//MainActivity下的侧边栏Fragment以及四个选项卡Fragment
 	private LeftSlidingMenuFragment leftSlidingMenuFragment;//侧边Fragment
 	private HomeFragment homeFragment;//主Fragment
 	private MineFragment mineFragment;
 	private SearchFragment searchFragment;
 	private SettingFragment settingFragment;
+	private Fragment nowFragment;//目前的fragment
 
-	private ImageView home_iv_cover;
+	private ImageView main_iv_cover;//主布局覆盖阴影 在侧边栏出现时该阴影显示
 
-	private TranslateAnimation animation1,animation2;
+	private TranslateAnimation titleAnimation;//标题栏动画
 
-	DisplayMetrics dm;
-	DBHelper mDbHelper;
+	private DisplayMetrics dm;
 
 	private VGApplication app;
 
 	private ProgressDialog progressDialog;//正在加载的弹出框
-	
+
 	private AlertDialog.Builder builder;//定位完成的弹出框
-	
+
 	private boolean enter2ndF = false;//是否进入了二层页面
 	private Fragment lastFragment = null;//是否进入了二层页面
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
-		Log.v(TAG, "onCreate");
+		LogUtil.d(TAG, "onCreate " + this + ": " + savedInstanceState);
 		setContentView(R.layout.activity_main);
+
 		//初始化app
 		app = (VGApplication)this.getApplication();
-		
+
 		progressDialog = new ProgressDialog(this);
 
 		fragmentManager = getSupportFragmentManager();
 
+		//必然加载侧边栏和主页面
 		leftSlidingMenuFragment = new LeftSlidingMenuFragment();
 		homeFragment = new HomeFragment();
-
 
 		if (savedInstanceState == null) {
 			fragmentManager.beginTransaction()
@@ -97,17 +92,14 @@ public class MainActivity extends SlidingFragmentActivity {
 			nowFragment = homeFragment;
 		}
 
-
+		/***有关屏幕像素和dpi信息***/
 		dm = new DisplayMetrics();  
 		getWindowManager().getDefaultDisplay().getMetrics(dm);  
 		//获得手机的宽度和高度像素单位为px  
-		String strPM = "手机屏幕分辨率为:" + dm.widthPixels+"* "+dm.heightPixels;  
-
+		//String strPM = "手机屏幕分辨率为:" + dm.widthPixels+"* "+dm.heightPixels;  
 		//Toast.makeText(getApplicationContext(), strPM, Toast.LENGTH_SHORT).show();
 		//Toast.makeText(getApplicationContext(), getResources().getDisplayMetrics().densityDpi+"", Toast.LENGTH_SHORT).show(); 
-
-		animation1 = new TranslateAnimation(0, (int)(dm.widthPixels*(1-behindWidth-0.05)), 0, 0);
-		animation2 = new TranslateAnimation(-(int)(dm.widthPixels*behindWidth), 0, 0, 0);
+		titleAnimation = new TranslateAnimation(0, (int)(dm.widthPixels*(1-behindWidth-0.05)), 0, 0);
 
 		initSlidingMenu();
 
@@ -115,17 +107,16 @@ public class MainActivity extends SlidingFragmentActivity {
 
 	@Override
 	protected void onResume() {
-		// TODO Auto-generated method stub
 		super.onResume();
-		Log.v(TAG, "onResume");
+		LogUtil.d(TAG, "onResume");
 
 	}
 
 	@Override
 	protected void onResumeFragments() {
-		Log.v(TAG, "onResumeFragments");
 		super.onResumeFragments();
-		// TODO 当nowFragment没有内容 或者被隐藏 跳往主界面
+		LogUtil.d(TAG, "onResumeFragments");
+		// 当nowFragment没有内容 或者被隐藏,就跳往主界面,确保界面显示正确
 		if(nowFragment == null||nowFragment.isHidden())
 			switchContentToHome();
 
@@ -136,7 +127,7 @@ public class MainActivity extends SlidingFragmentActivity {
 	 */
 	private void initSlidingMenu() {
 
-		home_iv_cover = (ImageView)findViewById(R.id.home_iv_cover);
+		main_iv_cover = (ImageView)findViewById(R.id.main_iv_cover);
 
 		setBehindContentView(R.layout.main_left_layout);//设置左边的菜单布局
 
@@ -147,27 +138,20 @@ public class MainActivity extends SlidingFragmentActivity {
 		mSlidingMenu = getSlidingMenu();
 		mSlidingMenu.setMode(SlidingMenu.LEFT);// 设置是左滑还是右滑，还是左右都可以滑，我这里只做了左滑
 		mSlidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_MARGIN);//设置手势模式
-//				mSlidingMenu.setShadowDrawable(R.drawable.shadow);// 设置左菜单阴影图片
-//				mSlidingMenu.setShadowWidth(100);
+		//mSlidingMenu.setShadowDrawable(R.drawable.shadow);// 设置左菜单阴影图片  这里我自行采用阴影
+		//mSlidingMenu.setShadowWidth(100);
 		mSlidingMenu.setFadeEnabled(true);// 设置滑动时菜单的是否淡入淡出
 		mSlidingMenu.setFadeDegree(1.0f);// 设置淡入淡出的比例
 		mSlidingMenu.setBehindScrollScale(0.1f);// 设置滑动时拖拽效果
-		mSlidingMenu.setBehindWidth((int)(dm.widthPixels*behindWidth));//侧边栏的宽度 按照黄金比例
+		mSlidingMenu.setBehindWidth((int)(dm.widthPixels*behindWidth));//侧边栏的宽度 按照behindWidth的比例
 		//mSlidingMenu.setBehindOffsetRes(R.dimen.slidingmenu_offset);// 设置剩余宽度
 		mSlidingMenu.setOnOpenListener(new OnOpenListener() {
 
 			@Override
 			public void onOpen() {
 				setCoverIvVisibility(View.VISIBLE);
-				if(nowFragment == homeFragment)
-					homeFragment.startAnimation(animation1);
-				else if(nowFragment == mineFragment)
-					mineFragment.startAnimation(animation1);
-				else if(nowFragment == searchFragment)
-					searchFragment.startAnimation(animation1);
-				else if(nowFragment == settingFragment)
-					settingFragment.startAnimation(animation1);
-				//				leftSlidingMenuFragment.startAnimation(animation2);
+				if(nowFragment instanceof AnimationFragment)
+					((AnimationFragment)nowFragment).startAnimation(titleAnimation);
 			}
 		});
 		mSlidingMenu.setOnCloseListener(new OnCloseListener() {
@@ -175,20 +159,11 @@ public class MainActivity extends SlidingFragmentActivity {
 			@Override
 			public void onClose() {
 				setCoverIvVisibility(View.GONE);
-				if(nowFragment == homeFragment)
-					homeFragment.clearAnimation();
-				else if(nowFragment == mineFragment)
-					mineFragment.clearAnimation();
-				else if(nowFragment == searchFragment)
-					searchFragment.clearAnimation();
-				else if(nowFragment == settingFragment)
-					settingFragment.clearAnimation();
-				//				leftSlidingMenuFragment.clearAnimation();
+				if(nowFragment instanceof AnimationFragment)
+					((AnimationFragment)nowFragment).clearAnimation();
 			}
 		});
 	}
-
-	private Fragment nowFragment;//目前的fragment
 
 	/**
 	 * 从一个Fragment跳转到另外一个Fragment
@@ -209,7 +184,7 @@ public class MainActivity extends SlidingFragmentActivity {
 	}
 
 	/**
-	 * 跳转到另外一个Fragment
+	 * 跳转到另外一个Fragment(此Fragment处于第一层)
 	 * @param toFragment
 	 */
 	private void switchContent(Fragment toFragment) {
@@ -230,13 +205,12 @@ public class MainActivity extends SlidingFragmentActivity {
 		mSlidingMenu.showContent();
 		enter2ndF = false;
 	}
-	
+
 	/**
-	 * 跳转到另外一个Fragment 且可以返回
+	 * 跳转到另外一个Fragment 且可以返回(此Fragment处于第二层)
 	 * @param toFragment
 	 */
 	private void switchContentCanBack(Fragment toFragment) {
-
 		switchContent(toFragment);
 		enter2ndF = true;
 	}
@@ -269,11 +243,11 @@ public class MainActivity extends SlidingFragmentActivity {
 			searchFragment = new SearchFragment();
 		switchContent(searchFragment);
 	}
-	
+
 	/**
 	 * 跳转到SearchFragment 且可以返回到lastFragment
 	 */
-	public void switchContentToSearchCanBack(Fragment lastFragment)
+	public void switchContentCanBackToSearchFrom(Fragment lastFragment)
 	{
 		this.lastFragment = lastFragment;
 		if(searchFragment == null)
@@ -292,26 +266,21 @@ public class MainActivity extends SlidingFragmentActivity {
 	}
 
 	/**
-	 * 设置侧边栏是否有用
-	 * @param enabled
+	 * 此函数为了xml布局里面的“android:onClick="showMenu"”
+	 * @param view
 	 */
-	public void setSlidingEnabled(boolean enabled)
-	{
-		mSlidingMenu.setSlidingEnabled(enabled);
-	}
-
 	public void showMenu(View view)
 	{
 		mSlidingMenu.showMenu(true);
 	}
 
 	/**
-	 * 设置覆盖图层是否显示
+	 * 设置主界面的覆盖图层是否显示
 	 * @param visibility
 	 */
 	public void setCoverIvVisibility(int visibility)
 	{
-		home_iv_cover.setVisibility(visibility);
+		main_iv_cover.setVisibility(visibility);
 	}
 
 	/**
@@ -327,13 +296,10 @@ public class MainActivity extends SlidingFragmentActivity {
 
 			@Override
 			public void onDismiss(DialogInterface dialog) {
-				
 
 			}
 		});
 	}
-	
-	
 
 	/**
 	 * 关闭加载弹出框
@@ -342,12 +308,12 @@ public class MainActivity extends SlidingFragmentActivity {
 	{
 		progressDialog.dismiss();
 	}
-	
+
 	/**
-	 * 显示双按钮弹出框 TODO 处理有关定位
+	 * 显示双按钮弹出框  处理有关定位 TODO 暂时未加进去
 	 */
 	public void showBuilder() {
-		
+
 		builder = new Builder(this);
 		builder.setMessage("确定进入吗？");
 		builder.setTitle("最近的城市  ````");
@@ -355,12 +321,12 @@ public class MainActivity extends SlidingFragmentActivity {
 
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-//				Intent intent = new Intent(mContext,CityActivity.class); // 跳转到城市景点详情页面 
-//				Bundle bundle = new Bundle();                           //创建Bundle对象   
-//				bundle.putString("cityName", mCityBean.getCityName());     //装入数据  
-//				bundle.putInt("cityID", mCityBean.getCityID());
-//				intent.putExtras(bundle);                               //把Bundle塞入Intent里面   
-//				startActivity(intent);                                     //开始切换 
+				//				Intent intent = new Intent(mContext,CityActivity.class); // 跳转到城市景点详情页面 
+				//				Bundle bundle = new Bundle();                           //创建Bundle对象   
+				//				bundle.putString("cityName", mCityBean.getCityName());     //装入数据  
+				//				bundle.putInt("cityID", mCityBean.getCityID());
+				//				intent.putExtras(bundle);                               //把Bundle塞入Intent里面   
+				//				startActivity(intent);                                     //开始切换 
 				dialog.dismiss();
 			}
 		});
@@ -376,50 +342,44 @@ public class MainActivity extends SlidingFragmentActivity {
 
 	@Override
 	protected void onRestoreInstanceState(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
-		Log.v(TAG, "onRestoreInstanceState");
-		super.onRestoreInstanceState(savedInstanceState);
+		LogUtil.d(TAG, "onRestoreInstanceState");
+		//		super.onRestoreInstanceState(savedInstanceState);
 	}
 
 	@Override
 	protected void onSaveInstanceState(Bundle outState) {
-		// TODO Auto-generated method stub
-		Log.v(TAG, "onSaveInstanceState");
-		//super.onSaveInstanceState(outState);
-
+		LogUtil.d(TAG, "onSaveInstanceState");
+		super.onSaveInstanceState(outState);
 	}
 
 	@Override
 	protected void onStop() {
-		// TODO 在Activity处于后台的时候 关掉那些不用的Fragment
-		destroyAllFragmentWithoutNow();
+		// TODO 在Activity处于后台的时候 关掉那些不用的Fragment,减少内存消耗
 		super.onStop();
-		Log.v(TAG, "onStop");
+		destroyAllFragmentWithoutNow();
+		LogUtil.d(TAG, "onStop");
 
 	}
 
 	@Override
 	protected void onDestroy() {
-		// TODO Auto-generated method stub
-
-		Log.v(TAG, "onDestroy");
-		//		destroyFragment(leftSlidingMenuFragment);
-		//		destroyFragment(homeFragment);
-		//		destroyFragment(mineFragment);
-		//		destroyFragment(searchFragment);
-		//		destroyFragment(settingFragment);
+		LogUtil.d(TAG, "onDestroy");
 		nowFragment = null;
+
+		//删除通知栏
+		clearNotify(MusicNotification.notifyId);
 		//解除服务的绑定
-		clearNotify(100);
-		//这里是试验一下
 		getApplication().unbindService(app.mConnection);
 		super.onDestroy();
 	}
 
-	private void clearNotify(int i) {
-		// TODO Auto-generated method stub
+	/**
+	 * 清除通知栏的消息，这样保证在APP第一个Activity被销毁时，能够移除通知栏
+	 * @param notifyId
+	 */
+	private void clearNotify(int notifyId) {
 		NotificationManager mNotificationManager = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
-		mNotificationManager.cancel(i);//删除一个特定的通知ID对应的通知
+		mNotificationManager.cancel(notifyId);//删除一个特定的通知ID对应的通知
 	}
 
 	/**
@@ -434,8 +394,9 @@ public class MainActivity extends SlidingFragmentActivity {
 		{
 			if(nowFragment==fragment)//如果remove的是现在显示的fragment
 				nowFragment = null;
-			fragmentManager.beginTransaction()
-			.remove(fragment).commit();
+			if(fragment.isAdded()==false)//如果被添加才移除
+				fragmentManager.beginTransaction()
+				.remove(fragment).commit();
 			fragment = null;
 		}
 	}
@@ -468,10 +429,10 @@ public class MainActivity extends SlidingFragmentActivity {
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event)
 	{
-		Log.v(TAG, "onKeyDown");
+		LogUtil.d(TAG, "onKeyDown");
 		if(keyCode == KeyEvent.KEYCODE_BACK)
 		{
-			Log.v(TAG, "back");
+			LogUtil.d(TAG, "back");
 			if(enter2ndF == true)
 			{
 				switchContent(lastFragment);
@@ -484,8 +445,11 @@ public class MainActivity extends SlidingFragmentActivity {
 			return false;
 		}
 		return super.onKeyDown(keyCode, event);
-		
+
 	}
+	/**
+	 * 按2次返回退出
+	 */
 	private void exitBy2Click() {
 		// TODO Auto-generated method stub
 		Timer tExit = null;
@@ -499,14 +463,11 @@ public class MainActivity extends SlidingFragmentActivity {
 
 				@Override
 				public void run() {
-					// TODO Auto-generated method stub
 					isExit = false;
 				}
 
 			}, 2000);
 		}else{
-			//退出整个程序,第一句我不知道加不加。。
-			//unbindService(app.mConnection);
 			app.exit();
 		}
 	}

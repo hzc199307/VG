@@ -1,7 +1,7 @@
 package com.ne.vg.fragment;
 
-import com.ne.vg.MainActivity;
 import com.ne.vg.R;
+import com.ne.vg.main.MainActivity;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

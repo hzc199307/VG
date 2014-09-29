@@ -6,9 +6,9 @@ import com.ne.vg.bean.BigScene;
 import com.ne.vg.dao.VGDao;
 import com.ne.vg.fragment.BigSceneIntroDetailFragment;
 import com.ne.vg.fragment.BigSceneIntroFragment;
-import com.ne.vg.fragment.HomeFragment;
-import com.ne.vg.fragment.MineFragment;
 import com.ne.vg.gmap.GMapFragment;
+import com.ne.vg.main.HomeFragment;
+import com.ne.vg.main.MineFragment;
 import com.ne.vg.util.UnitUtil;
 
 import android.content.Intent;

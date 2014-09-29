@@ -3,7 +3,6 @@ package com.ne.vg.fragment;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.ne.vg.MainActivity;
 import com.ne.vg.R;
 import com.ne.vg.activity.BigSceneDetailActivity;
 import com.ne.vg.activity.RecommendActivity;
@@ -13,6 +12,7 @@ import com.ne.vg.adapter.RouteDay_BigSceneListAdapter;
 import com.ne.vg.adapter.ViewHolder;
 import com.ne.vg.bean.BigScene;
 import com.ne.vg.dao.VGDao;
+import com.ne.vg.main.MainActivity;
 
 import android.app.Activity;
 import android.content.Intent;

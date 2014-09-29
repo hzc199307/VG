@@ -1,8 +1,8 @@
 package com.ne.vg.adapter;
 
 import com.ne.vg.fragment.BigSceneListFragment;
-import com.ne.vg.fragment.HomeFragment;
 import com.ne.vg.fragment.RecommendRouteFragment;
+import com.ne.vg.main.HomeFragment;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

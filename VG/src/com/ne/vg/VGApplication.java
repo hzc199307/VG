@@ -95,7 +95,7 @@ public class VGApplication extends Application{
             e.printStackTrace();     
         } finally {
         	unbindService(this.mConnection);
-        	clearNotify(100);
+        	clearNotify(MusicNotification.notifyId);
             System.exit(0);     
         }     
     }

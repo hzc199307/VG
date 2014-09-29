@@ -28,7 +28,7 @@ public class MusicNotification {
 	private VGDao mVgDao;
 	VGApplication app;
 	/** Notification的ID */
-	int notifyId = 100;
+	public static int notifyId = 100;
 	public MusicNotification(Context context){
 		mNotificationManager =(NotificationManager)context.getSystemService(context.NOTIFICATION_SERVICE);
 		this.context = context;
@@ -94,6 +94,7 @@ public class MusicNotification {
         mNotificationManager.notify(notifyId, notify);
 	
 	}
+	
 	public void showName(String musicName){
 		this.musicName = musicName;
 		this.author = "天才小土豆";
