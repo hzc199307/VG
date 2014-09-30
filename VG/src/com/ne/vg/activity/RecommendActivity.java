@@ -1,37 +1,20 @@
 package com.ne.vg.activity;
 
 import com.ne.vg.R;
-import com.ne.vg.R.drawable;
-import com.ne.vg.R.id;
-import com.ne.vg.R.layout;
-import com.ne.vg.R.menu;
-import com.ne.vg.activity.SceneActivity.MyOnPageChangeListener;
-import com.ne.vg.activity.SceneActivity.SceneAdapter;
 import com.ne.vg.adapter.RecommendAdapter;
 import com.ne.vg.dao.VGDao;
-import com.ne.vg.util.NotifyUtil;
-import com.ne.vg.view.MyViewPager;
 
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.content.Intent;
-import android.graphics.BitmapFactory;
-import android.graphics.Matrix;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class RecommendActivity extends FragmentActivity implements View.OnClickListener{
 
@@ -39,13 +22,9 @@ public class RecommendActivity extends FragmentActivity implements View.OnClickL
 	private ViewPager viewPager;//Ò³¿¨ÄÚÈÝ
 	private RecommendAdapter recommendAdapter;
 	private View view;// ¶¯»­Í¼Æ¬
-	private TextView textView1,textView2;
-	private ImageView imageView1,imageView2;
-	private LinearLayout linearLayout;
 	private TextView recommend_cityname;
 	private int offset = 0;// ¶¯»­Í¼Æ¬Æ«ÒÆÁ¿
 	private int currIndex = 0;// µ±Ç°Ò³¿¨±àºÅ
-	private int bmpW;// ¶¯»­Í¼Æ¬¿í¶È
 	private VGDao mVgDao;
 
 	private final static int ROUTELIST_STATUS = 0,SCENELIST_STATUS = 1;
@@ -270,6 +249,5 @@ public class RecommendActivity extends FragmentActivity implements View.OnClickL
 			break;
 		}
 	}
-
 
 }
