@@ -1,5 +1,8 @@
-package com.ne.vg;
+package com.ne.vg.activity;
 
+import com.ne.vg.R;
+import com.ne.vg.R.id;
+import com.ne.vg.R.layout;
 import com.ne.vg.fragment.MyLoveFragment;
 import com.ne.vg.fragment.PlayMusicFragment;
 

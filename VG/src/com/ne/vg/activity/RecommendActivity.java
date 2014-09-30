@@ -1,6 +1,5 @@
 package com.ne.vg.activity;
 
-import com.ne.vg.MyLoveActivity;
 import com.ne.vg.R;
 import com.ne.vg.R.drawable;
 import com.ne.vg.R.id;

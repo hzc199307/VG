@@ -13,6 +13,7 @@ import com.ne.vg.bean.City;
 import com.ne.vg.bean.CreateData;
 import com.ne.vg.dao.VGDao;
 import com.ne.vg.util.LocationUtil;
+import com.ne.vg.util.LogUtil;
 import com.slidingmenu.lib.app.SlidingFragmentActivity;
 
 import android.R.layout;
@@ -50,7 +51,7 @@ public class HomeFragment extends AnimationFragment implements OnClickListener{
 	private CommonAdapter<City> mAdapter;
 	private View home_title_search_btn,home_title_left;
 
-	private Intent intent;
+	private Intent intent = new Intent(getActivity(),RecommendActivity.class);
 	private VGDao mVgDao;
 
 //	private ProgressDialog progressDialog;
@@ -58,30 +59,27 @@ public class HomeFragment extends AnimationFragment implements OnClickListener{
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 //		progressDialog = new ProgressDialog(getActivity());
 //		progressDialog.setMessage(getString(R.string.loading));
 //		progressDialog.setCancelable(false);
-
 	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
-		//Toast.makeText(getActivity(), TAG+ " onCreateView", Toast.LENGTH_SHORT).show();
-		Log.v(TAG, "onCreateView");
-		mVgDao = new VGDao(getActivity());
+		LogUtil.d(TAG, "onCreateView");
+		
+		if(mVgDao==null)
+			mVgDao = new VGDao(getActivity());
 		View view  = inflater.inflate(R.layout.fragment_home, container,false);
 		lv_city = (ListView)view.findViewById(R.id.lv_city);
 
 
-//		if(cityListAdapter==null)
-//			cityListAdapter = new CityListAdapter(getActivity(), mVgDao.getCity());
-
-
+        //		if(cityListAdapter==null)
+		//			cityListAdapter = new CityListAdapter(getActivity(), mVgDao.getCity());
 		//lv_city.setAdapter(cityListAdapter);
-		
+		if(mAdapter==null)
 		mAdapter = new CommonAdapter<City>(getActivity(), mVgDao.getCity(), R.layout.item_city) {
 
 			@Override
@@ -94,28 +92,24 @@ public class HomeFragment extends AnimationFragment implements OnClickListener{
 			
 		};
 		lv_city.setAdapter(mAdapter);
-		
 		lv_city.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position,long id) {
 				// TODO Auto-generated method stub
-				Log.d(TAG, "item" + position + "is clicked");
-				intent = new Intent(getActivity(),RecommendActivity.class);
+				LogUtil.d(TAG, "item" + position + "is clicked");
 				City city = mVgDao.getCity().get(position);
 				intent.putExtra("cityID", city.getCityID());
-
 				Log.d(TAG, "cityID:"+city.getCityID());
-
 				startActivity(intent);
 				((MainActivity)getActivity()).destroyAllFragmentWithoutNow();
 			}
 		});
+		
 		home_title_left = (View)view.findViewById(R.id.home_title_left);
 		super.setAnimView(home_title_left);
 		home_title_search_btn = (ImageButton)view.findViewById(R.id.home_title_search_btn);
 		home_title_search_btn.setOnClickListener(this);
-
 		home_tab_locationEnter = (View)view.findViewById(R.id.home_tab_locationEnter);
 		home_tab_locationEnter.setOnClickListener(this);
 		home_tab_randomEnter = (View)view.findViewById(R.id.home_tab_randomEnter);
@@ -191,7 +185,7 @@ public class HomeFragment extends AnimationFragment implements OnClickListener{
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-		Log.v(TAG, "onDestroy");
+		LogUtil.d(TAG, "onDestroy");
 		mAdapter.destroy();
 		mAdapter = null;
 	}

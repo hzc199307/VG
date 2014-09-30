@@ -1,24 +1,17 @@
 package com.ne.vg.main;
 
-import com.ne.vg.MyLoveActivity;
 import com.ne.vg.R;
-import com.ne.vg.activity.BigSceneDetailActivity;
 import com.ne.vg.activity.MineCollectionActivity;
 import com.ne.vg.activity.MineDownloadActivity;
-import com.ne.vg.activity.PlayMusicActivity;
-import com.ne.vg.activity.RecommendActivity;
-import com.ne.vg.activity.RouteActivity;
+import com.ne.vg.activity.MyLoveActivity;
+import com.ne.vg.util.LogUtil;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.TranslateAnimation;
-import android.widget.Button;
-import android.widget.Toast;
 
 /**
  * ¡°ÎÒµÄ¡±
@@ -33,11 +26,12 @@ public class MineFragment extends AnimationFragment implements View.OnClickListe
 
 	private View mine_item_download,mine_item_love,mine_item_collection;
 	private View mine_title_left;
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		//Toast.makeText(getActivity(), TAG+ " onCreateView", Toast.LENGTH_SHORT).show();
-		Log.v(TAG, "onCreateView");
+		LogUtil.d(TAG, "onCreateView");
 		View view  = inflater.inflate(R.layout.fragment_mine, container,false);
 		mine_title_left = (View)view.findViewById(R.id.mine_title_left);
 		super.setAnimView(mine_title_left);
@@ -54,7 +48,7 @@ public class MineFragment extends AnimationFragment implements View.OnClickListe
 	public void onDestroyView() {
 		// TODO Auto-generated method stub
 		super.onDestroyView();
-		Log.v(TAG, "onDestroyView");
+		LogUtil.d(TAG, "onDestroyView");
 	}
 
 	@Override

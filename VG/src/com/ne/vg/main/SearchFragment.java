@@ -1,10 +1,11 @@
 package com.ne.vg.main;
 
-import com.ne.vg.MyLoveActivity;
 import com.ne.vg.R;
+import com.ne.vg.activity.MyLoveActivity;
 import com.ne.vg.activity.PlayMusicActivity;
 import com.ne.vg.activity.RecommendActivity;
 import com.ne.vg.activity.RouteActivity;
+import com.ne.vg.util.LogUtil;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -25,23 +26,20 @@ import android.widget.Button;
  */
 public class SearchFragment extends AnimationFragment implements View.OnClickListener{
 
-	
-	
-private final static String TAG = "SearchFragment";
-	
+	private final static String TAG = "SearchFragment";
 
-private View search_title_all;
-	
+	private View search_title_all;
+
 	@Override
 	public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		//Toast.makeText(getActivity(), TAG+ " onCreateView", Toast.LENGTH_SHORT).show();
 		View view  = inflater.inflate(R.layout.fragment_search, container,false);
-
 		search_title_all = (View)view.findViewById(R.id.search_title_all);
 		super.setAnimView(search_title_all);
 		return view;
 	}
+	
 	@Override
 	public void onClick(View view) {
 		// TODO Auto-generated method stub
@@ -50,11 +48,11 @@ private View search_title_all;
 			break;
 		}
 	}
-	
+
 	@Override
 	public void onDestroyView() {
 		// TODO Auto-generated method stub
 		super.onDestroyView();
-		Log.v(TAG, "onDestroyView");
+		LogUtil.d(TAG, "onDestroyView");
 	}
 }

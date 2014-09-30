@@ -82,7 +82,7 @@
             android:label="@string/title_activity_scene" >
         </activity>
         <activity
-            android:name=".MyLoveActivity"
+            android:name="com.ne.vg.activity.MyLoveActivity"
             android:label="@string/title_activity_my_love" >
         </activity>
 
