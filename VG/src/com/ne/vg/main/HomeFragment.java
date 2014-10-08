@@ -51,7 +51,7 @@ public class HomeFragment extends AnimationFragment implements OnClickListener{
 	private CommonAdapter<City> mAdapter;
 	private View home_title_search_btn,home_title_left;
 
-	private Intent intent = new Intent(getActivity(),RecommendActivity.class);
+	private Intent intent;
 	private VGDao mVgDao;
 
 //	private ProgressDialog progressDialog;
@@ -60,6 +60,7 @@ public class HomeFragment extends AnimationFragment implements OnClickListener{
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		intent = new Intent(getActivity(),RecommendActivity.class);
 //		progressDialog = new ProgressDialog(getActivity());
 //		progressDialog.setMessage(getString(R.string.loading));
 //		progressDialog.setCancelable(false);

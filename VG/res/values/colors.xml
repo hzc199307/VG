@@ -8,6 +8,9 @@
     <color name="tools_box_bg">#ff333332</color>
 
     <color name="main_iv_cover">#4d323232</color>
+    
+    <color name="all_bg">#323232</color>
+    
     <!-- activity big_scene_detail -->
     <color name="big_scene_detail_devide_line">#494949</color>
 
