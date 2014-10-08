@@ -152,9 +152,30 @@
 			 */
 			function showSpanWithAnimation() {
 				getLatLngBounds(latlngs);
-				map.fitBounds(latLngBounds);
+				
+				
+				var centerLat = (latLngBounds.getNorthEast().lat()+latLngBounds.getSouthWest().lat())/2;
+				var centerLng = (latLngBounds.getNorthEast().lng()+latLngBounds.getSouthWest().lng())/2;
+				var centerL = new google.maps.LatLng(centerLat,centerLng);
 				//map.setCenter(latLngBounds.getCenter());
-				map.panTo(latLngBounds.getCenter());
+				//map.panTo(latLngBounds.getCenter()); 在范围过小时,中心点错误
+				var chaLat = centerLat-latLngBounds.getCenter().lat();
+				var chaLng = centerLng-latLngBounds.getCenter().lng();
+				if(chaLat>1|chaLat<-1|chaLng<-1|chaLng>1)//是否中心点和实际出错
+				{
+				    map.panToBounds(latLngBounds);
+				    map.panTo(centerL);
+				}
+				else
+				{
+				    //fitBounds的效果比panToBounds效果好
+				    map.fitBounds(latLngBounds); //在范围过小时，会出现bug
+				}
+				
+				//window.demo.notify(centerL.lat(),centerL.lng());
+				//window.demo.notify(latLngBounds.getNorthEast().lat(),latLngBounds.getNorthEast().lng());
+				//window.demo.notify(latLngBounds.getSouthWest().lat(),latLngBounds.getSouthWest().lng());
+				//window.demo.notify(latLngBounds.getCenter().lat(),latLngBounds.getCenter().lng());
 			}
 
 			var latLngBounds;

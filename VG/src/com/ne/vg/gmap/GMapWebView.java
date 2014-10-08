@@ -542,6 +542,23 @@ public class GMapWebView extends WebView {
 			});
 
 		}
+		
+		/**
+		 * js提醒android坐标位置数据 (测试用)
+		 * 
+		 */
+		@JavascriptInterface 
+		public void notify(final double lat,final double lng)
+		{
+			handler.post(new Runnable() {
+				@Override
+				public void run() {
+					Toast.makeText(getContext(), lat+" "+lng, Toast.LENGTH_SHORT).show();
+					Log.v(TAG, lat+" "+lng);
+				}
+			});
+
+		}
 
 	}
 
