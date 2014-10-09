@@ -14,6 +14,7 @@ import com.ne.vg.R;
 import com.ne.vg.bean.City;
 import com.ne.vg.view.RoundProgressBar;
 
+@Deprecated
 public class MineDownloadCityAdapter extends BaseAdapter {
 
 	//LayoutInflater作用是将layout的xml布局文件实例化为View类对象。

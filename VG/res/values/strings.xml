@@ -40,13 +40,14 @@
     <string name="title_fragment_mine">我的</string>
     <string name="title_activity_mine_collection">MineCollectionActivity</string>
     <string name="title_activity_mine_download">MineDownloadActivity</string>
-    
+
     <!-- SearchFragment 相关 -->
     <string name="search_tab_abroad">国际</string>
     <string name="search_tab_china">国内</string>
-    
+
     <!-- SettingFragment -->
     <string name="title_fragment_setting">设置</string>
-    
+    <string name="title_activity_mind_download_sub">MindDownloadSubActivity</string>
+    <string name="title_activity_mine_download_sub">MineDownloadSubActivity</string>
 
 </resources>

@@ -41,6 +41,14 @@ public class VGDao {
 				("/sdcard/com.ne.vg/databases/VG_test.db", Context.MODE_PRIVATE, null);
 	}
 
+	private static VGDao instance;
+	public synchronized static VGDao getInstance(Context context) {  
+		if (instance == null) {  
+			instance = new VGDao(context);  
+		}   
+		return instance;  
+	}  
+
 	/**
 	 * 
 	 * @Title: getCityList 
@@ -397,5 +405,5 @@ public class VGDao {
 	public void closeDatabase(){
 		db.close();
 	}
-	
+
 }

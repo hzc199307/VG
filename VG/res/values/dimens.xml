@@ -103,13 +103,14 @@
     <dimen name="mine_item_num_tv">11sp</dimen>
 
     <!-- title -->
-
     <dimen name="title_height">50dp</dimen>
     <dimen name="title_left_icon_marginleft">10dp</dimen>
     <dimen name="title_left_tv_marginleftof_icon">10dp</dimen>
+    <dimen name="title_left_textsize">17sp</dimen>
     <dimen name="title_left_edit_marginleft">36dp</dimen>
     <dimen name="title_left_edit_marginright">9dp</dimen>
     <dimen name="title_right_icon_paddingright">10dp</dimen>
+    <dimen name="title_right_textsize">13sp</dimen>
     
     <!-- SearchFragment 相关 -->
     <dimen name="search_title_edit_width">273dp</dimen>
@@ -121,6 +122,10 @@
     <dimen name="setting_item_tv_left_marginleft">11dp</dimen>
     <dimen name="setting_item_tv_right_marginright">26dp</dimen>
     <dimen name="setting_item_ic_right_marginright">11dp</dimen>
+    
+    <!-- MineDownloadFragment -->
+    <dimen name="mine_download_swipelv_height">51dp</dimen>
+    <dimen name="mine_download_swipelv_btn_width">67dp</dimen>
     
 
 </resources>
