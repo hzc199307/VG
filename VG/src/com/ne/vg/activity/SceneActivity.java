@@ -63,9 +63,13 @@ public class SceneActivity extends FragmentActivity implements View.OnClickListe
 	private String cityName;
 	private String bigSceneName;
 	private int bigSceneID;
+	//从service获取的播放状态。
 	private boolean isPlaying;
+	//当拖动seekbar时用来保存播放状态。
+	private boolean playing;
+	//当seekbar拖动时的标志位。
 	
-	private boolean isSeekbarChanged;
+	private boolean isSeekbarChanged = false;
 	
 	private List<SmallScene> listSmallScenes;
 	
@@ -126,14 +130,18 @@ public class SceneActivity extends FragmentActivity implements View.OnClickListe
 		if(player!=null){
 			//设置seekbar与播放状态同步
 			isPlaying = app.mBinder.getService().isPlaying;
-			if(isPlaying == true)
-			{
-				Drawable mplay = getResources().getDrawable(R.drawable.scene_music_playing_icon);
-				mSeekBar.setThumb(mplay);
-			}else{
-				Drawable mpause = getResources().getDrawable(R.drawable.scene_music_pausing_icon);
-				mSeekBar.setThumb(mpause);
+			//不是处于seekBar拖动状态，则更新seekbar图片
+			if(isSeekbarChanged == false){
+				if(isPlaying == true)
+				{
+					Drawable mplay = getResources().getDrawable(R.drawable.scene_music_playing_icon);
+					mSeekBar.setThumb(mplay);
+				}else{
+					Drawable mpause = getResources().getDrawable(R.drawable.scene_music_pausing_icon);
+					mSeekBar.setThumb(mpause);
+				}
 			}
+			
 			scene_music_time_total.setText(MusicPlayerUtil.milliSecondsToTimer(player.getDuration()));
 			scene_music_time_now.setText(MusicPlayerUtil.milliSecondsToTimer(player.getCurrentPosition()));
 			
@@ -147,7 +155,6 @@ public class SceneActivity extends FragmentActivity implements View.OnClickListe
 			Log.d(TAG, "player is null!");
 		}
 		//mSeekBar.setMax(player.getDuration());  
-		
 		mSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 			
 			int oldProgress;
@@ -156,17 +163,20 @@ public class SceneActivity extends FragmentActivity implements View.OnClickListe
 			@Override
 			public void onStopTrackingTouch(SeekBar arg0) {
 				// TODO Auto-generated method stub
+				isSeekbarChanged = false;
 				//停止滑动则播放音乐
-				Log.d(TAG, "isPlaying=" + isPlaying);
+				Log.d(TAG, "onStop playing=" + playing);
 				newProgress = arg0.getProgress();
-				
+				Log.d(TAG,"newProgress = " + newProgress);
 				
 				if((Math.abs(newProgress-oldProgress)*1.0 / arg0.getMax()) < 0.1){
-					app.mBinder.getService().isPlaying = (app.mBinder.getService().isPlaying==true?false:true);
+					app.mBinder.getService().isPlaying = (playing==true?false:true);
 					
+				}else{
+					app.mBinder.getService().isPlaying = playing;
 				}
-				isPlaying = app.mBinder.getService().isPlaying;
-				if(isPlaying==true){
+				Log.d(TAG,"FINAL playing = " + app.mBinder.getService().isPlaying);
+				if(app.mBinder.getService().isPlaying==true){
 					app.mBinder.getService().play();
 				}
 				else{
@@ -179,9 +189,11 @@ public class SceneActivity extends FragmentActivity implements View.OnClickListe
 			@Override
 			public void onStartTrackingTouch(SeekBar arg0) {
 				// TODO Auto-generated method stub
-				
-				
+				isSeekbarChanged = true;
+				playing = app.mBinder.getService().isPlaying;
+				Log.d(TAG,"ONstart playing is " + playing);
 				oldProgress = arg0.getProgress();
+				Log.d(TAG,"oldProgress = " + oldProgress);
 			}
 			
 			//滑块滑动时调用的
@@ -196,6 +208,7 @@ public class SceneActivity extends FragmentActivity implements View.OnClickListe
                 	//player.seekTo(progress); 
                 	app.mBinder.getService().getPlayer().seekTo(progress);
                 }  
+                Log.d(TAG,"ONchanged playing is " + playing);
 			}
 		});
 	}
