@@ -23,6 +23,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
@@ -123,10 +124,21 @@ public class SceneActivity extends FragmentActivity implements View.OnClickListe
 		mSeekBar = (SeekBar)findViewById(R.id.scene_music_seekbar);
 		//获得歌曲的长度并设置成播放进度条的最大值  
 		if(player!=null){
+			//设置seekbar与播放状态同步
+			isPlaying = app.mBinder.getService().isPlaying;
+			if(isPlaying == true)
+			{
+				Drawable mplay = getResources().getDrawable(R.drawable.scene_music_playing_icon);
+				mSeekBar.setThumb(mplay);
+			}else{
+				Drawable mpause = getResources().getDrawable(R.drawable.scene_music_pausing_icon);
+				mSeekBar.setThumb(mpause);
+			}
 			scene_music_time_total.setText(MusicPlayerUtil.milliSecondsToTimer(player.getDuration()));
 			scene_music_time_now.setText(MusicPlayerUtil.milliSecondsToTimer(player.getCurrentPosition()));
 			
 			mSeekBar.setMax(player.getDuration());
+			
 			
 		}
 			
@@ -138,12 +150,22 @@ public class SceneActivity extends FragmentActivity implements View.OnClickListe
 		
 		mSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 			
+			int oldProgress;
+			int newProgress;
 			//滑动停止时调用的
 			@Override
 			public void onStopTrackingTouch(SeekBar arg0) {
 				// TODO Auto-generated method stub
 				//停止滑动则播放音乐
 				Log.d(TAG, "isPlaying=" + isPlaying);
+				newProgress = arg0.getProgress();
+				
+				
+				if((Math.abs(newProgress-oldProgress)*1.0 / arg0.getMax()) < 0.1){
+					app.mBinder.getService().isPlaying = (app.mBinder.getService().isPlaying==true?false:true);
+					
+				}
+				isPlaying = app.mBinder.getService().isPlaying;
 				if(isPlaying==true){
 					app.mBinder.getService().play();
 				}
@@ -158,7 +180,8 @@ public class SceneActivity extends FragmentActivity implements View.OnClickListe
 			public void onStartTrackingTouch(SeekBar arg0) {
 				// TODO Auto-generated method stub
 				
-				isPlaying = app.mBinder.getService().isPlaying;
+				
+				oldProgress = arg0.getProgress();
 			}
 			
 			//滑块滑动时调用的

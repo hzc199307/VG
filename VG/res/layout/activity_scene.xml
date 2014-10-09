@@ -59,6 +59,8 @@
                     android:layout_centerInParent="true"
                     android:maxHeight="1dp"
                     android:minHeight="1dp"
+                    android:paddingLeft="14dp"
+                    android:paddingRight="14dp"
                     android:progress="0"
                     android:progressDrawable="@drawable/scene_music_progress"
                     android:thumb="@drawable/scene_music_pausing_icon" />
