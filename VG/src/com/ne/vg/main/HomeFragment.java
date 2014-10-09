@@ -81,7 +81,7 @@ public class HomeFragment extends AnimationFragment implements OnClickListener{
 		//			cityListAdapter = new CityListAdapter(getActivity(), mVgDao.getCity());
 		//lv_city.setAdapter(cityListAdapter);
 		if(mAdapter==null)
-		mAdapter = new CommonAdapter<City>(getActivity(), mVgDao.getCity(), R.layout.item_city) {
+		mAdapter = new CommonAdapter<City>(getActivity(), mVgDao.getCityList(), R.layout.item_city) {
 
 			@Override
 			public void convert(ViewHolder helper, City item) {
@@ -99,7 +99,7 @@ public class HomeFragment extends AnimationFragment implements OnClickListener{
 			public void onItemClick(AdapterView<?> parent, View view, int position,long id) {
 				// TODO Auto-generated method stub
 				LogUtil.d(TAG, "item" + position + "is clicked");
-				City city = mVgDao.getCity().get(position);
+				City city = mVgDao.getCityList().get(position);
 				intent.putExtra("cityID", city.getCityID());
 				Log.d(TAG, "cityID:"+city.getCityID());
 				startActivity(intent);

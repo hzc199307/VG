@@ -74,7 +74,7 @@ public class BigSceneDetailActivity extends FragmentActivity {
 		mVgDao = new VGDao(this);
 		mIntent = this.getIntent();
 
-		bigScene = mVgDao.getBigSceneObject(mIntent.getExtras().getInt("bigSceneID"));
+		bigScene = mVgDao.getBigScene(mIntent.getExtras().getInt("bigSceneID"));
 
 		bigSceneName = mVgDao.getBigSceneName(mIntent.getExtras().getInt("bigSceneID"));
 		Log.d(TAG, bigSceneName);

@@ -3,7 +3,6 @@ package com.ne.vg.dao;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.baidu.platform.comapi.map.base.m;
 import com.ne.vg.DBHelper.TableColumns.BigSceneColumns;
 import com.ne.vg.DBHelper.TableColumns.CityColumns;
 import com.ne.vg.DBHelper.TableColumns.RecommendRouteColumns;
@@ -16,6 +15,7 @@ import com.ne.vg.bean.RecommendRoute;
 import com.ne.vg.bean.RouteContent;
 import com.ne.vg.bean.SceneContent;
 import com.ne.vg.bean.SmallScene;
+import com.ne.vg.util.LogUtil;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -29,9 +29,9 @@ import android.util.Log;
  * @date 2014-8-25 下午5:02:48
  */
 public class VGDao {
-	
+
 	private final String TAG = "VGDao";
-	
+
 	private SQLiteDatabase db;
 	//Context.MODE_PRIVATE代表该数据库是私有的只能被应用内访问
 	public VGDao(Context context){
@@ -40,20 +40,20 @@ public class VGDao {
 		db = context.openOrCreateDatabase
 				("/sdcard/com.ne.vg/databases/VG_test.db", Context.MODE_PRIVATE, null);
 	}
-	
+
 	/**
 	 * 
-	 * @Title: getCity 
+	 * @Title: getCityList 
 	 * @Description: 获取city列表的数据
-	 * @param @return
+	 * @param
 	 * @return List<City> 
 	 * @throws
 	 */
-	public List<City> getCity(){
+	public List<City> getCityList(){
 		List<City> listCities = new ArrayList<City>();
 		Cursor cr = db.query("city", null, null, null, null, null, null);
 		int count = cr.getCount();
-		Log.v(TAG,"start getCity() count = " + count);
+		LogUtil.d(TAG,"start getCity() count = " + count);
 		if(cr!=null){
 			cr.moveToFirst();
 			for(int i = 0; i < count; i++){
@@ -70,11 +70,31 @@ public class VGDao {
 				cr.moveToNext();
 			}
 		}
-		Log.v(TAG,"getCity is finished!");
+		LogUtil.d(TAG,"getCity is finished!");
 		return  listCities;
-		
 	}
-	
+
+	/**
+	 * 通过城市ID获取城市对象
+	 * @param cityID
+	 * @return
+	 */
+	public City getCity(int cityID) {
+		String[] args = {cityID+""};
+		Cursor cr = db.query("city", null, "cityID=?", args, null, null, null);
+		cr.moveToFirst();
+		City cb = new City();
+		cb.setCityID(cr.getInt(cr.getColumnIndex(CityColumns.cityID)));
+		cb.setCityName(cr.getString(cr.getColumnIndex(CityColumns.cityName)));
+		cb.setCityPinyin(cr.getString(cr.getColumnIndex(CityColumns.cityPinyin)));
+		cb.setLatitude(cr.getDouble(cr.getColumnIndex(CityColumns.latitude)));
+		cb.setLongtitude(cr.getDouble(cr.getColumnIndex(CityColumns.longtitude)));
+		cb.setResource(cr.getString(cr.getColumnIndex(CityColumns.resource)));
+		cb.setRouteNum(cr.getInt(cr.getColumnIndex(CityColumns.routeNum)));
+		cb.setSceneNum(cr.getInt(cr.getColumnIndex(CityColumns.sceneNum)));
+		return cb;
+	}
+
 	/**
 	 * 
 	 * @Title: getCityName 
@@ -96,14 +116,14 @@ public class VGDao {
 
 	/**
 	 * 
-	 * @Title: getBigScene 
+	 * @Title: getBigSceneList 
 	 * @Description: 根据城市id获取大景点列表
 	 * @param @param cityID
 	 * @param @return
 	 * @return List<BigScene> 
 	 * @throws
 	 */
-	public List<BigScene> getBigScene(int cityID){
+	public List<BigScene> getBigSceneList(int cityID){
 		List<BigScene> listBigScenes = new ArrayList<BigScene>();
 		String[] args = {cityID+""};
 		Cursor cr = db.query("bigScene", null, "cityID=?", args, null, null, null);
@@ -123,7 +143,7 @@ public class VGDao {
 				}else{
 					mBigScene.setDowned(false);
 				}
-				
+
 				mBigScene.setLatitude(cr.getDouble(cr.getColumnIndex(BigSceneColumns.latitude)));
 				mBigScene.setLevel(cr.getInt(cr.getColumnIndex(BigSceneColumns.level)));
 				mBigScene.setLongtitude(cr.getDouble(cr.getColumnIndex(BigSceneColumns.longtitude)));
@@ -131,15 +151,15 @@ public class VGDao {
 				mBigScene.setRecordNum(cr.getInt(cr.getColumnIndex(BigSceneColumns.recordNum)));
 				mBigScene.setResource(cr.getString(cr.getColumnIndex(BigSceneColumns.resource)));
 				listBigScenes.add(mBigScene);
-				
+
 				cr.moveToNext();
 			}
 		}
-		Log.v(TAG,"getBigScene is finished!");
+		LogUtil.d(TAG,"getBigScene is finished!");
 		return listBigScenes;
 	}
-	
-	public BigScene getBigSceneObject(int BigSceneID){
+
+	public BigScene getBigScene(int BigSceneID){
 		BigScene mBigScene = new BigScene();
 		String[] arg = {BigSceneID+""};
 		Cursor cr = db.query("bigScene", null, "bigSceneID=?", arg, null, null, null);
@@ -154,7 +174,7 @@ public class VGDao {
 		mBigScene.setResource(cr.getString(cr.getColumnIndex(BigSceneColumns.resource)));
 		return mBigScene;
 	}
-	
+
 	public String getBigSceneName(int BigSceneID){
 		String name = "";
 		String[] arg = {BigSceneID+""};
@@ -163,22 +183,23 @@ public class VGDao {
 		name = cr.getString(cr.getColumnIndex(BigSceneColumns.bigSceneName));
 		return name;
 	}
+
 	/**
 	 * 
-	 * @Title: getRecommendRoute 
+	 * @Title: getRecommendRouteList 
 	 * @Description: 根据城市ID获取推荐路线列表
 	 * @param @param cityID
 	 * @param @return
 	 * @return List<RecommendRoute> 
 	 * @throws
 	 */
-	public List<RecommendRoute> getRecommendRoute(int cityID){
+	public List<RecommendRoute> getRecommendRouteList(int cityID){
 		List<RecommendRoute> listRecommendRoutes = new ArrayList<RecommendRoute>();
 		String[] args = {cityID+""};
 		Log.d(TAG, "cityID=" + cityID);
 		Cursor cr = db.query("recommendRoute", null, "cityID=?", args, null, null, null);
 		int count = cr.getCount();
-		Log.v(TAG,"start getRecommendRoute() count = " + count);
+		LogUtil.d(TAG,"start getRecommendRoute() count = " + count);
 		if(cr!=null){
 			cr.moveToFirst();
 			for(int i =0; i < count; i++){
@@ -190,14 +211,14 @@ public class VGDao {
 				mRecommendRoute.setRouteID(cr.getInt(cr.getColumnIndex(RecommendRouteColumns.routeID)));
 				mRecommendRoute.setRouteName(cr.getString(cr.getColumnIndex(RecommendRouteColumns.routeName)));
 				mRecommendRoute.setSceneNum(cr.getInt(cr.getColumnIndex(RecommendRouteColumns.sceneNum)));
-				
+
 				listRecommendRoutes.add(mRecommendRoute);
 				cr.moveToNext();
 			}
 		}
 		return listRecommendRoutes;
 	}
-	
+
 	/**
 	 * 
 	 * @Title: getSceneContent 
@@ -213,7 +234,7 @@ public class VGDao {
 		Cursor cr = db.query("sceneContent", null, "contentID=?", args, null, null, null);
 		if(cr!=null){
 			mSceneContent.setAddress(cr.getString(cr.getColumnIndex(SceneContentColumns.address)));
-			
+
 			mSceneContent.setContent(cr.getString(cr.getColumnIndex(SceneContentColumns.content)));
 			mSceneContent.setPrice(cr.getString(cr.getColumnIndex(SceneContentColumns.price)));
 			mSceneContent.setRecommendLevel(cr.getInt(cr.getColumnIndex(SceneContentColumns.recommendLevel)));
@@ -224,21 +245,19 @@ public class VGDao {
 			mSceneContent.setWebsite(cr.getString(cr.getColumnIndex(SceneContentColumns.website)));
 			mSceneContent.setWorkingTime(cr.getString(cr.getColumnIndex(SceneContentColumns.workingTime)));
 		}
-		
-		
 		return mSceneContent;
 	}
-	
+
 	/**
 	 * 
-	 * @Title: getSmallScene 
+	 * @Title: getSmallSceneList 
 	 * @Description: 通过大景点ID来获取小景点列表
 	 * @param @param bigSceneID
 	 * @param @return
 	 * @return List<SmallScene> 
 	 * @throws
 	 */
-	public List<SmallScene> getSmallScene(int bigSceneID){
+	public List<SmallScene> getSmallSceneList(int bigSceneID){
 		List<SmallScene> listSmallScenes = new ArrayList<SmallScene>();
 		String[] args = {bigSceneID +""};
 		Cursor cr = db.query("smallScene", null, "bigSceneID=?", args, null, null, null);
@@ -253,14 +272,14 @@ public class VGDao {
 				mSmallScene.setResource(cr.getString(cr.getColumnIndex(SmallSceneColumns.resource)));
 				mSmallScene.setSmallSceneID(cr.getInt(cr.getColumnIndex(SmallSceneColumns.smallSceneID)));
 				mSmallScene.setSmallSceneName(cr.getString(cr.getColumnIndex(SmallSceneColumns.smallSceneName)));
-				
+
 				listSmallScenes.add(mSmallScene);
 				cr.moveToNext();
 			}
 		}
 		return listSmallScenes;
 	}
-	
+
 	/**
 	 * 
 	 * @Title: getBigSceneID 
@@ -274,16 +293,14 @@ public class VGDao {
 		SmallScene mScene = new SmallScene();
 		String[] args = {smallSceneName};
 		Cursor cr = db.query("smallScene", null, "smallSceneName=?", args, null, null, null);
-		
+
 		if(cr!=null){
 			cr.moveToFirst();
 			mScene.setBigSceneID(cr.getInt(cr.getColumnIndex(SmallSceneColumns.bigSceneID)));
 		}
 		return mScene.getBigSceneID();	
-		
-		
 	}
-	
+
 	/**
 	 * 
 	 * @Title: getRoute 
@@ -293,7 +310,7 @@ public class VGDao {
 	 * @return RecommendRoute 
 	 * @throws
 	 */
-	public RecommendRoute getRoute (int RouteID){
+	public RecommendRoute getRecommendRoute(int RouteID){
 		RecommendRoute mRecommendRoute = new RecommendRoute();
 		String[] args = {RouteID+ ""};
 		Cursor cr = db.query("recommendRoute", null, "RouteID=?", args, null, null, null);
@@ -304,7 +321,7 @@ public class VGDao {
 		}
 		return mRecommendRoute;
 	}
-	
+
 	/**
 	 * 
 	 * 这个有可能得修改下。。。
@@ -323,19 +340,14 @@ public class VGDao {
 		if(cr!=null)
 		{
 			cr.moveToFirst();
-			
-				
-				mRouteContent.setFirstScene(cr.getString(cr.getColumnIndex(RouteContentColumns.firstScene)));
-				mRouteContent.setSecondScene(cr.getString(cr.getColumnIndex(RouteContentColumns.secondScene)));
-				mRouteContent.setThirdScene(cr.getString(cr.getColumnIndex(RouteContentColumns.thirdScene)));
-				mRouteContent.setFourthScene(cr.getString(cr.getColumnIndex(RouteContentColumns.fourthScene)));
-				mRouteContent.setFifthScene(cr.getString(cr.getColumnIndex(RouteContentColumns.fifthScene)));
-				mRouteContent.setSixthScene(cr.getString(cr.getColumnIndex(RouteContentColumns.sixthScene)));
-				mRouteContent.setSeventhScene(cr.getString(cr.getColumnIndex(RouteContentColumns.seventhScene)));
-				
-			
-			
-			 
+
+			mRouteContent.setFirstScene(cr.getString(cr.getColumnIndex(RouteContentColumns.firstScene)));
+			mRouteContent.setSecondScene(cr.getString(cr.getColumnIndex(RouteContentColumns.secondScene)));
+			mRouteContent.setThirdScene(cr.getString(cr.getColumnIndex(RouteContentColumns.thirdScene)));
+			mRouteContent.setFourthScene(cr.getString(cr.getColumnIndex(RouteContentColumns.fourthScene)));
+			mRouteContent.setFifthScene(cr.getString(cr.getColumnIndex(RouteContentColumns.fifthScene)));
+			mRouteContent.setSixthScene(cr.getString(cr.getColumnIndex(RouteContentColumns.sixthScene)));
+			mRouteContent.setSeventhScene(cr.getString(cr.getColumnIndex(RouteContentColumns.seventhScene)));
 		}
 		return mRouteContent;
 	}
@@ -353,7 +365,7 @@ public class VGDao {
 		BigScene mBigScene = new BigScene();
 		String[] args = {bigSceneID +""};
 		Cursor cr = db.query("bigScene", null, "bigSceneID= ?", args, null, null, null);
-		
+
 		if(cr!=null){
 			cr.moveToFirst();
 			mBigScene.setBigSceneName(cr.getString(cr.getColumnIndex(BigSceneColumns.bigSceneName)));
@@ -367,7 +379,7 @@ public class VGDao {
 		SmallScene mScene = new SmallScene();
 		String[] args = {smallSceneID+""};
 		Cursor cr = db.query("smallScene", null, "smallSceneID=?", args, null, null, null);
-		
+
 		if(cr!=null){
 			cr.moveToFirst();
 			mScene.setSmallSceneName(cr.getString(cr.getColumnIndex(SmallSceneColumns.smallSceneName)));
@@ -375,7 +387,7 @@ public class VGDao {
 		return mScene.getSmallSceneName();	
 	}
 	/**
-	 * 
+	 * 关闭数据库连接
 	 * @Title: closeDatabase 
 	 * @Description: TODO
 	 * @param 
@@ -385,4 +397,5 @@ public class VGDao {
 	public void closeDatabase(){
 		db.close();
 	}
+	
 }

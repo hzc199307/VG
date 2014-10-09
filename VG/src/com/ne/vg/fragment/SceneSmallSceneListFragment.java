@@ -134,7 +134,7 @@ public class SceneSmallSceneListFragment extends Fragment {
 		View rootView = inflater.inflate(R.layout.fragment_scene_smallscenelist, container, false);
 		smallSceneListView= (ListView)rootView.findViewById(R.id.smallSceneListView);
 		//mAdapter = new SceneSmallSceneListAdapter(getActivity(),mDao.getSmallScene(bigSceneID));
-		mAdapter = new CommonAdapter<SmallScene>(getActivity(), mDao.getSmallScene(bigSceneID), R.layout.scene_item_small_scene) {
+		mAdapter = new CommonAdapter<SmallScene>(getActivity(), mDao.getSmallSceneList(bigSceneID), R.layout.scene_item_small_scene) {
 
 			@Override
 			public void convert(ViewHolder helper, SmallScene item){
@@ -177,8 +177,8 @@ public class SceneSmallSceneListFragment extends Fragment {
 				Log.d(TAG, " item " + position +" is clicked!");
 				currentView = view;
 				
-				smallSceneName = mDao.getSmallScene(bigSceneID).get(position).getSmallSceneName();
-				smallSceneId = mDao.getSmallScene(bigSceneID).get(position).getSmallSceneID();
+				smallSceneName = mDao.getSmallSceneList(bigSceneID).get(position).getSmallSceneName();
+				smallSceneId = mDao.getSmallSceneList(bigSceneID).get(position).getSmallSceneID();
 				//设置playSceneID的值为当前选中的值。
 				app.playSceneID = smallSceneId;
 				Log.d(TAG, "play scene id is :" + app.playSceneID);

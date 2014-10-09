@@ -49,7 +49,7 @@ public class MineCollectionFragment extends Fragment {
 		
 		//TODO 这里的数据需要转换，即第二个参数改为mVgDao.getRecommendRoute(cityID)那个
 		mVgDao = new VGDao(getActivity());
-		gridAdapter = new MineCollectionAdapter(getActivity(), mVgDao.getRecommendRoute(cityID));
+		gridAdapter = new MineCollectionAdapter(getActivity(), mVgDao.getRecommendRouteList(cityID));
 		listview.setAdapter(gridAdapter);
 		listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -57,7 +57,7 @@ public class MineCollectionFragment extends Fragment {
 			public void onItemClick(AdapterView<?> parent, View view, int position,long id) {
 				//TODO 下面是我自己修改的部分，带参数的startActivity
 				mIntent = new Intent(getActivity(),RouteActivity.class);
-				int routeID = mVgDao.getRecommendRoute(cityID).get(position).getRouteID();
+				int routeID = mVgDao.getRecommendRouteList(cityID).get(position).getRouteID();
 				mIntent.putExtra("routeID", routeID);
 				startActivity(mIntent);
 			}

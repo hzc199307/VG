@@ -55,7 +55,7 @@ public class RecommendRouteFragment extends Fragment{
 		//TODO 这里的数据需要转换，即第二个参数改为mVgDao.getRecommendRoute(cityID)那个
 		mVgDao = new VGDao(getActivity());
 		//gridAdapter = new RecommendRouteAdapter(getActivity(), mVgDao.getRecommendRoute(cityID));
-		gridAdapter = new CommonAdapter<RecommendRoute>(getActivity(), mVgDao.getRecommendRoute(cityID),R.layout.item_recommendroute) {
+		gridAdapter = new CommonAdapter<RecommendRoute>(getActivity(), mVgDao.getRecommendRouteList(cityID),R.layout.item_recommendroute) {
 
 			@Override
 			public void convert(ViewHolder helper, RecommendRoute item) {
@@ -76,7 +76,7 @@ public class RecommendRouteFragment extends Fragment{
 			public void onItemClick(AdapterView<?> parent, View view, int position,long id) {
 				//TODO 下面是我自己修改的部分，带参数的startActivity
 				mIntent = new Intent(getActivity(),RouteActivity.class);
-				int routeID = mVgDao.getRecommendRoute(cityID).get(position).getRouteID();
+				int routeID = mVgDao.getRecommendRouteList(cityID).get(position).getRouteID();
 				mIntent.putExtra("routeID", routeID);
 				startActivity(mIntent);
 			}

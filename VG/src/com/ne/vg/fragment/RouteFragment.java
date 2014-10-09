@@ -104,8 +104,8 @@ public class RouteFragment extends Fragment{
 		
 		
 		//TODO 这里第二个参数应该是viewpager的页面数量
-		Log.d(TAG, "routeDay = " + mVgDao.getRoute(routeID).getRouteDay());
-		myPagerAdapter = new MyFragmentStatePagerAdapter(getFragmentManager(),mVgDao.getRoute(routeID).getRouteDay());
+		Log.d(TAG, "routeDay = " + mVgDao.getRecommendRoute(routeID).getRouteDay());
+		myPagerAdapter = new MyFragmentStatePagerAdapter(getFragmentManager(),mVgDao.getRecommendRoute(routeID).getRouteDay());
 		route_viewpager.setAdapter(myPagerAdapter);
 		route_viewpager.setCurrentItem(0);
 	}
@@ -163,7 +163,7 @@ public class RouteFragment extends Fragment{
 			// TODO Auto-generated method stub
 			if(DEBUG)Log.v(TAG, "MyFragmentPagerAdapter instantiateItem");
 			//获取routeContentID
-			routeContentID = mVgDao.getRoute(routeID).getRouteContentID();
+			routeContentID = mVgDao.getRecommendRoute(routeID).getRouteContentID();
 			//Toast.makeText(getActivity(), TAG+ " instantiateItem", Toast.LENGTH_SHORT).show();
 			return super.instantiateItem(container, position);
 		}

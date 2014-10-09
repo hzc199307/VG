@@ -140,7 +140,7 @@ public class RouteDayFragment extends Fragment {
 		List<BigScene> scene = new ArrayList<BigScene>();
 		for(int i =0; i <sceneId.length ; i++)
 		{
-			scene.add(mVgDao.getBigSceneObject(Integer.parseInt(sceneId[i])));
+			scene.add(mVgDao.getBigScene(Integer.parseInt(sceneId[i])));
 		}
 		return scene;
 	}

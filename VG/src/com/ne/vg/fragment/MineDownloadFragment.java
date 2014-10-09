@@ -19,6 +19,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+/**
+ * 
+ * @ClassName: MineDownloadFragment 
+ * @author ºØÖÇ³¬
+ * @Description: TODO 
+ * @date 2014-10-9 ÏÂÎç2:23:07
+ */
 public class MineDownloadFragment extends Fragment{
 
 	private static final String TAG = "MineDownloadFragment";
@@ -69,7 +76,6 @@ public class MineDownloadFragment extends Fragment{
 			adapter.notifyDataSetChanged();
 			if (progressDialog != null) {
 				progressDialog.dismiss();
-				progressDialog = null;
 			}
 		}
 	}

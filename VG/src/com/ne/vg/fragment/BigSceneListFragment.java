@@ -79,7 +79,7 @@ public class BigSceneListFragment extends Fragment{
 		gridview = (GridView) rootView.findViewById(R.id.bigscene_gridview1);
 		
 		//gridAdapter = new BigSceneListAdapter(getActivity(), mVgDao.getBigScene(cityID));\
-		gridAdapter = new CommonAdapter<BigScene>(getActivity(), mVgDao.getBigScene(cityID),R.layout.item_bigscenelist) {
+		gridAdapter = new CommonAdapter<BigScene>(getActivity(), mVgDao.getBigSceneList(cityID),R.layout.item_bigscenelist) {
 
 			@Override
 			public void convert(ViewHolder helper, BigScene item) {
@@ -123,7 +123,7 @@ public class BigSceneListFragment extends Fragment{
 				
 				mIntent = new Intent(getActivity(),BigSceneDetailActivity.class);
 				
-				int bigSceneID = mVgDao.getBigScene(cityID).get(position).getBigSceneID();
+				int bigSceneID = mVgDao.getBigSceneList(cityID).get(position).getBigSceneID();
 				mIntent.putExtra("bigSceneID", bigSceneID);
 				mIntent.putExtra("cityName", cityName);
 				startActivity(mIntent);
