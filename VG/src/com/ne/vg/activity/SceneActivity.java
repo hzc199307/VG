@@ -178,9 +178,13 @@ public class SceneActivity extends FragmentActivity implements View.OnClickListe
 				Log.d(TAG,"FINAL playing = " + app.mBinder.getService().isPlaying);
 				if(app.mBinder.getService().isPlaying==true){
 					app.mBinder.getService().play();
+					Drawable mplay = getResources().getDrawable(R.drawable.scene_music_playing_icon);
+					mSeekBar.setThumb(mplay);
 				}
 				else{
 					app.mBinder.getService().pause();
+					Drawable mpause = getResources().getDrawable(R.drawable.scene_music_pausing_icon);
+					mSeekBar.setThumb(mpause);
 				}
 				scene_music_time_now.setText(MusicPlayerUtil.milliSecondsToTimer(app.mBinder.getService().getPlayer().getCurrentPosition()));
 			}
@@ -208,7 +212,7 @@ public class SceneActivity extends FragmentActivity implements View.OnClickListe
                 	//player.seekTo(progress); 
                 	app.mBinder.getService().getPlayer().seekTo(progress);
                 }  
-                Log.d(TAG,"ONchanged playing is " + playing);
+               // Log.d(TAG,"ONchanged playing is " + playing);
 			}
 		});
 	}
