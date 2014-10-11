@@ -137,7 +137,7 @@ public class SceneSmallSceneListFragment extends Fragment {
 		mAdapter = new CommonAdapter<SmallScene>(getActivity(), mDao.getSmallSceneList(bigSceneID), R.layout.scene_item_small_scene) {
 
 			@Override
-			public void convert(ViewHolder helper, SmallScene item){
+			public void convert(ViewHolder helper, SmallScene item, int position){
 				
 				// TODO Auto-generated method stub
 				helper.setText(R.id.scene_item_smallscene_name, item.getSmallSceneName());

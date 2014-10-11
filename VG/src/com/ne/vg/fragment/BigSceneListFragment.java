@@ -82,9 +82,10 @@ public class BigSceneListFragment extends Fragment{
 		gridAdapter = new CommonAdapter<BigScene>(getActivity(), mVgDao.getBigSceneList(cityID),R.layout.item_bigscenelist) {
 
 			@Override
-			public void convert(ViewHolder helper, BigScene item) {
+			public void convert(ViewHolder helper, BigScene item, int position) {
 				// TODO 还要处理download
-				helper.setImageResource(R.id.bigscenelist_view01, item.getResource());
+				helper.setImageBitmap(R.id.bigscenelist_view01, "bigScene/"+cityName+"/"+item.getResource());
+//				helper.setImageResource(R.id.bigscenelist_view01, item.getResource());
 				helper.setText(R.id.bigscenelist_item_name, item.getBigSceneName());
 				helper.setText(R.id.bigscenelist_loveNum, Integer.toString(item.getLoveNum()));
 				helper.setText(R.id.bigscenelist_musicNum, Integer.toString(item.getRecordNum()));

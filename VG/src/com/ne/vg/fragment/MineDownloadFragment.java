@@ -62,7 +62,7 @@ public class MineDownloadFragment extends Fragment{
 		adapter = new CommonAdapter<City>(getActivity(), cityList, R.layout.mine_download_item_city) {
 
 			@Override
-			public void convert(ViewHolder helper, City item) {
+			public void convert(ViewHolder helper, City item, int position) {
 				// TODO Auto-generated method stub
 				helper.setText(R.id.mine_download_item_city_name, item.getCityName());
 				helper.setText(R.id.mine_download_item_city_pinyin, item.getCityPinyin());

@@ -84,11 +84,12 @@ public class HomeFragment extends AnimationFragment implements OnClickListener{
 		mAdapter = new CommonAdapter<City>(getActivity(), mVgDao.getCityList(), R.layout.item_city) {
 
 			@Override
-			public void convert(ViewHolder helper, City item) {
+			public void convert(ViewHolder helper, City item, int position) {
 				// TODO Auto-generated method stub
 				helper.setText(R.id.cityName, item.getCityName());
 				helper.setText(R.id.cityPinyin, item.getCityPinyin());
-				helper.setImageResource(R.id.item_city_bg, item.getResource());
+				helper.setImageBitmap(R.id.item_city_bg, "city/"+item.getResource());
+				//helper.setImageResource(R.id.item_city_bg, item.getResource());
 			}
 			
 		};

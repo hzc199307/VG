@@ -162,7 +162,7 @@ public class RouteDayFragment extends Fragment {
 //			bigSceneListAdapter = new RouteDay_BigSceneListAdapter(getActivity(),bigSceneIDs);
 			bigSceneListAdapter = new CommonAdapter<BigScene>(getActivity(),ArrayToList(bigSceneIDs),R.layout.route_item_big_scene) {
 				@Override
-				public void convert(ViewHolder helper, BigScene myBigScene) {
+				public void convert(ViewHolder helper, BigScene myBigScene, int position) {
 					// TODO Auto-generated method stub
 					helper.setText(R.id.bigSceneName, myBigScene.getBigSceneName());
 					helper.setText(R.id.num1, ""+myBigScene.getLoveNum());

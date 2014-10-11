@@ -1,6 +1,11 @@
 package com.ne.vg.adapter;
 
+import com.ne.vg.util.ImageUtil;
+import com.ne.vg.util.LogUtil;
+
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.drawable.AnimationDrawable;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
@@ -12,6 +17,8 @@ import android.widget.TextView;
 /*自定义的ViewHolder*/
 public class ViewHolder
 {
+	
+	private static final String TAG = "ViewHolder";
 	//SparseView 和Map类似，但是效率比Map高
 	private final SparseArray<View> mViews;
 	private int mPosition;
@@ -67,7 +74,7 @@ public class ViewHolder
 	 * @return ViewHolder 
 	 * @throws
 	 */
-	public ViewHolder setImageResource(int viewId, String  drawableId){
+	public ViewHolder setImageResource(int viewId, String drawableId){
 		int resId = mContext.getResources().getIdentifier(drawableId, "drawable","com.ne.vg");
 		ImageView view = getView(viewId);
 		view.setImageResource(resId);
@@ -89,6 +96,36 @@ public class ViewHolder
 		view.setImageResource(drawableId);
 		return this;
 	}
+	
+	/**
+	 * 
+	 * @Title: setImageBitmap 
+	 * @Description: 通过String来设置存储在SD卡的图片资源,前面的"com.ne.vg/image/"部分不用包含在内
+	 * @param viewId
+	 * @param imageUrl
+	 * @param @return
+	 * @return ViewHolder 
+	 * @throws
+	 */
+	@SuppressLint("NewApi") public ViewHolder setImageBitmap(int viewId, String imageUrl){
+		Bitmap temp = ImageUtil.getLoacalBitmap("com.ne.vg/image/"+imageUrl+".png");
+		if(temp==null)
+			temp = ImageUtil.getLoacalBitmap("com.ne.vg/image/"+imageUrl+".jpg");
+		//temp.setDensity(mContext.getResources().getDisplayMetrics().densityDpi);
+		ImageView view = getView(viewId);
+		
+//		double hScale = view.getHeight()/temp.getHeight();
+//		double wScale = view.getWidth()/temp.getWidth();
+//		double scale = hScale>wScale?hScale:wScale;
+//		LogUtil.d(TAG, view.getHeight()+" "+temp.getHeight()+" "+scale);
+//		temp.setHeight((int) (temp.getHeight()*scale));
+//		temp.setWidth((int) (temp.getHeight()*scale));
+		view.setImageBitmap(temp); 
+		temp=null;
+		return this;
+	}
+	
+	
 	/**
 	 * 
 	 * @Title: setView 

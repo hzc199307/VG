@@ -58,7 +58,7 @@ public class RecommendRouteFragment extends Fragment{
 		gridAdapter = new CommonAdapter<RecommendRoute>(getActivity(), mVgDao.getRecommendRouteList(cityID),R.layout.item_recommendroute) {
 
 			@Override
-			public void convert(ViewHolder helper, RecommendRoute item) {
+			public void convert(ViewHolder helper, RecommendRoute item, int position) {
 				helper.setImageResource(R.id.recommendroute_view01, item.getResource());
 				helper.setText(R.id.recommendroute_sceneNum, Integer.toString(item.getSceneNum()));
 				helper.setText(R.id.recommendroute_name, item.getRouteName());

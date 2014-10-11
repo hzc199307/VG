@@ -46,17 +46,10 @@ public class MineDownloadSubFragment extends Fragment {
 
 			@Override
 			public void convert(ViewHolder helper, BigScene item, int position) {
-				// TODO Auto-generated method stub
-				super.convert(helper, item, position);
 				helper.setText(R.id.mine_download_sub_item_bigscene_position, (position+1)+".");
 				helper.setText(R.id.mine_download_sub_item_bigscene_name, item.getBigSceneName());
 			}
 
-			@Override
-			public void convert(ViewHolder helper, BigScene item) {
-				// TODO Auto-generated method stub
-				
-			}
 		};
 		listView.setAdapter(adapter);
 		listView.setOnItemClickListener(new OnItemClickListener() {
