@@ -127,5 +127,12 @@
     <dimen name="mine_download_swipelv_height">51dp</dimen>
     <dimen name="mine_download_swipelv_btn_width">67dp</dimen>
     
+    <!-- BigSceneDetailActivity -->
+    <dimen name="bsid_item_margin_top">20dp</dimen>
+    <dimen name="bsid_item_icon_width">14dp</dimen>
+    <dimen name="bsid_item_icon_height">14dp</dimen>
+    <dimen name="bsid_item_icon_marginleft">1dp</dimen>
+    <dimen name="bsid_item_icon_marginright">10dp</dimen>
+    
 
 </resources>

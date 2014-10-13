@@ -1,26 +1,12 @@
 package com.ne.vg.fragment;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import com.ne.vg.R;
 import com.ne.vg.activity.BigSceneDetailActivity;
-import com.ne.vg.activity.MyLoveActivity;
-import com.ne.vg.activity.RouteActivity;
-import com.ne.vg.adapter.BigSceneListAdapter;
 import com.ne.vg.adapter.CommonAdapter;
 import com.ne.vg.adapter.ViewHolder;
 import com.ne.vg.bean.BigScene;
-import com.ne.vg.bean.CreateData;
-import com.ne.vg.bean.SceneContent;
 import com.ne.vg.dao.VGDao;
-import com.ne.vg.util.NotifyUtil;
 
-
-
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -30,7 +16,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.FrameLayout.LayoutParams;
 /**

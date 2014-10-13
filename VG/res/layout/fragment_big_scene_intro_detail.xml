@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
@@ -15,11 +14,7 @@
         android:orientation="horizontal" >
 
         <ImageView
-            android:layout_width="14dp"
-            android:layout_height="14dp"
-            android:layout_marginLeft="1dp"
-            android:layout_marginRight="10dp"
-            android:scaleType="centerInside"
+            style="@style/bsid_item_icon_style"
             android:src="@drawable/bsid_necessary_icon" />
 
         <TextView
@@ -30,6 +25,7 @@
             android:textSize="14sp" />
 
         <TextView
+            android:id="@+id/bsid_recommendScene"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="国立故宫博物馆   光化门   勤政殿"
@@ -42,19 +38,16 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="@dimen/bsid_item_margin_top"
         android:gravity="top"
         android:orientation="horizontal" >
 
         <ImageView
-            android:layout_width="14dp"
-            android:layout_height="14dp"
-            android:layout_marginLeft="1dp"
-            android:layout_marginRight="10dp"
-            android:scaleType="centerInside"
+            style="@style/bsid_item_icon_style"
             android:src="@drawable/bsid_location_icon" />
 
         <TextView
+            android:id="@+id/bsid_address"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="首尔市中路区世宗路1-1"
@@ -67,19 +60,16 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="@dimen/bsid_item_margin_top"
         android:gravity="top"
         android:orientation="horizontal" >
 
         <ImageView
-            android:layout_width="14dp"
-            android:layout_height="14dp"
-            android:layout_marginLeft="1dp"
-            android:layout_marginRight="10dp"
-            android:scaleType="centerInside"
+            style="@style/bsid_item_icon_style"
             android:src="@drawable/bsid_traffic_icon" />
 
         <TextView
+            android:id="@+id/bsid_route"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="搭乘地铁3号线至景福宫站下，从5号出口徒步约5分钟可达。\n或搭乘地铁5号线至光化门站下，从2号出口徒步约10分钟。"
@@ -92,19 +82,16 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="@dimen/bsid_item_margin_top"
         android:gravity="top"
         android:orientation="horizontal" >
 
         <ImageView
-            android:layout_width="14dp"
-            android:layout_height="14dp"
-            android:layout_marginLeft="1dp"
-            android:layout_marginRight="10dp"
-            android:scaleType="centerInside"
+            style="@style/bsid_item_icon_style"
             android:src="@drawable/bsid_time_icon" />
 
         <TextView
+            android:id="@+id/bsid_workingtime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="9：00-18：00，11月-2月至17：00，5-8月周六、日及节假日至19：00（入场至关门前1小时）逢周二休息。"
@@ -117,19 +104,16 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="@dimen/bsid_item_margin_top"
         android:gravity="top"
         android:orientation="horizontal" >
 
         <ImageView
-            android:layout_width="14dp"
-            android:layout_height="14dp"
-            android:layout_marginLeft="1dp"
-            android:layout_marginRight="10dp"
-            android:scaleType="centerInside"
+            style="@style/bsid_item_icon_style"
             android:src="@drawable/bsid_link_icon" />
 
         <TextView
+            android:id="@+id/bsid_website"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="www.royalpalace.go.kr"
@@ -142,22 +126,19 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="@dimen/bsid_item_margin_top"
         android:gravity="top"
         android:orientation="horizontal" >
 
         <ImageView
-            android:layout_width="14dp"
-            android:layout_height="14dp"
-            android:layout_marginLeft="1dp"
-            android:layout_marginRight="10dp"
-            android:scaleType="centerInside"
+            style="@style/bsid_item_icon_style"
             android:src="@drawable/bsid_phone_icon" />
 
         <TextView
+            android:id="@+id/bsid_telephone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="02-3700-3900"
+            android:text="10086"
             android:textColor="#0796fb"
             android:textSize="12sp" />
     </LinearLayout>
@@ -167,19 +148,16 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="@dimen/bsid_item_margin_top"
         android:gravity="top"
         android:orientation="horizontal" >
 
         <ImageView
-            android:layout_width="14dp"
-            android:layout_height="14dp"
-            android:layout_marginLeft="1dp"
-            android:layout_marginRight="10dp"
-            android:scaleType="centerInside"
+            style="@style/bsid_item_icon_style"
             android:src="@drawable/bsid_cost_icon" />
 
         <TextView
+            android:id="@+id/bsid_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="成人3000韩元，7-18岁1500韩元"

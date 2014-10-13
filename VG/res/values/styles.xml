@@ -63,5 +63,13 @@
         <item name="android:textColor">@color/mine_item_num_tv</item>
         <item name="android:textSize">@dimen/mine_item_num_tv</item>
     </style>
+    
+    <style name="bsid_item_icon_style">
+        <item name="android:layout_width">@dimen/bsid_item_icon_width</item>
+        <item name="android:layout_height">@dimen/bsid_item_icon_height</item>
+        <item name="android:layout_marginLeft">@dimen/bsid_item_icon_marginleft</item>
+        <item name="android:layout_marginRight">@dimen/bsid_item_icon_marginright</item>
+        <item name="android:scaleType">centerInside</item>
+    </style>
 
 </resources>
