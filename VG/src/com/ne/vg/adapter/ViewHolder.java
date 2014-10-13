@@ -7,6 +7,8 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.AnimationDrawable;
+import android.os.Handler;
+import android.os.Message;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,7 +19,7 @@ import android.widget.TextView;
 /*自定义的ViewHolder*/
 public class ViewHolder
 {
-	
+
 	private static final String TAG = "ViewHolder";
 	//SparseView 和Map类似，但是效率比Map高
 	private final SparseArray<View> mViews;
@@ -26,7 +28,7 @@ public class ViewHolder
 	private Context mContext;
 
 	private ViewHolder(Context context, ViewGroup parent, int layoutId,
-		int position)
+			int position)
 	{
 		this.mViews = new SparseArray<View>();
 		mConvertView = LayoutInflater.from(context).inflate(layoutId,parent,false);
@@ -36,10 +38,10 @@ public class ViewHolder
 		mContext = context;
 	}
 	/**
-	*拿到一个ViewHolder对象
-	*/
+	 *拿到一个ViewHolder对象
+	 */
 	public static ViewHolder get(Context context,View convertView,
-	 ViewGroup parent, int layoutId,int position)
+			ViewGroup parent, int layoutId,int position)
 	{
 		if(convertView==null){
 			return new ViewHolder(context, parent, layoutId, position);
@@ -47,8 +49,8 @@ public class ViewHolder
 		return (ViewHolder)convertView.getTag();
 	}
 	/**
-	*通过控件的Id获取对于的控件，如果没有则加入views中
-	*/
+	 *通过控件的Id获取对于的控件，如果没有则加入views中
+	 */
 	public <T extends View> T getView(int viewId){
 		View view = mViews.get(viewId);
 		if(view == null){
@@ -80,7 +82,7 @@ public class ViewHolder
 		view.setImageResource(resId);
 		return this;
 	}
-	
+
 	/**
 	 * 
 	 * @Title: setImageResourceByInt 
@@ -96,7 +98,10 @@ public class ViewHolder
 		view.setImageResource(drawableId);
 		return this;
 	}
-	
+
+	private Handler mHandler;
+	private ImageView imageView;
+	private Bitmap bitmap;
 	/**
 	 * 
 	 * @Title: setImageBitmap 
@@ -107,25 +112,54 @@ public class ViewHolder
 	 * @return ViewHolder 
 	 * @throws
 	 */
-	@SuppressLint("NewApi") public ViewHolder setImageBitmap(int viewId, String imageUrl){
-		Bitmap temp = ImageUtil.getLoacalBitmap("com.ne.vg/image/"+imageUrl+".png");
-		if(temp==null)
-			temp = ImageUtil.getLoacalBitmap("com.ne.vg/image/"+imageUrl+".jpg");
-		//temp.setDensity(mContext.getResources().getDisplayMetrics().densityDpi);
-		ImageView view = getView(viewId);
+	public ViewHolder setImageBitmap(int viewId, String imageUrl){
+
+		imageView = getView(viewId);
+		if(mHandler == null)
+		{
+			mHandler = new Handler() {
+				@Override
+				public void handleMessage(Message msg) {
+					if(bitmap!=null)
+						imageView.setImageBitmap(bitmap);
+					bitmap=null;
+					super.handleMessage(msg);
+				}
+			};
+		}
+		MyImageThread myImageThread = new MyImageThread();
+		myImageThread.setData(imageUrl);
+		myImageThread.start();
 		
-//		double hScale = view.getHeight()/temp.getHeight();
-//		double wScale = view.getWidth()/temp.getWidth();
-//		double scale = hScale>wScale?hScale:wScale;
-//		LogUtil.d(TAG, view.getHeight()+" "+temp.getHeight()+" "+scale);
-//		temp.setHeight((int) (temp.getHeight()*scale));
-//		temp.setWidth((int) (temp.getHeight()*scale));
-		view.setImageBitmap(temp); 
-		temp=null;
 		return this;
 	}
 	
-	
+	public class MyImageThread extends Thread {
+		private String imageUrl;
+		public MyImageThread() {
+			// TODO Auto-generated constructor stub
+		}
+		public void setData(String imageUrl) {
+			this.imageUrl = imageUrl;
+		}
+		public void run() {
+
+			bitmap = ImageUtil.getLoacalBitmap("com.ne.vg/image/"+imageUrl+".png");
+			if(bitmap==null)
+				bitmap = ImageUtil.getLoacalBitmap("com.ne.vg/image/"+imageUrl+".jpg");
+			//bitmap.setDensity(mContext.getResources().getDisplayMetrics().densityDpi);
+
+			//			double hScale = view.getHeight()/temp.getHeight();
+			//			double wScale = view.getWidth()/temp.getWidth();
+			//			double scale = hScale>wScale?hScale:wScale;
+			//			LogUtil.d(TAG, view.getHeight()+" "+temp.getHeight()+" "+scale);
+			//			temp.setHeight((int) (temp.getHeight()*scale));
+			//			temp.setWidth((int) (temp.getHeight()*scale));
+			//			view.setImageBitmap(temp);
+			mHandler.sendMessage(new Message());
+		}
+	}
+
 	/**
 	 * 
 	 * @Title: setView 
@@ -163,7 +197,7 @@ public class ViewHolder
 		}
 		if(isStart == 0)
 			animationDrawable.stop();
-		
+
 		return this;
 	}
 
