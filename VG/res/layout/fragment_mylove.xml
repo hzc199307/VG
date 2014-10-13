@@ -19,7 +19,8 @@
         android:gravity="center"
         android:horizontalSpacing="@dimen/bigscenel_gridview_spacing"
         android:numColumns="2"
-        android:verticalSpacing="@dimen/bigscenel_gridview_spacing" />
+        android:verticalSpacing="@dimen/bigscenel_gridview_spacing"
+        android:scrollbars="none" />
     
 
 </LinearLayout>

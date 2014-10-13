@@ -239,6 +239,7 @@ public class RecommendActivity extends FragmentActivity implements View.OnClickL
 		switch (view.getId()) {
 		case R.id.recommend_title_left:
 			this.finish();
+			break;
 		case R.id.recommend_routelist_layout:
 			viewPager.setCurrentItem(ROUTELIST_STATUS);  //会自动调用 myOnPageChangeListener.onPageSelected()
 			break;

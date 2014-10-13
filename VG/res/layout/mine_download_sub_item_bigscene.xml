@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="48dp"
-    android:background="#323232"
+    android:background="@drawable/mine_download_sub_item_bg_selector"
     android:orientation="vertical"
     android:paddingLeft="10dp" >
 
@@ -17,7 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="1."
-            android:textColor="#d4d4d4"
+            android:textColor="@color/mine_download_sub_item_tv_selector"
             android:textSize="16sp" />
 
         <TextView
@@ -25,7 +25,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="景福宫"
-            android:textColor="#d4d4d4"
+            android:textColor="@color/mine_download_sub_item_tv_selector"
             android:textSize="16sp" />
     </LinearLayout>
 

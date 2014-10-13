@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.ne.vg.R;
+import com.ne.vg.activity.BigSceneDetailActivity;
 import com.ne.vg.activity.SceneActivity;
 import com.ne.vg.adapter.CommonAdapter;
 import com.ne.vg.adapter.ViewHolder;
@@ -58,7 +59,7 @@ public class MineDownloadSubFragment extends Fragment {
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				// TODO Auto-generated method stub
-				Intent myIntent = new Intent(getActivity(),SceneActivity.class); 
+				Intent myIntent = new Intent(getActivity(),BigSceneDetailActivity.class); 
 				myIntent.putExtra("bigSceneID", bigSceneList.get(position).getBigSceneID());
 				startActivity(myIntent);
 			}

@@ -341,6 +341,7 @@ public class SceneActivity extends FragmentActivity implements View.OnClickListe
 		case R.id.scene_title_left:
 			destroyGMapFragment();
 			this.finish();
+			break;
 		case R.id.scene_map_layout:
 			viewPager.setCurrentItem(MAP_STATUS);  //会自动调用 myOnPageChangeListener.onPageSelected()
 			break;

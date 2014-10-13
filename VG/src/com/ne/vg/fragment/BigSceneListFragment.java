@@ -126,7 +126,6 @@ public class BigSceneListFragment extends Fragment{
 				
 				int bigSceneID = mVgDao.getBigSceneList(cityID).get(position).getBigSceneID();
 				mIntent.putExtra("bigSceneID", bigSceneID);
-				mIntent.putExtra("cityName", cityName);
 				startActivity(mIntent);
 			}
 		});

@@ -55,6 +55,12 @@
     <color name="mine_item_tv_pressed">#fc6662</color>
     <color name="mine_item_num_tv">#a0a0a0</color>
     
+    <!-- MineDownloadSubFragment -->
+    <color name="mine_download_sub_item_tv_normal">#d4d4d4</color>
+    <color name="mine_download_sub_item_tv_pressed">#fc6662</color>
+    <color name="mine_download_sub_item_bg_normal">#323232</color>
+    <color name="mine_download_sub_item_bg_pressed">#3c3c3c</color>
+    
     <!-- swipelistview -->
     <color name="swipeDrawableChecked">#deeff3</color>
     

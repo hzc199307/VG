@@ -48,7 +48,7 @@
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="@dimen/mine_item_tv_marginleft"
                         android:text="离线解说"
-                        android:textColor="@color/mine_item_tv"
+                        android:textColor="@color/mine_item_tv_selector"
                         android:textSize="@dimen/mine_item_tv" />
 
                     <TextView
@@ -98,7 +98,7 @@
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="@dimen/mine_item_tv_marginleft"
                         android:text="我喜欢的"
-                        android:textColor="@color/mine_item_tv"
+                        android:textColor="@color/mine_item_tv_selector"
                         android:textSize="@dimen/mine_item_tv" />
 
                     <TextView
@@ -148,7 +148,7 @@
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="@dimen/mine_item_tv_marginleft"
                         android:text="路线收藏"
-                        android:textColor="@color/mine_item_tv"
+                        android:textColor="@color/mine_item_tv_selector"
                         android:textSize="@dimen/mine_item_tv" />
 
                     <TextView
