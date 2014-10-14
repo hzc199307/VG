@@ -4,8 +4,10 @@ import java.util.ArrayList;
 
 import com.ne.vg.R;
 import com.ne.vg.adapter.MyFragmentStatePagerAdapter2;
+import com.ne.vg.bean.RecommendRoute;
 import com.ne.vg.dao.VGDao;
 import com.ne.vg.gmap.GMapFragment;
+import com.ne.vg.util.LogUtil;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -23,13 +25,13 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 /**
  * 对应 推荐路线的按日期的详情页
  * @ClassName: RouteFragment 
  * @author 贺智超
- * @Description: TODO 
  * @date 2014-8-12 上午10:14:19
  */
 public class RouteFragment extends Fragment{
@@ -44,24 +46,31 @@ public class RouteFragment extends Fragment{
 	private GMapFragment gMapFragment ;
 	
 	private int routeID;
+	private RecommendRoute route;
 	private VGDao mVgDao;
+	private TextView routeTitleNameTv;
+	
+	public RouteFragment(int routeID){
+		Log.d(TAG, routeID + "");
+		this.routeID = routeID;
+		
+	}
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		if(DEBUG)Log.v(TAG, "onCreateView");
+		mVgDao = VGDao.getInstance(getActivity());
+		if(route == null)
+			route = mVgDao.getRecommendRoute(routeID);
 		//Toast.makeText(getActivity(), TAG+ " onCreateView", Toast.LENGTH_SHORT).show();
 		rootView = inflater.inflate(R.layout.fragment_route, container,false);
-		initMap();
+		routeTitleNameTv = (TextView)rootView.findViewById(R.id.route_title_name);
+		routeTitleNameTv.setText(route.getRouteName());
 		initViewPager();
 		return rootView;
 	}
 	
-	public RouteFragment(int routeID){
-		Log.d(TAG, routeID + "");
-		this.routeID = routeID;
-	}
-
 	@Override
 	public void onResume() {
 		// TODO Auto-generated method stub
@@ -99,13 +108,8 @@ public class RouteFragment extends Fragment{
 		route_pagertab.setBackgroundColor(getResources().getColor(R.color.route_pagertab_bg));
 		route_pagertab.setTextSpacing(50);
 		
-		
-		mVgDao = new VGDao(getActivity());
-		
-		
-		//TODO 这里第二个参数应该是viewpager的页面数量
-		Log.d(TAG, "routeDay = " + mVgDao.getRecommendRoute(routeID).getRouteDay());
-		myPagerAdapter = new MyFragmentStatePagerAdapter(getFragmentManager(),mVgDao.getRecommendRoute(routeID).getRouteDay());
+		Log.d(TAG, "routeDay = " + route.getRouteDay());
+		myPagerAdapter = new MyFragmentStatePagerAdapter(getFragmentManager(),route.getRouteDay());
 		route_viewpager.setAdapter(myPagerAdapter);
 		route_viewpager.setCurrentItem(0);
 	}
@@ -120,11 +124,12 @@ public class RouteFragment extends Fragment{
 	public class MyFragmentStatePagerAdapter extends MyFragmentStatePagerAdapter2{
 
 		private int NUM_ITEMS = 3;
-		
 		private int routeContentID;
+		
 		public MyFragmentStatePagerAdapter(FragmentManager fm ,int numOfFragment) {  
 			super(fm);  
 			NUM_ITEMS = numOfFragment;
+			routeContentID = route.getRouteContentID();
 		}
 
 		@Override  
@@ -141,18 +146,7 @@ public class RouteFragment extends Fragment{
 			if(DEBUG)Log.v(TAG, "MyFragmentPagerAdapter getItem");
 			//Toast.makeText(getActivity(), TAG+ " getItem", Toast.LENGTH_SHORT).show();
 			// 返回相应的  fragment  
-			switch(position)
-			{
-			case 0:return new RouteDayFragment(0, routeContentID);
-			case 1:return new RouteDayFragment(1, routeContentID);
-			case 2:return new RouteDayFragment(2, routeContentID);
-			case 3:return new RouteDayFragment(3, routeContentID);
-			case 4:return new RouteDayFragment(4, routeContentID);
-			case 5:return new RouteDayFragment(5, routeContentID);
-			case 6:return new RouteDayFragment(6, routeContentID);
-			case 7:return new RouteDayFragment(7, routeContentID);
-			default:return null;
-			}
+			return new RouteDayFragment(position, routeContentID);
 		}
 
 		/**
@@ -162,8 +156,7 @@ public class RouteFragment extends Fragment{
 		public Object instantiateItem(ViewGroup container, int position) {
 			// TODO Auto-generated method stub
 			if(DEBUG)Log.v(TAG, "MyFragmentPagerAdapter instantiateItem");
-			//获取routeContentID
-			routeContentID = mVgDao.getRecommendRoute(routeID).getRouteContentID();
+			
 			//Toast.makeText(getActivity(), TAG+ " instantiateItem", Toast.LENGTH_SHORT).show();
 			return super.instantiateItem(container, position);
 		}
@@ -175,7 +168,7 @@ public class RouteFragment extends Fragment{
 		public CharSequence getPageTitle(int position) {
 			// TODO Auto-generated method stub
 			if(DEBUG)Log.v(TAG, "getPageTitle"+ position);
-			return "Day "+position;
+			return "第"+(position+1)+"天";//return "Day "+(position+1);
 		}
 
 		/**

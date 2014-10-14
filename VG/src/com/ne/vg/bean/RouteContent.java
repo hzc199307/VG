@@ -3,7 +3,7 @@ package com.ne.vg.bean;
 public class RouteContent {
 	private int routeContentID;
 	private String firstScene,secondScene,thirdScene,fourthScene,
-					fifthScene,sixthScene,seventhScene;
+	fifthScene,sixthScene,seventhScene;
 	public int getRouteContentID() {
 		return routeContentID;
 	}
@@ -52,5 +52,27 @@ public class RouteContent {
 	public void setSeventhScene(String seventhScene) {
 		this.seventhScene = seventhScene;
 	}
-					
+
+	public String getSceneOfIndex(int index) {
+		switch (index) {
+		case 1:
+			return getFirstScene();
+		case 2:
+			return getSecondScene();
+		case 3:
+			return getThirdScene();
+		case 4:
+			return getFourthScene();
+		case 5:
+			return getFifthScene();
+		case 6:
+			return getSixthScene();
+		case 7:
+			return getSeventhScene();
+		default:
+			return null;
+		}
+
+	}
+
 }

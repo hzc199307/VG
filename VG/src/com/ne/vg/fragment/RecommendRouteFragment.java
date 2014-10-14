@@ -15,6 +15,7 @@ import com.ne.vg.adapter.CommonAdapter;
 import com.ne.vg.adapter.ViewHolder;
 import com.ne.vg.bean.RecommendRoute;
 import com.ne.vg.dao.VGDao;
+import com.ne.vg.util.LogUtil;
 /**
  * 
  * @ClassName: RecommendRouteFragment 
@@ -53,7 +54,7 @@ public class RecommendRouteFragment extends Fragment{
 		
 		
 		//TODO 这里的数据需要转换，即第二个参数改为mVgDao.getRecommendRoute(cityID)那个
-		mVgDao = new VGDao(getActivity());
+		mVgDao = VGDao.getInstance(getActivity());
 		//gridAdapter = new RecommendRouteAdapter(getActivity(), mVgDao.getRecommendRoute(cityID));
 		gridAdapter = new CommonAdapter<RecommendRoute>(getActivity(), mVgDao.getRecommendRouteList(cityID),R.layout.item_recommendroute) {
 
@@ -64,7 +65,6 @@ public class RecommendRouteFragment extends Fragment{
 				helper.setText(R.id.recommendroute_name, item.getRouteName());
 				helper.setText(R.id.recommendroute_scenenum, item.getRouteDay()+ "天");
 				helper.setText(R.id.recommendroute_lovenum, Integer.toString(item.getCollectNum()));
-				//TODO click的响应目前先不写
 			}
 		};
 		

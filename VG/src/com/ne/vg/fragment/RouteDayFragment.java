@@ -42,15 +42,18 @@ public class RouteDayFragment extends Fragment {
 	private ListView listView_route_day_bigscenes;
 	private CommonAdapter<BigScene> bigSceneListAdapter;
 
-	int i =-1;
+	int indexOfDay =-1;
 	int routeContentID;
 	private String[] bigSceneIDs;
 	private VGDao mVgDao;
 	private Intent mIntent;
-	
-	public RouteDayFragment(int i, int routeContentID) {
+
+	/**
+	 * @param indexOfDay 天数从0开始
+	 */
+	public RouteDayFragment(int indexOfDay, int routeContentID) {
 		// TODO Auto-generated constructor stub
-		this.i = i;
+		this.indexOfDay = indexOfDay;
 		this.routeContentID = routeContentID;
 	}
 
@@ -59,9 +62,9 @@ public class RouteDayFragment extends Fragment {
 		super.onAttach(activity);
 		Log.v(TAG, "onAttach");
 		//Toast.makeText(getActivity(), TAG+ " "+i+" onAttach", Toast.LENGTH_SHORT).show();
-		
+
 	}
-	
+
 	/**
 	 * 有关数据的放在这里
 	 */
@@ -70,62 +73,14 @@ public class RouteDayFragment extends Fragment {
 		super.onCreate(savedInstanceState);
 		//TODO TMD 这要有的写了。。。。。
 		/** 主要是获取对应每天的景点列表所获取的数据，bigSceneIDs是以逗号隔开的bigSceneID的集合分开的数组*/
-		mVgDao = new VGDao(getActivity());
-		switch(i){
-		case 0:
-			if(mVgDao.getRouteContent(routeContentID).getFirstScene()==null){
-				bigSceneIDs = null;
-			}else{
-				bigSceneIDs = mVgDao.getRouteContent(routeContentID).getFirstScene().split(",");
-			}
-			
-			break;
-		case 1:
-			if(mVgDao.getRouteContent(routeContentID).getSecondScene()==null){
-				bigSceneIDs = null;
-			}else{
-				bigSceneIDs = mVgDao.getRouteContent(routeContentID).getSecondScene().split(",");
-			}
-		
-			break;
-		case 2:
-			if(mVgDao.getRouteContent(routeContentID).getThirdScene()==null){
-				bigSceneIDs = null;
-			}else{
-				bigSceneIDs = mVgDao.getRouteContent(routeContentID).getThirdScene().split(",");
-			}
-			break;
-		case 3:
-			if(mVgDao.getRouteContent(routeContentID).getFourthScene()==null){
-				bigSceneIDs = null;
-			}else{
-				bigSceneIDs = mVgDao.getRouteContent(routeContentID).getFourthScene().split(",");
-			}
-			break;
-		case 4:
-			if(mVgDao.getRouteContent(routeContentID).getFifthScene()==null){
-				bigSceneIDs = null;
-			}else{
-				bigSceneIDs = mVgDao.getRouteContent(routeContentID).getFifthScene().split(",");
-			}
-			break;
-		case 5:
-			if(mVgDao.getRouteContent(routeContentID).getFifthScene()==null){
-				bigSceneIDs = null;
-			}else{
-				bigSceneIDs = mVgDao.getRouteContent(routeContentID).getFifthScene().split(",");
-			}
-			break;
-		case 6:
-			if(mVgDao.getRouteContent(routeContentID).getSeventhScene()==null){
-				bigSceneIDs = null;
-			}else{
-				bigSceneIDs = mVgDao.getRouteContent(routeContentID).getSeventhScene().split(",");
-			}
-			break;
-		}	
+		mVgDao = VGDao.getInstance(getActivity());
+		String sceneOfIndex = mVgDao.getRouteContent(routeContentID).getSceneOfIndex(indexOfDay+1);
+		if(sceneOfIndex == null)
+			bigSceneIDs = null;
+		else
+			bigSceneIDs = sceneOfIndex.split(",");
 	}
-	
+
 	/**
 	 * 
 	 * @Title: ArrayToList 
@@ -151,24 +106,24 @@ public class RouteDayFragment extends Fragment {
 		Log.v(TAG, "onCreateView");
 		//Toast.makeText(getActivity(), TAG+ " "+i+" onCreateView", Toast.LENGTH_SHORT).show();
 
-		
-		rootView = inflater.inflate(R.layout.fragment_route_day, container,false);
-//		tv= (TextView)rootView.findViewById(R.id.tv);
-//		tv.setText(""+i);
 
-		
+		rootView = inflater.inflate(R.layout.fragment_route_day, container,false);
+		//		tv= (TextView)rootView.findViewById(R.id.tv);
+		//		tv.setText(""+i);
+
+
 		listView_route_day_bigscenes = (ListView)rootView.findViewById(R.id.listView_route_day_bigscenes);
 		if(bigSceneListAdapter == null)
-//			bigSceneListAdapter = new RouteDay_BigSceneListAdapter(getActivity(),bigSceneIDs);
+			//			bigSceneListAdapter = new RouteDay_BigSceneListAdapter(getActivity(),bigSceneIDs);
 			bigSceneListAdapter = new CommonAdapter<BigScene>(getActivity(),ArrayToList(bigSceneIDs),R.layout.route_item_big_scene) {
-				@Override
-				public void convert(ViewHolder helper, BigScene myBigScene, int position) {
-					// TODO Auto-generated method stub
-					helper.setText(R.id.bigSceneName, myBigScene.getBigSceneName());
-					helper.setText(R.id.num1, ""+myBigScene.getLoveNum());
-					helper.setText(R.id.num2, ""+myBigScene.getRecordNum());
-				}
-			};
+			@Override
+			public void convert(ViewHolder helper, BigScene myBigScene, int position) {
+				// TODO Auto-generated method stub
+				helper.setText(R.id.bigSceneName, myBigScene.getBigSceneName());
+				helper.setText(R.id.num1, ""+myBigScene.getLoveNum());
+				helper.setText(R.id.num2, ""+myBigScene.getRecordNum());
+			}
+		};
 		listView_route_day_bigscenes.setAdapter(bigSceneListAdapter);
 		listView_route_day_bigscenes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -177,9 +132,9 @@ public class RouteDayFragment extends Fragment {
 				// TODO Auto-generated method stub
 				mIntent = new Intent(getActivity(),BigSceneDetailActivity.class);
 				//这里的position是不是从0开始算的？
-//				mIntent.putExtra("bigSceneID",bigSceneIDs[position]);
-//				startActivity(mIntent);
-//				((RouteActivity)getActivity()).destroyGMapFragment();
+				//				mIntent.putExtra("bigSceneID",bigSceneIDs[position]);
+				//				startActivity(mIntent);
+				//				((RouteActivity)getActivity()).destroyGMapFragment();
 			}
 		});
 		return rootView;
@@ -192,10 +147,9 @@ public class RouteDayFragment extends Fragment {
 		super.onDestroyView();
 		//Toast.makeText(getActivity(), TAG+ " "+i+" onDestroyView", Toast.LENGTH_SHORT).show();
 	}
-	
+
 	@Override
 	public void onDestroy() {
-		mVgDao.closeDatabase();
 		// TODO Auto-generated method stub
 		super.onDestroy();
 		Log.v(TAG, "onDestroy");

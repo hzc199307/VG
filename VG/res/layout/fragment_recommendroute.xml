@@ -20,7 +20,8 @@
         android:dividerHeight="@dimen/recommendroute_listview_diverheight"
         android:gravity="center"
         android:layoutAnimation="@anim/navagation_gridview_anim"
-        android:listSelector="@color/none" >
+        android:listSelector="@color/none"
+        android:scrollbars="none" >
     </ListView>
 
 </LinearLayout>
