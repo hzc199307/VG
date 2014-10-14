@@ -27,4 +27,19 @@ public class ImageUtil {
 			return null;
 		}
 	}
+	
+	/**
+	 * 获取city的图片的路径
+	 * @param fileName
+	 * @return
+	 */
+	public static String getCityResourceStr(String fileName)
+	{
+		return "com.ne.vg/image/city/"+fileName;
+	}
+	
+	public static String getBigSceneResourceStr(String fileName)
+	{
+		return "com.ne.vg/image/bigScene/"+fileName;
+	}
 }

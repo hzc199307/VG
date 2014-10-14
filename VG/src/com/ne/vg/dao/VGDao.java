@@ -62,7 +62,7 @@ public class VGDao {
 		Cursor cr = db.query("city", null, null, null, null, null, null);
 		int count = cr.getCount();
 		LogUtil.d(TAG,"start getCity() count = " + count);
-		if(cr!=null){
+		if(cr!=null&&cr.getCount()>0){
 			cr.moveToFirst();
 			for(int i = 0; i < count; i++){
 				City cb = new City();
@@ -88,18 +88,21 @@ public class VGDao {
 	 * @return
 	 */
 	public City getCity(int cityID) {
+		City cb = null;
 		String[] args = {cityID+""};
 		Cursor cr = db.query("city", null, "cityID=?", args, null, null, null);
-		cr.moveToFirst();
-		City cb = new City();
-		cb.setCityID(cr.getInt(cr.getColumnIndex(CityColumns.cityID)));
-		cb.setCityName(cr.getString(cr.getColumnIndex(CityColumns.cityName)));
-		cb.setCityPinyin(cr.getString(cr.getColumnIndex(CityColumns.cityPinyin)));
-		cb.setLatitude(cr.getDouble(cr.getColumnIndex(CityColumns.latitude)));
-		cb.setLongtitude(cr.getDouble(cr.getColumnIndex(CityColumns.longtitude)));
-		cb.setResource(cr.getString(cr.getColumnIndex(CityColumns.resource)));
-		cb.setRouteNum(cr.getInt(cr.getColumnIndex(CityColumns.routeNum)));
-		cb.setSceneNum(cr.getInt(cr.getColumnIndex(CityColumns.sceneNum)));
+		if(cr!=null&&cr.getCount()>0){
+			cr.moveToFirst();
+			cb = new City();
+			cb.setCityID(cr.getInt(cr.getColumnIndex(CityColumns.cityID)));
+			cb.setCityName(cr.getString(cr.getColumnIndex(CityColumns.cityName)));
+			cb.setCityPinyin(cr.getString(cr.getColumnIndex(CityColumns.cityPinyin)));
+			cb.setLatitude(cr.getDouble(cr.getColumnIndex(CityColumns.latitude)));
+			cb.setLongtitude(cr.getDouble(cr.getColumnIndex(CityColumns.longtitude)));
+			cb.setResource(cr.getString(cr.getColumnIndex(CityColumns.resource)));
+			cb.setRouteNum(cr.getInt(cr.getColumnIndex(CityColumns.routeNum)));
+			cb.setSceneNum(cr.getInt(cr.getColumnIndex(CityColumns.sceneNum)));
+		}
 		return cb;
 	}
 
@@ -117,8 +120,10 @@ public class VGDao {
 		String name = "";
 		String[] args = {cityID+""};
 		Cursor cr = db.query("city", null, "cityID=?", args, null, null, null);
-		cr.moveToFirst();
-		name = cr.getString(cr.getColumnIndex(CityColumns.cityName));
+		if(cr!=null&&cr.getCount()>0){
+			cr.moveToFirst();
+			name = cr.getString(cr.getColumnIndex(CityColumns.cityName));
+		}
 		return name;
 	}
 
@@ -137,7 +142,7 @@ public class VGDao {
 		Cursor cr = db.query("bigScene", null, "cityID=?", args, null, null, null);
 		int count = cr.getCount();
 		Log.d(TAG,"start getCity() count = " + count);
-		if(cr!=null){
+		if(cr!=null&&cr.getCount()>0){
 			cr.moveToFirst();
 			for(int i = 0; i < count; i++){
 				BigScene mBigScene = new BigScene();
@@ -168,18 +173,22 @@ public class VGDao {
 	}
 
 	public BigScene getBigScene(int BigSceneID){
-		BigScene mBigScene = new BigScene();
+		BigScene mBigScene = null;
 		String[] arg = {BigSceneID+""};
 		Cursor cr = db.query("bigScene", null, "bigSceneID=?", arg, null, null, null);
-		cr.moveToFirst();
-		mBigScene.setCityID(cr.getInt(cr.getColumnIndex(BigSceneColumns.cityID)));
-		mBigScene.setBigSceneName(cr.getString(cr.getColumnIndex(BigSceneColumns.bigSceneName)));
-		mBigScene.setLatitude(cr.getDouble(cr.getColumnIndex(BigSceneColumns.latitude)));
-		mBigScene.setLevel(cr.getInt(cr.getColumnIndex(BigSceneColumns.level)));
-		mBigScene.setLongtitude(cr.getDouble(cr.getColumnIndex(BigSceneColumns.longtitude)));
-		mBigScene.setLoveNum(cr.getInt(cr.getColumnIndex(BigSceneColumns.loveNum)));
-		mBigScene.setRecordNum(cr.getInt(cr.getColumnIndex(BigSceneColumns.recordNum)));
-		mBigScene.setResource(cr.getString(cr.getColumnIndex(BigSceneColumns.resource)));
+		if(cr!=null&&cr.getCount()>0){
+			mBigScene = new BigScene();
+			cr.moveToFirst();
+			mBigScene.setContentID(cr.getInt(cr.getColumnIndex(BigSceneColumns.contentID)));
+			mBigScene.setCityID(cr.getInt(cr.getColumnIndex(BigSceneColumns.cityID)));
+			mBigScene.setBigSceneName(cr.getString(cr.getColumnIndex(BigSceneColumns.bigSceneName)));
+			mBigScene.setLatitude(cr.getDouble(cr.getColumnIndex(BigSceneColumns.latitude)));
+			mBigScene.setLevel(cr.getInt(cr.getColumnIndex(BigSceneColumns.level)));
+			mBigScene.setLongtitude(cr.getDouble(cr.getColumnIndex(BigSceneColumns.longtitude)));
+			mBigScene.setLoveNum(cr.getInt(cr.getColumnIndex(BigSceneColumns.loveNum)));
+			mBigScene.setRecordNum(cr.getInt(cr.getColumnIndex(BigSceneColumns.recordNum)));
+			mBigScene.setResource(cr.getString(cr.getColumnIndex(BigSceneColumns.resource)));
+		}
 		return mBigScene;
 	}
 
@@ -187,8 +196,10 @@ public class VGDao {
 		String name = "";
 		String[] arg = {BigSceneID+""};
 		Cursor cr = db.query("bigScene", null, "bigSceneID=?", arg, null, null, null);
-		cr.moveToFirst();
-		name = cr.getString(cr.getColumnIndex(BigSceneColumns.bigSceneName));
+		if(cr!=null&&cr.getCount()>0){
+			cr.moveToFirst();
+			name = cr.getString(cr.getColumnIndex(BigSceneColumns.bigSceneName));
+		}
 		return name;
 	}
 
@@ -208,7 +219,7 @@ public class VGDao {
 		Cursor cr = db.query("recommendRoute", null, "cityID=?", args, null, null, null);
 		int count = cr.getCount();
 		LogUtil.d(TAG,"start getRecommendRoute() count = " + count);
-		if(cr!=null){
+		if(cr!=null&&cr.getCount()>0){
 			cr.moveToFirst();
 			for(int i =0; i < count; i++){
 				RecommendRoute mRecommendRoute = new RecommendRoute();
@@ -237,12 +248,14 @@ public class VGDao {
 	 * @throws
 	 */
 	public SceneContent getSceneContent(int contentID){
-		SceneContent mSceneContent = new SceneContent();
+		SceneContent mSceneContent = null;
 		String[] args = {contentID + ""};
 		Cursor cr = db.query("sceneContent", null, "contentID=?", args, null, null, null);
-		if(cr!=null){
+		if(cr!=null&&cr.getCount()>0){
+			mSceneContent = new SceneContent();
+			cr.moveToFirst();
+			Log.d(TAG,cr.getString(cr.getColumnIndex(SceneContentColumns.address)));
 			mSceneContent.setAddress(cr.getString(cr.getColumnIndex(SceneContentColumns.address)));
-
 			mSceneContent.setContent(cr.getString(cr.getColumnIndex(SceneContentColumns.content)));
 			mSceneContent.setPrice(cr.getString(cr.getColumnIndex(SceneContentColumns.price)));
 			mSceneContent.setRecommendLevel(cr.getInt(cr.getColumnIndex(SceneContentColumns.recommendLevel)));
@@ -252,8 +265,12 @@ public class VGDao {
 			mSceneContent.setTelephone(cr.getString(cr.getColumnIndex(SceneContentColumns.telephone)));
 			mSceneContent.setWebsite(cr.getString(cr.getColumnIndex(SceneContentColumns.website)));
 			mSceneContent.setWorkingTime(cr.getString(cr.getColumnIndex(SceneContentColumns.workingTime)));
+			return mSceneContent;
 		}
-		return mSceneContent;
+		else
+		{
+			return null;
+		}
 	}
 
 	/**
@@ -270,7 +287,7 @@ public class VGDao {
 		String[] args = {bigSceneID +""};
 		Cursor cr = db.query("smallScene", null, "bigSceneID=?", args, null, null, null);
 		int count = cr.getCount();
-		if(cr!=null){
+		if(cr!=null&&cr.getCount()>0){
 			cr.moveToFirst();
 			for(int i = 0; i <count; i++){
 				SmallScene mSmallScene = new SmallScene();
@@ -298,11 +315,11 @@ public class VGDao {
 	 * @throws
 	 */
 	public int getBigSceneID(String smallSceneName){
-		SmallScene mScene = new SmallScene();
+		SmallScene mScene = null;
 		String[] args = {smallSceneName};
 		Cursor cr = db.query("smallScene", null, "smallSceneName=?", args, null, null, null);
-
-		if(cr!=null){
+		if(cr!=null&&cr.getCount()>0){
+			mScene = new SmallScene();
 			cr.moveToFirst();
 			mScene.setBigSceneID(cr.getInt(cr.getColumnIndex(SmallSceneColumns.bigSceneID)));
 		}
@@ -319,10 +336,11 @@ public class VGDao {
 	 * @throws
 	 */
 	public RecommendRoute getRecommendRoute(int RouteID){
-		RecommendRoute mRecommendRoute = new RecommendRoute();
+		RecommendRoute mRecommendRoute = null;
 		String[] args = {RouteID+ ""};
 		Cursor cr = db.query("recommendRoute", null, "RouteID=?", args, null, null, null);
-		if(cr!=null){
+		if(cr!=null&&cr.getCount()>0){
+			mRecommendRoute = new RecommendRoute();
 			cr.moveToFirst();
 			mRecommendRoute.setRouteDay(cr.getInt(cr.getColumnIndex(RecommendRouteColumns.routeDay)));
 			mRecommendRoute.setRouteContentID(cr.getInt(cr.getColumnIndex(RecommendRouteColumns.routeContentID)));
@@ -341,14 +359,13 @@ public class VGDao {
 	 * @throws
 	 */
 	public RouteContent getRouteContent(int routeContentID){
-		RouteContent mRouteContent = new RouteContent();
+		RouteContent mRouteContent = null;
 		String[] args = {routeContentID +""};
 		Cursor cr = db.query("routeContent", null, "routeContentID=?", args, null, null, null);
 		int count = cr.getCount();
-		if(cr!=null)
-		{
+		if(cr!=null&&cr.getCount()>0){
+			mRouteContent = new RouteContent();
 			cr.moveToFirst();
-
 			mRouteContent.setFirstScene(cr.getString(cr.getColumnIndex(RouteContentColumns.firstScene)));
 			mRouteContent.setSecondScene(cr.getString(cr.getColumnIndex(RouteContentColumns.secondScene)));
 			mRouteContent.setThirdScene(cr.getString(cr.getColumnIndex(RouteContentColumns.thirdScene)));
@@ -384,11 +401,11 @@ public class VGDao {
 	}
 
 	public String getSmallSceneName(int smallSceneID){
-		SmallScene mScene = new SmallScene();
+		SmallScene mScene = null;
 		String[] args = {smallSceneID+""};
 		Cursor cr = db.query("smallScene", null, "smallSceneID=?", args, null, null, null);
-
-		if(cr!=null){
+		if(cr!=null&&cr.getCount()>0){
+			mScene = new SmallScene();
 			cr.moveToFirst();
 			mScene.setSmallSceneName(cr.getString(cr.getColumnIndex(SmallSceneColumns.smallSceneName)));
 		}
@@ -397,7 +414,7 @@ public class VGDao {
 	/**
 	 * 关闭数据库连接
 	 * @Title: closeDatabase 
-	 * @Description: TODO
+	 * @Description: TODO 
 	 * @param 
 	 * @return void 
 	 * @throws

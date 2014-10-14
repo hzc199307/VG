@@ -3,12 +3,14 @@ package com.ne.vg.activity;
 import com.ne.vg.R;
 import com.ne.vg.TestFragment;
 import com.ne.vg.bean.BigScene;
+import com.ne.vg.bean.SceneContent;
 import com.ne.vg.dao.VGDao;
 import com.ne.vg.fragment.BigSceneIntroDetailFragment;
 import com.ne.vg.fragment.BigSceneIntroFragment;
 import com.ne.vg.gmap.GMapFragment;
 import com.ne.vg.main.HomeFragment;
 import com.ne.vg.main.MineFragment;
+import com.ne.vg.util.LogUtil;
 import com.ne.vg.util.UnitUtil;
 
 import android.content.Intent;
@@ -56,6 +58,12 @@ public class BigSceneDetailActivity extends FragmentActivity {
 
 	private TextView big_scene_detail_title_name;
 	private BigScene bigScene;
+	
+	private SceneContent sceneContent;
+
+	public SceneContent getSceneContent() {
+		return sceneContent;
+	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -75,7 +83,9 @@ public class BigSceneDetailActivity extends FragmentActivity {
 		mIntent = this.getIntent();
 
 		bigScene = mVgDao.getBigScene(mIntent.getExtras().getInt("bigSceneID"));
-
+		LogUtil.d(TAG, bigScene.getContentID()+"");
+		sceneContent = mVgDao.getSceneContent(bigScene.getContentID());
+		
 		bigSceneName = mVgDao.getBigSceneName(mIntent.getExtras().getInt("bigSceneID"));
 		Log.d(TAG, bigSceneName);
 		big_scene_detail_title_name.setText(bigSceneName);

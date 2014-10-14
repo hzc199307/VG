@@ -12,6 +12,7 @@ import com.ne.vg.adapter.ViewHolder;
 import com.ne.vg.bean.City;
 import com.ne.vg.bean.CreateData;
 import com.ne.vg.dao.VGDao;
+import com.ne.vg.util.ImageUtil;
 import com.ne.vg.util.LocationUtil;
 import com.ne.vg.util.LogUtil;
 import com.slidingmenu.lib.app.SlidingFragmentActivity;
@@ -88,7 +89,7 @@ public class HomeFragment extends AnimationFragment implements OnClickListener{
 				// TODO Auto-generated method stub
 				helper.setText(R.id.cityName, item.getCityName());
 				helper.setText(R.id.cityPinyin, item.getCityPinyin());
-				helper.setImageBitmap(R.id.item_city_bg, "city/"+item.getResource());
+				helper.setImageBitmap(R.id.item_city_bg, ImageUtil.getCityResourceStr(item.getResource()));
 				//helper.setImageResource(R.id.item_city_bg, item.getResource());
 				helper.setText(R.id.item_city_route_number_tv, item.getRouteNum()+"");
 				helper.setText(R.id.item_city_scene_number_tv, item.getSceneNum()+"");

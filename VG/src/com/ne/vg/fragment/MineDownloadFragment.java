@@ -15,6 +15,7 @@ import com.ne.vg.adapter.ViewHolder;
 import com.ne.vg.bean.BigScene;
 import com.ne.vg.bean.City;
 import com.ne.vg.dao.VGDao;
+import com.ne.vg.util.ImageUtil;
 import com.ne.vg.util.PhoneUtil;
 import com.ne.vg.util.UnitUtil;
 
@@ -66,6 +67,8 @@ public class MineDownloadFragment extends Fragment{
 				// TODO Auto-generated method stub
 				helper.setText(R.id.mine_download_item_city_name, item.getCityName());
 				helper.setText(R.id.mine_download_item_city_pinyin, item.getCityPinyin());
+				helper.setImageBitmap(R.id.mine_download_item_city_bg, ImageUtil.getCityResourceStr(item.getResource()));
+				
 			}
 		};
 		swipeListView.setAdapter(adapter);

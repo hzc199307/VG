@@ -105,7 +105,7 @@ public class ViewHolder
 	/**
 	 * 
 	 * @Title: setImageBitmap 
-	 * @Description: 通过String来设置存储在SD卡的图片资源,前面的"com.ne.vg/image/"部分不用包含在内
+	 * @Description: 通过String来设置存储在SD卡的图片资源,后面的图片名后缀部分不用包含在内
 	 * @param viewId
 	 * @param imageUrl
 	 * @param @return
@@ -144,9 +144,9 @@ public class ViewHolder
 		}
 		public void run() {
 
-			bitmap = ImageUtil.getLoacalBitmap("com.ne.vg/image/"+imageUrl+".png");
+			bitmap = ImageUtil.getLoacalBitmap(imageUrl+".png");
 			if(bitmap==null)
-				bitmap = ImageUtil.getLoacalBitmap("com.ne.vg/image/"+imageUrl+".jpg");
+				bitmap = ImageUtil.getLoacalBitmap(imageUrl+".jpg");
 			//bitmap.setDensity(mContext.getResources().getDisplayMetrics().densityDpi);
 
 			//			double hScale = view.getHeight()/temp.getHeight();

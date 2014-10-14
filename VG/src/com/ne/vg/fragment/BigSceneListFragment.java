@@ -6,6 +6,7 @@ import com.ne.vg.adapter.CommonAdapter;
 import com.ne.vg.adapter.ViewHolder;
 import com.ne.vg.bean.BigScene;
 import com.ne.vg.dao.VGDao;
+import com.ne.vg.util.ImageUtil;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -69,7 +70,7 @@ public class BigSceneListFragment extends Fragment{
 			@Override
 			public void convert(ViewHolder helper, BigScene item, int position) {
 				// TODO 还要处理download
-				helper.setImageBitmap(R.id.bigscenelist_view01, "bigScene/"+cityName+"/"+item.getResource());
+				helper.setImageBitmap(R.id.bigscenelist_view01, ImageUtil.getBigSceneResourceStr(cityName+"/"+item.getResource()));
 //				helper.setImageResource(R.id.bigscenelist_view01, item.getResource());
 				helper.setText(R.id.bigscenelist_item_name, item.getBigSceneName());
 				helper.setText(R.id.bigscenelist_loveNum, Integer.toString(item.getLoveNum()));
