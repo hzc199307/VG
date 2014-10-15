@@ -15,6 +15,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+@Deprecated
 public class MyLoveAdapter extends BaseAdapter{
 
 	//LayoutInflater作用是将layout的xml布局文件实例化为View类对象。
@@ -96,11 +97,16 @@ public class MyLoveAdapter extends BaseAdapter{
 	 * @throws
 	 */
 	public void showstar(int level,Holder holder){
+		for(int i = 0;i<level;i++){
+			//设置显示
+			holder.img[i].setVisibility(View.VISIBLE);
+		}
 		for(int i = level;i<5;i++){
 			//设置不显示，但不占空间
 			holder.img[i].setVisibility(View.GONE);
 		}
 	}
+	
 	class Holder{
 		private TextView sceneName;
 		private ImageView img[];

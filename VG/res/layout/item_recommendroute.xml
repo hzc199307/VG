@@ -62,7 +62,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="@dimen/recommend_item_iv_right"
-                android:src="@drawable/recommend_item_love_icon" />
+                android:src="@drawable/recommend_item_love_icon_normal" />
 
             <TextView
                 android:id="@+id/recommendroute_lovenum"
@@ -104,7 +104,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="@dimen/recommend_item_recicon_marginTop"
                 android:scaleType="centerCrop"
-                android:src="@drawable/recommend__item_icon" />
+                android:src="@drawable/recommend_item_icon" />
 
             <!-- 不知道为什么LinearLayout用fillparent就不行 -->
 

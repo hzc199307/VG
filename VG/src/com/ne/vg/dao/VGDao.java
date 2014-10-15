@@ -17,6 +17,7 @@ import com.ne.vg.bean.SceneContent;
 import com.ne.vg.bean.SmallScene;
 import com.ne.vg.util.LogUtil;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -141,7 +142,7 @@ public class VGDao {
 		String[] args = {cityID+""};
 		Cursor cr = db.query("bigScene", null, "cityID=?", args, null, null, null);
 		int count = cr.getCount();
-		Log.d(TAG,"start getCity() count = " + count);
+		Log.d(TAG,"start getBigSceneList() count = " + count);
 		if(cr!=null&&cr.getCount()>0){
 			cr.moveToFirst();
 			for(int i = 0; i < count; i++){
@@ -171,6 +172,83 @@ public class VGDao {
 		}
 		LogUtil.d(TAG,"getBigScene is finished!");
 		return listBigScenes;
+	}
+	
+	/**
+	 * 获取被收藏的大景点
+	 * @param cityID
+	 * @return
+	 */
+	public List<BigScene> getCollectedBigSceneList(){
+		List<BigScene> listBigScenes = new ArrayList<BigScene>();
+		String[] args = {1+""};
+		Cursor cr = db.query("bigScene", null, "isCollected=?", args, null, null, null);
+		int count = cr.getCount();
+		if(cr!=null&&cr.getCount()>0){
+			cr.moveToFirst();
+			for(int i = 0; i < count; i++){
+				BigScene mBigScene = new BigScene();
+				mBigScene.setBigSceneID(cr.getInt(cr.getColumnIndex(BigSceneColumns.bigSceneID)));
+				mBigScene.setBigSceneName(cr.getString(cr.getColumnIndex(BigSceneColumns.bigSceneName)));
+				mBigScene.setContentID(cr.getInt(cr.getColumnIndex(BigSceneColumns.contentID)));
+				//mBigScene.setDowned(cr.get(cr.getColumnIndex(BigSceneColumns.bigCityID)));
+				int l = cr.getInt(cr.getColumnIndex(BigSceneColumns.bigSceneID));
+				if(l == 1){
+					mBigScene.setDowned(true);
+				}else{
+					mBigScene.setDowned(false);
+				}
+				mBigScene.setCityID(cr.getInt(cr.getColumnIndex(BigSceneColumns.cityID)));
+				mBigScene.setLatitude(cr.getDouble(cr.getColumnIndex(BigSceneColumns.latitude)));
+				mBigScene.setLevel(cr.getInt(cr.getColumnIndex(BigSceneColumns.level)));
+				mBigScene.setLongtitude(cr.getDouble(cr.getColumnIndex(BigSceneColumns.longtitude)));
+				mBigScene.setLoveNum(cr.getInt(cr.getColumnIndex(BigSceneColumns.loveNum)));
+				mBigScene.setRecordNum(cr.getInt(cr.getColumnIndex(BigSceneColumns.recordNum)));
+				mBigScene.setIsCollected(cr.getInt(cr.getColumnIndex(BigSceneColumns.isCollected)));
+				mBigScene.setResource(cr.getString(cr.getColumnIndex(BigSceneColumns.resource)));
+				listBigScenes.add(mBigScene);
+
+				cr.moveToNext();
+			}
+		}
+		LogUtil.d(TAG,"getBigScene is finished!");
+		return listBigScenes;
+	}
+	
+	/**
+	 * * 
+	 * 改变BigScene的isCollected值
+	 * @param bigSceneID
+	 * @param status
+	 * @return
+	 */
+	public boolean setBigSceneCollected(int bigSceneID,int status) {
+		// TODO Auto-generated method stub
+		ContentValues cv = new ContentValues();
+		cv.put("isCollected", status+"");
+		String[] whereArgs = {bigSceneID+""};
+		if(db.update("bigScene", cv, "bigSceneID=?", whereArgs)>0)
+			return true;
+		else
+			return false;
+	}
+	
+	/**
+	 * 获取BigScene的isCollected值
+	 * @param bigSceneID
+	 * @return
+	 */
+	public boolean getBigSceneCollected(int bigSceneID) {
+		// TODO Auto-generated method stub
+		String[] args = {bigSceneID+""};
+		String[] columns = {BigSceneColumns.isCollected+""};
+		boolean ans = false;
+		Cursor cr = db.query("bigScene", null, "bigSceneID=?", args, null, null, null);
+		if(cr!=null&&cr.getCount()>0){
+			cr.moveToFirst();
+			ans = cr.getInt(cr.getColumnIndex(BigSceneColumns.isCollected))==1?true:false;
+		}
+		return ans;
 	}
 
 	public BigScene getBigScene(int BigSceneID){

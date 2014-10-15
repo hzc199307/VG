@@ -1,5 +1,8 @@
 package com.ne.vg.fragment;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.ne.vg.R;
 import com.ne.vg.activity.BigSceneDetailActivity;
 import com.ne.vg.adapter.CommonAdapter;
@@ -8,6 +11,8 @@ import com.ne.vg.bean.BigScene;
 import com.ne.vg.dao.VGDao;
 import com.ne.vg.util.ImageUtil;
 
+import android.content.DialogInterface.OnClickListener;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -75,13 +80,45 @@ public class BigSceneListFragment extends Fragment{
 				helper.setText(R.id.bigscenelist_item_name, item.getBigSceneName());
 				helper.setText(R.id.bigscenelist_loveNum, Integer.toString(item.getLoveNum()));
 				helper.setText(R.id.bigscenelist_musicNum, Integer.toString(item.getRecordNum()));
+				helper.setImageSelected(R.id.bigscenelist_love_iv, item.getIsCollected()==1);
 				LayoutParams params = new LayoutParams(
 						LayoutParams.MATCH_PARENT,
 						LayoutParams.MATCH_PARENT);
 				if(item.isDowned()==false){
 					helper.getView(R.id.bigscenelist_item_shadow).setLayoutParams( params);
 				}
+				
+				MyOnClickListener myOnClickListener = (MyOnClickListener) helper.getOnClickListener();
+				if(myOnClickListener==null)
+					myOnClickListener = new MyOnClickListener();
+				myOnClickListener.setPosition(position);
+				myOnClickListener.setHelper(helper);
+				myOnClickListener.setBigScene(item);
+				helper.setOnClickListener(R.id.bigscenelist_love, myOnClickListener);
+				
+			}
 			
+			class MyOnClickListener implements View.OnClickListener
+			{
+				private int position ;
+				private ViewHolder helper;
+				private BigScene bigScene;
+				public void setBigScene(BigScene bigScene) {
+					this.bigScene = bigScene;
+				}
+				public void setHelper(ViewHolder helper) {
+					this.helper = helper;
+				}
+				public void setPosition(int position) {
+					this.position = position;
+				}
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					boolean isCollected = VGDao.getInstance(getActivity()).getBigSceneCollected(bigScene.getBigSceneID());
+					helper.setImageSelected(R.id.bigscenelist_love_iv, (isCollected==false));
+					VGDao.getInstance(getActivity()).setBigSceneCollected(bigScene.getBigSceneID(), (isCollected==false)?1:0);
+				}
 			}
 		};
 		gridview.setAdapter(gridAdapter);
@@ -89,7 +126,7 @@ public class BigSceneListFragment extends Fragment{
 		return rootView;
 
 	}
-	
+
 	/**
 	 * 
 	 * @Title: InitListener 

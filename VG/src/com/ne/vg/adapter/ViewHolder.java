@@ -98,6 +98,18 @@ public class ViewHolder
 		view.setImageResource(drawableId);
 		return this;
 	}
+	
+	/**
+	 * …Ë÷√Õº∆¨ «∑Ò±ª—°‘Ò◊¥Ã¨
+	 * @param viewId
+	 * @param status
+	 * @return
+	 */
+	public ViewHolder setImageSelected(int viewId,boolean status){
+		ImageView view = getView(viewId);
+		view.setSelected(status);
+		return this;
+	}
 
 	private Handler mHandler;
 	private ImageView imageView;
@@ -173,6 +185,20 @@ public class ViewHolder
 	public ViewHolder setView(int viewId, int i){
 		View view = getView(viewId);
 		view.setVisibility(i);
+		return this;
+	}
+	
+	private View.OnClickListener onClickListener = null;
+	public View.OnClickListener getOnClickListener() {
+		return onClickListener;
+	}
+	public void setOnClickListener(View.OnClickListener onClickListener) {
+		this.onClickListener = onClickListener;
+	}
+	public ViewHolder setOnClickListener(int viewId, View.OnClickListener onClickListener){
+		this.onClickListener = onClickListener;
+		View view = getView(viewId);
+		view.setOnClickListener(onClickListener);
 		return this;
 	}
 	/**
