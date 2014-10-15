@@ -29,7 +29,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
-    
+
     <supports-screens
         android:anyDensity="true"
         android:largeScreens="true"
@@ -120,14 +120,17 @@
             android:label="@string/title_activity_mine_download" >
         </activity>
         <activity
-            android:name="com.ne.vg.activity.MineDownloadSubActivity"
+            android:name=".activity.MineDownloadSubActivity"
             android:label="@string/title_activity_mine_download_sub" >
+        </activity>
+        <activity
+            android:name=".FetchDataActivity"
+            android:label="@string/title_activity_fetch_data" >
         </activity>
     </application>
 
     <!-- 以下都是百度地图API所需 -->
 
-    
 
     <!-- 使用网络功能所需权限 -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" >

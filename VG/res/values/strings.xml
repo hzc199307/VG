@@ -49,5 +49,6 @@
     <string name="title_fragment_setting">设置</string>
     <string name="title_activity_mind_download_sub">MindDownloadSubActivity</string>
     <string name="title_activity_mine_download_sub">MineDownloadSubActivity</string>
+    <string name="title_activity_fetch_data">FetchDataActivity</string>
 
 </resources>

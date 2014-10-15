@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.MatchResult;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -16,14 +19,16 @@ import org.apache.http.params.HttpParams;
 import org.apache.http.util.EntityUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
+import android.content.ContentValues;
 import android.util.Log;
 
 public class DetaiInfoUtil {
 	
-	private String url;
-	public DetaiInfoUtil(String url){
-		this.url = url;
+	
+	public DetaiInfoUtil(){
+		
 	}
 	
 	/**
@@ -34,25 +39,55 @@ public class DetaiInfoUtil {
 	 * @return List<Map<String,Object>> 
 	 * @throws
 	 */
-	public List<Map<String, Object>> getBigSceneList(){
-		List<Map<String, Object>> result = new ArrayList<Map<String,Object>>();
-    	String csdnString = http_get(url);
-    	org.jsoup.nodes.Document doc = Jsoup.parse(csdnString);
-    	Map<String, Object> map = new HashMap<String, Object>();
-    	String str = "";
-		map.put("bigSceneName", str);
-		map.put("latitude", str);
-		map.put("longtitude", str);
-		map.put("cityID", str);
-		map.put("bigSceneID", str);
-		map.put("resource", str);
-		map.put("contentID", str);
-		
-		map.put("isDowned", str);
-		map.put("loveNum", str);
-		map.put("recordNum", str);
-    	return result;
+	public List<ContentValues> getBigSceneList(String url){
+		String my_url = url;
+		List<ContentValues> result = new ArrayList<ContentValues>();
+    	Matcher m = getMatcher("alt=\".*?-(.*?)\\(",my_url);//(景点名称)
+    	Matcher m2 = getMatcher(">No\\.(.*?)<",my_url); //获取bigSceneID
+    	while(m.find()&&m2.find()){
+    		MatchResult mr = m.toMatchResult();
+    		MatchResult mr2 = m2.toMatchResult();
+    		ContentValues map = new ContentValues();
+    		map.put("bigSceneName", mr.group(1));
+    		//map.put("latitude", null);
+    		//map.put("longtitude", null);
+    		map.put("cityID", 1);
+    		map.put("bigSceneID", mr2.group(1));
+    		//map.put("resource", null);
+    		map.put("contentID", mr2.group(1));
+    		
+    		map.put("isDowned", 1);
+    		//map.put("loveNum", 123);
+    		//map.put("recordNum", 456);
+    		result.add(map);
+    	}
+		return result;
 	}
+	/**
+	 * 
+	 * @Title: getWebSite 
+	 * @Description: 获取列表页的每个item的详细地址
+	 * @param @param url
+	 * @param @return
+	 * @return List<String> 
+	 * @throws
+	 */
+	public List<String> getWebSite(String url){
+		String my_url = url;
+		List<String> myList = new ArrayList<String>();
+		org.jsoup.nodes.Document doc = Jsoup.parse(my_url);
+    	Elements links = doc.select(".title h3 a");
+    	for(Element link:links){
+    		String linkhref = link.attr("href");
+    		myList.add(linkhref);//获取了网站的详情页面website
+    	}
+		return myList;
+	}
+	public Matcher getMatcher(String str,String url){
+    	String csdnString = http_get(url);
+    	Pattern p = Pattern.compile(str);
+    	return p.matcher(csdnString);
+    }
 	/**
 	 * 
 	 * @Title: getDetaiInfo 
@@ -61,8 +96,8 @@ public class DetaiInfoUtil {
 	 * @return Map<String,Object> 
 	 * @throws
 	 */
-	public Map<String, Object> getDetaiInfo(){
-		Map<String, Object> result = new HashMap<String,Object>();
+	public ContentValues getDetaiInfo(String url){
+		ContentValues result = new ContentValues();
     	String csdnString = http_get(url);
     	org.jsoup.nodes.Document doc = Jsoup.parse(csdnString);
     	Element fenshu = doc.select(".score-info").first().child(0);
