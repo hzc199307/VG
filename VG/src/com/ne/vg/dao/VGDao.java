@@ -162,6 +162,7 @@ public class VGDao {
 				mBigScene.setLongtitude(cr.getDouble(cr.getColumnIndex(BigSceneColumns.longtitude)));
 				mBigScene.setLoveNum(cr.getInt(cr.getColumnIndex(BigSceneColumns.loveNum)));
 				mBigScene.setRecordNum(cr.getInt(cr.getColumnIndex(BigSceneColumns.recordNum)));
+				mBigScene.setIsCollected(cr.getInt(cr.getColumnIndex(BigSceneColumns.isCollected)));
 				mBigScene.setResource(cr.getString(cr.getColumnIndex(BigSceneColumns.resource)));
 				listBigScenes.add(mBigScene);
 
@@ -188,6 +189,7 @@ public class VGDao {
 			mBigScene.setLoveNum(cr.getInt(cr.getColumnIndex(BigSceneColumns.loveNum)));
 			mBigScene.setRecordNum(cr.getInt(cr.getColumnIndex(BigSceneColumns.recordNum)));
 			mBigScene.setResource(cr.getString(cr.getColumnIndex(BigSceneColumns.resource)));
+			mBigScene.setIsCollected(cr.getInt(cr.getColumnIndex(BigSceneColumns.isCollected)));
 		}
 		return mBigScene;
 	}
@@ -349,6 +351,7 @@ public class VGDao {
 			mRecommendRoute.setRouteID(cr.getInt(cr.getColumnIndex(RecommendRouteColumns.routeID)));
 			mRecommendRoute.setRouteName(cr.getString(cr.getColumnIndex(RecommendRouteColumns.routeName)));
 			mRecommendRoute.setSceneNum(cr.getInt(cr.getColumnIndex(RecommendRouteColumns.sceneNum)));
+			mRecommendRoute.setIsCollected(cr.getInt(cr.getColumnIndex(RecommendRouteColumns.isCollected)));
 		}
 		return mRecommendRoute;
 	}

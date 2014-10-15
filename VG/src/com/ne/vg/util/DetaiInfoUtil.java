@@ -41,8 +41,16 @@ public class DetaiInfoUtil {
     	Map<String, Object> map = new HashMap<String, Object>();
     	String str = "";
 		map.put("bigSceneName", str);
-		map.put("url", str);
-		map.put("score", str);
+		map.put("latitude", str);
+		map.put("longtitude", str);
+		map.put("cityID", str);
+		map.put("bigSceneID", str);
+		map.put("resource", str);
+		map.put("contentID", str);
+		
+		map.put("isDowned", str);
+		map.put("loveNum", str);
+		map.put("recordNum", str);
     	return result;
 	}
 	/**

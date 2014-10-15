@@ -20,6 +20,7 @@ public class TableColumns {
 		public static final String collectNum = "collectNum";
 		public static final String routeContentID = "routeContentID";
 		public static final String resource = "resource";
+		public static final String isCollected = "isCollected";
 	}
 	public interface RouteContentColumns{
 		public static final String routeContentID = "routeContentID";
@@ -43,6 +44,7 @@ public class TableColumns {
 		public static final String isDowned = "isDowned";
 		public static final String loveNum = "loveNum";
 		public static final String recordNum = "recordNum";
+		public static final String isCollected = "isCollected";
 		
 	}
 	public interface SceneContentColumns{

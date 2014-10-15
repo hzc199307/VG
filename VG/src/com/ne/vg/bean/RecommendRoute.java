@@ -11,7 +11,7 @@ import android.R.string;
  */
 public class RecommendRoute {
 	private String routeName,resource;
-	private int routeID,routeDay,collectNum,sceneNum,cityID,routeContentID;
+	private int routeID,routeDay,collectNum,sceneNum,cityID,routeContentID,isCollected;
 	
 	public int getCityID() {
 		return cityID;
@@ -60,6 +60,12 @@ public class RecommendRoute {
 	}
 	public void setRouteID(int routeID) {
 		this.routeID = routeID;
+	}
+	public int getIsCollected() {
+		return isCollected;
+	}
+	public void setIsCollected(int isCollected) {
+		this.isCollected = isCollected;
 	}
 	
 }
