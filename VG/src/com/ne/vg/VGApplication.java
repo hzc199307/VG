@@ -109,7 +109,7 @@ public class VGApplication extends Application{
 		super.onTerminate();
 	}
 	
-	
+	//TODO 暂时采用了从asset里面复制数据库的办法
 	public void onDB() {
 		// TODO Auto-generated method stub
 		DBHelper mDbHelper = new DBHelper(this);
