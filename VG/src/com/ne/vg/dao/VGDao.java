@@ -243,7 +243,7 @@ public class VGDao {
 		String[] args = {bigSceneID+""};
 		String[] columns = {BigSceneColumns.isCollected+""};
 		boolean ans = false;
-		Cursor cr = db.query("bigScene", null, "bigSceneID=?", args, null, null, null);
+		Cursor cr = db.query("bigScene", columns, "bigSceneID=?", args, null, null, null);
 		if(cr!=null&&cr.getCount()>0){
 			cr.moveToFirst();
 			ans = cr.getInt(cr.getColumnIndex(BigSceneColumns.isCollected))==1?true:false;
@@ -282,6 +282,34 @@ public class VGDao {
 		}
 		return name;
 	}
+	
+	/**
+	 * 
+	 * @Title: getRoute 
+	 * @Description: 主要用于获取路线的天数跟路线信息ID
+	 * @param @param RouteID
+	 * @param @return
+	 * @return RecommendRoute 
+	 * @throws
+	 */
+	public RecommendRoute getRecommendRoute(int RouteID){
+		RecommendRoute mRecommendRoute = null;
+		String[] args = {RouteID+ ""};
+		Cursor cr = db.query("recommendRoute", null, "RouteID=?", args, null, null, null);
+		if(cr!=null&&cr.getCount()>0){
+			mRecommendRoute = new RecommendRoute();
+			cr.moveToFirst();
+			mRecommendRoute.setCollectNum(cr.getInt(cr.getColumnIndex(RecommendRouteColumns.collectNum)));
+			mRecommendRoute.setResource(cr.getString(cr.getColumnIndex(RecommendRouteColumns.resource)));
+			mRecommendRoute.setRouteContentID(cr.getInt(cr.getColumnIndex(RecommendRouteColumns.routeContentID)));
+			mRecommendRoute.setRouteDay(cr.getInt(cr.getColumnIndex(RecommendRouteColumns.routeDay)));
+			mRecommendRoute.setRouteID(cr.getInt(cr.getColumnIndex(RecommendRouteColumns.routeID)));
+			mRecommendRoute.setRouteName(cr.getString(cr.getColumnIndex(RecommendRouteColumns.routeName)));
+			mRecommendRoute.setSceneNum(cr.getInt(cr.getColumnIndex(RecommendRouteColumns.sceneNum)));
+			mRecommendRoute.setIsCollected(cr.getInt(cr.getColumnIndex(RecommendRouteColumns.isCollected)));
+		}
+		return mRecommendRoute;
+	}
 
 	/**
 	 * 
@@ -311,6 +339,71 @@ public class VGDao {
 				mRecommendRoute.setRouteName(cr.getString(cr.getColumnIndex(RecommendRouteColumns.routeName)));
 				mRecommendRoute.setSceneNum(cr.getInt(cr.getColumnIndex(RecommendRouteColumns.sceneNum)));
 
+				listRecommendRoutes.add(mRecommendRoute);
+				cr.moveToNext();
+			}
+		}
+		return listRecommendRoutes;
+	}
+	
+	/**
+	 * 获取RecommendRoute的isCollected值
+	 * @param routeID
+	 * @return
+	 */
+	public boolean getRecommendRouteCollected(int routeID) {
+		// TODO Auto-generated method stub
+		String[] args = {routeID+""};
+		String[] columns = {RecommendRouteColumns.isCollected+""};
+		boolean ans = false;
+		Cursor cr = db.query("recommendRoute", columns, "routeID=?", args, null, null, null);
+		if(cr!=null&&cr.getCount()>0){
+			cr.moveToFirst();
+			ans = cr.getInt(cr.getColumnIndex(RecommendRouteColumns.isCollected))==1?true:false;
+		}
+		return ans;
+	}
+	
+	/**
+	 * * 
+	 * 改变RecommendRoute的isCollected值
+	 * @param routeID
+	 * @param status
+	 * @return
+	 */
+	public boolean setRecommendRouteCollected(int routeID,int status) {
+		// TODO Auto-generated method stub
+		ContentValues cv = new ContentValues();
+		cv.put("isCollected", status+"");
+		String[] whereArgs = {routeID+""};
+		if(db.update("recommendRoute", cv, "routeID=?", whereArgs)>0)
+			return true;
+		else
+			return false;
+	}
+	
+	/**
+	 * 获取被收藏的路线
+	 * @return
+	 */
+	public List<RecommendRoute> getCollectedRecommendRouteList()
+	{
+		List<RecommendRoute> listRecommendRoutes = new ArrayList<RecommendRoute>();
+		String[] args = {1+""};
+		Cursor cr = db.query("recommendRoute", null, "isCollected=?", args, null, null, null);
+		int count = cr.getCount();
+		LogUtil.d(TAG,"start getRecommendRoute() count = " + count);
+		if(cr!=null&&cr.getCount()>0){
+			cr.moveToFirst();
+			for(int i =0; i < count; i++){
+				RecommendRoute mRecommendRoute = new RecommendRoute();
+				mRecommendRoute.setCollectNum(cr.getInt(cr.getColumnIndex(RecommendRouteColumns.collectNum)));
+				mRecommendRoute.setResource(cr.getString(cr.getColumnIndex(RecommendRouteColumns.resource)));
+				mRecommendRoute.setRouteContentID(cr.getInt(cr.getColumnIndex(RecommendRouteColumns.routeContentID)));
+				mRecommendRoute.setRouteDay(cr.getInt(cr.getColumnIndex(RecommendRouteColumns.routeDay)));
+				mRecommendRoute.setRouteID(cr.getInt(cr.getColumnIndex(RecommendRouteColumns.routeID)));
+				mRecommendRoute.setRouteName(cr.getString(cr.getColumnIndex(RecommendRouteColumns.routeName)));
+				mRecommendRoute.setSceneNum(cr.getInt(cr.getColumnIndex(RecommendRouteColumns.sceneNum)));
 				listRecommendRoutes.add(mRecommendRoute);
 				cr.moveToNext();
 			}
@@ -406,33 +499,7 @@ public class VGDao {
 		return mScene.getBigSceneID();	
 	}
 
-	/**
-	 * 
-	 * @Title: getRoute 
-	 * @Description: 主要用于获取路线的天数跟路线信息ID
-	 * @param @param RouteID
-	 * @param @return
-	 * @return RecommendRoute 
-	 * @throws
-	 */
-	public RecommendRoute getRecommendRoute(int RouteID){
-		RecommendRoute mRecommendRoute = null;
-		String[] args = {RouteID+ ""};
-		Cursor cr = db.query("recommendRoute", null, "RouteID=?", args, null, null, null);
-		if(cr!=null&&cr.getCount()>0){
-			mRecommendRoute = new RecommendRoute();
-			cr.moveToFirst();
-			mRecommendRoute.setCollectNum(cr.getInt(cr.getColumnIndex(RecommendRouteColumns.collectNum)));
-			mRecommendRoute.setResource(cr.getString(cr.getColumnIndex(RecommendRouteColumns.resource)));
-			mRecommendRoute.setRouteContentID(cr.getInt(cr.getColumnIndex(RecommendRouteColumns.routeContentID)));
-			mRecommendRoute.setRouteDay(cr.getInt(cr.getColumnIndex(RecommendRouteColumns.routeDay)));
-			mRecommendRoute.setRouteID(cr.getInt(cr.getColumnIndex(RecommendRouteColumns.routeID)));
-			mRecommendRoute.setRouteName(cr.getString(cr.getColumnIndex(RecommendRouteColumns.routeName)));
-			mRecommendRoute.setSceneNum(cr.getInt(cr.getColumnIndex(RecommendRouteColumns.sceneNum)));
-			mRecommendRoute.setIsCollected(cr.getInt(cr.getColumnIndex(RecommendRouteColumns.isCollected)));
-		}
-		return mRecommendRoute;
-	}
+	
 
 	/**
 	 * 

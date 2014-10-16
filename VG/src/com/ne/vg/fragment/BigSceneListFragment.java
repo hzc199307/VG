@@ -80,7 +80,8 @@ public class BigSceneListFragment extends Fragment{
 				helper.setText(R.id.bigscenelist_item_name, item.getBigSceneName());
 				helper.setText(R.id.bigscenelist_loveNum, Integer.toString(item.getLoveNum()));
 				helper.setText(R.id.bigscenelist_musicNum, Integer.toString(item.getRecordNum()));
-				helper.setImageSelected(R.id.bigscenelist_love_iv, item.getIsCollected()==1);
+				boolean isCollected = VGDao.getInstance(getActivity()).getBigSceneCollected(item.getBigSceneID());
+				helper.setImageSelected(R.id.bigscenelist_love_iv, isCollected);
 				LayoutParams params = new LayoutParams(
 						LayoutParams.MATCH_PARENT,
 						LayoutParams.MATCH_PARENT);

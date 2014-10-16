@@ -60,7 +60,7 @@ public class RecommendRouteAdapter extends BaseAdapter{
 		if(convertView == null){
 			convertView = mInflater.inflate(R.layout.item_recommendroute, null);
 			holder = new Holder();
-			holder.img = (ImageView)convertView.findViewById(R.id.recommendroute_view01);
+			holder.img = (ImageView)convertView.findViewById(R.id.recommendroute_bg);
 			//TODO 这里注释的地方需要取消
 			/** */
 			holder.sceneNum = (TextView)convertView.findViewById(R.id.recommendroute_sceneNum);

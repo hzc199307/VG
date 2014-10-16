@@ -12,7 +12,9 @@ import android.widget.Toast;
 import com.ne.vg.R;
 import com.ne.vg.activity.RouteActivity;
 import com.ne.vg.adapter.CommonAdapter;
+import com.ne.vg.adapter.CommonRRAdapter;
 import com.ne.vg.adapter.ViewHolder;
+import com.ne.vg.bean.BigScene;
 import com.ne.vg.bean.RecommendRoute;
 import com.ne.vg.dao.VGDao;
 import com.ne.vg.util.LogUtil;
@@ -32,7 +34,7 @@ public class RecommendRouteFragment extends Fragment{
 	private int cityID;
 	private VGDao mVgDao;
 	private Intent mIntent;
-	
+
 	public RecommendRouteFragment(int cityID){
 		this.cityID = cityID;
 	}
@@ -40,7 +42,7 @@ public class RecommendRouteFragment extends Fragment{
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
 	}
-	
+
 	@Override
 	public View onCreateView(LayoutInflater inflater,
 			ViewGroup container, Bundle savedInstanceState)
@@ -50,25 +52,56 @@ public class RecommendRouteFragment extends Fragment{
 				container, false);
 		//Init view
 		listview = (ListView) rootView.findViewById(R.id.recommendroute_listview);
-		
-		
-		
+
+
+
 		//TODO 这里的数据需要转换，即第二个参数改为mVgDao.getRecommendRoute(cityID)那个
 		mVgDao = VGDao.getInstance(getActivity());
-		//gridAdapter = new RecommendRouteAdapter(getActivity(), mVgDao.getRecommendRoute(cityID));
-		gridAdapter = new CommonAdapter<RecommendRoute>(getActivity(), mVgDao.getRecommendRouteList(cityID),R.layout.item_recommendroute) {
+		//gridAdapter = new RecommendRouteAdapter(getActivity(), mVgDao.getRecommendRouteList(cityID));
+		//		gridAdapter = new CommonAdapter<RecommendRoute>(getActivity(), mVgDao.getRecommendRouteList(cityID),R.layout.item_recommendroute) {
+		//
+		//			@Override
+		//			public void convert(ViewHolder helper, RecommendRoute item, int position) {
+		//				helper.setImageResource(R.id.recommendroute_view01, item.getResource());
+		//				helper.setText(R.id.recommendroute_sceneNum, Integer.toString(item.getSceneNum()));
+		//				helper.setText(R.id.recommendroute_name, item.getRouteName());
+		//				helper.setText(R.id.recommendroute_scenenum, item.getRouteDay()+ "天");
+		//				helper.setText(R.id.recommendroute_lovenum, Integer.toString(item.getCollectNum()));
+		//			}
+		//		};
+
+		gridAdapter = new CommonRRAdapter(getActivity(), mVgDao.getRecommendRouteList(cityID), R.layout.item_recommendroute){
 
 			@Override
-			public void convert(ViewHolder helper, RecommendRoute item, int position) {
-				helper.setImageResource(R.id.recommendroute_view01, item.getResource());
+			public void convert(ViewHolder helper, RecommendRoute item,
+					int position) {
+				helper.setImageResource(R.id.recommendroute_bg, item.getResource());
 				helper.setText(R.id.recommendroute_sceneNum, Integer.toString(item.getSceneNum()));
 				helper.setText(R.id.recommendroute_name, item.getRouteName());
 				helper.setText(R.id.recommendroute_scenenum, item.getRouteDay()+ "天");
 				helper.setText(R.id.recommendroute_lovenum, Integer.toString(item.getCollectNum()));
+				boolean isCollected = VGDao.getInstance(getContext()).getRecommendRouteCollected(item.getRouteID());
+				helper.setImageSelected(R.id.recommendroute_love_iv, isCollected);
+
+			}
+
+			@Override
+			public void aboutOnClickListener(ViewHolder helper,
+					MyOnClickListener myOnClickListener) {
+				// TODO Auto-generated method stub
+				helper.setOnClickListener(R.id.recommendroute_love, myOnClickListener);
+			}
+
+			@Override
+			public void onLoveClick(ViewHolder helper,
+					RecommendRoute recommendRoute) {
+				// TODO Auto-generated method stub
+				boolean isCollected = VGDao.getInstance(getContext()).getRecommendRouteCollected(recommendRoute.getRouteID());
+				helper.setImageSelected(R.id.recommendroute_love_iv, (isCollected==false));
+				VGDao.getInstance(getContext()).setRecommendRouteCollected(recommendRoute.getRouteID(), (isCollected==false)?1:0);
 			}
 		};
-		
-		
+
 		listview.setAdapter(gridAdapter);
 		listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -83,8 +116,8 @@ public class RecommendRouteFragment extends Fragment{
 		});
 		super.onStart();
 		return rootView;
-		
+
 	}
-	
-	
+
+
 }

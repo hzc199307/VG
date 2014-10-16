@@ -8,6 +8,7 @@ import com.ne.vg.DBHelper.DBHelper;
 import com.ne.vg.util.MusicNotification;
 import com.ne.vg.util.SystemUtil;
 
+import com.ne.vg.dao.VGDao;
 import com.ne.vg.receiver.MusicBroadcastReceiver;
 import com.ne.vg.service.MusicService;
 
@@ -104,6 +105,7 @@ public class VGApplication extends Application{
 		Log.d(TAG, "on Terminate()");
 		unbindService(this.mConnection);
 		clearNotify(100);
+		VGDao.getInstance(getInstance()).closeDatabase();
 		super.onTerminate();
 	}
 	
@@ -181,6 +183,5 @@ public class VGApplication extends Application{
 	public void setSmallSceneFragmentExisted(boolean smallSceneFragmentExisted) {
 		SmallSceneFragmentExisted = smallSceneFragmentExisted;
 	}
-	
 	
 }

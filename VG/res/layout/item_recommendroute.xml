@@ -9,7 +9,7 @@
     android:background="@color/recommend_bg" >
 
     <ImageView
-        android:id="@+id/recommendroute_view01"
+        android:id="@+id/recommendroute_bg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:scaleType="centerCrop"
@@ -51,18 +51,20 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/recommendroute_love"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="center_vertical|right"
             android:gravity="center_vertical"
+            android:clickable="true"
             android:orientation="horizontal" >
 
             <ImageView
-                android:id="@+id/iv"
+                android:id="@+id/recommendroute_love_iv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="@dimen/recommend_item_iv_right"
-                android:src="@drawable/recommend_item_love_icon_normal" />
+                android:src="@drawable/recommend_item_love_icon_selector" />
 
             <TextView
                 android:id="@+id/recommendroute_lovenum"

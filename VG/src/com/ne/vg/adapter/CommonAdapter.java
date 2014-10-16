@@ -12,6 +12,10 @@ public abstract class CommonAdapter<T> extends BaseAdapter
 {
 	protected LayoutInflater mInflater;
 	protected Context mContext;
+	public Context getContext() {
+		return mContext;
+	}
+
 	protected List<T> mDatas;
 	protected final int mItemLayoutId;
 
@@ -41,11 +45,17 @@ public abstract class CommonAdapter<T> extends BaseAdapter
 		return position;
 	}
 
+	private ViewHolder viewHolderNow;
+	public ViewHolder getViewHolderNow() {
+		return viewHolderNow;
+	}
+
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent)
 	{
 		final ViewHolder viewHolder = getViewHolder(position, convertView,
 				parent);
+		viewHolderNow = viewHolder;
 		convert(viewHolder, getItem(position),position);
 		return viewHolder.getConvertView();
 
