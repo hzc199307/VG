@@ -297,7 +297,7 @@ public class VGDao {
 	
 	/**
 	 * 
-	 * @Title: getRoute 
+	 * @Title: getRecommendRoute 
 	 * @Description: 主要用于获取路线的天数跟路线信息ID
 	 * @param @param RouteID
 	 * @param @return
