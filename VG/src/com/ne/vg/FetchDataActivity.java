@@ -23,7 +23,7 @@ import android.widget.Toast;
 public class FetchDataActivity extends Activity {
 
 	private static final String TAG = "FetchDataActivity";
-	private static final String BIGSCENELIST = "http://www.mafengwo.cn/jd/10063/0-0-0-0-0-2.html";
+	private static final String BIGSCENELIST = "http://www.mafengwo.cn/jd/10063/0-0-0-0-0-7.html";
 	private List<ContentValues> data;
 	private SQLiteDatabase db;
 	Handler handler;  
