@@ -53,7 +53,7 @@ public class BigSceneListFragment extends Fragment{
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
 		
-		mVgDao = new VGDao(getActivity());
+		mVgDao = VGDao.getInstance(getActivity());
 		
 		this.cityName = mVgDao.getCityName(cityID);
 	}

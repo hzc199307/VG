@@ -258,6 +258,8 @@ public class VGDao {
 		if(cr!=null&&cr.getCount()>0){
 			mBigScene = new BigScene();
 			cr.moveToFirst();
+			mBigScene.setBigSceneID(cr.getInt(cr.getColumnIndex(BigSceneColumns.bigSceneID)));
+			mBigScene.setBigSceneName(cr.getString(cr.getColumnIndex(BigSceneColumns.bigSceneName)));
 			mBigScene.setContentID(cr.getInt(cr.getColumnIndex(BigSceneColumns.contentID)));
 			mBigScene.setCityID(cr.getInt(cr.getColumnIndex(BigSceneColumns.cityID)));
 			mBigScene.setBigSceneName(cr.getString(cr.getColumnIndex(BigSceneColumns.bigSceneName)));

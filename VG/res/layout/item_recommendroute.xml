@@ -11,9 +11,9 @@
     <ImageView
         android:id="@+id/recommendroute_bg"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="130dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/city_cinqueterre" />
+        android:src="@drawable/city_florence" />
 
     <!-- 底下白色的那一栏 -->
 

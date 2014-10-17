@@ -133,7 +133,9 @@ public class ViewHolder
 				@Override
 				public void handleMessage(Message msg) {
 					if(bitmap!=null)
+					{
 						imageView.setImageBitmap(bitmap);
+					}
 					bitmap=null;
 					super.handleMessage(msg);
 				}

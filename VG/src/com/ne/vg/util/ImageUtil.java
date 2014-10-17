@@ -42,4 +42,9 @@ public class ImageUtil {
 	{
 		return "com.ne.vg/image/bigScene/"+fileName;
 	}
+	
+	public static String getRouteResourceStr(String fileName)
+	{
+		return "com.ne.vg/image/route/"+fileName;
+	}
 }

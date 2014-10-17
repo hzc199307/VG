@@ -13,6 +13,7 @@ import com.ne.vg.adapter.ViewHolder;
 import com.ne.vg.bean.BigScene;
 import com.ne.vg.dao.VGDao;
 import com.ne.vg.main.MainActivity;
+import com.ne.vg.util.LogUtil;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -45,6 +46,7 @@ public class RouteDayFragment extends Fragment {
 	int indexOfDay =-1;
 	int routeContentID;
 	private String[] bigSceneIDs;
+	private List<BigScene> bigScenes;
 	private VGDao mVgDao;
 	private Intent mIntent;
 
@@ -115,7 +117,8 @@ public class RouteDayFragment extends Fragment {
 		listView_route_day_bigscenes = (ListView)rootView.findViewById(R.id.listView_route_day_bigscenes);
 		if(bigSceneListAdapter == null)
 			//			bigSceneListAdapter = new RouteDay_BigSceneListAdapter(getActivity(),bigSceneIDs);
-			bigSceneListAdapter = new CommonAdapter<BigScene>(getActivity(),ArrayToList(bigSceneIDs),R.layout.route_item_big_scene) {
+			bigScenes = ArrayToList(bigSceneIDs);
+			bigSceneListAdapter = new CommonAdapter<BigScene>(getActivity(),bigScenes,R.layout.route_item_big_scene) {
 			@Override
 			public void convert(ViewHolder helper, BigScene myBigScene, int position) {
 				// TODO Auto-generated method stub
@@ -131,6 +134,9 @@ public class RouteDayFragment extends Fragment {
 			public void onItemClick(AdapterView<?> parent, View view, int position,long id) {
 				// TODO Auto-generated method stub
 				mIntent = new Intent(getActivity(),BigSceneDetailActivity.class);
+				LogUtil.d(TAG, bigScenes.get(position).getBigSceneID()+"notes");
+				mIntent.putExtra("bigSceneID",bigScenes.get(position).getBigSceneID());
+				startActivity(mIntent);
 				//这里的position是不是从0开始算的？
 				//				mIntent.putExtra("bigSceneID",bigSceneIDs[position]);
 				//				startActivity(mIntent);

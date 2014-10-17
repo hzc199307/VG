@@ -9,6 +9,7 @@ import com.ne.vg.adapter.ViewHolder;
 import com.ne.vg.adapter.CommonRRAdapter.MyOnClickListener;
 import com.ne.vg.bean.RecommendRoute;
 import com.ne.vg.dao.VGDao;
+import com.ne.vg.util.ImageUtil;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -59,7 +60,8 @@ public class MineCollectionFragment extends Fragment {
 			@Override
 			public void convert(ViewHolder helper, RecommendRoute item,
 					int position) {
-				helper.setImageResource(R.id.recommendroute_bg, item.getResource());
+				helper.setImageBitmap(R.id.recommendroute_bg, ImageUtil.getRouteResourceStr(mVgDao.getCityName(cityID)+"/"+item.getResource()));
+//				helper.setImageResource(R.id.recommendroute_bg, item.getResource());
 				helper.setText(R.id.recommendroute_sceneNum, Integer.toString(item.getSceneNum()));
 				helper.setText(R.id.recommendroute_name, item.getRouteName());
 				helper.setText(R.id.recommendroute_scenenum, item.getRouteDay()+ "Ìì");
