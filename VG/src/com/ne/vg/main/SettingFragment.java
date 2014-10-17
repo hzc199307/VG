@@ -1,5 +1,6 @@
 package com.ne.vg.main;
 
+import com.ne.vg.FetchDataActivity;
 import com.ne.vg.R;
 import com.ne.vg.util.LogUtil;
 
@@ -32,7 +33,7 @@ public class SettingFragment extends AnimationFragment {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Intent myIntent = new Intent();
+				Intent myIntent = new Intent(getActivity(), FetchDataActivity.class);
 				startActivity(myIntent);
 			}
 		});

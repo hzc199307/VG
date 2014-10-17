@@ -23,13 +23,12 @@ import android.widget.Toast;
 public class FetchDataActivity extends Activity {
 
 	private static final String TAG = "FetchDataActivity";
-	private static final String BIGSCENELIST = "http://www.mafengwo.cn/jd/10063/gonglve.html";
-	private static final String SCENEDETAIL = "http://www.mafengwo.cn/poi/78213.html";
+	private static final String BIGSCENELIST = "http://www.mafengwo.cn/jd/10063/0-0-0-0-0-2.html";
 	private List<ContentValues> data;
 	private SQLiteDatabase db;
 	Handler handler;  
 	static FileUtil fileUtil = new FileUtil();
-	private static String DB_PATH = "com.ne.vg/voice/罗马";
+	private static String DB_PATH = "com.ne.vg/voice/罗马/";
 	DetaiInfoUtil mDetaiInfoUtil = new DetaiInfoUtil();
 	private ContentValues detail_data;
 	protected List<String> weblist;
@@ -56,15 +55,21 @@ public class FetchDataActivity extends Activity {
                 try {  
                     data = mDetaiInfoUtil.getBigSceneList(BIGSCENELIST);  
                     weblist = mDetaiInfoUtil.getWebSite(BIGSCENELIST);
-                    msg.what = data.size();
+                    msg.what = weblist.size();
+                    
+                    Log.d(TAG, "size=" + weblist.size());
                     for(int i =0;i<data.size();i++){
+                    	//往bigScene表插入的内容
                     	ContentValues values = data.get(i);
                     	//插入数据
-                        db.insert("bigScene", null, values);
+                        long m1= db.insert("bigScene", null, values);
                         //创建音乐播放的目录
-                        fileUtil.createSDDir(DB_PATH+values.get("bigSceneName"));
+                        fileUtil.createSDDir(DB_PATH+values.getAsString("bigSceneName"));
+                        Log.d(TAG, "bigSceneName=" + values.getAsString("bigSceneName"));
                         //每个详情页面的数据插入数据库中
-                        detail_data = mDetaiInfoUtil.getDetaiInfo(weblist.get(i));
+                        Log.d(TAG, "website=" + weblist.get(i));
+                        Log.d(TAG, "contentID=" + values.getAsString("contentID"));
+                        detail_data = mDetaiInfoUtil.getDetaiInfo(weblist.get(i), values.getAsString("contentID"));
                         db.insert("sceneContent", null, detail_data);
                     }
                     
@@ -87,10 +92,10 @@ public class FetchDataActivity extends Activity {
         return new Handler(){  
             public void handleMessage(Message msg) {  
                 if (msg.what < 0) {  
-                    //Toast.makeText(FetchDataActivity.class, "数据获取失败", Toast.LENGTH_SHORT).show();  
+                    //Toast.makeText(this, "数据获取失败", Toast.LENGTH_SHORT).show();  
                     Log.d(TAG, "There is no data");
                 }else {  
-                    //initListview();  
+                    Log.d(TAG, "Insert is successful"); 
                 }  
             }  
         };  
