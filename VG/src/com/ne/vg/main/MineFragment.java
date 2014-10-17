@@ -4,6 +4,7 @@ import com.ne.vg.R;
 import com.ne.vg.activity.MineCollectionActivity;
 import com.ne.vg.activity.MineDownloadActivity;
 import com.ne.vg.activity.MyLoveActivity;
+import com.ne.vg.dao.VGDao;
 import com.ne.vg.util.LogUtil;
 
 import android.content.Intent;
@@ -12,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 /**
  * ¡°ÎÒµÄ¡±
@@ -27,6 +29,8 @@ public class MineFragment extends AnimationFragment implements View.OnClickListe
 	private View mine_item_download,mine_item_love,mine_item_collection;
 	private View mine_title_left;
 	
+	private TextView mine_colleced_route_num,mine_love_bigscene_num,mine_download_voice_num;
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -41,6 +45,14 @@ public class MineFragment extends AnimationFragment implements View.OnClickListe
 		mine_item_download.setOnClickListener(this);
 		mine_item_love.setOnClickListener(this);
 		mine_item_collection.setOnClickListener(this);
+		
+		mine_download_voice_num = (TextView)view.findViewById(R.id.mine_download_voice_num);
+		mine_download_voice_num.setText(VGDao.getInstance(getActivity()).getSmallSceneNum()+"");
+		mine_love_bigscene_num = (TextView)view.findViewById(R.id.mine_love_bigscene_num);
+		mine_love_bigscene_num.setText(VGDao.getInstance(getActivity()).getCollectedBigSceneNum()+"");
+		mine_colleced_route_num = (TextView)view.findViewById(R.id.mine_colleced_route_num);
+		mine_colleced_route_num.setText(VGDao.getInstance(getActivity()).getCollectedRecommendRouteNum()+"");
+		
 		return view;
 	}
 

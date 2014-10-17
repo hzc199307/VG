@@ -52,6 +52,7 @@
                         android:textSize="@dimen/mine_item_tv" />
 
                     <TextView
+                        android:id="@+id/mine_download_voice_num"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
@@ -102,6 +103,7 @@
                         android:textSize="@dimen/mine_item_tv" />
 
                     <TextView
+                        android:id="@+id/mine_love_bigscene_num"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
@@ -152,6 +154,7 @@
                         android:textSize="@dimen/mine_item_tv" />
 
                     <TextView
+                        android:id="@+id/mine_colleced_route_num"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"

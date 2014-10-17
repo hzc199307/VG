@@ -138,7 +138,9 @@ public class HomeFragment extends AnimationFragment implements OnClickListener{
 			//progressDialog.isShowing();
 			break;
 		case R.id.home_tab_randomEnter:
-
+			Intent intent = new Intent(getActivity(),BigSceneDetailActivity.class);
+			intent.putExtra("bigSceneID", VGDao.getInstance(getActivity()).getRandomBigSceneID());
+			startActivity(intent);
 			break;
 		default:
 			break;

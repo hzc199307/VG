@@ -216,6 +216,16 @@ public class VGDao {
 	}
 	
 	/**
+	 * 获取被收藏的大景点个数
+	 * @return
+	 */
+	public int getCollectedBigSceneNum(){
+		String[] args = {1+""};
+		Cursor cr = db.query("bigScene", null, "isCollected=?", args, null, null, null);
+		return cr.getCount();
+	}
+	
+	/**
 	 * * 
 	 * 改变BigScene的isCollected值
 	 * @param bigSceneID
@@ -412,6 +422,16 @@ public class VGDao {
 		}
 		return listRecommendRoutes;
 	}
+	
+	/**
+	 * 获取收藏的推荐路线数量
+	 * @return
+	 */
+	public int getCollectedRecommendRouteNum() {
+		String[] args = {1+""};
+		Cursor cr = db.query("recommendRoute", null, "isCollected=?", args, null, null, null);
+		return cr.getCount();
+	}
 
 	/**
 	 * 
@@ -479,6 +499,15 @@ public class VGDao {
 		}
 		return listSmallScenes;
 	}
+	
+	/**
+	 * 获取小景点的数目
+	 * @return
+	 */
+	public int getSmallSceneNum() {
+		Cursor cr = db.query("smallScene", null, null, null, null, null, null);
+		return cr.getCount();
+	}
 
 	/**
 	 * 
@@ -499,6 +528,20 @@ public class VGDao {
 			mScene.setBigSceneID(cr.getInt(cr.getColumnIndex(SmallSceneColumns.bigSceneID)));
 		}
 		return mScene.getBigSceneID();	
+	}
+	
+	/**
+	 * 随机获取一个大景点id 没有就返回-1
+	 * @return
+	 */
+	public int getRandomBigSceneID() {
+		int id = -1;
+		Cursor cr = db.query("smallScene", null, null, null, null, null, null);
+		if(cr!=null&&cr.getCount()>0){
+			cr.moveToPosition((int) (System.currentTimeMillis()%cr.getCount()));
+			id = cr.getInt(cr.getColumnIndex(SmallSceneColumns.bigSceneID));
+		}
+		return id;
 	}
 
 	
