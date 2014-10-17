@@ -102,15 +102,25 @@ public class DetaiInfoUtil {
 		ContentValues result = new ContentValues();
 		result.put("contentID", Integer.parseInt(contentID));
 		Log.d("website",url);
+//		String csdnString2 = http_get(CSDNURL2);
+//    	org.jsoup.nodes.Document doc2 = Jsoup.parse(csdnString2);
     	String my_url = http_get(url);
     	org.jsoup.nodes.Document doc = Jsoup.parse(my_url);
     	if(getInformation(doc, "地址")!=null){
     		result.put("address", getInformation(doc, "地址"));
     		Log.d("地址",getInformation(doc, "地址"));
+    	}else{
+    		Log.d("dizhi","为空");
     	}
-    	Element fenshu = doc.select(".score span em").first().child(0);
+//    	Element link10 = doc2.select(".score-info").first();
+//    	Element fenshu = link10;
+//    	Log.d(TAG, "fenshu=" + fenshu.text());
+    	//Element fenshu = doc.select(".score span em").first().child(0);
+    	Element fenshu = doc.select(".score-info em").first();
     	
     	result.put("recommendLevel", fenshu.text());
+    	
+    	
     	result.put("content", getInformation(doc, "简介"));
     	
     	
